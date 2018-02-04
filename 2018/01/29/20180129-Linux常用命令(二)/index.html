@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux常用命令(实用命令) | HDQ | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="HDQ,HDQ's Blog" />
+  
+  <meta name="description" content="Linux—常用命令[root@localhost ~]#其中:12345root       当前登录用户localhost  主机名~          当前所在目录（家目录）#          超级用户的提示符  $          普通用户的提示符
+
+命令的基本格式12345678910111213命令 [选项] [参数]  注意：个别命令使用时你不遵循此格式  当有多个选项是，可以写">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux常用命令(实用命令)">
+<meta property="og:url" content="https://hdqgame.top/2018/01/29/20180129-Linux常用命令(二)/index.html">
+<meta property="og:site_name" content="HDQ | Blog">
+<meta property="og:description" content="Linux—常用命令[root@localhost ~]#其中:12345root       当前登录用户localhost  主机名~          当前所在目录（家目录）#          超级用户的提示符  $          普通用户的提示符
+
+命令的基本格式12345678910111213命令 [选项] [参数]  注意：个别命令使用时你不遵循此格式  当有多个选项是，可以写">
+<meta property="og:updated_time" content="2018-02-04T05:55:24.430Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux常用命令(实用命令)">
+<meta name="twitter:description" content="Linux—常用命令[root@localhost ~]#其中:12345root       当前登录用户localhost  主机名~          当前所在目录（家目录）#          超级用户的提示符  $          普通用户的提示符
+
+命令的基本格式12345678910111213命令 [选项] [参数]  注意：个别命令使用时你不遵循此格式  当有多个选项是，可以写">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-113082369-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?1cd7bf82a83ddaaa3265f139afd7e75b";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+  
+
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <style>
+    .pingfuADHolder{
+      display: none !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">HDQ&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        HDQ&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 互联网生活 互联网资源的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="QQ空间" target="_blank" href="https://user.qzone.qq.com/610717159/">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="手机QQ" target="_blank" href="http://qm.qq.com/cgi-bin/qm/qr?k=vG_te0JtZ-ZWhvNRf8vYmV0yvyIccSV1">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="https://weibo.com/u/5470832383?refer_flag=1005055013_">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Steam" target="_blank" href="http://steamcommunity.com/id/610717159/">
+                            <i class="fa fa-steam fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-20180129-Linux常用命令(二)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      Linux常用命令(实用命令)
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/Linux/">Linux</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-01-29
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h4 id="Linux—常用命令"><a href="#Linux—常用命令" class="headerlink" title="Linux—常用命令"></a><font color="#0099ff" size="4" face="黑体">Linux—常用命令</font></h4><p><code>[root@localhost ~]#</code><br>其中:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">root       当前登录用户</div><div class="line">localhost  主机名</div><div class="line">~          当前所在目录（家目录）</div><div class="line">#          超级用户的提示符  </div><div class="line">$          普通用户的提示符</div></pre></td></tr></table></figure></p>
+<hr>
+<h4 id="命令的基本格式"><a href="#命令的基本格式" class="headerlink" title="命令的基本格式"></a><font color="#0099ff" size="4" face="黑体">命令的基本格式</font></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">命令 [选项] [参数]</div><div class="line"></div><div class="line">  注意：个别命令使用时你不遵循此格式</div><div class="line">  当有多个选项是，可以写在一起</div><div class="line">  简化选项和完整选项</div><div class="line"> 例</div><div class="line"> 查询目录中的内容 ： ls</div><div class="line"> ls [选项] [文件或目录]</div><div class="line">  选项：</div><div class="line">  -a 显示所有的文件，包括隐藏的文件</div><div class="line">  -l 显示详细信息</div><div class="line">  -d 人性化显示目录大小</div><div class="line">  -i 显示inode</div></pre></td></tr></table></figure>
+<hr>
+<h4 id="文件处理命令"><a href="#文件处理命令" class="headerlink" title="文件处理命令"></a><font color="#0099ff" size="3" face="黑体">文件处理命令</font></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">命令 [选项] [参数]</div><div class="line"></div><div class="line">  注意：个别命令使用时你不遵循此格式</div><div class="line">  当有多个选项是，可以写在一起</div><div class="line">  简化选项和完整选项</div><div class="line"> 例</div><div class="line"> 查询目录中的内容 ： ls</div><div class="line"> ls [选项] [文件或目录]</div><div class="line">  选项：</div><div class="line">  -a 显示所有的文件，包括隐藏的文件</div><div class="line">  -l 显示详细信息</div><div class="line">  -d 人性化显示目录大小</div><div class="line">  -i 显示inode</div></pre></td></tr></table></figure>
+<hr>
+<h4 id="文件处理命令-1"><a href="#文件处理命令-1" class="headerlink" title="文件处理命令"></a><font color="#0099ff" size="3" face="黑体">文件处理命令</font></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">文件处理命令</div><div class="line">创建文件 vi touch</div><div class="line">创建文件：除了一般直接创建文件的命令外，能定向输出一个不存在的文件也能创建一个文件</div><div class="line">例如： </div><div class="line"> cp 拷贝一个不存在的文件就能创建文件</div><div class="line"> mv 移动一个不存在的文件就能创建文件</div><div class="line"> rm 删除文件或目录</div><div class="line"> cat 显示文件内容 more 分页显示文件内容（q或Q退出）</div><div class="line">head -num 显示文件的第num行</div><div class="line">tail -num 显示文件的后num行</div><div class="line">目录处理命令</div><div class="line">创建目录 mkdir -p 递归创建目录(创建目录及子目录)</div><div class="line">进入目录 </div><div class="line">cd ~ 进入家目录</div><div class="line">cd -进入上次目录</div><div class="line">cd ..进入上级目录</div><div class="line">cd .进入当前目录 （没什么意义）  </div><div class="line">查询当前所在位置 pwd</div><div class="line">删除空目录  rmdir -r 删除目录 -f强制</div><div class="line">cp 复制文件 </div><div class="line"> -r复制目录 -p 连带文件属性的复制</div><div class="line"> -d 若源文件是链接文件 则复制链接属性 -a 相当于 -pdr（和源文件一模一样）</div><div class="line">mv 剪切或改名 </div><div class="line">链接命令： ln</div><div class="line">ln -s [源文件] [目标文件]      -s创建软连接</div><div class="line">ln 创建硬链接</div></pre></td></tr></table></figure>
+<hr>
+<h4 id="文件搜索命令"><a href="#文件搜索命令" class="headerlink" title="文件搜索命令"></a><font color="#0099ff" size="4" face="黑体">文件搜索命令</font></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">文件搜索命令 locate（只能搜索文件）</div><div class="line">locate 文件名</div><div class="line">在后台数据库之中按文件名搜索，搜索速度快（自己新建的文件搜索不到必须更新数据库）</div><div class="line">/var/lib/mocate locate命令所搜索的后台数据库</div><div class="line">updatedb 更新数据库</div><div class="line"></div><div class="line">搜索命令的命令 whereis 命令名（可以看到帮助文档） </div><div class="line"> -b 只查找可执行文件 -m只查找帮助文档</div><div class="line">搜索命令所在的路径及帮助文档所在的位置</div><div class="line"></div><div class="line">搜索命令的命令 which （可以看到别名） </div><div class="line">搜索命令所在文件级别名</div><div class="line"></div><div class="line">find [搜索范围] [搜索条件] </div><div class="line">搜索文件</div><div class="line">例 find / -name install.log</div><div class="line">注意：避免大范围的搜索，会非常消耗系统资源</div><div class="line"> find 是在系统当中搜索符合条件的文件名，如果需要匹配请使用通配符匹配，通配符是完全匹配</div><div class="line"> -iname 不区分大小写 -user 按照所有者搜索  -nouser 查找没有所有者的文件（内核产生或外来产生[光盘或移动硬盘等]除了这两种情况外，没有所有者的文件都是垃圾文件）</div><div class="line"> -mtime  +num（num天前） -num（num内产生的文件） num(num天当天修改的文件) </div><div class="line">atime 文件访问时间</div><div class="line">ctime 改变文件属性</div><div class="line">mtime 修改文件内容</div><div class="line"> -size num k 查找文件大小是num k 的文件 （+表示大于-表示小于）</div><div class="line"> -inum  num查找节点是num的文件</div><div class="line"> -a 表示and  逻辑与 -o表示or逻辑或</div><div class="line"> 例： find  /etc -size +20k -a -size -40k</div><div class="line">  #查找 etc目录下大于20k小于40k的文件</div><div class="line">find /etc -size +20k -a -size -40k -exec/ ls -lh &#123;&#125;\;</div><div class="line"> -exec/ -ok 命令&#123;&#125;\; 对搜索结果执行操作 </div><div class="line">搜索字符串命令 grep</div><div class="line">grep [选项] 字符串 文件名</div><div class="line">在文件当中匹配符合条件的字符串</div><div class="line"> -i 忽略大小写</div><div class="line"> -v 排除指定字符串</div></pre></td></tr></table></figure>
+<hr>
+<h4 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a><font color="#0099ff" size="4" face="黑体">帮助命令</font></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">帮助命令 man man拥有各个级别的帮助</div><div class="line">man -f 命令相当于 whatis命令</div><div class="line">man -k 命令 相当于apropos命令（查看和命令相关的所有帮助）</div><div class="line">选项帮助 --help</div><div class="line">获取命令选项的帮助</div><div class="line">help shell内部命令</div><div class="line">获取shell内部命令的帮助</div><div class="line">例： whereis cd</div><div class="line">确定是否是shell内部的命令</div><div class="line">help cd</div><div class="line">获取cd命令的帮助 </div><div class="line">详细命令帮助info</div><div class="line">info命令</div><div class="line"> -回车 进入子帮助页面（带有*标记）</div><div class="line"> -u 进入上层页面</div><div class="line"> -n 进入下一个帮助小节</div><div class="line"> -p 进入上一个帮助小节</div><div class="line"> -q 退出</div></pre></td></tr></table></figure>
+<hr>
+<h4 id="压缩与解压命令"><a href="#压缩与解压命令" class="headerlink" title="压缩与解压命令"></a><font color="#0099ff" size="4" face="黑体">压缩与解压命令</font></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">.zip 格式压缩</div><div class="line">zip 压缩文件名 源文件</div><div class="line">压缩文件</div><div class="line">zip -r 压缩文件名 源目录</div><div class="line">压缩目录</div><div class="line">.zip格式解压</div><div class="line">unzip 压缩文件</div><div class="line">解压zip文件</div><div class="line">.gz格式压缩</div><div class="line">gzip 源文件</div><div class="line">压缩为.gz格式的文件，源文件会消失</div><div class="line">gzip -c 源文件 &gt;压缩文件</div><div class="line">压缩为 .gz格式，源文件保留</div><div class="line">gzip -r 目录</div><div class="line">压缩目录下的所有的子文件，注意但不能压缩目录</div><div class="line">.gz格式解压缩</div><div class="line">gzip -d 压缩文件</div><div class="line">解压缩文件</div><div class="line">gunzip 压缩文件</div><div class="line">解压缩文件</div><div class="line">.bz2格式压缩</div><div class="line">bzip2 源文件</div><div class="line">压缩为.bz2格式，不保留源文件</div><div class="line">bzip2 -k 源文件</div><div class="line">压缩之后保留源文件</div><div class="line">注意：bzip2命令不能压缩目录</div><div class="line">.bz2格式解压缩</div><div class="line">bzip2 -d 压缩文件</div><div class="line">解压缩，-k 保留压缩文件</div><div class="line">bunzip2 压缩文件</div><div class="line">解压缩，-k保留解压缩文件</div><div class="line"></div><div class="line">打包命令 tar</div><div class="line">tar -cvf 打包文件名 源文件</div><div class="line">选项：</div><div class="line"> -c 打包</div><div class="line"> -v 显示过程</div><div class="line"> -f 指定打包后的文件名</div><div class="line">解打包命令</div><div class="line">tar -xvf打包文件名</div><div class="line">选项 -x 解打包</div><div class="line">其实：.tar.gz格式是先打包为tar格式，在压缩为。gz格式</div><div class="line">tar -zcvf 压缩包名.tar.gz源文件</div><div class="line">选项： -z 压缩为.tar.gz格式</div><div class="line">tar -zxvf 压缩包名.tar.gz</div><div class="line">选项：</div><div class="line"> -x 解压缩.tar.gz格式</div><div class="line"> -t 测试不解压 或压缩</div><div class="line"> —C 指定解压缩 压缩位置 (写到后面)</div><div class="line"> .tar.bz2压缩格式</div><div class="line">tar -jcvf压缩包名.tar.bz2源文件</div><div class="line">j-压缩为.tar.bz2格式</div></pre></td></tr></table></figure>
+<hr>
+<h4 id="关机与重启命令"><a href="#关机与重启命令" class="headerlink" title="关机与重启命令"></a><font color="#0099ff" size="4" face="黑体">关机与重启命令</font></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">shutdown命令</div><div class="line">shutdown [选项] 时间</div><div class="line">选项： -c 取消前一个关机命令</div><div class="line">   -h 关机</div><div class="line">   -r 重启</div><div class="line">其他关机命令：</div><div class="line">halt </div><div class="line">poweroff</div><div class="line">init 0 （调用级别 0）</div><div class="line">reboot</div><div class="line">init 6</div><div class="line">cat/etc/inittab </div><div class="line">修改系统默认运行级别</div><div class="line">runlevel</div><div class="line">查询系统运行级别  </div><div class="line">logout</div><div class="line">退出登录命令</div></pre></td></tr></table></figure>
+<hr>
+<h4 id="其他常用命令"><a href="#其他常用命令" class="headerlink" title="其他常用命令"></a><font color="#0099ff" size="4" face="黑体">其他常用命令</font></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">挂载命令：</div><div class="line">mount</div><div class="line">查询系统中已经挂载的设备</div><div class="line">mount -a</div><div class="line">依据配置文件/etc/fstab的内容，自动挂载</div><div class="line">mount  [-t 文件系统] [-o 特殊选项]  设备文件名 挂载点</div><div class="line">挂载光盘</div><div class="line">mkdir /mnt/cdrom/</div><div class="line">建立挂载点</div><div class="line">mount -t iso9660 /dev/cdrom/mnt/cdrom</div><div class="line">挂载光盘</div><div class="line">卸载命令：</div><div class="line">umount 设备文件名或挂载点</div><div class="line"></div><div class="line">挂载U盘</div><div class="line">fdisk -l</div><div class="line">查看U盘设备文件名</div><div class="line">mount -t vfat /dev/sdb1/mnt/usb/</div><div class="line">注意：linux默认是不支持NTFS文件系统的</div><div class="line"></div><div class="line"></div><div class="line">用户登录查看和用户交互命令：</div><div class="line">查看用户登录信息 w</div><div class="line">who 用户名</div><div class="line">last 查询当前登录和过去登录的用户信息</div><div class="line">last命令默认读取的是/var/log/wtmp文件数据 </div><div class="line">lastlog 查看所有用户最后一次登录的信息</div></pre></td></tr></table></figure>
+<hr>
+<h4 id="权限"><a href="#权限" class="headerlink" title="权限"></a><font color="#0099ff" size="4" face="黑体">权限</font></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">例：</div><div class="line"> -rw-r--r--</div><div class="line"> -文件类型（-文件d目录 l软连接文件）</div><div class="line"> rw-  r-    r--</div><div class="line"> u所有者   g所属者   o其他人</div><div class="line"> r读      w写       x执行</div></pre></td></tr></table></figure>
+<hr>
+<h4 id="文件命名规则"><a href="#文件命名规则" class="headerlink" title="文件命名规则"></a><font color="#0099ff" size="4" face="黑体">文件命名规则</font></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">例：</div><div class="line">&lt;1&gt;除了/之外，所有的字符都合法</div><div class="line">&lt;2&gt;有些字符最好不用，如空格字符、制表符、退格符、和字符@#￥（）-等</div><div class="line">&lt;3&gt;避免使用.作为不同文件名的开头</div><div class="line">&lt;4&gt;大小写敏感</div></pre></td></tr></table></figure>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年02月04日 13:55</p>
+        <footer>
+            <a href="#">
+                <img src="/images/logo.png" alt="Garen">
+                Garen
+            </a>
+        </footer>
+    </div>
+</div>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
+    <script type="text/javascript">
+        (function (d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+
+            if (typeof LivereTower === 'function') { return; }
+
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hdqgame.top/2018/01/29/20180129-Linux常用命令(二)/&title=《Linux常用命令(实用命令)》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/01/28/pjR9r4.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hdqgame.top/2018/01/29/20180129-Linux常用命令(二)/&title=《Linux常用命令(实用命令)》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hdqgame.top/2018/01/29/20180129-Linux常用命令(二)/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux常用命令(实用命令)》 — HDQ | Blog&url=https://hdqgame.top/2018/01/29/20180129-Linux常用命令(二)/&via=https://hdqgame.top" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hdqgame.top/2018/01/29/20180129-Linux常用命令(二)/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://hdqgame.top/2018/01/29/20180129-Linux常用命令(二)/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Linux/" class="color1">Linux</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Linux—常用命令"><span class="post-toc-text">Linux—常用命令</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#命令的基本格式"><span class="post-toc-text">命令的基本格式</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#文件处理命令"><span class="post-toc-text">文件处理命令</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#文件处理命令-1"><span class="post-toc-text">文件处理命令</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#文件搜索命令"><span class="post-toc-text">文件搜索命令</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#帮助命令"><span class="post-toc-text">帮助命令</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#压缩与解压命令"><span class="post-toc-text">压缩与解压命令</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#关机与重启命令"><span class="post-toc-text">关机与重启命令</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#其他常用命令"><span class="post-toc-text">其他常用命令</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#权限"><span class="post-toc-text">权限</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#文件命名规则"><span class="post-toc-text">文件命名规则</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/2018/01/30/20180130-Microsoft Office-2016-2010-四合一绿色精简版/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          Microsoft Office 2016 2010 四合一绿色精简版
+        
+      </span>
+    </a>
+  
+  
+    <a href="/2018/01/28/20180128-Linux常用命令(一)/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Linux常用命令(JDK安装、Tomcat安装、MySQL安装)</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+                <p>
+                    Powered by <a href="#" target="_blank">HDQ</a> Theme <a href="#" target="_blank">Garen</a> &copy;
+                    2018
+                        Garen<br>
+                </p>
+        </div>
+    </div>
+</footer>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://hdqgame.top",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/Java/">Java</a><a class="category-link" href="/categories/Linux/">Linux</a><a class="category-link" href="/categories/Mac/">Mac</a><a class="category-link" href="/categories/iOS/">iOS</a><a class="category-link" href="/categories/资源/">资源</a><a class="category-link" href="/categories/软件/">软件</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/HTML/" style="font-size: 13.33px;">HTML</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/iOS/" style="font-size: 16.67px;">iOS</a> <a href="/tags/office/" style="font-size: 10px;">office</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/办公/" style="font-size: 10px;">办公</a> <a href="/tags/图像处理/" style="font-size: 10px;">图像处理</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 16.67px;">开发技巧</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/终端/" style="font-size: 13.33px;">终端</a> <a href="/tags/视频/" style="font-size: 10px;">视频</a> <a href="/tags/资源/" style="font-size: 20px;">资源</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/HTML/" style="font-size: 13.33px;">HTML</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/iOS/" style="font-size: 16.67px;">iOS</a> <a href="/tags/office/" style="font-size: 10px;">office</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/办公/" style="font-size: 10px;">办公</a> <a href="/tags/图像处理/" style="font-size: 10px;">图像处理</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 16.67px;">开发技巧</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/终端/" style="font-size: 13.33px;">终端</a> <a href="/tags/视频/" style="font-size: 10px;">视频</a> <a href="/tags/资源/" style="font-size: 20px;">资源</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+<script>
+  $(".pingfuADHolder").remove();
+</script>
+</html>

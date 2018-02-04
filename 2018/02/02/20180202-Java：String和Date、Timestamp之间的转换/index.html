@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java小技巧(String和Date、Timestamp之间的转换) | HDQ | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="HDQ,HDQ's Blog" />
+  
+  <meta name="description" content="String与Date（java.util.Date）互转String -&amp;gt; Date12345678910String dateStr = &quot;2010/05/04 12:34:23&quot;;Date date = new Date();//注意format的格式要与日期String的格式相匹配DateFormat sdf = new SimpleDateFormat(&quot;yyyy/MM/dd H">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java小技巧(String和Date、Timestamp之间的转换)">
+<meta property="og:url" content="https://hdqgame.top/2018/02/02/20180202-Java：String和Date、Timestamp之间的转换/index.html">
+<meta property="og:site_name" content="HDQ | Blog">
+<meta property="og:description" content="String与Date（java.util.Date）互转String -&amp;gt; Date12345678910String dateStr = &quot;2010/05/04 12:34:23&quot;;Date date = new Date();//注意format的格式要与日期String的格式相匹配DateFormat sdf = new SimpleDateFormat(&quot;yyyy/MM/dd H">
+<meta property="og:image" content="https://s1.ax1x.com/2018/02/02/9Aq64e.jpg">
+<meta property="og:updated_time" content="2018-02-04T05:51:14.167Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java小技巧(String和Date、Timestamp之间的转换)">
+<meta name="twitter:description" content="String与Date（java.util.Date）互转String -&amp;gt; Date12345678910String dateStr = &quot;2010/05/04 12:34:23&quot;;Date date = new Date();//注意format的格式要与日期String的格式相匹配DateFormat sdf = new SimpleDateFormat(&quot;yyyy/MM/dd H">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/02/02/9Aq64e.jpg">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-113082369-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?1cd7bf82a83ddaaa3265f139afd7e75b";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+  
+
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <style>
+    .pingfuADHolder{
+      display: none !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">HDQ&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        HDQ&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 互联网生活 互联网资源的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="QQ空间" target="_blank" href="https://user.qzone.qq.com/610717159/">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="手机QQ" target="_blank" href="http://qm.qq.com/cgi-bin/qm/qr?k=vG_te0JtZ-ZWhvNRf8vYmV0yvyIccSV1">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="https://weibo.com/u/5470832383?refer_flag=1005055013_">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Steam" target="_blank" href="http://steamcommunity.com/id/610717159/">
+                            <i class="fa fa-steam fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-20180202-Java：String和Date、Timestamp之间的转换" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      Java小技巧(String和Date、Timestamp之间的转换)
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/Java/">Java</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-02-02
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p><img src="https://s1.ax1x.com/2018/02/02/9Aq64e.jpg" alt=""></p>
+<h3 id="String与Date（java-util-Date）互转"><a href="#String与Date（java-util-Date）互转" class="headerlink" title="String与Date（java.util.Date）互转"></a>String与Date（java.util.Date）互转</h3><h4 id="String-gt-Date"><a href="#String-gt-Date" class="headerlink" title="String -&gt; Date"></a>String -&gt; Date</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">String dateStr = <span class="string">"2010/05/04 12:34:23"</span>;</div><div class="line">Date date = <span class="keyword">new</span> Date();</div><div class="line"><span class="comment">//注意format的格式要与日期String的格式相匹配</span></div><div class="line">DateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy/MM/dd HH:mm:ss"</span>);</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    date = sdf.parse(dateStr);</div><div class="line">    System.out.println(date.toString());</div><div class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Date-gt-String"><a href="#Date-gt-String" class="headerlink" title="Date -&gt; String"></a>Date -&gt; String</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">String dateStr = <span class="string">""</span>;</div><div class="line">Date date = <span class="keyword">new</span> Date();</div><div class="line"><span class="comment">//format的格式可以任意</span></div><div class="line">DateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy/MM/dd HH:mm:ss"</span>);</div><div class="line">DateFormat sdf2 = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd HH/mm/ss"</span>);</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    dateStr = sdf.format(date);</div><div class="line">    System.out.println(dateStr);</div><div class="line">    dateStr = sdf2.format(date);</div><div class="line">    System.out.println(dateStr);</div><div class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="String与Timestamp互转"><a href="#String与Timestamp互转" class="headerlink" title="String与Timestamp互转"></a>String与Timestamp互转</h3><h4 id="String-gt-Timestamp"><a href="#String-gt-Timestamp" class="headerlink" title="String -&gt;Timestamp"></a>String -&gt;Timestamp</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Timestamp ts = <span class="keyword">new</span> Timestamp(System.currentTimeMillis());</div><div class="line">String tsStr = <span class="string">"2011-05-09 11:49:45"</span>;</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    ts = Timestamp.valueOf(tsStr);</div><div class="line">    System.out.println(ts);</div><div class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<font color="red" size="3" face="微软雅黑">String的类型必须形如： yyyy-mm-dd hh:mm:ss[.f…] 这样的格式，中括号表示可选，否则报错！！！<br>如果String为其他格式，可考虑重新解析下字符串，再重组~~</font>
+
+<h4 id="Timestamp-gt-String"><a href="#Timestamp-gt-String" class="headerlink" title="Timestamp -&gt; String"></a>Timestamp -&gt; String</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Timestamp ts = <span class="keyword">new</span> Timestamp(System.currentTimeMillis());</div><div class="line">String tsStr = <span class="string">""</span>;</div><div class="line">DateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy/MM/dd HH:mm:ss"</span>);</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    <span class="comment">//方法一</span></div><div class="line">    tsStr = sdf.format(ts);</div><div class="line">    System.out.println(tsStr);</div><div class="line">    <span class="comment">//方法二</span></div><div class="line">    tsStr = ts.toString();</div><div class="line">    System.out.println(tsStr);</div><div class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<font size="3" face="微软雅黑">很容易能够看出来，方法一的优势在于可以灵活的设置字符串的形式。</font>
+
+<hr>
+<h3 id="Date（-java-util-Date-）和Timestamp互转"><a href="#Date（-java-util-Date-）和Timestamp互转" class="headerlink" title="Date（ java.util.Date ）和Timestamp互转"></a>Date（ java.util.Date ）和Timestamp互转</h3><h4 id="Timestamp-gt-Date"><a href="#Timestamp-gt-Date" class="headerlink" title="Timestamp -&gt; Date"></a>Timestamp -&gt; Date</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Timestamp ts = <span class="keyword">new</span> Timestamp(System.currentTimeMillis());</div><div class="line">Date date = <span class="keyword">new</span> Date();</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    date = ts;</div><div class="line">    System.out.println(date);</div><div class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<font size="3" face="微软雅黑">很简单，但是此刻date对象指向的实体却是一个Timestamp，即date拥有Date类的方法，但被覆盖的方法的执行实体在Timestamp中。</font>
+
+<h4 id="Date-gt-Timestamp"><a href="#Date-gt-Timestamp" class="headerlink" title="Date -&gt; Timestamp"></a>Date -&gt; Timestamp</h4><p><font color="red" size="3" face="微软雅黑">父类不能直接向子类转化，可借助中间的String~~</font><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//注：使用以下方式更简洁</span></div><div class="line">Timestamp ts = <span class="keyword">new</span> Timestamp(date.getTime());</div></pre></td></tr></table></figure></p>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年02月04日 13:51</p>
+        <footer>
+            <a href="#">
+                <img src="/images/logo.png" alt="Garen">
+                Garen
+            </a>
+        </footer>
+    </div>
+</div>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
+    <script type="text/javascript">
+        (function (d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+
+            if (typeof LivereTower === 'function') { return; }
+
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hdqgame.top/2018/02/02/20180202-Java：String和Date、Timestamp之间的转换/&title=《Java小技巧(String和Date、Timestamp之间的转换)》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/02/02/9AjUIK.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hdqgame.top/2018/02/02/20180202-Java：String和Date、Timestamp之间的转换/&title=《Java小技巧(String和Date、Timestamp之间的转换)》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hdqgame.top/2018/02/02/20180202-Java：String和Date、Timestamp之间的转换/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java小技巧(String和Date、Timestamp之间的转换)》 — HDQ | Blog&url=https://hdqgame.top/2018/02/02/20180202-Java：String和Date、Timestamp之间的转换/&via=https://hdqgame.top" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hdqgame.top/2018/02/02/20180202-Java：String和Date、Timestamp之间的转换/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://hdqgame.top/2018/02/02/20180202-Java：String和Date、Timestamp之间的转换/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Java/" class="color5">Java</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#String与Date（java-util-Date）互转"><span class="post-toc-text">String与Date（java.util.Date）互转</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#String-gt-Date"><span class="post-toc-text">String -> Date</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Date-gt-String"><span class="post-toc-text">Date -> String</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#String与Timestamp互转"><span class="post-toc-text">String与Timestamp互转</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#String-gt-Timestamp"><span class="post-toc-text">String ->Timestamp</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Timestamp-gt-String"><span class="post-toc-text">Timestamp -> String</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Date（-java-util-Date-）和Timestamp互转"><span class="post-toc-text">Date（ java.util.Date ）和Timestamp互转</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Timestamp-gt-Date"><span class="post-toc-text">Timestamp -> Date</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Date-gt-Timestamp"><span class="post-toc-text">Date -> Timestamp</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/2018/02/03/20180203-Java：String类常用方法集锦/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          Java小技巧(String类常用方法集锦)
+        
+      </span>
+    </a>
+  
+  
+    <a href="/2018/02/01/20180201-安利一个手机浏览器 大小不到1M/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Android X浏览器</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+                <p>
+                    Powered by <a href="#" target="_blank">HDQ</a> Theme <a href="#" target="_blank">Garen</a> &copy;
+                    2018
+                        Garen<br>
+                </p>
+        </div>
+    </div>
+</footer>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://hdqgame.top",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/Java/">Java</a><a class="category-link" href="/categories/Linux/">Linux</a><a class="category-link" href="/categories/Mac/">Mac</a><a class="category-link" href="/categories/iOS/">iOS</a><a class="category-link" href="/categories/资源/">资源</a><a class="category-link" href="/categories/软件/">软件</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/HTML/" style="font-size: 13.33px;">HTML</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/iOS/" style="font-size: 16.67px;">iOS</a> <a href="/tags/office/" style="font-size: 10px;">office</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/办公/" style="font-size: 10px;">办公</a> <a href="/tags/图像处理/" style="font-size: 10px;">图像处理</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 16.67px;">开发技巧</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/终端/" style="font-size: 13.33px;">终端</a> <a href="/tags/视频/" style="font-size: 10px;">视频</a> <a href="/tags/资源/" style="font-size: 20px;">资源</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/HTML/" style="font-size: 13.33px;">HTML</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/iOS/" style="font-size: 16.67px;">iOS</a> <a href="/tags/office/" style="font-size: 10px;">office</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/办公/" style="font-size: 10px;">办公</a> <a href="/tags/图像处理/" style="font-size: 10px;">图像处理</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 16.67px;">开发技巧</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/终端/" style="font-size: 13.33px;">终端</a> <a href="/tags/视频/" style="font-size: 10px;">视频</a> <a href="/tags/资源/" style="font-size: 20px;">资源</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+<script>
+  $(".pingfuADHolder").remove();
+</script>
+</html>
