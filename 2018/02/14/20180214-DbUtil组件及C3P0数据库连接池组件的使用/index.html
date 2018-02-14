@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>DbUtil组件及C3P0数据库连接池组件的使用 | HDQ | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="HDQ,HDQ's Blog" />
+  
+  <meta name="description" content="DbUtils&amp;#8195;&amp;#8195;DbUtils 是 Apache 组织提供的一个开源 JDBC工具类库，它是对JDBC的简单封装，学习成本极低，并且使用dbutils能极大简化jdbc编码的工作量，同时也不会影响程序的性能。&amp;#8195;&amp;#8195;使用commons-dbutils 的核心工具类：QueryRunner，该类定义了所有操作数据库的方法&amp;#8195;&amp;#8195;如方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DbUtil组件及C3P0数据库连接池组件的使用">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/02/14/20180214-DbUtil组件及C3P0数据库连接池组件的使用/index.html">
+<meta property="og:site_name" content="HDQ | Blog">
+<meta property="og:description" content="DbUtils&amp;#8195;&amp;#8195;DbUtils 是 Apache 组织提供的一个开源 JDBC工具类库，它是对JDBC的简单封装，学习成本极低，并且使用dbutils能极大简化jdbc编码的工作量，同时也不会影响程序的性能。&amp;#8195;&amp;#8195;使用commons-dbutils 的核心工具类：QueryRunner，该类定义了所有操作数据库的方法&amp;#8195;&amp;#8195;如方法">
+<meta property="og:updated_time" content="2018-02-14T08:17:38.918Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DbUtil组件及C3P0数据库连接池组件的使用">
+<meta name="twitter:description" content="DbUtils&amp;#8195;&amp;#8195;DbUtils 是 Apache 组织提供的一个开源 JDBC工具类库，它是对JDBC的简单封装，学习成本极低，并且使用dbutils能极大简化jdbc编码的工作量，同时也不会影响程序的性能。&amp;#8195;&amp;#8195;使用commons-dbutils 的核心工具类：QueryRunner，该类定义了所有操作数据库的方法&amp;#8195;&amp;#8195;如方法">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-113082369-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?1cd7bf82a83ddaaa3265f139afd7e75b";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+  
+
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <style>
+    .pingfuADHolder{
+      display: none !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">HDQ&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        HDQ&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 互联网生活 互联网资源的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="QQ空间" target="_blank" href="https://user.qzone.qq.com/610717159/">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="手机QQ" target="_blank" href="http://qm.qq.com/cgi-bin/qm/qr?k=vG_te0JtZ-ZWhvNRf8vYmV0yvyIccSV1">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="https://weibo.com/u/5470832383?refer_flag=1005055013_">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Steam" target="_blank" href="http://steamcommunity.com/id/610717159/">
+                            <i class="fa fa-steam fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-20180214-DbUtil组件及C3P0数据库连接池组件的使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      DbUtil组件及C3P0数据库连接池组件的使用
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/Java/">Java</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-02-14
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h3 id="DbUtils"><a href="#DbUtils" class="headerlink" title="DbUtils"></a><font color="#0099ff" size="4" face="微软雅黑">DbUtils</font></h3><font color="black" size="3" face="微软雅黑">&#8195;&#8195;<strong>DbUtils</strong> 是 Apache 组织提供的一个开源 JDBC工具类库，它是对JDBC的简单封装，学习成本极低，并且使用dbutils能极大简化jdbc编码的工作量，同时也不会影响程序的性能。<br><br>&#8195;&#8195;使用commons-dbutils 的核心工具类：QueryRunner，该类定义了所有操作数据库的方法<br><br>&#8195;&#8195;如方法：<code>T query(Connection conn ,String sql, ResultSetHandler&lt;T&gt; rsh, Object... params)</code></font>
+
+<p><strong>使用：</strong></p>
+<font color="red" size="3" face="微软雅黑">前提：实体类必须符合javabean规范，并且实体类中的字段必须与数据库表的字段相同。<br><br>引入jar文件 :commons-dbutils-1.6.jar</font>
+
+<h4 id="1、简单创建一个工具类JdbcUtil，方便代码调用"><a href="#1、简单创建一个工具类JdbcUtil，方便代码调用" class="headerlink" title="1、简单创建一个工具类JdbcUtil，方便代码调用"></a><font color="#56B092" size="3" face="微软雅黑">1、简单创建一个工具类JdbcUtil，方便代码调用</font></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">jdbcUtil</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String url=<span class="string">"jdbc:mysql://localhost/test"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String user = <span class="string">"root"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String password = <span class="string">"root"</span>;</div><div class="line">    <span class="comment">//获取QueryRunner对象</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> QueryRunner <span class="title">getQueryRunner</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> QueryRunner();</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//获取连接</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span></span>&#123;</div><div class="line">     <span class="keyword">try</span> &#123;</div><div class="line">         Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</div><div class="line">         <span class="keyword">return</span> DriverManager.getConnection(url, user, password);</div><div class="line">     &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">         e.printStackTrace();</div><div class="line">         <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</div><div class="line">     &#125;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="2、调用query方法"><a href="#2、调用query方法" class="headerlink" title="2、调用query方法"></a><font color="#56B092" size="3" face="微软雅黑">2、调用query方法</font></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">     <span class="comment">//创建一个接受数据库的数组</span></div><div class="line">     List&lt;testEntity&gt; list = <span class="keyword">null</span>;</div><div class="line">         <span class="keyword">try</span> &#123;</div><div class="line">             <span class="comment">//获得连接</span></div><div class="line">             Connection conn = jdbcUtil.getConnection();</div><div class="line">             <span class="comment">//调用query方法</span></div><div class="line">             list = jdbcUtil.getQueryRunner().query(conn, <span class="string">"select * from test"</span></div><div class="line">                     , <span class="keyword">new</span> BeanListHandler&lt;testEntity&gt;(testEntity.class));</div><div class="line">         &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">             e.printStackTrace();</div><div class="line">             <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</div><div class="line">         &#125;</div><div class="line">         <span class="keyword">if</span>(list !=<span class="keyword">null</span>)&#123;</div><div class="line">             <span class="keyword">for</span> (testEntity student : list) &#123;</div><div class="line">                 System.out.println(student.getId());</div><div class="line">             &#125;</div><div class="line">         &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="使用C3P0数据库连接池组件优化程序性能"><a href="#使用C3P0数据库连接池组件优化程序性能" class="headerlink" title="使用C3P0数据库连接池组件优化程序性能"></a><font color="#0099ff" size="4" face="微软雅黑">使用C3P0数据库连接池组件优化程序性能</font></h3><font color="black" size="3" face="微软雅黑">&#8195;&#8195;<strong>C3P0核心类：ComboPooledDataSource</strong></font>
+
+<p><strong>使用：</strong></p>
+<font color="red" size="3" face="微软雅黑">前提：引入jar文件 : c3p0-0.9.1.2.jar</font>
+
+<h4 id="方式一：不使用配置文件"><a href="#方式一：不使用配置文件" class="headerlink" title="方式一：不使用配置文件"></a><font color="#56B092" size="3" face="微软雅黑">方式一：不使用配置文件</font></h4><h5 id="1、简单建立一个jdbc工具类，方便方法调用"><a href="#1、简单建立一个jdbc工具类，方便方法调用" class="headerlink" title="1、简单建立一个jdbc工具类，方便方法调用"></a><font color="#833ab4" size="2" face="微软雅黑">1、简单建立一个jdbc工具类，方便方法调用</font></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JdbcUtil</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String url=<span class="string">"jdbc:mysql://localhost/test"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String user = <span class="string">"root"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String password = <span class="string">"root"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ComboPooledDataSource dataSource = <span class="keyword">null</span>; <span class="comment">//存储数据源接口池</span></div><div class="line">    <span class="keyword">static</span>&#123;</div><div class="line">        <span class="comment">//初始化操作</span></div><div class="line">        dataSource = <span class="keyword">new</span> ComboPooledDataSource();<span class="comment">// 使用默认的配置</span></div><div class="line">        dataSource.setJdbcUrl(url);<span class="comment">//设置连接字符串</span></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            dataSource.setDriverClass(<span class="string">"com.mysql.jdbc.Driver"</span>);<span class="comment">//获取驱动</span></div><div class="line">        &#125; <span class="keyword">catch</span> (PropertyVetoException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        dataSource.setUser(user);<span class="comment">//用户名</span></div><div class="line">        dataSource.setPassword(password);<span class="comment">//密码</span></div><div class="line">        dataSource.setInitialPoolSize(<span class="number">3</span>);<span class="comment">//初始化时获取三个连接</span></div><div class="line">        dataSource.setMaxPoolSize(<span class="number">6</span>);<span class="comment">//连接池中保留的最大连接数</span></div><div class="line">        dataSource.setMaxIdleTime(<span class="number">60</span>); <span class="comment">//最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//获取QueryRunner对象</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> QueryRunner <span class="title">getQueryRunner</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> QueryRunner(dataSource);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//获取连接纯 通过c3p0核心类对象获取(此例子没用到该方法)</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> java.sql.<span class="function">Connection <span class="title">getConnection</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">return</span> dataSource.getConnection();</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="2、执行测试"><a href="#2、执行测试" class="headerlink" title="2、执行测试"></a><font color="#833ab4" size="2" face="微软雅黑">2、执行测试</font></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 不使用配置文件 </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">         <span class="comment">//创建一个接受数据库的数组</span></div><div class="line">         List&lt;testEntity&gt; list = <span class="keyword">null</span>;</div><div class="line">         <span class="keyword">try</span> &#123;</div><div class="line">             <span class="comment">//获得连接</span></div><div class="line">             Connection conn = JdbcUtil.getConnection();</div><div class="line">             <span class="comment">//调用query方法</span></div><div class="line">             list = JdbcUtil.getQueryRunner().query(conn, <span class="string">"select * from test"</span></div><div class="line">                     , <span class="keyword">new</span> BeanListHandler&lt;testEntity&gt;(testEntity.class));</div><div class="line">         &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">             e.printStackTrace();</div><div class="line">             <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</div><div class="line">         &#125;</div><div class="line">         <span class="keyword">if</span>(list !=<span class="keyword">null</span>)&#123;</div><div class="line">             <span class="keyword">for</span> (testEntity student : list) &#123;</div><div class="line">                 System.out.println(student.getId());</div><div class="line">             &#125;</div><div class="line">         &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="方式二：使用配置文件来初始化"><a href="#方式二：使用配置文件来初始化" class="headerlink" title="方式二：使用配置文件来初始化"></a><font color="#56B092" size="3" face="微软雅黑">方式二：使用配置文件来初始化</font></h4><h5 id="1、将C3P0配置文件c3p0-config-xml放置在工程src目录下"><a href="#1、将C3P0配置文件c3p0-config-xml放置在工程src目录下" class="headerlink" title="1、将C3P0配置文件c3p0-config.xml放置在工程src目录下"></a><font color="#833ab4" size="2" face="微软雅黑">1、将C3P0配置文件c3p0-config.xml放置在工程src目录下</font></h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">c3p0-config</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!-- 默认加载配置 --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">default-config</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClass"</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcUrl"</span>&gt;</span>jdbc:mysql://localhost/test<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"user"</span>&gt;</span>root<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span>&gt;</span>root<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"initialPoolSize"</span>&gt;</span>5<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxPoolSize"</span>&gt;</span>10<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">default-config</span>&gt;</span></div><div class="line"></div><div class="line">   <span class="comment">&lt;!-- 指定名称加载配置 --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">named-config</span> <span class="attr">name</span>=<span class="string">"oracleConfig"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClass"</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcUrl"</span>&gt;</span>jdbc:mysql://localhost/fas<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"user"</span>&gt;</span>root<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span>&gt;</span>root<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"initialPoolSize"</span>&gt;</span>5<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxPoolSize"</span>&gt;</span>10<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">named-config</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">c3p0-config</span>&gt;</span></div></pre></td></tr></table></figure>
+<h5 id="2、简单编写一个工具类，方便代码调用"><a href="#2、简单编写一个工具类，方便代码调用" class="headerlink" title="2、简单编写一个工具类，方便代码调用"></a><font color="#833ab4" size="2" face="微软雅黑">2、简单编写一个工具类，方便代码调用</font></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JdbcUtil2</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ComboPooledDataSource dataSource = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">static</span>&#123;</div><div class="line">        <span class="comment">//初始化操作</span></div><div class="line">        <span class="comment">// 自动加载src目录下c3p0的配置文件【c3p0-config.xml】</span></div><div class="line">        dataSource = <span class="keyword">new</span> ComboPooledDataSource();<span class="comment">// 使用默认的配置</span></div><div class="line">        <span class="comment">//使用c3p0-config.xml配置文件中named-config的name属性为C3P0TestName的配置</span></div><div class="line">        <span class="comment">//dataSource = new ComboPooledDataSource("C3P0TestName");</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//获取QueryRunner对象</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> QueryRunner <span class="title">getQueryRunner</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> QueryRunner(dataSource);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//获取连接纯 通过c3p0核心类对象获取(此例子没用到该方法)</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> java.sql.<span class="function">Connection <span class="title">getConnection</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">return</span> dataSource.getConnection();</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="3、执行测试"><a href="#3、执行测试" class="headerlink" title="3、执行测试"></a><font color="#833ab4" size="2" face="微软雅黑">3、执行测试</font></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 使用配置文件 </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">         <span class="comment">//创建一个接受数据库的数组</span></div><div class="line">         List&lt;testEntity&gt; list = <span class="keyword">null</span>;</div><div class="line">         <span class="keyword">try</span> &#123;</div><div class="line">             <span class="comment">//获得连接</span></div><div class="line">             Connection conn = JdbcUtil2.getConnection();</div><div class="line">             <span class="comment">//调用query方法</span></div><div class="line">             list = JdbcUtil2.getQueryRunner().query(conn, <span class="string">"select * from test"</span></div><div class="line">                     , <span class="keyword">new</span> BeanListHandler&lt;testEntity&gt;(testEntity.class));</div><div class="line">         &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">             e.printStackTrace();</div><div class="line">             <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</div><div class="line">         &#125;</div><div class="line">         <span class="keyword">if</span>(list !=<span class="keyword">null</span>)&#123;</div><div class="line">             <span class="keyword">for</span> (testEntity student : list) &#123;</div><div class="line">                 System.out.println(student.getId());</div><div class="line">             &#125;</div><div class="line">         &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年02月14日 16:17</p>
+        <footer>
+            <a href="#">
+                <img src="/images/logo.png" alt="Garen">
+                Garen
+            </a>
+        </footer>
+    </div>
+</div>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
+    <script type="text/javascript">
+        (function (d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+
+            if (typeof LivereTower === 'function') { return; }
+
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/02/14/20180214-DbUtil组件及C3P0数据库连接池组件的使用/&title=《DbUtil组件及C3P0数据库连接池组件的使用》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/02/14/9YG1g0.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.hdqyf.club/2018/02/14/20180214-DbUtil组件及C3P0数据库连接池组件的使用/&title=《DbUtil组件及C3P0数据库连接池组件的使用》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/02/14/20180214-DbUtil组件及C3P0数据库连接池组件的使用/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《DbUtil组件及C3P0数据库连接池组件的使用》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/02/14/20180214-DbUtil组件及C3P0数据库连接池组件的使用/&via=https://blog.hdqyf.club" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/02/14/20180214-DbUtil组件及C3P0数据库连接池组件的使用/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/02/14/20180214-DbUtil组件及C3P0数据库连接池组件的使用/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Java/" class="color5">Java</a>
+      
+    <a href="/tags/数据库/" class="color4">数据库</a>
+      
+    <a href="/tags/连接池/" class="color4">连接池</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#DbUtils"><span class="post-toc-text">DbUtils</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、简单创建一个工具类JdbcUtil，方便代码调用"><span class="post-toc-text">1、简单创建一个工具类JdbcUtil，方便代码调用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、调用query方法"><span class="post-toc-text">2、调用query方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用C3P0数据库连接池组件优化程序性能"><span class="post-toc-text">使用C3P0数据库连接池组件优化程序性能</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#方式一：不使用配置文件"><span class="post-toc-text">方式一：不使用配置文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1、简单建立一个jdbc工具类，方便方法调用"><span class="post-toc-text">1、简单建立一个jdbc工具类，方便方法调用</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2、执行测试"><span class="post-toc-text">2、执行测试</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#方式二：使用配置文件来初始化"><span class="post-toc-text">方式二：使用配置文件来初始化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1、将C3P0配置文件c3p0-config-xml放置在工程src目录下"><span class="post-toc-text">1、将C3P0配置文件c3p0-config.xml放置在工程src目录下</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2、简单编写一个工具类，方便代码调用"><span class="post-toc-text">2、简单编写一个工具类，方便代码调用</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3、执行测试"><span class="post-toc-text">3、执行测试</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2018/02/12/20180212-单细胞动物的困境/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">单细胞动物的困境</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+                <p>
+                    Powered by <a href="#" target="_blank">HDQ</a> Theme <a href="#" target="_blank">Garen</a> &copy;
+                    2018
+                        Garen<br>
+                </p>
+        </div>
+    </div>
+</footer>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://blog.hdqyf.club",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/Java/">Java</a><a class="category-link" href="/categories/Linux/">Linux</a><a class="category-link" href="/categories/Mac/">Mac</a><a class="category-link" href="/categories/SQL/">SQL</a><a class="category-link" href="/categories/iOS/">iOS</a><a class="category-link" href="/categories/常识/">常识</a><a class="category-link" href="/categories/感悟/">感悟</a><a class="category-link" href="/categories/资源/">资源</a><a class="category-link" href="/categories/软件/">软件</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/HTML/" style="font-size: 13.33px;">HTML</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 16.67px;">Java</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/iOS/" style="font-size: 16.67px;">iOS</a> <a href="/tags/office/" style="font-size: 13.33px;">office</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/办公/" style="font-size: 13.33px;">办公</a> <a href="/tags/图像处理/" style="font-size: 10px;">图像处理</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 16.67px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 13.33px;">感悟</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/生活/" style="font-size: 13.33px;">生活</a> <a href="/tags/终端/" style="font-size: 13.33px;">终端</a> <a href="/tags/视频/" style="font-size: 10px;">视频</a> <a href="/tags/资源/" style="font-size: 20px;">资源</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/HTML/" style="font-size: 13.33px;">HTML</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 16.67px;">Java</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/iOS/" style="font-size: 16.67px;">iOS</a> <a href="/tags/office/" style="font-size: 13.33px;">office</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/办公/" style="font-size: 13.33px;">办公</a> <a href="/tags/图像处理/" style="font-size: 10px;">图像处理</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 16.67px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 13.33px;">感悟</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/生活/" style="font-size: 13.33px;">生活</a> <a href="/tags/终端/" style="font-size: 13.33px;">终端</a> <a href="/tags/视频/" style="font-size: 10px;">视频</a> <a href="/tags/资源/" style="font-size: 20px;">资源</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+<script>
+  $(".pingfuADHolder").remove();
+</script>
+</html>
