@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux 服务器综合测速脚本 ZBench | HDQ | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="HDQ,HDQ's Blog" />
+  
+  <meta name="description" content="今天看到人用这个脚本真挺不错，专门适合国人测试Linux服务器的，因为加强了到中国的带宽和延迟测试。有点像teddysun大佬的bench.sh和SuperBench的整合版，测试完还有个web页面报告。项目地址：https://github.com/FunctionClub/ZBench
+
+
+使用方法wget https://raw.githubusercontent.com/FunctionC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 服务器综合测速脚本 ZBench">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/02/19/20180219-Linux服务器综合测速脚本ZBench/index.html">
+<meta property="og:site_name" content="HDQ | Blog">
+<meta property="og:description" content="今天看到人用这个脚本真挺不错，专门适合国人测试Linux服务器的，因为加强了到中国的带宽和延迟测试。有点像teddysun大佬的bench.sh和SuperBench的整合版，测试完还有个web页面报告。项目地址：https://github.com/FunctionClub/ZBench
+
+
+使用方法wget https://raw.githubusercontent.com/FunctionC">
+<meta property="og:updated_time" content="2018-02-19T07:57:51.656Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux 服务器综合测速脚本 ZBench">
+<meta name="twitter:description" content="今天看到人用这个脚本真挺不错，专门适合国人测试Linux服务器的，因为加强了到中国的带宽和延迟测试。有点像teddysun大佬的bench.sh和SuperBench的整合版，测试完还有个web页面报告。项目地址：https://github.com/FunctionClub/ZBench
+
+
+使用方法wget https://raw.githubusercontent.com/FunctionC">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-113082369-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?1cd7bf82a83ddaaa3265f139afd7e75b";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+  
+
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <style>
+    .pingfuADHolder{
+      display: none !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">HDQ&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        HDQ&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 互联网生活 互联网资源的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="QQ空间" target="_blank" href="https://user.qzone.qq.com/610717159/">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="手机QQ" target="_blank" href="http://qm.qq.com/cgi-bin/qm/qr?k=vG_te0JtZ-ZWhvNRf8vYmV0yvyIccSV1">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="https://weibo.com/u/5470832383?refer_flag=1005055013_">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Steam" target="_blank" href="http://steamcommunity.com/id/610717159/">
+                            <i class="fa fa-steam fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-20180219-Linux服务器综合测速脚本ZBench" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      Linux 服务器综合测速脚本 ZBench
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/Linux/">Linux</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-02-19
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <font color="black" size="3" face="微软雅黑">今天看到人用这个脚本真挺不错，专门适合国人测试Linux服务器的，因为加强了到中国的带宽和延迟测试。有点像teddysun大佬的bench.sh和SuperBench的整合版，测试完还有个web页面报告。<br><br>项目地址：<a href="https://github.com/FunctionClub/ZBench" target="_blank" rel="external">https://github.com/FunctionClub/ZBench</a></font>
+
+<hr>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a><font color="#0099ff" size="4" face="微软雅黑">使用方法</font></h3><font color="black" size="3" face="微软雅黑">wget <a href="https://raw.githubusercontent.com/FunctionClub/ZBench/master/ZBench-CN.sh" target="_blank" rel="external">https://raw.githubusercontent.com/FunctionClub/ZBench/master/ZBench-CN.sh</a><br><br>如果出现乱码使用下面英文版<br><br>wget <a href="https://raw.githubusercontent.com/FunctionClub/ZBench/master/ZBench.sh" target="_blank" rel="external">https://raw.githubusercontent.com/FunctionClub/ZBench/master/ZBench.sh</a><br><br>执行这个脚本<br><br>安装的中文版执行<code>bash ZBench-CN.sh</code><br><br>安装的英文版执行<code>bash ZBench.sh</code><br><br>首先它会安装一些程序</font>
+
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Installing Virt-What......</div><div class="line">Installing ca-certificates......</div><div class="line">Installing Besttrace......</div><div class="line">Installing SpeedTest......</div><div class="line">Installing ZPing-CN.py......</div></pre></td></tr></table></figure>
+<font color="black" size="3" face="微软雅黑">是不是很眼熟，其实也就是把这几个工具合成了。<br><br>接着开始测试速度</font>
+
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">--------------------------------------------------------------------------</div><div class="line">CPU 型号             : Intel(R) Xeon(R) CPU @ <span class="number">2</span>.<span class="number">50</span>GHz</div><div class="line">CPU 核心数           : <span class="number">1</span></div><div class="line">CPU 频率             : <span class="number">2500</span>.<span class="number">000</span> MHz</div><div class="line">总硬盘大小           : <span class="number">10</span>.<span class="number">2</span> GB (<span class="number">1</span>.<span class="number">9</span> GB Used)</div><div class="line">总内存大小           : <span class="number">584</span> MB (<span class="number">542</span> MB Used)</div><div class="line">SWAP大小             : <span class="number">0</span> MB (<span class="number">0</span> MB Used)</div><div class="line">开机时长             : <span class="number">42</span> days, <span class="number">21</span> hour <span class="number">36</span> min</div><div class="line">系统负载             : <span class="number">0</span>.<span class="number">28</span>, <span class="number">0</span>.<span class="number">07</span>, <span class="number">0</span>.<span class="number">02</span></div><div class="line">系统                 : Ubuntu <span class="number">14</span>.<span class="number">04</span>.<span class="number">5</span> LTS</div><div class="line">架构                 : x86_64 (<span class="number">64</span> Bit)</div><div class="line">内核                 : <span class="number">4</span>.<span class="number">12</span>.<span class="number">9</span>-<span class="number">041209</span>-generic</div><div class="line">虚拟化平台           : kvm</div><div class="line">--------------------------------------------------------------------------</div><div class="line">硬盘I/O (第一次测试) : <span class="number">37</span>.<span class="number">1</span> MB/s</div><div class="line">硬盘I/O (第二次测试) : <span class="number">37</span>.<span class="number">3</span> MB/s</div><div class="line">硬盘I/O (第三次测试) : <span class="number">37</span>.<span class="number">4</span> MB/s</div><div class="line">--------------------------------------------------------------------------</div><div class="line">节点名称                  IP地址            下载速度            延迟      </div><div class="line">CacheFly                  <span class="number">204</span>.<span class="number">93</span>.<span class="number">150</span>.<span class="number">152</span>    <span class="number">52</span>.<span class="number">0</span>MB/s            <span class="number">39</span>.<span class="number">208</span> ms   </div><div class="line">Linode, Tokyo, JP         <span class="number">106</span>.<span class="number">187</span>.<span class="number">96</span>.<span class="number">148</span>    <span class="number">43</span>.<span class="number">1</span>MB/s            <span class="number">39</span>.<span class="number">954</span> ms   </div><div class="line">Linode, Singapore, SG     <span class="number">139</span>.<span class="number">162</span>.<span class="number">23</span>.<span class="number">4</span>      <span class="number">34</span>.<span class="number">4</span>MB/s            <span class="number">48</span>.<span class="number">062</span> ms   </div><div class="line">Linode, London, UK        <span class="number">176</span>.<span class="number">58</span>.<span class="number">107</span>.<span class="number">39</span>     <span class="number">6</span>.<span class="number">37</span>MB/s            <span class="number">250</span>.<span class="number">821</span> ms  </div><div class="line">Linode, Frankfurt, DE     <span class="number">139</span>.<span class="number">162</span>.<span class="number">130</span>.<span class="number">8</span>     <span class="number">6</span>.<span class="number">11</span>MB/s            <span class="number">259</span>.<span class="number">101</span> ms  </div><div class="line">Linode, Fremont, CA       <span class="number">50</span>.<span class="number">116</span>.<span class="number">14</span>.<span class="number">9</span>       <span class="number">12</span>.<span class="number">1</span>MB/s            <span class="number">132</span>.<span class="number">688</span> ms  </div><div class="line">Softlayer, Dallas, TX     <span class="number">173</span>.<span class="number">192</span>.<span class="number">68</span>.<span class="number">18</span>     <span class="number">5</span>.<span class="number">98</span>MB/s            <span class="number">176</span>.<span class="number">925</span> ms  </div><div class="line">Softlayer, Seattle, WA    <span class="number">67</span>.<span class="number">228</span>.<span class="number">112</span>.<span class="number">250</span>    <span class="number">8</span>.<span class="number">48</span>MB/s            <span class="number">133</span>.<span class="number">265</span> ms  </div><div class="line">Softlayer, Frankfurt, DE  <span class="number">159</span>.<span class="number">122</span>.<span class="number">69</span>.<span class="number">4</span>      <span class="number">3</span>.<span class="number">24</span>MB/s            <span class="number">238</span>.<span class="number">727</span> ms  </div><div class="line">Softlayer, Singapore, SG  <span class="number">119</span>.<span class="number">81</span>.<span class="number">28</span>.<span class="number">170</span>     <span class="number">22</span>.<span class="number">7</span>MB/s            <span class="number">46</span>.<span class="number">562</span> ms   </div><div class="line">Softlayer, HongKong, CN   <span class="number">119</span>.<span class="number">81</span>.<span class="number">130</span>.<span class="number">170</span>    <span class="number">60</span>.<span class="number">5</span>MB/s            <span class="number">14</span>.<span class="number">160</span> ms   </div><div class="line">--------------------------------------------------------------------------</div><div class="line">节点名称                  上传速度          下载速度            延迟      </div><div class="line">上海电信                  <span class="number">175</span>.<span class="number">65</span> Mbit/s     <span class="number">88</span>.<span class="number">95</span> Mbit/s        <span class="number">112</span>.<span class="number">066</span> ms </div><div class="line">成都电信                  <span class="number">365</span>.<span class="number">54</span> Mbit/s     <span class="number">1249</span>.<span class="number">70</span> Mbit/s      <span class="number">53</span>.<span class="number">272</span> ms  </div><div class="line">西安电信                  <span class="number">215</span>.<span class="number">36</span> Mbit/s     <span class="number">19</span>.<span class="number">16</span> Mbit/s        <span class="number">60</span>.<span class="number">242</span> ms  </div><div class="line">上海联通                  <span class="number">263</span>.<span class="number">72</span> Mbit/s     <span class="number">26</span>.<span class="number">73</span> Mbit/s        <span class="number">51</span>.<span class="number">41</span> ms   </div><div class="line">重庆联通                  <span class="number">182</span>.<span class="number">32</span> Mbit/s     <span class="number">41</span>.<span class="number">77</span> Mbit/s        <span class="number">53</span>.<span class="number">26</span> ms   </div><div class="line">西安移动                  <span class="number">572</span>.<span class="number">55</span> Mbit/s     <span class="number">573</span>.<span class="number">67</span> Mbit/s       <span class="number">7</span>.<span class="number">55</span> ms    </div><div class="line">上海移动                  <span class="number">86</span>.<span class="number">00</span> Mbit/s      <span class="number">60</span>.<span class="number">62</span> Mbit/s        <span class="number">184</span>.<span class="number">12</span> ms  </div><div class="line">成都移动                  <span class="number">31</span>.<span class="number">88</span> Mbit/s      <span class="number">7</span>.<span class="number">51</span> Mbit/s         <span class="number">305</span>.<span class="number">175</span> ms </div><div class="line">--------------------------------------------------------------------------</div><div class="line">合肥        : <span class="number">63</span>.<span class="number">81</span> ms   北京        : <span class="number">53</span>.<span class="number">81</span> ms   武汉        : <span class="number">33</span>.<span class="number">64</span> ms   </div><div class="line">昌吉        : <span class="number">96</span>.<span class="number">54</span> ms   成都        : <span class="number">43</span>.<span class="number">2</span> ms    上海        : <span class="number">179</span>.<span class="number">66</span> ms  </div><div class="line">太原        : <span class="number">50</span>.<span class="number">23</span> ms   杭州        : <span class="number">41</span>.<span class="number">24</span> ms   宁夏        : <span class="number">73</span>.<span class="number">03</span> ms   </div><div class="line">呼和浩特    : Fail       南昌        : <span class="number">31</span>.<span class="number">59</span> ms   拉萨        : <span class="number">79</span>.<span class="number">99</span> ms   </div><div class="line">乌鲁木齐    : <span class="number">102</span>.<span class="number">77</span> ms  天津        : <span class="number">52</span>.<span class="number">03</span> ms   襄阳        : <span class="number">37</span>.<span class="number">88</span> ms   </div><div class="line">郑州        : <span class="number">46</span>.<span class="number">82</span> ms   沈阳        : <span class="number">87</span>.<span class="number">32</span> ms   兰州        : <span class="number">70</span>.<span class="number">18</span> ms   </div><div class="line">哈尔滨      : <span class="number">66</span>.<span class="number">72</span> ms   宁波        : <span class="number">179</span>.<span class="number">39</span> ms  苏州        : <span class="number">48</span>.<span class="number">28</span> ms   </div><div class="line">济南        : <span class="number">55</span>.<span class="number">32</span> ms   西安        : <span class="number">56</span>.<span class="number">23</span> ms   西宁        : <span class="number">61</span>.<span class="number">23</span> ms   </div><div class="line">重庆        : <span class="number">65</span>.<span class="number">98</span> ms   深圳        : <span class="number">22</span>.<span class="number">26</span> ms   南京        : <span class="number">44</span>.<span class="number">47</span> ms   </div><div class="line">长沙        : <span class="number">30</span>.<span class="number">53</span> ms   长春        : <span class="number">73</span>.<span class="number">49</span> ms   福州        : <span class="number">29</span>.<span class="number">75</span> ms   </div><div class="line">--------------------------------------------------------------------------</div><div class="line">您的测评报告已保存在 /root/report.html</div><div class="line"> </div><div class="line">你想现在查看您的测评报告吗? [y/n]: y</div></pre></td></tr></table></figure>
+<font color="black" size="3" face="微软雅黑">想生成web页面报告的话属于y就行了。</font>
+
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年02月19日 15:57</p>
+        <footer>
+            <a href="#">
+                <img src="/images/logo.png" alt="Garen">
+                Garen
+            </a>
+        </footer>
+    </div>
+</div>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
+    <script type="text/javascript">
+        (function (d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+
+            if (typeof LivereTower === 'function') { return; }
+
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/02/19/20180219-Linux服务器综合测速脚本ZBench/&title=《Linux 服务器综合测速脚本 ZBench》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/02/19/9tfaNQ.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.hdqyf.club/2018/02/19/20180219-Linux服务器综合测速脚本ZBench/&title=《Linux 服务器综合测速脚本 ZBench》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/02/19/20180219-Linux服务器综合测速脚本ZBench/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux 服务器综合测速脚本 ZBench》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/02/19/20180219-Linux服务器综合测速脚本ZBench/&via=https://blog.hdqyf.club" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/02/19/20180219-Linux服务器综合测速脚本ZBench/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/02/19/20180219-Linux服务器综合测速脚本ZBench/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Linux/" class="color1">Linux</a>
+      
+    <a href="/tags/服务器/" class="color4">服务器</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用方法"><span class="post-toc-text">使用方法</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2018/02/14/20180214-DbUtil组件及C3P0数据库连接池组件的使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">DbUtil组件及C3P0数据库连接池组件的使用</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+                <p>
+                    Powered by <a href="#" target="_blank">HDQ</a> Theme <a href="#" target="_blank">Garen</a> &copy;
+                    2018
+                        Garen<br>
+                </p>
+        </div>
+    </div>
+</footer>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://blog.hdqyf.club",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/Java/">Java</a><a class="category-link" href="/categories/Linux/">Linux</a><a class="category-link" href="/categories/Mac/">Mac</a><a class="category-link" href="/categories/SQL/">SQL</a><a class="category-link" href="/categories/iOS/">iOS</a><a class="category-link" href="/categories/常识/">常识</a><a class="category-link" href="/categories/感悟/">感悟</a><a class="category-link" href="/categories/资源/">资源</a><a class="category-link" href="/categories/软件/">软件</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/HTML/" style="font-size: 13.33px;">HTML</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 16.67px;">Java</a> <a href="/tags/Linux/" style="font-size: 16.67px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/iOS/" style="font-size: 16.67px;">iOS</a> <a href="/tags/office/" style="font-size: 13.33px;">office</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/办公/" style="font-size: 13.33px;">办公</a> <a href="/tags/图像处理/" style="font-size: 10px;">图像处理</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 16.67px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 13.33px;">感悟</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/生活/" style="font-size: 13.33px;">生活</a> <a href="/tags/终端/" style="font-size: 13.33px;">终端</a> <a href="/tags/视频/" style="font-size: 10px;">视频</a> <a href="/tags/资源/" style="font-size: 20px;">资源</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/HTML/" style="font-size: 13.33px;">HTML</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 16.67px;">Java</a> <a href="/tags/Linux/" style="font-size: 16.67px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/iOS/" style="font-size: 16.67px;">iOS</a> <a href="/tags/office/" style="font-size: 13.33px;">office</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/办公/" style="font-size: 13.33px;">办公</a> <a href="/tags/图像处理/" style="font-size: 10px;">图像处理</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 16.67px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 13.33px;">感悟</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/生活/" style="font-size: 13.33px;">生活</a> <a href="/tags/终端/" style="font-size: 13.33px;">终端</a> <a href="/tags/视频/" style="font-size: 10px;">视频</a> <a href="/tags/资源/" style="font-size: 20px;">资源</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+<script>
+  $(".pingfuADHolder").remove();
+</script>
+</html>
