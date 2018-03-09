@@ -11,7 +11,7 @@
   <meta name="description" content="Welcome to my blog.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="HDQ | Blog">
-<meta property="og:url" content="https://hdqgame.top/categories/生活/index.html">
+<meta property="og:url" content="https://blog.hdqyf.club/categories/生活/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
 <meta property="og:description" content="Welcome to my blog.">
 <meta name="twitter:card" content="summary">
@@ -53,14 +53,56 @@ ga('send', 'pageview');
   
 
   <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+        jQuery(document).ready(function ($) {
+		var a = new Array("YF", "HDQ", "www.hdqyf.club", "自由", "平等", "公正" ,"法治", "爱国", "敬业", "诚信", "友善"); 
+            $("body").bind("click", function (e) { //直接给body一个事件好了.
+		var random = Math.round(Math.random() * (a.length - 1));
+                var $i = $("<b>").text(a[random]);//添加到页面的元素
+                var x = e.pageX, y = e.pageY;//鼠标点击的位置
+                $i.css({
+                    "z-index": 99999,
+                    "top": y - 15,
+                    "left": x,
+                    "position": "absolute",
+                    "color": function color() {
+                        return "#" + (~~(Math.random() * (1 << 24))).toString(16);
+                    }
+                });
+                $("body").append($i);
+                $i.animate(
+                    { "top": y - 180, "opacity": 0 },
+                    1500,
+                    function () { $i.remove(); }
+                );
+                e.stopPropagation();
+            });
+        });
+  </script>
+
+  <script>
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState == 'hidden') {
+        normal_title = document.title;
+        document.title = '(づ￣ 3￣)づ记得回来找HDQ噢~';
+      }
+      else
+        document.title = normal_title;
+    });
+  </script>
+
   <style>
     .pingfuADHolder{
       display: none !important;
     }
+
+    * {
+        cursor: url(https://blog.hdqyf.club/Cursor.cur), default!important;
+    }
   </style>
 </head>
 
-<body>
+<body oncontextmenu="return false" onselectstart="return false" oncopy="return false">
   <div id="container">
       <header id="header">
     <div id="banner"></div>
@@ -152,13 +194,13 @@ ga('send', 'pageview');
     <article class="archive-article archive-type-post">
   <div class="archive-article-inner">
     <header class="archive-article-header">
-      <a href="/2018/02/06/20180206-你追求的幸福到底是什么？/" class="archive-article-date">
-  <time datetime="2018-02-06T01:28:03.000Z" itemprop="datePublished">02-06</time>
+      <a href="/2018/03/09/20180309-大学考了三年的四级英语，我终于过了！/" class="archive-article-date">
+  <time datetime="2018-03-09T02:29:44.000Z" itemprop="datePublished">03-09</time>
 </a>
       
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/06/20180206-你追求的幸福到底是什么？/"  >你追求的幸福到底是什么？</a>
+      <a class="archive-article-title" href="/2018/03/09/20180309-大学考了三年的四级英语，我终于过了！/"  >大学考了三年的四级英语，我终于过了！</a>
     </h1>
   
 
@@ -169,9 +211,9 @@ ga('send', 'pageview');
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/感悟/" class="color3">感悟</a>
-      
     <a href="/tags/生活/" class="color3">生活</a>
+      
+    <a href="/tags/大学/" class="color3">大学</a>
       
   </li>
 
@@ -202,19 +244,38 @@ ga('send', 'pageview');
 </p>
 
 
-                <p>
-                    Powered by <a href="#" target="_blank">HDQ</a> Theme <a href="#" target="_blank">Garen</a> &copy;
-                    2018
-                        Garen<br>
-                </p>
+            <span id="runtime_span"></span>
+            <br>
+            <p>
+                Powered by <a href="#" target="_blank">HDQ</a> Theme <a href="#" target="_blank">Garen</a> &copy;
+                2018
+                    Garen<br>
+            </p>
         </div>
     </div>
 </footer>
+<script>
+    function show_runtime() {
+            window.setTimeout("show_runtime()", 1000);
+            X = new Date("11/25/2017 05:20:00");
+            Y = new Date(); T = (Y.getTime() - X.getTime()); M = 24 * 60 * 60 * 1000;
+            a = T / M;
+            A = Math.floor(a);
+            b = (a - A) * 24;
+            B = Math.floor(b);
+            c = (b - B) * 60;
+            C = Math.floor((b - B) * 60);
+            D = Math.floor((c - C) * 60);
+            runtime_span.innerHTML = "本站勉强运行: " + A + "天" + B + "小时" + C + "分" + D + "秒";
+        }
+
+        show_runtime();
+</script>
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script>
   var mihoConfig = {
-      root: "https://hdqgame.top",
+      root: "https://blog.hdqyf.club",
       animate: true,
       isHome: false,
       share: true,
@@ -238,10 +299,10 @@ ga('send', 'pageview');
 <div class="sidebar-menu-box" id="sidebar-menu-box">
     <div class="sidebar-menu-box-container">
         <div id="sidebar-menu-box-categories">
-            <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/Java/">Java</a><a class="category-link" href="/categories/Linux/">Linux</a><a class="category-link" href="/categories/Mac/">Mac</a><a class="category-link" href="/categories/SQL/">SQL</a><a class="category-link" href="/categories/iOS/">iOS</a><a class="category-link" href="/categories/常识/">常识</a><a class="category-link" href="/categories/生活/">生活</a><a class="category-link" href="/categories/资源/">资源</a><a class="category-link" href="/categories/软件/">软件</a>
+            <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/Java/">Java</a><a class="category-link" href="/categories/Linux/">Linux</a><a class="category-link" href="/categories/Mac/">Mac</a><a class="category-link" href="/categories/SQL/">SQL</a><a class="category-link" href="/categories/Steam/">Steam</a><a class="category-link" href="/categories/iOS/">iOS</a><a class="category-link" href="/categories/下载/">下载</a><a class="category-link" href="/categories/常识/">常识</a><a class="category-link" href="/categories/感悟/">感悟</a><a class="category-link" href="/categories/效率/">效率</a><a class="category-link" href="/categories/激活/">激活</a><a class="category-link" href="/categories/生活/">生活</a><a class="category-link" href="/categories/资源/">资源</a><a class="category-link" href="/categories/软件/">软件</a>
         </div>
         <div id="sidebar-menu-box-tags">
-            <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/HTML/" style="font-size: 13.33px;">HTML</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/iOS/" style="font-size: 16.67px;">iOS</a> <a href="/tags/office/" style="font-size: 13.33px;">office</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/办公/" style="font-size: 13.33px;">办公</a> <a href="/tags/图像处理/" style="font-size: 10px;">图像处理</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 16.67px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 10px;">感悟</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/终端/" style="font-size: 13.33px;">终端</a> <a href="/tags/视频/" style="font-size: 10px;">视频</a> <a href="/tags/资源/" style="font-size: 20px;">资源</a>
+            <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/HTML/" style="font-size: 15px;">HTML</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/Mac/" style="font-size: 15px;">Mac</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/office/" style="font-size: 12.5px;">office</a> <a href="/tags/下载/" style="font-size: 12.5px;">下载</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/办公/" style="font-size: 12.5px;">办公</a> <a href="/tags/图像处理/" style="font-size: 10px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 15px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.5px;">感悟</a> <a href="/tags/效率/" style="font-size: 12.5px;">效率</a> <a href="/tags/数据库/" style="font-size: 12.5px;">数据库</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/激活/" style="font-size: 10px;">激活</a> <a href="/tags/生活/" style="font-size: 15px;">生活</a> <a href="/tags/终端/" style="font-size: 12.5px;">终端</a> <a href="/tags/视频/" style="font-size: 10px;">视频</a> <a href="/tags/资源/" style="font-size: 20px;">资源</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a>
         </div>
     </div>
     <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
@@ -274,7 +335,7 @@ ga('send', 'pageview');
     <div class="mobile-header-tag-container">
         <span class="title">Tags</span>
         <div id="mobile-header-container-tags">
-            <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/HTML/" style="font-size: 13.33px;">HTML</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 16.67px;">Mac</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/iOS/" style="font-size: 16.67px;">iOS</a> <a href="/tags/office/" style="font-size: 13.33px;">office</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/办公/" style="font-size: 13.33px;">办公</a> <a href="/tags/图像处理/" style="font-size: 10px;">图像处理</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 16.67px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 10px;">感悟</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/终端/" style="font-size: 13.33px;">终端</a> <a href="/tags/视频/" style="font-size: 10px;">视频</a> <a href="/tags/资源/" style="font-size: 20px;">资源</a>
+            <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/HTML/" style="font-size: 15px;">HTML</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/Mac/" style="font-size: 15px;">Mac</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/office/" style="font-size: 12.5px;">office</a> <a href="/tags/下载/" style="font-size: 12.5px;">下载</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/办公/" style="font-size: 12.5px;">办公</a> <a href="/tags/图像处理/" style="font-size: 10px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 15px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.5px;">感悟</a> <a href="/tags/效率/" style="font-size: 12.5px;">效率</a> <a href="/tags/数据库/" style="font-size: 12.5px;">数据库</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/激活/" style="font-size: 10px;">激活</a> <a href="/tags/生活/" style="font-size: 15px;">生活</a> <a href="/tags/终端/" style="font-size: 12.5px;">终端</a> <a href="/tags/视频/" style="font-size: 10px;">视频</a> <a href="/tags/资源/" style="font-size: 20px;">资源</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a>
         </div>
     </div>
 </div>
