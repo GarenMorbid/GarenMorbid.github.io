@@ -3,24 +3,36 @@
 <head>
   <meta charset="utf-8">
   
-  <title>你追求的幸福到底是什么？ | HDQ | Blog</title>
+  <title>convert命令FAT32转NTFS（不影响硬盘数据） | HDQ | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HDQ,HDQ's Blog" />
   
-  <meta name="description" content="这是英国动画人Steve Cutts 的一部动画短片，名为《Happiness》。视频画面可能有一些会引起不适，特别是密集恐惧症，在此提醒。
-在消费社会中，到处都充满刺激，我们认为自主地追求的幸福，不过是来自消费市场的控制，你要的手机，名牌，你以为的金钱、豪车。然而我们就在这样的世界中不断追逐着。我想，想要真正幸福和高效生活，首先得站在更高的地方看一看自己，看一看自己到底过着什么样的生活。这就">
+  <meta name="description" content="前言使用 NTFS 分区，可以更好的管理磁盘及提高系统的安全性；硬盘为 NTFS 格式时，碎片整理也快很多。在安装的过程中可以选择使用 NTFS 还是 FAT 分区。如果在安装过程中选择了 FAT，可以用下面的办法来把它转换成 NTFS。最实用的是它能对 U 盘转格式
+
+
+第一步依次选择“开始 → 运行”命令，在弹出对话框中输入“cmd”命令（或点“开始 → 程序 → 附件 → 命令”提示符），打">
 <meta property="og:type" content="article">
-<meta property="og:title" content="你追求的幸福到底是什么？">
-<meta property="og:url" content="https://blog.hdqyf.club/2018/02/06/20180206-你追求的幸福到底是什么？/index.html">
+<meta property="og:title" content="convert命令FAT32转NTFS（不影响硬盘数据）">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/03/09/20180309-convert命令FAT32转NTFS（不影响硬盘数据）/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
-<meta property="og:description" content="这是英国动画人Steve Cutts 的一部动画短片，名为《Happiness》。视频画面可能有一些会引起不适，特别是密集恐惧症，在此提醒。
-在消费社会中，到处都充满刺激，我们认为自主地追求的幸福，不过是来自消费市场的控制，你要的手机，名牌，你以为的金钱、豪车。然而我们就在这样的世界中不断追逐着。我想，想要真正幸福和高效生活，首先得站在更高的地方看一看自己，看一看自己到底过着什么样的生活。这就">
-<meta property="og:updated_time" content="2018-02-12T10:30:50.000Z">
+<meta property="og:description" content="前言使用 NTFS 分区，可以更好的管理磁盘及提高系统的安全性；硬盘为 NTFS 格式时，碎片整理也快很多。在安装的过程中可以选择使用 NTFS 还是 FAT 分区。如果在安装过程中选择了 FAT，可以用下面的办法来把它转换成 NTFS。最实用的是它能对 U 盘转格式
+
+
+第一步依次选择“开始 → 运行”命令，在弹出对话框中输入“cmd”命令（或点“开始 → 程序 → 附件 → 命令”提示符），打">
+<meta property="og:image" content="https://s1.ax1x.com/2018/03/09/92ODgK.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2018/03/09/92OB36.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2018/03/09/92OrjO.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2018/03/09/92O09x.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2018/03/09/92Od41.jpg">
+<meta property="og:updated_time" content="2018-03-09T02:19:50.077Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="你追求的幸福到底是什么？">
-<meta name="twitter:description" content="这是英国动画人Steve Cutts 的一部动画短片，名为《Happiness》。视频画面可能有一些会引起不适，特别是密集恐惧症，在此提醒。
-在消费社会中，到处都充满刺激，我们认为自主地追求的幸福，不过是来自消费市场的控制，你要的手机，名牌，你以为的金钱、豪车。然而我们就在这样的世界中不断追逐着。我想，想要真正幸福和高效生活，首先得站在更高的地方看一看自己，看一看自己到底过着什么样的生活。这就">
+<meta name="twitter:title" content="convert命令FAT32转NTFS（不影响硬盘数据）">
+<meta name="twitter:description" content="前言使用 NTFS 分区，可以更好的管理磁盘及提高系统的安全性；硬盘为 NTFS 格式时，碎片整理也快很多。在安装的过程中可以选择使用 NTFS 还是 FAT 分区。如果在安装过程中选择了 FAT，可以用下面的办法来把它转换成 NTFS。最实用的是它能对 U 盘转格式
+
+
+第一步依次选择“开始 → 运行”命令，在弹出对话框中输入“cmd”命令（或点“开始 → 程序 → 附件 → 命令”提示符），打">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/03/09/92ODgK.jpg">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -182,14 +194,14 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-20180206-你追求的幸福到底是什么？" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-20180309-convert命令FAT32转NTFS（不影响硬盘数据）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      你追求的幸福到底是什么？
+      convert命令FAT32转NTFS（不影响硬盘数据）
     </h1>
     <div class="post-title-bar">
       <ul>
@@ -197,12 +209,12 @@ ga('send', 'pageview');
               <li>
                   <i class="fa fa-book"></i>
                   
-                      <a href="/categories/感悟/">感悟</a>
+                      <a href="/categories/效率/">效率</a>
                   
               </li>
           
         <li>
-          <i class="fa fa-calendar"></i>  2018-02-06
+          <i class="fa fa-calendar"></i>  2018-03-09
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -218,21 +230,48 @@ ga('send', 'pageview');
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <p><iframe frameborder="0" width="100%" height="500px" src="https://v.qq.com/iframe/player.html?vid=s0546b5aqoh&tiny=0&auto=0" allowfullscreen></iframe><br></p>
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font size="3" face="微软雅黑">使用 NTFS 分区，可以更好的管理磁盘及提高系统的安全性；硬盘为 NTFS 格式时，碎片整理也快很多。<br>在安装的过程中可以选择使用 NTFS 还是 FAT 分区。如果在安装过程中选择了 FAT，可以用下面的办法来把它转换成 NTFS。<br><strong>最实用的是它能对 U 盘转格式</strong></font>
+
 <hr>
-<p>这是英国动画人Steve Cutts 的一部动画短片，名为《Happiness》。视频画面可能有一些会引起不适，特别是密集恐惧症，在此提醒。</p>
-<p>在消费社会中，到处都充满刺激，我们认为自主地追求的幸福，不过是来自消费市场的控制，你要的手机，名牌，你以为的金钱、豪车。然而我们就在这样的世界中不断追逐着。我想，想要真正幸福和高效生活，首先得站在更高的地方看一看自己，看一看自己到底过着什么样的生活。这就是我们把本篇放在这里的意义。</p>
-<p>动画师：</p>
-<p>Steve Cutts</p>
-<p>来源：</p>
-<p><a href="https://v.qq.com/x/page/s0546b5aqoh.html" target="_blank" rel="external">https://v.qq.com/x/page/s0546b5aqoh.html</a></p>
-<p>音乐：</p>
-<p>‘Habanera’ by Bizet</p>
-<p>‘Morning Mood’ by Edvard Grieg</p>
+<h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a><font color="#0099ff" size="4" face="黑体">第一步</font></h3><font size="3" face="微软雅黑" color="green">依次选择“开始 → 运行”命令，在弹出对话框中输入“cmd”命令（或点“开始 → 程序 → 附件 → 命令”提示符），打开命令提示符窗口</font>
+
+<hr>
+<h3 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a><font color="#0099ff" size="4" face="黑体">第二步</font></h3><font size="3" face="微软雅黑" color="green">打开窗口以后，在光标的提示符下输入<br><strong>convert disk:/FS:NTFS （disk：驱动器,大小写均可）</strong><br>然后回车。注意在“convert”的后面有一个空格。<br>如：convert f:/FS:NTFS 把 F 盘转换为 NTFS 格式。</font>
+
+<p><img src="https://s1.ax1x.com/2018/03/09/92ODgK.jpg" alt=""></p>
+<hr>
+<h3 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a><font color="#0099ff" size="4" face="黑体">第三步</font></h3><font size="3" face="微软雅黑" color="green">接着，如果驱动器有卷标，系统会要求你输入磁盘的卷标，然后回车；补充：查看卷标：右击磁盘→属性→常规。</font>
+
+<p><img src="https://s1.ax1x.com/2018/03/09/92OB36.jpg" alt=""></p>
+<font size="3" face="微软雅黑" color="green">如果驱动器没有卷标，则直接进行转换。</font>
+
+<h3 id="第四步"><a href="#第四步" class="headerlink" title="第四步"></a><font color="#0099ff" size="4" face="黑体">第四步</font></h3><hr>
+<font size="3" face="微软雅黑" color="green">转换完成后，它会向你报告你所转换的磁盘分区情况。</font>
+
+<p><img src="https://s1.ax1x.com/2018/03/09/92OrjO.jpg" alt=""></p>
+<hr>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a><font color="#0099ff" size="4" face="黑体">注意事项</font></h3><h4 id="1-切记"><a href="#1-切记" class="headerlink" title="1.切记"></a><font color="red" size="4" face="黑体">1.切记</font></h4><font size="3" face="微软雅黑" color="green">命令是convert不是covert</font>
+
+<p><img src="https://s1.ax1x.com/2018/03/09/92O09x.jpg" alt=""></p>
+<h4 id="2-切记"><a href="#2-切记" class="headerlink" title="2.切记"></a><font color="red" size="4" face="黑体">2.切记</font></h4><font size="3" face="微软雅黑" color="green">如果用convert也有此提示（极少），请把当前目录设置为windows/system32,然后再输入convert命令</font>
+
+<p><img src="https://s1.ax1x.com/2018/03/09/92Od41.jpg" alt=""></p>
+<h4 id="3-切记"><a href="#3-切记" class="headerlink" title="3.切记"></a><font color="red" size="4" face="黑体">3.切记</font></h4><font size="3" face="微软雅黑" color="green">建议先执行磁盘扫描、磁盘碎片整理程序。</font>
+
+<h4 id="4-切记"><a href="#4-切记" class="headerlink" title="4.切记"></a><font color="red" size="4" face="黑体">4.切记</font></h4><font size="3" face="微软雅黑" color="green">如果 convert 无法锁定驱动器（例如，驱动器是系统卷或当前驱动器），则它会在下次重新启动计算机时进桌面前自动开始转换该驱动器。如果您不能立即重新启动计算机以完成转换，则请安排一个重新启动计算机的时间，并为转换过程留出所需要的时间。<br><br>如果要转换的分区上有文件正被系统使用，那么在转换时，转换程序将会询问你是否卸下要转换的卷（即分区），这时最好选择“否”，最后它就会询问你是否在下一次计算机启动时转换分区，选择“是”并重新启动机器即可完成转换。</font>
+
+<h4 id="5-切记"><a href="#5-切记" class="headerlink" title="5.切记"></a><font color="red" size="4" face="黑体">5.切记</font></h4><font size="3" face="微软雅黑" color="green">这样可以简单地转换分区格式为NTFS。这个方法只用于FAT32转为NTFS，不能将NTFS转为FAT32。</font>
+
+<h4 id="6-切记"><a href="#6-切记" class="headerlink" title="6.切记"></a><font color="red" size="4" face="黑体">6.切记</font></h4><font size="3" face="微软雅黑" color="green">用convert命令把文件格式从 FAT 转换为 NTFS，现有的文件和文件夹完好无损。</font>
+
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年02月12日 18:30</p>
+        <p>最后更新： 2018年03月09日 10:19</p>
         <footer>
             <a href="#">
                 <img src="/images/logo.png" alt="Garen">
@@ -307,7 +346,7 @@ ga('send', 'pageview');
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/02/06/20180206-你追求的幸福到底是什么？/&title=《你追求的幸福到底是什么？》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/02/06/9MTVUI.jpg" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/03/09/20180309-convert命令FAT32转NTFS（不影响硬盘数据）/&title=《convert命令FAT32转NTFS（不影响硬盘数据）》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/03/09/92OtHJ.jpg" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -317,22 +356,22 @@ ga('send', 'pageview');
             </a>
           </li>
           <li>
-            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.hdqyf.club/2018/02/06/20180206-你追求的幸福到底是什么？/&title=《你追求的幸福到底是什么？》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ">
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.hdqyf.club/2018/03/09/20180309-convert命令FAT32转NTFS（不影响硬盘数据）/&title=《convert命令FAT32转NTFS（不影响硬盘数据）》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ">
               <i class="fa fa-qq"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/02/06/20180206-你追求的幸福到底是什么？/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/03/09/20180309-convert命令FAT32转NTFS（不影响硬盘数据）/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《你追求的幸福到底是什么？》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/02/06/20180206-你追求的幸福到底是什么？/&via=https://blog.hdqyf.club" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《convert命令FAT32转NTFS（不影响硬盘数据）》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/03/09/20180309-convert命令FAT32转NTFS（不影响硬盘数据）/&via=https://blog.hdqyf.club" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/02/06/20180206-你追求的幸福到底是什么？/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/03/09/20180309-convert命令FAT32转NTFS（不影响硬盘数据）/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -342,7 +381,7 @@ ga('send', 'pageview');
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/02/06/20180206-你追求的幸福到底是什么？/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/03/09/20180309-convert命令FAT32转NTFS（不影响硬盘数据）/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -354,9 +393,7 @@ ga('send', 'pageview');
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/感悟/" class="color3">感悟</a>
-      
-    <a href="/tags/生活/" class="color3">生活</a>
+    <a href="/tags/效率/" class="color3">效率</a>
       
   </li>
 
@@ -367,22 +404,18 @@ ga('send', 'pageview');
 </article>
 
 
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第一步"><span class="post-toc-text">第一步</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第二步"><span class="post-toc-text">第二步</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第三步"><span class="post-toc-text">第三步</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第四步"><span class="post-toc-text">第四步</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#注意事项"><span class="post-toc-text">注意事项</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-切记"><span class="post-toc-text">1.切记</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-切记"><span class="post-toc-text">2.切记</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-切记"><span class="post-toc-text">3.切记</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-切记"><span class="post-toc-text">4.切记</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-切记"><span class="post-toc-text">5.切记</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-切记"><span class="post-toc-text">6.切记</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
 
 <nav id="article-nav">
   
-    <a href="/2018/02/07/20180207-一篇文章让你掌握SQL的基础语句使用/" id="article-nav-newer" class="article-nav-link-wrap">
-
-      <span class="article-nav-title">
-        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
-        
-          一篇文章让你掌握SQL的基础语句使用
-        
-      </span>
-    </a>
   
-  
-    <a href="/2018/02/04/20180204-PPT那些常用的保存格式可以做什么/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">PPT那些常用的保存格式可以做什么</span>
+    <a href="/2018/03/02/20180302-最佳下载利器！IDM 6.30.6 最新绿色特别版/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">最佳下载利器！IDM 6.30.6 最新绿色特别版</span>
       <i class="fa fa-hand-o-right" aria-hidden="true"></i>
     </a>
   
