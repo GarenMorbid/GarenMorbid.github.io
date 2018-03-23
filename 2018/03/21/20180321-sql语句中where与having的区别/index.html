@@ -14,7 +14,7 @@
 <meta property="og:url" content="https://blog.hdqyf.club/2018/03/21/20180321-sql语句中where与having的区别/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
 <meta property="og:description" content="Where是一个约束声明，使用Where约束来自数据库的数据，Where是在结果返回之前起作用的，Where中不能使用聚合函数。Having是一个过滤声明，是在查询返回结果集以后对查询结果进行的过滤操作，在Having中可以使用聚合函数。在查询过程中聚合语句(sum,min,max,avg,count)要比having子句优先执行。而where子句在查询过程中执行优先级高于聚合语句。下面用一个例子">
-<meta property="og:updated_time" content="2018-03-21T03:50:21.651Z">
+<meta property="og:updated_time" content="2018-03-23T11:01:01.160Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sql语句中where与having的区别">
 <meta name="twitter:description" content="Where是一个约束声明，使用Where约束来自数据库的数据，Where是在结果返回之前起作用的，Where中不能使用聚合函数。Having是一个过滤声明，是在查询返回结果集以后对查询结果进行的过滤操作，在Having中可以使用聚合函数。在查询过程中聚合语句(sum,min,max,avg,count)要比having子句优先执行。而where子句在查询过程中执行优先级高于聚合语句。下面用一个例子">
@@ -196,16 +196,16 @@ ga('send', 'pageview');
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <font color="#000" size="4" face="微软雅黑"><strong>Where</strong>是一个约束声明，使用Where约束来自数据库的数据，Where是在结果返回之前起作用的，Where中不能使用聚合函数。<br><br><strong>Having</strong>是一个过滤声明，是在查询返回结果集以后对查询结果进行的过滤操作，在Having中可以使用聚合函数。<br><br>在查询过程中聚合语句(sum,min,max,avg,count)要比having子句优先执行。而where子句在查询过程中执行优先级高于聚合语句。</font><br><br><br><font color="#833ab4" size="3" face="微软雅黑">下面用一个例子进一步说明问题。假设有数据表：</font>
+            <font color="#000" size="4" face="微软雅黑" style="line-height:1.8;"><strong>Where</strong>是一个约束声明，使用Where约束来自数据库的数据，Where是在结果返回之前起作用的，Where中不能使用聚合函数。<br><strong>Having</strong>是一个过滤声明，是在查询返回结果集以后对查询结果进行的过滤操作，在Having中可以使用聚合函数。<br>在查询过程中聚合语句(sum,min,max,avg,count)要比having子句优先执行。而where子句在查询过程中执行优先级高于聚合语句。</font><br><br><br><font color="#833ab4" size="3" face="微软雅黑" style="line-height:2;">下面用一个例子进一步说明问题。假设有数据表：</font>
 
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span>  <span class="string">`test`</span>.<span class="string">`salary_info`</span> (</div><div class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> auto_increment,</div><div class="line">  <span class="string">`deparment`</span> <span class="built_in">varchar</span>(<span class="number">16</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">default</span> <span class="string">''</span>,</div><div class="line">  <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">16</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">default</span> <span class="string">''</span>,</div><div class="line">  <span class="string">`salary`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">default</span> <span class="string">'0'</span>,</div><div class="line">   PRIMARY <span class="keyword">KEY</span>  (<span class="string">`id`</span>)</div><div class="line">) <span class="keyword">ENGINE</span>=MyISAM AUTO_INCREMENT=<span class="number">7</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</div></pre></td></tr></table></figure>
-<font color="#833ab4" size="3" face="微软雅黑"><strong>例1：要查找平均工资大于3000的部门</strong><br><br>则sql语句应为：</font>
+<font color="#833ab4" size="3" face="微软雅黑" style="line-height:2;"><strong>例1：要查找平均工资大于3000的部门</strong><br>则sql语句应为：</font>
 
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> deparment, <span class="keyword">avg</span>(salary) <span class="keyword">as</span> average <span class="keyword">from</span> salary_info </div><div class="line"><span class="keyword">group</span> <span class="keyword">by</span> deparment <span class="keyword">having</span> average &gt; <span class="number">3000</span></div></pre></td></tr></table></figure>
-<font color="#833ab4" size="3" face="微软雅黑">此时只能使用having，而不能使用where。一来，我们要使用聚合语句avg；二来，我们要对聚合后的结果进行筛选（average &gt; 3000），因此使用where会被告知sql有误。</font><br><br><br><font color="#833ab4" size="3" face="微软雅黑"><strong>例2：要查询每个部门工资大于3000的员工个数</strong><br><br>则sql语句应为：</font>
+<font color="#833ab4" size="3" face="微软雅黑" style="line-height:2;">此时只能使用having，而不能使用where。一来，我们要使用聚合语句avg；二来，我们要对聚合后的结果进行筛选（average &gt; 3000），因此使用where会被告知sql有误。</font><br><br><br><font color="#833ab4" size="3" face="微软雅黑" style="line-height:2;"><strong>例2：要查询每个部门工资大于3000的员工个数</strong><br>则sql语句应为：</font>
 
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> deparment, <span class="keyword">count</span>(*) <span class="keyword">as</span> c <span class="keyword">from</span> salary_info </div><div class="line"><span class="keyword">where</span> salary &gt; <span class="number">3000</span> <span class="keyword">group</span> <span class="keyword">by</span> deparment</div></pre></td></tr></table></figure>
-<font color="#833ab4" size="3" face="微软雅黑">此处的where不可用having进行替换，因为是直接对库中的数据进行筛选，而非对结果集进行筛选。</font>
+<font color="#833ab4" size="3" face="微软雅黑" style="line-height:2;">此处的where不可用having进行替换，因为是直接对库中的数据进行筛选，而非对结果集进行筛选。</font>
 
 <p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
 <ul>
@@ -214,7 +214,7 @@ ga('send', 'pageview');
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年03月21日 11:50</p>
+        <p>最后更新： 2018年03月23日 19:01</p>
         <footer>
             <a href="#">
                 <img src="/images/logo.png" alt="Garen">

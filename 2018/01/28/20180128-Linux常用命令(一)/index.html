@@ -26,7 +26,7 @@ Windows连接Linux的方式
 putty是一个比较灵活的小工具，它可以连接到远程Linux的字符界面进行操作。
 xshell一款免费的Linux远程连接工具，操作简便，人性化。
 SecureCRT可以用来连接字符界面，也可以用来上传">
-<meta property="og:updated_time" content="2018-02-04T06:02:38.000Z">
+<meta property="og:updated_time" content="2018-03-23T11:13:04.966Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux常用命令(JDK安装、Tomcat安装、MySQL安装)">
 <meta name="twitter:description" content="LinuxLinux发展史，安装方法，各种发行版本，以及内核版本在这里就不赘述了，主要针对Linux下JDK安装、Tomcat安装、MySQL安装命令总结。
@@ -226,7 +226,7 @@ ga('send', 'pageview');
 <li>Samba，使用此工具共享目录，Linux可以直接访问Windows的共享文件夹。</li>
 </ul>
 <hr>
-<h4 id="JDK安装、Tomcat安装、MySQL安装"><a href="#JDK安装、Tomcat安装、MySQL安装" class="headerlink" title="JDK安装、Tomcat安装、MySQL安装"></a><font color="#0099ff" size="4" face="黑体">JDK安装、Tomcat安装、MySQL安装</font></h4><font size="3" face="微软雅黑">安装最新的JDK，直接在oracle官网下载就可以了。</font>
+<h4 id="JDK安装、Tomcat安装、MySQL安装"><a href="#JDK安装、Tomcat安装、MySQL安装" class="headerlink" title="JDK安装、Tomcat安装、MySQL安装"></a><font color="#0099ff" size="4" face="黑体">JDK安装、Tomcat安装、MySQL安装</font></h4><font size="3" face="微软雅黑" style="line-height:2;">安装最新的JDK，直接在oracle官网下载就可以了。</font>
 
 <h6 id="JDK配置"><a href="#JDK配置" class="headerlink" title="JDK配置"></a><font color="#0099ff" size="3" face="黑体">JDK配置</font></h6><p>下载包名：<code>jdk-8u121-linux-x64.tar.gz</code>，在安装配置之前先SecureCRT连接工具安装上传下载工具<code>lrzsz</code>，安装命令<code>apt-get install lrzsz</code>，上传命令<code>rz -y</code>，把需要安装配置的软件放在<code>/myapp/soft</code>目录下，解压到当前目录：<br><code>tar -zxvf jdk-8u121-linux-x64.tar.gz</code><br>解压完成之后移到bin目录下使用命令：<br><code>mv jdk-8u121-linux-x64 /myapp/bin/</code><br>进入到此目录中，使用命令：<br><code>ln jdk-8u121-linux-x64/ jdk</code>建立软链接目录，然后进行配置</p>
 <h6 id="jdk配置环境变量"><a href="#jdk配置环境变量" class="headerlink" title="jdk配置环境变量"></a><font color="#0099ff" size="3" face="黑体">jdk配置环境变量</font></h6><p><code>$ vi /etc/profile</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">export JAVA_HOME=&quot;/myapp/bin/jdk/&quot;</div><div class="line">export CLASSPATH=&quot;.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib/tools.jar&quot;</div><div class="line">export JRE_HOME=&quot;$JAVA_HOME/jre&quot;</div><div class="line">export PATH=&quot;$JAVA_HOME/bin:$PATH</div></pre></td></tr></table></figure></p>
@@ -254,7 +254,7 @@ ga('send', 'pageview');
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年02月04日 14:02</p>
+        <p>最后更新： 2018年03月23日 19:13</p>
         <footer>
             <a href="#">
                 <img src="/images/logo.png" alt="Garen">

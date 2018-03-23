@@ -14,7 +14,7 @@
 <meta property="og:url" content="https://blog.hdqyf.club/2018/03/20/20180320-mybatis动态sql中的trim标签的使用/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
 <meta property="og:description" content="mybatis动态sql中的trim标签的使用12345　　select * from user　　&amp;lt;trim prefix=&quot;WHERE&quot; prefixoverride=&quot;AND|OR&quot;&amp;gt;　　　　&amp;lt;if test=&quot;name != null and name.length()&amp;gt;0&quot;&amp;gt; AND name=#&amp;#123;name&amp;#125;&amp;lt;/if&amp;gt;">
-<meta property="og:updated_time" content="2018-03-20T08:40:39.211Z">
+<meta property="og:updated_time" content="2018-03-23T11:01:54.226Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis动态sql中的trim标签的使用">
 <meta name="twitter:description" content="mybatis动态sql中的trim标签的使用12345　　select * from user　　&amp;lt;trim prefix=&quot;WHERE&quot; prefixoverride=&quot;AND|OR&quot;&amp;gt;　　　　&amp;lt;if test=&quot;name != null and name.length()&amp;gt;0&quot;&amp;gt; AND name=#&amp;#123;name&amp;#125;&amp;lt;/if&amp;gt;">
@@ -197,10 +197,10 @@ ga('send', 'pageview');
       
             
             <h3 id="mybatis动态sql中的trim标签的使用"><a href="#mybatis动态sql中的trim标签的使用" class="headerlink" title="mybatis动态sql中的trim标签的使用"></a><font color="#0099ff" size="4" face="微软雅黑">mybatis动态sql中的trim标签的使用</font></h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">　　select * from user</div><div class="line">　　<span class="tag">&lt;<span class="name">trim</span> <span class="attr">prefix</span>=<span class="string">"WHERE"</span> <span class="attr">prefixoverride</span>=<span class="string">"AND|OR"</span>&gt;</span></div><div class="line">　　　　<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"name != null and name.length()&gt;0"</span>&gt;</span> AND name=#&#123;name&#125;<span class="tag">&lt;/<span class="name">if</span>&gt;</span></div><div class="line">　　　　<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"gender != null and gender.length()&gt;0"</span>&gt;</span> AND gender=#&#123;gender&#125;<span class="tag">&lt;/<span class="name">if</span>&gt;</span></div><div class="line">　　<span class="tag">&lt;/<span class="name">trim</span>&gt;</span></div></pre></td></tr></table></figure>
-<font color="#833ab4" size="3" face="微软雅黑">假如说name和gender的值都不为null的话打印的SQL为：<code>select * from user where ❤ name = ‘xx’ and gender = ‘xx’</code><br><br>在❤标记的地方是不存在第一个and的，上面两个属性的意思如下：<br>prefix：前缀<br>prefixoverride：去掉第一个and或者是or</font>
+<font color="#833ab4" size="3" face="微软雅黑" style="line-height:2;">假如说name和gender的值都不为null的话打印的SQL为：<code>select * from user where ❤ name = ‘xx’ and gender = ‘xx’</code><br>在❤标记的地方是不存在第一个and的，上面两个属性的意思如下：<br>prefix：前缀<br>prefixoverride：去掉第一个and或者是or</font>
 
 <h3 id="mybatis动态sql中的trim标签的使用-1"><a href="#mybatis动态sql中的trim标签的使用-1" class="headerlink" title="mybatis动态sql中的trim标签的使用"></a><font color="#0099ff" size="4" face="微软雅黑">mybatis动态sql中的trim标签的使用</font></h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">　　update user</div><div class="line">　　<span class="tag">&lt;<span class="name">trim</span> <span class="attr">prefix</span>=<span class="string">"set"</span> <span class="attr">suffixoverride</span>=<span class="string">","</span> <span class="attr">suffix</span>=<span class="string">" where id = #&#123;id&#125; "</span>&gt;</span></div><div class="line">　　　　<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"name != null and name.length()&gt;0"</span>&gt;</span> name=#&#123;name&#125; , <span class="tag">&lt;/<span class="name">if</span>&gt;</span></div><div class="line">　　　　<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"gender != null and gender.length()&gt;0"</span>&gt;</span> gender=#&#123;gender&#125; ,  <span class="tag">&lt;/<span class="name">if</span>&gt;</span></div><div class="line">　　<span class="tag">&lt;/<span class="name">trim</span>&gt;</span></div></pre></td></tr></table></figure>
-<font color="#833ab4" size="3" face="微软雅黑">假如说name和gender的值都不为null的话打印的SQL为：<code>update user set name=’xx’ , gender=’xx’ ❤ where id=’x’</code><br><br>在❤标记的地方不存在逗号，而且自动加了一个set前缀和where后缀，上面三个属性的意义如下，其中prefix意义如上：<br>suffix：后缀<br>suffixoverride：去掉最后一个逗号（也可以是其他的标记，就像是上面前缀中的and一样）</font>
+<font color="#833ab4" size="3" face="微软雅黑" style="line-height:2;">假如说name和gender的值都不为null的话打印的SQL为：<code>update user set name=’xx’ , gender=’xx’ ❤ where id=’x’</code><br>在❤标记的地方不存在逗号，而且自动加了一个set前缀和where后缀，上面三个属性的意义如下，其中prefix意义如上：<br>suffix：后缀<br>suffixoverride：去掉最后一个逗号（也可以是其他的标记，就像是上面前缀中的and一样）</font>
 
 <p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
 <ul>
@@ -209,7 +209,7 @@ ga('send', 'pageview');
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年03月20日 16:40</p>
+        <p>最后更新： 2018年03月23日 19:01</p>
         <footer>
             <a href="#">
                 <img src="/images/logo.png" alt="Garen">
