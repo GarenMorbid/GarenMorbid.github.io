@@ -3,25 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Microsoft Office 2016 2010 四合一绿色精简版 | HDQ | Blog</title>
+  <title>CSS清除浮动（float）常用方法总结 | HDQ | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HDQ,HDQ's Blog" />
   
-  <meta name="description" content="软件简介Office2016四合一绿色精简版，由绿软爱好者xb21cn专注绿化精简制作，包含Access、Excel 、Ppt 、Word 四大组件(含VBA )，支持自动永久激活及KMS激活，支持Win7、Win8.1、Win10操作系统32及64位，此版仅适合普通文档编辑使用，特殊需要建议安装原版，无法保证在系统装有office复杂情况下使用正常！Microsoft Office 2016 R">
+  <meta name="description" content="前言在清除浮动前我们要了解两个重要的定义：浮动的定义：使元素脱离文档流，按照指定方向发生移动，遇到父级边界或者相邻的浮动元素停了下来。高度塌陷：浮动元素父元素高度自适应（父元素不写高度时，子元素写了浮动后，父元素会发生高度塌陷）知道浮动和为什么要清除浮动之后我们可以开始学习如何清除浮动了，这时候我们就需要用到清除浮动的属性clear, clear:left | right | both | non">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Microsoft Office 2016 2010 四合一绿色精简版">
-<meta property="og:url" content="https://blog.hdqyf.club/2018/01/30/20180130-Microsoft Office-2016-2010-四合一绿色精简版/index.html">
+<meta property="og:title" content="CSS清除浮动（float）常用方法总结">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/03/27/20180327-CSS清除浮动（float）常用方法总结/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
-<meta property="og:description" content="软件简介Office2016四合一绿色精简版，由绿软爱好者xb21cn专注绿化精简制作，包含Access、Excel 、Ppt 、Word 四大组件(含VBA )，支持自动永久激活及KMS激活，支持Win7、Win8.1、Win10操作系统32及64位，此版仅适合普通文档编辑使用，特殊需要建议安装原版，无法保证在系统装有office复杂情况下使用正常！Microsoft Office 2016 R">
-<meta property="og:image" content="https://s1.ax1x.com/2018/01/30/9pqcqJ.jpg">
-<meta property="og:image" content="https://s1.ax1x.com/2018/01/30/9pq2Z9.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/01/30/9pqRaR.png">
-<meta property="og:updated_time" content="2018-03-27T02:36:50.507Z">
+<meta property="og:description" content="前言在清除浮动前我们要了解两个重要的定义：浮动的定义：使元素脱离文档流，按照指定方向发生移动，遇到父级边界或者相邻的浮动元素停了下来。高度塌陷：浮动元素父元素高度自适应（父元素不写高度时，子元素写了浮动后，父元素会发生高度塌陷）知道浮动和为什么要清除浮动之后我们可以开始学习如何清除浮动了，这时候我们就需要用到清除浮动的属性clear, clear:left | right | both | non">
+<meta property="og:updated_time" content="2018-03-27T03:16:18.060Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Microsoft Office 2016 2010 四合一绿色精简版">
-<meta name="twitter:description" content="软件简介Office2016四合一绿色精简版，由绿软爱好者xb21cn专注绿化精简制作，包含Access、Excel 、Ppt 、Word 四大组件(含VBA )，支持自动永久激活及KMS激活，支持Win7、Win8.1、Win10操作系统32及64位，此版仅适合普通文档编辑使用，特殊需要建议安装原版，无法保证在系统装有office复杂情况下使用正常！Microsoft Office 2016 R">
-<meta name="twitter:image" content="https://s1.ax1x.com/2018/01/30/9pqcqJ.jpg">
+<meta name="twitter:title" content="CSS清除浮动（float）常用方法总结">
+<meta name="twitter:description" content="前言在清除浮动前我们要了解两个重要的定义：浮动的定义：使元素脱离文档流，按照指定方向发生移动，遇到父级边界或者相邻的浮动元素停了下来。高度塌陷：浮动元素父元素高度自适应（父元素不写高度时，子元素写了浮动后，父元素会发生高度塌陷）知道浮动和为什么要清除浮动之后我们可以开始学习如何清除浮动了，这时候我们就需要用到清除浮动的属性clear, clear:left | right | both | non">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -164,14 +160,14 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-20180130-Microsoft Office-2016-2010-四合一绿色精简版" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-20180327-CSS清除浮动（float）常用方法总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      Microsoft Office 2016 2010 四合一绿色精简版
+      CSS清除浮动（float）常用方法总结
     </h1>
     <div class="post-title-bar">
       <ul>
@@ -179,12 +175,12 @@ ga('send', 'pageview');
               <li>
                   <i class="fa fa-book"></i>
                   
-                      <a href="/categories/资源/">资源</a>
+                      <a href="/categories/CSS/">CSS</a>
                   
               </li>
           
         <li>
-          <i class="fa fa-calendar"></i>  2018-01-30
+          <i class="fa fa-calendar"></i>  2018-03-27
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -200,44 +196,40 @@ ga('send', 'pageview');
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <h4 id="软件简介"><a href="#软件简介" class="headerlink" title="软件简介"></a>软件简介</h4><font face="微软雅黑" style="line-height:2;"><strong>Office2016</strong>四合一绿色精简版，由绿软爱好者xb21cn专注绿化精简制作，包含Access、Excel 、Ppt 、Word 四大组件(含VBA )，支持自动永久激活及KMS激活，支持Win7、Win8.1、Win10操作系统32及64位，此版仅适合普通文档编辑使用，特殊需要建议安装原版，无法保证在系统装有office复杂情况下使用正常！<br><strong>Microsoft Office 2016 RTM</strong>，微软全新办公软件套件，相比Office 2013的变化不是特别大，界面和功能都只是微调。Office2016，Word引入实时协作，Excel可直接识别手写方程式等等，都能大大提高办公效率！</font>
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font size="3" face="微软雅黑" style="line-height:2;">在清除浮动前我们要了解两个重要的定义：<br><strong>浮动的定义：</strong>使元素脱离文档流，按照指定方向发生移动，遇到父级边界或者相邻的浮动元素停了下来。<br><strong>高度塌陷</strong>：浮动元素父元素高度自适应（父元素不写高度时，子元素写了浮动后，父元素会发生高度塌陷）<br>知道浮动和为什么要清除浮动之后我们可以开始学习如何清除浮动了，这时候我们就需要用到清除浮动的属性clear, <br>clear:left | right | both | none | inherit：元素的某个方向上不能有浮动元素 <br>clear:both：在左右两侧均不允许浮动元素。</font>
 
-<hr>
-<h4 id="软件使用展示"><a href="#软件使用展示" class="headerlink" title="软件使用展示"></a>软件使用展示</h4><p><img src="https://s1.ax1x.com/2018/01/30/9pqcqJ.jpg" alt=""><br><img src="https://s1.ax1x.com/2018/01/30/9pq2Z9.png" alt=""><br><img src="https://s1.ax1x.com/2018/01/30/9pqRaR.png" alt=""><br>测试环境：WinXP/2003/Win7/Win8.1/Win10 32/64位</p>
-<blockquote>
-<p>Office2016四合一绿色精简版 / 163MB (Word、Excel、Ppt、Access  四大组件(含VBA))</p>
-<ul>
-<li>安装完成后为30天试用，可自行用kms激活。</li>
-<li>支持联机模板。</li>
-<li>支持规划求解、分析等excel加载项。</li>
-<li>支持打开pdf文档。</li>
-<li>添加 MAK MSDN KMS三种授权，可mak永久激活！</li>
-<li>更新到2018年1月最新补丁。</li>
-<li>尝试解决在不关闭UAC的情况下安装和运行</li>
-</ul>
-<p>Office2010四合一绿色适度精简版 / 84MB (Word、Excel、Ppt、Access  四大组件(含VBA))</p>
-<ul>
-<li>此版只精简了翻译、校对，其它功能全部保留；</li>
-<li>需要的只需要将对应文件夹补回原始目录即可。</li>
-<li>安装完默认30天试用，请自行用kms工具激活；</li>
-<li>补充vc2010库，避免系统缺vc运行库而无法运行；</li>
-<li>加入右键新建项，公式无需重启或注销可直接使用；</li>
-<li>修复一些小问题，微软官方公式可用；</li>
-<li>更新安全更新补丁截至2018年1月份；</li>
-</ul>
+<h3 id="浮动的特性"><a href="#浮动的特性" class="headerlink" title="浮动的特性"></a><font color="#0099ff" size="4" face="黑体">浮动的特性</font></h3><blockquote>
+<p>☀️ 浮动的元素排在同一排<br> ☀️ 浮动的元素内容撑开宽度<br> ☀️ 动的元素支持所有的css样式<br> ☀️ 浮动的元素脱离文档流<br> ☀️ 浮动的元素提升层级半级</p>
 </blockquote>
-<hr>
-<h4 id="Office-2016-绿色精简版永久激活方法"><a href="#Office-2016-绿色精简版永久激活方法" class="headerlink" title="Office 2016 绿色精简版永久激活方法"></a>Office 2016 绿色精简版永久激活方法</h4><font color="#0099ff" size="3" face="微软雅黑" style="line-height:2;">方法一：备份还原激活信息<br>└—永久激活后，运行 !)激活备份还原.cmd，选 1 备份激活信息。<br>└—重装后恢复，运行 !)激活备份还原.cmd，选 2 恢复激活信息，<br>在office2016文件夹中右键打开dos窗口，运行<br>cscript Office16\ospp.vbs /inpkey:XXXXX-XXXXX-XXXXX<br></font><br><font color="#0099ff" size="3" face="微软雅黑" style="line-height:2;">方法二：在线联网激活方法<br>└—在office2016绿色版安装文件夹中打开dos窗口，运行<br>cscript Office16\ospp.vbs /inpkey:XXXXX-XXXXX-XXXXX<br>cscript Office16\ospp.vbs /act<br>（xxxxx为永久激活key，且必须与备份的激活信息文件相配套）<br></font><br><font color="red" size="3" face="微软雅黑" style="line-height:2;">注意：建议右键管理员权限运行 !)安装.cmd，非管理员用户如果启动组件出错，在右键属性兼容性中选启用管理员运行。<br>PS：对于无法启动或启动出错，建议运行 +)关闭UAC.cmd 重启后再安装！</font>
+<h3 id="清除浮动方法"><a href="#清除浮动方法" class="headerlink" title="清除浮动方法"></a><font color="#0099ff" size="4" face="黑体">清除浮动方法</font></h3><font size="3" face="微软雅黑" style="line-height:2;"><strong>BFC</strong>：就是清浮动 就是用来处理浮动元素脱离文档流的问题</font>
 
-<hr>
-<h4 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h4><p>Office 2016 精简版<br><br><a href="https://pan.baidu.com/s/1vH0e2MkTmA3Wy9dEf-5MXw" target="_blank" rel="external">链接：https://pan.baidu.com/s/1vH0e2MkTmA3Wy9dEf-5MXw 密码：rpl3</a><br><br>Office 2010 精简版<br><br><a href="https://pan.baidu.com/s/1jKf75dW" target="_blank" rel="external">链接：https://pan.baidu.com/s/1jKf75dW 密码：q75h</a><br><br><br></p>
+<h4 id="1-clear清除浮动（添加空div法）"><a href="#1-clear清除浮动（添加空div法）" class="headerlink" title="1.clear清除浮动（添加空div法）"></a><font color="#833ab4" size="3" face="微软雅黑" style="line-height:2;">1.clear清除浮动（添加空div法）</font></h4><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*在浮动元素下方添加空div,并给该元素写css样式：*/</span></div><div class="line"><span class="selector-tag">div</span>&#123;</div><div class="line">    <span class="attribute">clear</span>:both;</div><div class="line">    <span class="attribute">height</span>:<span class="number">0</span>;</div><div class="line">    <span class="attribute">overflow</span>:hidden;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="2、方法：给浮动元素父级设置高度"><a href="#2、方法：给浮动元素父级设置高度" class="headerlink" title="2、方法：给浮动元素父级设置高度"></a><font color="#833ab4" size="3" face="微软雅黑" style="line-height:2;">2、方法：给浮动元素父级设置高度</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">我们知道了高度塌陷是应为给浮动元素的父级高度是自适应导致的，那么我们给它的设置适当的高度就可以解决这个问题了。<br><strong>缺点</strong>：在浮动元素高度不确定的时候不适用，扩展性不好</font>
+
+<h4 id="3、方法：以浮制浮（父级同时浮动）"><a href="#3、方法：以浮制浮（父级同时浮动）" class="headerlink" title="3、方法：以浮制浮（父级同时浮动）"></a><font color="#833ab4" size="3" face="微软雅黑" style="line-height:2;">3、方法：以浮制浮（父级同时浮动）</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">何谓“以浮制浮”呢？就是让浮动元素的父级也浮动。<br><strong>缺点</strong>：需要给每个浮动元素父级添加浮动，浮动多了容易出现问题。</font>
+
+<h4 id="4、方法：父级设置成inline-block"><a href="#4、方法：父级设置成inline-block" class="headerlink" title="4、方法：父级设置成inline-block"></a><font color="#833ab4" size="3" face="微软雅黑" style="line-height:2;">4、方法：父级设置成inline-block</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><strong>缺点</strong>：左右的margin:0 auto; 会失效。(如果需要让元素居中可以给父级加text-align:center)</font>
+
+<h4 id="5、标签清浮动"><a href="#5、标签清浮动" class="headerlink" title="5、标签清浮动"></a><font color="#833ab4" size="3" face="微软雅黑" style="line-height:2;">5、<br>标签清浮动</font></h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div class="box"&gt;</div><div class="line">    &lt;div class="top"&gt;&lt;/div&gt;</div><div class="line">    &lt;br clear="both" /&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">br 标签自带clear属性，将它设置成both其实和添加空div原理是一样的。 <strong>存在问题</strong>：不符合工作中：结构、样式、行为，三者分离的要求。</font>
+
+<h4 id="6、给父级添加overflow-hidden-清浮动方法"><a href="#6、给父级添加overflow-hidden-清浮动方法" class="headerlink" title="6、给父级添加overflow:hidden 清浮动方法"></a><font color="#833ab4" size="3" face="微软雅黑" style="line-height:2;">6、给父级添加overflow:hidden 清浮动方法</font></h4><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*这里的div指的是某某元素的父元素，不必过多纠结*/</span></div><div class="line"><span class="selector-tag">div</span>&#123;</div><div class="line">    <span class="attribute">overflow</span>: hidden;</div><div class="line">    <span class="attribute">zoom</span>: <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><strong>缺点</strong>：需要配合 宽度 或者 zoom 兼容IE6 IE7</font>
+
+<h4 id="7、万能清除法-after伪类-清浮动（现在主流方法，推荐使用）"><a href="#7、万能清除法-after伪类-清浮动（现在主流方法，推荐使用）" class="headerlink" title="7、万能清除法 after伪类 清浮动（现在主流方法，推荐使用）"></a><font color="#833ab4" size="3" face="微软雅黑" style="line-height:2;">7、万能清除法 after伪类 清浮动（现在主流方法，推荐使用）</font></h4><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">选择符<span class="selector-pseudo">:after</span>&#123;</div><div class="line">            <span class="attribute">content</span>:<span class="string">""</span>;</div><div class="line">            <span class="attribute">clear</span>:both;</div><div class="line">            <span class="attribute">display</span>:block;</div><div class="line">            <span class="attribute">height</span>:<span class="number">0</span>;</div><div class="line">            <span class="attribute">overflow</span>:hidden;</div><div class="line">            <span class="attribute">visibility</span>:hidden;</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">同时为了兼容 IE6，7 同样需要配合zoom使用例如：</font>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.clear</span><span class="selector-pseudo">:after</span>&#123;</div><div class="line">    <span class="attribute">content</span>:<span class="string">''</span>;</div><div class="line">    <span class="attribute">display</span>:block;</div><div class="line">    <span class="attribute">clear</span>:both;</div><div class="line">    <span class="attribute">height</span>:<span class="number">0</span>;</div><div class="line">    <span class="attribute">overflow</span>:hidden;</div><div class="line">    <span class="attribute">visibility</span>:hidden;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="selector-class">.clear</span>&#123;</div><div class="line">    <span class="attribute">zoom</span>:<span class="number">1</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><strong>需要注意的东西</strong>：<br>after伪类： 元素内部末尾添加内容；<br>&emsp;&emsp;:after{content”添加的内容”;} IE6，7下不兼容<br>zoom 缩放 <br>&emsp;&emsp;a、触发 IE下 haslayout，使元素根据自身内容计算宽高。<br>&emsp;&emsp;b、FF 不支持；</font>
+
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
 <ul>
 <li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
 </ul>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年03月27日 10:36</p>
+        <p>最后更新： 2018年03月27日 11:16</p>
         <footer>
             <a href="#">
                 <img src="/images/logo.png" alt="Garen">
@@ -312,7 +304,7 @@ ga('send', 'pageview');
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/01/30/20180130-Microsoft Office-2016-2010-四合一绿色精简版/&title=《Microsoft Office 2016 2010 四合一绿色精简版》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/01/30/9pOpfx.jpg" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/03/27/20180327-CSS清除浮动（float）常用方法总结/&title=《CSS清除浮动（float）常用方法总结》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/03/27/9OUfrd.jpg" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -322,22 +314,22 @@ ga('send', 'pageview');
             </a>
           </li>
           <li>
-            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.hdqyf.club/2018/01/30/20180130-Microsoft Office-2016-2010-四合一绿色精简版/&title=《Microsoft Office 2016 2010 四合一绿色精简版》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ">
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.hdqyf.club/2018/03/27/20180327-CSS清除浮动（float）常用方法总结/&title=《CSS清除浮动（float）常用方法总结》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ">
               <i class="fa fa-qq"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/01/30/20180130-Microsoft Office-2016-2010-四合一绿色精简版/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/03/27/20180327-CSS清除浮动（float）常用方法总结/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Microsoft Office 2016 2010 四合一绿色精简版》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/01/30/20180130-Microsoft Office-2016-2010-四合一绿色精简版/&via=https://blog.hdqyf.club" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CSS清除浮动（float）常用方法总结》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/03/27/20180327-CSS清除浮动（float）常用方法总结/&via=https://blog.hdqyf.club" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/01/30/20180130-Microsoft Office-2016-2010-四合一绿色精简版/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/03/27/20180327-CSS清除浮动（float）常用方法总结/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -347,7 +339,7 @@ ga('send', 'pageview');
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/01/30/20180130-Microsoft Office-2016-2010-四合一绿色精简版/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/03/27/20180327-CSS清除浮动（float）常用方法总结/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -359,11 +351,11 @@ ga('send', 'pageview');
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/资源/" class="color3">资源</a>
+    <a href="/tags/CSS/" class="color4">CSS</a>
       
-    <a href="/tags/office/" class="color2">office</a>
+    <a href="/tags/前端/" class="color3">前端</a>
       
-    <a href="/tags/办公/" class="color3">办公</a>
+    <a href="/tags/HTML/" class="color5">HTML</a>
       
   </li>
 
@@ -376,26 +368,16 @@ ga('send', 'pageview');
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#软件简介"><span class="post-toc-text">软件简介</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#软件使用展示"><span class="post-toc-text">软件使用展示</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Office-2016-绿色精简版永久激活方法"><span class="post-toc-text">Office 2016 绿色精简版永久激活方法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#下载地址"><span class="post-toc-text">下载地址</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#浮动的特性"><span class="post-toc-text">浮动的特性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#清除浮动方法"><span class="post-toc-text">清除浮动方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-clear清除浮动（添加空div法）"><span class="post-toc-text">1.clear清除浮动（添加空div法）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、方法：给浮动元素父级设置高度"><span class="post-toc-text">2、方法：给浮动元素父级设置高度</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3、方法：以浮制浮（父级同时浮动）"><span class="post-toc-text">3、方法：以浮制浮（父级同时浮动）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4、方法：父级设置成inline-block"><span class="post-toc-text">4、方法：父级设置成inline-block</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5、标签清浮动"><span class="post-toc-text">5、标签清浮动</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6、给父级添加overflow-hidden-清浮动方法"><span class="post-toc-text">6、给父级添加overflow:hidden 清浮动方法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7、万能清除法-after伪类-清浮动（现在主流方法，推荐使用）"><span class="post-toc-text">7、万能清除法 after伪类 清浮动（现在主流方法，推荐使用）</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
 
 <nav id="article-nav">
   
-    <a href="/2018/01/31/20180131-HTML小技巧(一)/" id="article-nav-newer" class="article-nav-link-wrap">
-
-      <span class="article-nav-title">
-        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
-        
-          HTML小技巧(JS禁止系列)
-        
-      </span>
-    </a>
   
-  
-    <a href="/2018/01/29/20180129-Linux常用命令(二)/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">Linux常用命令(实用命令)</span>
+    <a href="/2018/03/26/20180326-UltraEdit文本编辑器 简体中文绿色破解版本/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">UltraEdit文本编辑器 简体中文绿色破解版本</span>
       <i class="fa fa-hand-o-right" aria-hidden="true"></i>
     </a>
   
