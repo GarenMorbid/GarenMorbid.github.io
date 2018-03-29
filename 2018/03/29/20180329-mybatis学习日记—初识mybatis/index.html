@@ -3,30 +3,30 @@
 <head>
   <meta charset="utf-8">
   
-  <title>HDQ | Blog</title>
+  <title>mybatis学习日记—初识mybatis | HDQ | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HDQ,HDQ's Blog" />
   
-  <meta name="description" content="中文 Chinese      英文 English 
+  <meta name="description" content="前言MyBatis本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis。2013年11月迁移到Github。
 
-
-                冰冻三尺 非一日之寒， 积土成山 非斯须之作        Hey，我是Garen(HDQ)，目标是成为一只程序猿，现在成都学习。    这是我的利用闲暇时刻搭建的个人博客，我会在日后与大家分享我的学习之旅和奇闻异事。    工作、学习之余，我特别喜欢运动，跑步、健身和打羽毛球都是我特别喜">
-<meta property="og:type" content="website">
-<meta property="og:title" content="HDQ | Blog">
-<meta property="og:url" content="https://blog.hdqyf.club/about/index.html">
+理解什么是MyBatis？MyBatis是支持普通 SQL 查询，存储过程和高级映射的优秀持久层框架。MyBatis几乎消除了所有的 JDBC 代码和参数的手工设置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis学习日记—初识mybatis">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/03/29/20180329-mybatis学习日记—初识mybatis/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
-<meta property="og:description" content="中文 Chinese      英文 English 
+<meta property="og:description" content="前言MyBatis本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis。2013年11月迁移到Github。
 
-
-                冰冻三尺 非一日之寒， 积土成山 非斯须之作        Hey，我是Garen(HDQ)，目标是成为一只程序猿，现在成都学习。    这是我的利用闲暇时刻搭建的个人博客，我会在日后与大家分享我的学习之旅和奇闻异事。    工作、学习之余，我特别喜欢运动，跑步、健身和打羽毛球都是我特别喜">
-<meta property="og:updated_time" content="2018-02-12T11:10:28.000Z">
+理解什么是MyBatis？MyBatis是支持普通 SQL 查询，存储过程和高级映射的优秀持久层框架。MyBatis几乎消除了所有的 JDBC 代码和参数的手工设置">
+<meta property="og:image" content="https://s1.ax1x.com/2018/03/29/9jYD56.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/03/29/9jYBUx.png">
+<meta property="og:updated_time" content="2018-03-29T06:02:57.868Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HDQ | Blog">
-<meta name="twitter:description" content="中文 Chinese      英文 English 
+<meta name="twitter:title" content="mybatis学习日记—初识mybatis">
+<meta name="twitter:description" content="前言MyBatis本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis。2013年11月迁移到Github。
 
-
-                冰冻三尺 非一日之寒， 积土成山 非斯须之作        Hey，我是Garen(HDQ)，目标是成为一只程序猿，现在成都学习。    这是我的利用闲暇时刻搭建的个人博客，我会在日后与大家分享我的学习之旅和奇闻异事。    工作、学习之余，我特别喜欢运动，跑步、健身和打羽毛球都是我特别喜">
+理解什么是MyBatis？MyBatis是支持普通 SQL 查询，存储过程和高级映射的优秀持久层框架。MyBatis几乎消除了所有的 JDBC 代码和参数的手工设置">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/03/29/9jYD56.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -169,66 +169,76 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-20180329-mybatis学习日记—初识mybatis" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
-    <div class="article-entry " itemprop="articleBody">
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      mybatis学习日记—初识mybatis
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/mybatis/">mybatis</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-03-29
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=37653063&auto=1&height=66"></iframe>
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font size="3" face="微软雅黑" style="line-height:2;"><strong>MyBatis</strong>本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis。2013年11月迁移到Github。</font>
 
-<p><br></p>
-<!-- Language Selector -->
-<select class="sel-lang" onchange="onLanChange(this.options[this.options.selectedIndex].value)"><br>    <option value="0" selected> 中文 Chinese </option><br>    <option value="1"> 英文 English </option><br></select>
+<h3 id="理解什么是MyBatis？"><a href="#理解什么是MyBatis？" class="headerlink" title="理解什么是MyBatis？"></a><font color="#0099ff" size="4" face="黑体">理解什么是MyBatis？</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><strong>MyBatis</strong>是支持普通 SQL 查询，存储过程和高级映射的优秀<strong>持久层框架</strong>。<strong>MyBatis</strong>几乎消除了所有的 JDBC 代码和参数的手工设置以及对结果集的检索。它取代了JDBC，减少代码量，着力于关注操作数据库的SQL</font><br><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><strong>MyBatis</strong>可以使用简单的XML 或注解用于配置和原始映射，将接口和 Java 的 POJO（ Plain Old Java Objects，普通的Java 对象）映射成数据库中的记录</font>
 
-<!-- Chinese Version -->
-<div class="zh post-container"><br><br>    <!--copied from markdown --><br>    <blockquote><br>        <p>冰冻三尺 非一日之寒，<br> 积土成山 非斯须之作</p><br>    </blockquote><br><br>    <p>Hey，我是<strong>Garen(HDQ)</strong>，目标是成为一只程序猿，现在成都学习。</p><br><br>    <p>这是我的利用闲暇时刻搭建的个人博客，我会在日后与大家分享我的学习之旅和奇闻异事。</p><br><br>    <p>工作、学习之余，我特别喜欢运动，跑步、健身和打羽毛球都是我特别喜欢的运动。</p><br><br>    <p></p><br><br>    <h5>Talks</h5><br><br>    <ul><br>        <li><a href="http://steamcommunity.com/id/610717159/" target="_blank" rel="external">Steam</a></li><br>        <li><a href="https://weibo.com/u/5470832383?refer_flag=1005055013_" target="_blank" rel="external">新浪微博</a></li><br>        <li><a href="https://user.qzone.qq.com/610717159/" target="_blank" rel="external">QQ空间</a></li><br>    </ul><br></div>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><br>    <ul><br>        <li>MyBATIS 目前提供了三种语言实现的版本，包括：Java、.NET以及Ruby。（我主要学习java，就讲java的使用）<br>        </li><br>        <li>它提供的持久层框架包括SQL Maps和Data Access Objects（DAO）<br>        </li><br>        <li>mybatis与hibernate的对比？<br>            mybatis提供一种“半自动化”的<strong>ORM</strong>实现。<br>            这里的“半自动化”，是相对Hibernate等提供了全面的数据库封装机制的“全自动化”ORM实现而言,“全自动”ORM实现了POJO和数据库表之间的映射，以及 SQL 的自动生成和执行。<br>            而mybatis的着力点，则在于POJO与SQL之间的映射关系。<br>        </li><br>    </ul><br></font>
 
-<!-- English Version -->
-<div class="en post-container"><br>    <blockquote><br>        <p>Yet another iOS Developer. <br> Yet another Life-long Student.</p><br>    </blockquote><br><br>    <p>Hi, I am <strong>Garen</strong>，you can call me <strong>HDQ</strong>. The goal is to become a program ape, now chengdu study.</p><br><br>    <p>This is my personal blog in my spare time, and I will share my learning journey and anecdotes with you in the future.</p><br><br>    <p>I am a sports enthusiast, I like fitness, running and playing badminton.</p><br><br>    <h5>Talks</h5><br><br>    <ul><br>        <li><a href="http://steamcommunity.com/id/610717159/" target="_blank" rel="external">Steam</a></li><br>        <li><a href="https://weibo.com/u/5470832383?refer_flag=1005055013_" target="_blank" rel="external">新浪微博</a></li><br>        <li><a href="https://user.qzone.qq.com/610717159/" target="_blank" rel="external">QQ空间</a></li><br>    </ul><br></div>
+<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a><font color="#0099ff" size="4" face="黑体">Tips</font></h3><blockquote>
+<p>持久层框架:</p>
+<ul>
+<li>持久化：数据信息永久的保存，数据库、文件</li>
+<li>实现数据保存到数据库中的框架，取代JDBC</li>
+<li>开源数据访问框架：Hibernate、JAP(Java persistence API)…都是持久层框架</li>
+</ul>
+<p>ORM:</p>
+<ul>
+<li>ORM：object-relation-mapping，对象关系映射</li>
+<li>表—类，列—属性，记录—对象</li>
+<li>而mybatis只实现了，Relation—Object：单向映射，数据库中的结果集可以直接映射成对象对SQL、存储过程、动态SQL的处理进行了封装，所以mybatis是半ORM</li>
+</ul>
+<p>apache software foundation：专门运作开源软件项目的团队</p>
+<p>GitHub：一个面向开源及私有软件项目的托管平台，因为只支持git 作为唯一的版本库格式进行托管</p>
+</blockquote>
+<h3 id="mybatis的下载"><a href="#mybatis的下载" class="headerlink" title="mybatis的下载"></a><font color="#0099ff" size="4" face="黑体">mybatis的下载</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">大家可以直接去mybatis官网然后进入GitHub进行下载</font>
 
-<!-- Handle Language Change -->
-<script type="text/javascript">
-    // get nodes
-    var $zh = document.querySelector(".zh");
-    var $en = document.querySelector(".en");
-    var $select = document.querySelector("select");
+<p><a href="http://www.mybatis.org/mybatis-3/zh/index.html" target="_blank" rel="external">mybatis官网链接</a></p>
+<p><img src="https://s1.ax1x.com/2018/03/29/9jYD56.png" alt=""><br><img src="https://s1.ax1x.com/2018/03/29/9jYBUx.png" alt=""></p>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
 
-    // bind hashchange event
-    window.addEventListener('hashchange', _render);
-
-    // handle render
-    function _render() {
-        var _hash = window.location.hash;
-        // en
-        if (_hash == "#en") {
-            $select.selectedIndex = 1;
-            $en.style.display = "block";
-            $zh.style.display = "none";
-            // zh by default
-        } else {
-            // not trigger onChange, otherwise cause a loop call.
-            $select.selectedIndex = 0;
-            $zh.style.display = "block";
-            $en.style.display = "none";
-        }
-    }
-
-    // handle select change
-    function onLanChange(index) {
-        if (index == 0) {
-            window.location.hash = "#zh"
-        } else {
-            window.location.hash = "#en"
-        }
-    }
-
-    // init
-    _render();
-</script>
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年02月12日 19:10</p>
+        <p>最后更新： 2018年03月29日 14:02</p>
         <footer>
             <a href="#">
                 <img src="/images/logo.png" alt="Garen">
@@ -303,7 +313,7 @@ ga('send', 'pageview');
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/about/&title=HDQ | Blog&pic=https://blog.hdqyf.clubimages/logo.png" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/03/29/20180329-mybatis学习日记—初识mybatis/&title=《mybatis学习日记—初识mybatis》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/03/29/9jtCzF.jpg" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -313,22 +323,22 @@ ga('send', 'pageview');
             </a>
           </li>
           <li>
-            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.hdqyf.club/about/&title=HDQ | Blog&source=Welcome to my blog." data-title="QQ">
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.hdqyf.club/2018/03/29/20180329-mybatis学习日记—初识mybatis/&title=《mybatis学习日记—初识mybatis》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ">
               <i class="fa fa-qq"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/about/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/03/29/20180329-mybatis学习日记—初识mybatis/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=HDQ | Blog&url=https://blog.hdqyf.club/about/&via=https://blog.hdqyf.club" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mybatis学习日记—初识mybatis》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/03/29/20180329-mybatis学习日记—初识mybatis/&via=https://blog.hdqyf.club" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/about/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/03/29/20180329-mybatis学习日记—初识mybatis/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -338,7 +348,7 @@ ga('send', 'pageview');
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/about/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/03/29/20180329-mybatis学习日记—初识mybatis/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -347,6 +357,17 @@ ga('send', 'pageview');
         <ul class="article-footer-menu">
             
             
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Java/" class="color5">Java</a>
+      
+    <a href="/tags/mybatis/" class="color3">mybatis</a>
+      
+    <a href="/tags/框架/" class="color3">框架</a>
+      
+  </li>
+
         </ul>
         
     </footer>
@@ -356,10 +377,20 @@ ga('send', 'pageview');
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#undefined"><span class="post-toc-text">Talks</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#undefined"><span class="post-toc-text">Talks</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#理解什么是MyBatis？"><span class="post-toc-text">理解什么是MyBatis？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Tips"><span class="post-toc-text">Tips</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#mybatis的下载"><span class="post-toc-text">mybatis的下载</span></a></li></ol>
         </nav>
     </aside>
     
+
+<nav id="article-nav">
+  
+  
+    <a href="/2018/03/28/20180328-音乐狂app 各大平台收费歌曲免费下载工具/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">音乐狂app 各大平台收费歌曲免费下载工具</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
 
 
 
