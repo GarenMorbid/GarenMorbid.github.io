@@ -8,24 +8,24 @@
   
     <meta name="keywords" content="HDQ,HDQ's Blog" />
   
-  <meta name="description" content="前言MyBatis本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis。2013年11月迁移到Github。
+  <meta name="description" content="前言mybatis本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为mybatis。2013年11月迁移到Github。
 
-理解什么是MyBatis？MyBatis是支持普通 SQL 查询，存储过程和高级映射的优秀持久层框架。MyBatis几乎消除了所有的 JDBC 代码和参数的手工设置">
+理解什么是mybatis？mybatis是支持普通 SQL 查询，存储过程和高级映射的优秀持久层框架。mybatis几乎消除了所有的 JDBC 代码和参数的手工设置">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mybatis学习日记—初识mybatis">
 <meta property="og:url" content="https://blog.hdqyf.club/2018/03/29/20180329-mybatis学习日记—初识mybatis/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
-<meta property="og:description" content="前言MyBatis本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis。2013年11月迁移到Github。
+<meta property="og:description" content="前言mybatis本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为mybatis。2013年11月迁移到Github。
 
-理解什么是MyBatis？MyBatis是支持普通 SQL 查询，存储过程和高级映射的优秀持久层框架。MyBatis几乎消除了所有的 JDBC 代码和参数的手工设置">
+理解什么是mybatis？mybatis是支持普通 SQL 查询，存储过程和高级映射的优秀持久层框架。mybatis几乎消除了所有的 JDBC 代码和参数的手工设置">
 <meta property="og:image" content="https://s1.ax1x.com/2018/03/29/9jYD56.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/03/29/9jYBUx.png">
-<meta property="og:updated_time" content="2018-03-29T06:02:57.868Z">
+<meta property="og:updated_time" content="2018-03-29T11:36:53.162Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis学习日记—初识mybatis">
-<meta name="twitter:description" content="前言MyBatis本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis。2013年11月迁移到Github。
+<meta name="twitter:description" content="前言mybatis本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为mybatis。2013年11月迁移到Github。
 
-理解什么是MyBatis？MyBatis是支持普通 SQL 查询，存储过程和高级映射的优秀持久层框架。MyBatis几乎消除了所有的 JDBC 代码和参数的手工设置">
+理解什么是mybatis？mybatis是支持普通 SQL 查询，存储过程和高级映射的优秀持久层框架。mybatis几乎消除了所有的 JDBC 代码和参数的手工设置">
 <meta name="twitter:image" content="https://s1.ax1x.com/2018/03/29/9jYD56.png">
   
   
@@ -205,11 +205,11 @@ ga('send', 'pageview');
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font size="3" face="微软雅黑" style="line-height:2;"><strong>MyBatis</strong>本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis。2013年11月迁移到Github。</font>
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font size="3" face="微软雅黑" style="line-height:2;"><strong>mybatis</strong>本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为mybatis。2013年11月迁移到Github。</font>
 
-<h3 id="理解什么是MyBatis？"><a href="#理解什么是MyBatis？" class="headerlink" title="理解什么是MyBatis？"></a><font color="#0099ff" size="4" face="黑体">理解什么是MyBatis？</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><strong>MyBatis</strong>是支持普通 SQL 查询，存储过程和高级映射的优秀<strong>持久层框架</strong>。<strong>MyBatis</strong>几乎消除了所有的 JDBC 代码和参数的手工设置以及对结果集的检索。它取代了JDBC，减少代码量，着力于关注操作数据库的SQL</font><br><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><strong>MyBatis</strong>可以使用简单的XML 或注解用于配置和原始映射，将接口和 Java 的 POJO（ Plain Old Java Objects，普通的Java 对象）映射成数据库中的记录</font>
+<h3 id="理解什么是mybatis？"><a href="#理解什么是mybatis？" class="headerlink" title="理解什么是mybatis？"></a><font color="#0099ff" size="4" face="黑体">理解什么是mybatis？</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><strong>mybatis</strong>是支持普通 SQL 查询，存储过程和高级映射的优秀<strong>持久层框架</strong>。<strong>mybatis</strong>几乎消除了所有的 JDBC 代码和参数的手工设置以及对结果集的检索。它取代了JDBC，减少代码量，着力于关注操作数据库的SQL</font><br><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><strong>mybatis</strong>可以使用简单的XML 或注解用于配置和原始映射，将接口和 Java 的 POJO（ Plain Old Java Objects，普通的Java 对象）映射成数据库中的记录</font>
 
-<font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><br>    <ul><br>        <li>MyBATIS 目前提供了三种语言实现的版本，包括：Java、.NET以及Ruby。（我主要学习java，就讲java的使用）<br>        </li><br>        <li>它提供的持久层框架包括SQL Maps和Data Access Objects（DAO）<br>        </li><br>        <li>mybatis与hibernate的对比？<br>            mybatis提供一种“半自动化”的<strong>ORM</strong>实现。<br>            这里的“半自动化”，是相对Hibernate等提供了全面的数据库封装机制的“全自动化”ORM实现而言,“全自动”ORM实现了POJO和数据库表之间的映射，以及 SQL 的自动生成和执行。<br>            而mybatis的着力点，则在于POJO与SQL之间的映射关系。<br>        </li><br>    </ul><br></font>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><br>    <ul><br>        <li>mybatis 目前提供了三种语言实现的版本，包括：Java、.NET以及Ruby。（我主要学习java，就讲java的使用）<br>        </li><br>        <li>它提供的持久层框架包括SQL Maps和Data Access Objects（DAO）<br>        </li><br>        <li>mybatis与hibernate的对比？<br>            mybatis提供一种“半自动化”的<strong>ORM</strong>实现。<br>            这里的“半自动化”，是相对Hibernate等提供了全面的数据库封装机制的“全自动化”ORM实现而言,“全自动”ORM实现了POJO和数据库表之间的映射，以及 SQL 的自动生成和执行。<br>            而mybatis的着力点，则在于POJO与SQL之间的映射关系。<br>        </li><br>    </ul><br></font>
 
 <h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a><font color="#0099ff" size="4" face="黑体">Tips</font></h3><blockquote>
 <p>持久层框架:</p>
@@ -238,7 +238,7 @@ ga('send', 'pageview');
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年03月29日 14:02</p>
+        <p>最后更新： 2018年03月29日 19:36</p>
         <footer>
             <a href="#">
                 <img src="/images/logo.png" alt="Garen">
@@ -377,12 +377,22 @@ ga('send', 'pageview');
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#理解什么是MyBatis？"><span class="post-toc-text">理解什么是MyBatis？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Tips"><span class="post-toc-text">Tips</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#mybatis的下载"><span class="post-toc-text">mybatis的下载</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#理解什么是mybatis？"><span class="post-toc-text">理解什么是mybatis？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Tips"><span class="post-toc-text">Tips</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#mybatis的下载"><span class="post-toc-text">mybatis的下载</span></a></li></ol>
         </nav>
     </aside>
     
 
 <nav id="article-nav">
+  
+    <a href="/2018/03/29/20180329-mybatis学习日记—核心类、核心配置文件/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          mybatis学习日记—核心类、核心配置文件
+        
+      </span>
+    </a>
   
   
     <a href="/2018/03/28/20180328-音乐狂app 各大平台收费歌曲免费下载工具/" id="article-nav-older" class="article-nav-link-wrap">
@@ -470,7 +480,7 @@ ga('send', 'pageview');
             <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/Java/">Java</a><a class="category-link" href="/categories/Linux/">Linux</a><a class="category-link" href="/categories/Mac/">Mac</a><a class="category-link" href="/categories/MySQL/">MySQL</a><a class="category-link" href="/categories/SQL/">SQL</a><a class="category-link" href="/categories/Steam/">Steam</a><a class="category-link" href="/categories/iOS/">iOS</a><a class="category-link" href="/categories/mybatis/">mybatis</a><a class="category-link" href="/categories/下载/">下载</a><a class="category-link" href="/categories/常识/">常识</a><a class="category-link" href="/categories/感悟/">感悟</a><a class="category-link" href="/categories/截屏/">截屏</a><a class="category-link" href="/categories/效率/">效率</a><a class="category-link" href="/categories/文档/">文档</a><a class="category-link" href="/categories/注册表/">注册表</a><a class="category-link" href="/categories/激活/">激活</a><a class="category-link" href="/categories/生活/">生活</a><a class="category-link" href="/categories/编辑器/">编辑器</a><a class="category-link" href="/categories/资源/">资源</a><a class="category-link" href="/categories/转换/">转换</a><a class="category-link" href="/categories/音乐/">音乐</a>
         </div>
         <div id="sidebar-menu-box-tags">
-            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/CSS/" style="font-size: 11.67px;">CSS</a> <a href="/tags/HTML/" style="font-size: 15px;">HTML</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 18.33px;">Java</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 13.33px;">Mac</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/SQL/" style="font-size: 11.67px;">SQL</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/iOS/" style="font-size: 13.33px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 11.67px;">mybatis</a> <a href="/tags/office/" style="font-size: 11.67px;">office</a> <a href="/tags/下载/" style="font-size: 16.67px;">下载</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/办公/" style="font-size: 11.67px;">办公</a> <a href="/tags/图像处理/" style="font-size: 10px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 13.33px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 11.67px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/效率/" style="font-size: 15px;">效率</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/文档/" style="font-size: 10px;">文档</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/框架/" style="font-size: 11.67px;">框架</a> <a href="/tags/注册表/" style="font-size: 10px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 10px;">激活</a> <a href="/tags/生活/" style="font-size: 13.33px;">生活</a> <a href="/tags/终端/" style="font-size: 11.67px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/视频/" style="font-size: 10px;">视频</a> <a href="/tags/资源/" style="font-size: 20px;">资源</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/CSS/" style="font-size: 11.67px;">CSS</a> <a href="/tags/HTML/" style="font-size: 15px;">HTML</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 18.33px;">Java</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 13.33px;">Mac</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/SQL/" style="font-size: 11.67px;">SQL</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/iOS/" style="font-size: 13.33px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 13.33px;">mybatis</a> <a href="/tags/office/" style="font-size: 11.67px;">office</a> <a href="/tags/下载/" style="font-size: 16.67px;">下载</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/办公/" style="font-size: 11.67px;">办公</a> <a href="/tags/图像处理/" style="font-size: 10px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 13.33px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 11.67px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/效率/" style="font-size: 15px;">效率</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/文档/" style="font-size: 10px;">文档</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/框架/" style="font-size: 13.33px;">框架</a> <a href="/tags/注册表/" style="font-size: 10px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 10px;">激活</a> <a href="/tags/生活/" style="font-size: 13.33px;">生活</a> <a href="/tags/终端/" style="font-size: 11.67px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/视频/" style="font-size: 10px;">视频</a> <a href="/tags/资源/" style="font-size: 20px;">资源</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
         </div>
     </div>
     <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
@@ -503,7 +513,7 @@ ga('send', 'pageview');
     <div class="mobile-header-tag-container">
         <span class="title">Tags</span>
         <div id="mobile-header-container-tags">
-            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/CSS/" style="font-size: 11.67px;">CSS</a> <a href="/tags/HTML/" style="font-size: 15px;">HTML</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 18.33px;">Java</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 13.33px;">Mac</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/SQL/" style="font-size: 11.67px;">SQL</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/iOS/" style="font-size: 13.33px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 11.67px;">mybatis</a> <a href="/tags/office/" style="font-size: 11.67px;">office</a> <a href="/tags/下载/" style="font-size: 16.67px;">下载</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/办公/" style="font-size: 11.67px;">办公</a> <a href="/tags/图像处理/" style="font-size: 10px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 13.33px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 11.67px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/效率/" style="font-size: 15px;">效率</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/文档/" style="font-size: 10px;">文档</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/框架/" style="font-size: 11.67px;">框架</a> <a href="/tags/注册表/" style="font-size: 10px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 10px;">激活</a> <a href="/tags/生活/" style="font-size: 13.33px;">生活</a> <a href="/tags/终端/" style="font-size: 11.67px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/视频/" style="font-size: 10px;">视频</a> <a href="/tags/资源/" style="font-size: 20px;">资源</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+            <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/CSS/" style="font-size: 11.67px;">CSS</a> <a href="/tags/HTML/" style="font-size: 15px;">HTML</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 18.33px;">Java</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/Mac/" style="font-size: 13.33px;">Mac</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/SQL/" style="font-size: 11.67px;">SQL</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/iOS/" style="font-size: 13.33px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 13.33px;">mybatis</a> <a href="/tags/office/" style="font-size: 11.67px;">office</a> <a href="/tags/下载/" style="font-size: 16.67px;">下载</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/办公/" style="font-size: 11.67px;">办公</a> <a href="/tags/图像处理/" style="font-size: 10px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 13.33px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 11.67px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/效率/" style="font-size: 15px;">效率</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/文档/" style="font-size: 10px;">文档</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/框架/" style="font-size: 13.33px;">框架</a> <a href="/tags/注册表/" style="font-size: 10px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 10px;">激活</a> <a href="/tags/生活/" style="font-size: 13.33px;">生活</a> <a href="/tags/终端/" style="font-size: 11.67px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/视频/" style="font-size: 10px;">视频</a> <a href="/tags/资源/" style="font-size: 20px;">资源</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
         </div>
     </div>
 </div>

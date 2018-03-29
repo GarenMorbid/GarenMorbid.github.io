@@ -3,30 +3,31 @@
 <head>
   <meta charset="utf-8">
   
-  <title>HDQ | Blog</title>
+  <title>mybatis学习日记—核心类、核心配置文件 | HDQ | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HDQ,HDQ's Blog" />
   
-  <meta name="description" content="中文 Chinese      英文 English 
+  <meta name="description" content="mybatis核心类简介推荐像我一样初学者可以看看API 👉 mybatis在线API
 
-
-                冰冻三尺 非一日之寒， 积土成山 非斯须之作        Hey，我是Garen(HDQ)，目标是成为一只程序猿，现在成都学习。    这是我的利用闲暇时刻搭建的个人博客，我会在日后与大家分享我的学习之旅和奇闻异事。    工作、学习之余，我特别喜欢运动，跑步、健身和打羽毛球都是我特别喜">
-<meta property="og:type" content="website">
-<meta property="og:title" content="HDQ | Blog">
-<meta property="og:url" content="https://blog.hdqyf.club/about/index.html">
+SqlSessionFactoryBuilder  读取全局配置文件，得到数据源的信息，创建连接的工厂(SqlSessionFactory)  通过SqlSessionFactoryBuilder创建会话工厂SqlSessionFactory  将SqlSessionFactoryBuilder当成一个工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis学习日记—核心类、核心配置文件">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/03/29/20180329-mybatis学习日记—核心类、核心配置文件/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
-<meta property="og:description" content="中文 Chinese      英文 English 
+<meta property="og:description" content="mybatis核心类简介推荐像我一样初学者可以看看API 👉 mybatis在线API
 
-
-                冰冻三尺 非一日之寒， 积土成山 非斯须之作        Hey，我是Garen(HDQ)，目标是成为一只程序猿，现在成都学习。    这是我的利用闲暇时刻搭建的个人博客，我会在日后与大家分享我的学习之旅和奇闻异事。    工作、学习之余，我特别喜欢运动，跑步、健身和打羽毛球都是我特别喜">
-<meta property="og:updated_time" content="2018-02-12T11:10:28.000Z">
+SqlSessionFactoryBuilder  读取全局配置文件，得到数据源的信息，创建连接的工厂(SqlSessionFactory)  通过SqlSessionFactoryBuilder创建会话工厂SqlSessionFactory  将SqlSessionFactoryBuilder当成一个工具">
+<meta property="og:image" content="https://s1.ax1x.com/2018/03/29/9v9WXd.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/03/29/9v9R6H.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/03/29/9v9hnA.png">
+<meta property="og:updated_time" content="2018-03-29T12:27:36.527Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HDQ | Blog">
-<meta name="twitter:description" content="中文 Chinese      英文 English 
+<meta name="twitter:title" content="mybatis学习日记—核心类、核心配置文件">
+<meta name="twitter:description" content="mybatis核心类简介推荐像我一样初学者可以看看API 👉 mybatis在线API
 
-
-                冰冻三尺 非一日之寒， 积土成山 非斯须之作        Hey，我是Garen(HDQ)，目标是成为一只程序猿，现在成都学习。    这是我的利用闲暇时刻搭建的个人博客，我会在日后与大家分享我的学习之旅和奇闻异事。    工作、学习之余，我特别喜欢运动，跑步、健身和打羽毛球都是我特别喜">
+SqlSessionFactoryBuilder  读取全局配置文件，得到数据源的信息，创建连接的工厂(SqlSessionFactory)  通过SqlSessionFactoryBuilder创建会话工厂SqlSessionFactory  将SqlSessionFactoryBuilder当成一个工具">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/03/29/9v9WXd.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -169,66 +170,88 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-20180329-mybatis学习日记—核心类、核心配置文件" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
-    <div class="article-entry " itemprop="articleBody">
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      mybatis学习日记—核心类、核心配置文件
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/mybatis/">mybatis</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-03-29
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=37653063&auto=1&height=66"></iframe>
+            <h3 id="mybatis核心类简介"><a href="#mybatis核心类简介" class="headerlink" title="mybatis核心类简介"></a><font color="#0099ff" size="4" face="黑体">mybatis核心类简介</font></h3><p>推荐像我一样初学者可以看看API 👉 <a href="http://tool.oschina.net/apidocs/apidoc?api=mybatis-3.1.1" target="_blank" rel="external">mybatis在线API</a></p>
+<ul>
+<li><p><strong>SqlSessionFactoryBuilder</strong><br>  读取全局配置文件，得到数据源的信息，创建连接的工厂(SqlSessionFactory)<br>  通过SqlSessionFactoryBuilder创建会话工厂SqlSessionFactory<br>  将SqlSessionFactoryBuilder当成一个工具类使用，无需单例模式管理SqlSessionFactoryBuilder。<br>  在需要创建SqlSessionFactory时，只需new一次SqlSessionFactoryBuilder即可。</p>
+</li>
+<li><p><strong>SqlSessionFactory</strong><br>  连接工厂，通过SqlSessionFactory创建SqlSession，使用单例模式管理SqlSessionFactory（工厂一旦创建，使用一个单例）</p>
+</li>
+<li><p><strong>SqlSession</strong><br>  连接，SqlSession是一个面向用户（软件工程师）的接口<br>  SqlSession中提供了许多操纵数据库的方法，如：<br>  selectOne()：返回单个对象<br>  selectList():返回当个或多个对象<br>  …..</p>
+</li>
+<li><p><strong>Mapper映射类</strong><br>  更映射关系对应，SQL</p>
+</li>
+</ul>
+<h3 id="mybatis核心配置文件简介"><a href="#mybatis核心配置文件简介" class="headerlink" title="mybatis核心配置文件简介"></a><font color="#0099ff" size="4" face="黑体">mybatis核心配置文件简介</font></h3><ul>
+<li><p><strong>SqlMapConfig.xml</strong><br>  全局配置文件：<br>  1️⃣ 配置数据源(建立连接相关的信息)<br>  2️⃣ 配置事务<br>  3️⃣ 配置映射文件</p>
+<p>  配置的是数据库的相关信息(部分)</p>
+<ul>
+<li><p>❤️ <strong>environments</strong>：<br>  💡 mybatis 可以配置多套运行环境，有助于SQL映射到多个数据库<br>  💡 每个environment会对应到一个SQLSessionFactory<br>  💡 多个environment是通过不同的id来区分的</p>
+</li>
+<li><p>❤️ <strong>transactionManager</strong>：事务管理器<br>  💡 JDBC：使用JDBC事务的提交和管理，依赖于从数据源获得连接来管理事务的生命周期<br>  💡 MANAGED：使用容器如Spring来管理事务</p>
+</li>
+<li><p>❤️ <strong>dataSource</strong>：配置数据源<br>  💡 POOLED：这个数据源的实现缓存了 JDBC 连接对象，用于避免每次创建新的数据库连接时都初始化和进行认证，加快程序响应。并发 WEB 应用通常通过这种做法来获得快速响应<br>  💡 UNPOOLED：每次遇到的时候都要打开和关闭数据源<br>  💡 JNDI： 这个数据源的配置是为了准备与像 Spring 或应用服务器能够在外部或者内部配置数据源的容器一起使用，然后在 JNDI 上下文中引用</p>
+<p>  <img src="https://s1.ax1x.com/2018/03/29/9v9WXd.png" alt=""><br>  <img src="https://s1.ax1x.com/2018/03/29/9v9R6H.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p><strong>Mapper.xml</strong><br>  映射文件，映射SQL相关的<br>  配置的是操作某某表的SQL语句</p>
+<ul>
+<li><p>❤️ 命名规范：XXXMapper.xml：原始的ibatis命名方式</p>
+</li>
+<li><p>❤️ namespace：映射文件的命名空间，根据这个空间查找方法</p>
+</li>
+<li><p>❤️ SQL语句<br>  💡 select<br>  💡 insert<br>  💡 delete<br>  💡 update</p>
+</li>
+<li><p>❤️ SQL语句具体的配置项<br>  💡 id：命名空间下的SQL的标志符<br>  💡 parameterType：输入参数的类型，基本数据类型，对象类型<br>  💡 resultType：返回类型，一般是返回的类</p>
+<p>  <img src="https://s1.ax1x.com/2018/03/29/9v9hnA.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
 
-<p><br></p>
-<!-- Language Selector -->
-<select class="sel-lang" onchange="onLanChange(this.options[this.options.selectedIndex].value)"><br>    <option value="0" selected> 中文 Chinese </option><br>    <option value="1"> 英文 English </option><br></select>
-
-<!-- Chinese Version -->
-<div class="zh post-container"><br><br>    <!--copied from markdown --><br>    <blockquote><br>        <p>冰冻三尺 非一日之寒，<br> 积土成山 非斯须之作</p><br>    </blockquote><br><br>    <p>Hey，我是<strong>Garen(HDQ)</strong>，目标是成为一只程序猿，现在成都学习。</p><br><br>    <p>这是我的利用闲暇时刻搭建的个人博客，我会在日后与大家分享我的学习之旅和奇闻异事。</p><br><br>    <p>工作、学习之余，我特别喜欢运动，跑步、健身和打羽毛球都是我特别喜欢的运动。</p><br><br>    <p></p><br><br>    <h5>Talks</h5><br><br>    <ul><br>        <li><a href="http://steamcommunity.com/id/610717159/" target="_blank" rel="external">Steam</a></li><br>        <li><a href="https://weibo.com/u/5470832383?refer_flag=1005055013_" target="_blank" rel="external">新浪微博</a></li><br>        <li><a href="https://user.qzone.qq.com/610717159/" target="_blank" rel="external">QQ空间</a></li><br>    </ul><br></div>
-
-<!-- English Version -->
-<div class="en post-container"><br>    <blockquote><br>        <p>Yet another iOS Developer. <br> Yet another Life-long Student.</p><br>    </blockquote><br><br>    <p>Hi, I am <strong>Garen</strong>，you can call me <strong>HDQ</strong>. The goal is to become a program ape, now chengdu study.</p><br><br>    <p>This is my personal blog in my spare time, and I will share my learning journey and anecdotes with you in the future.</p><br><br>    <p>I am a sports enthusiast, I like fitness, running and playing badminton.</p><br><br>    <h5>Talks</h5><br><br>    <ul><br>        <li><a href="http://steamcommunity.com/id/610717159/" target="_blank" rel="external">Steam</a></li><br>        <li><a href="https://weibo.com/u/5470832383?refer_flag=1005055013_" target="_blank" rel="external">新浪微博</a></li><br>        <li><a href="https://user.qzone.qq.com/610717159/" target="_blank" rel="external">QQ空间</a></li><br>    </ul><br></div>
-
-<!-- Handle Language Change -->
-<script type="text/javascript">
-    // get nodes
-    var $zh = document.querySelector(".zh");
-    var $en = document.querySelector(".en");
-    var $select = document.querySelector("select");
-
-    // bind hashchange event
-    window.addEventListener('hashchange', _render);
-
-    // handle render
-    function _render() {
-        var _hash = window.location.hash;
-        // en
-        if (_hash == "#en") {
-            $select.selectedIndex = 1;
-            $en.style.display = "block";
-            $zh.style.display = "none";
-            // zh by default
-        } else {
-            // not trigger onChange, otherwise cause a loop call.
-            $select.selectedIndex = 0;
-            $zh.style.display = "block";
-            $en.style.display = "none";
-        }
-    }
-
-    // handle select change
-    function onLanChange(index) {
-        if (index == 0) {
-            window.location.hash = "#zh"
-        } else {
-            window.location.hash = "#en"
-        }
-    }
-
-    // init
-    _render();
-</script>
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年02月12日 19:10</p>
+        <p>最后更新： 2018年03月29日 20:27</p>
         <footer>
             <a href="#">
                 <img src="/images/logo.png" alt="Garen">
@@ -303,7 +326,7 @@ ga('send', 'pageview');
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/about/&title=HDQ | Blog&pic=https://blog.hdqyf.clubimages/logo.png" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/03/29/20180329-mybatis学习日记—核心类、核心配置文件/&title=《mybatis学习日记—核心类、核心配置文件》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/03/29/9jtCzF.jpg" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -313,22 +336,22 @@ ga('send', 'pageview');
             </a>
           </li>
           <li>
-            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.hdqyf.club/about/&title=HDQ | Blog&source=Welcome to my blog." data-title="QQ">
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.hdqyf.club/2018/03/29/20180329-mybatis学习日记—核心类、核心配置文件/&title=《mybatis学习日记—核心类、核心配置文件》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ">
               <i class="fa fa-qq"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/about/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/03/29/20180329-mybatis学习日记—核心类、核心配置文件/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=HDQ | Blog&url=https://blog.hdqyf.club/about/&via=https://blog.hdqyf.club" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mybatis学习日记—核心类、核心配置文件》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/03/29/20180329-mybatis学习日记—核心类、核心配置文件/&via=https://blog.hdqyf.club" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/about/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/03/29/20180329-mybatis学习日记—核心类、核心配置文件/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -338,7 +361,7 @@ ga('send', 'pageview');
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/about/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/03/29/20180329-mybatis学习日记—核心类、核心配置文件/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -347,6 +370,17 @@ ga('send', 'pageview');
         <ul class="article-footer-menu">
             
             
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Java/" class="color5">Java</a>
+      
+    <a href="/tags/mybatis/" class="color3">mybatis</a>
+      
+    <a href="/tags/框架/" class="color3">框架</a>
+      
+  </li>
+
         </ul>
         
     </footer>
@@ -356,10 +390,20 @@ ga('send', 'pageview');
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#undefined"><span class="post-toc-text">Talks</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#undefined"><span class="post-toc-text">Talks</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#mybatis核心类简介"><span class="post-toc-text">mybatis核心类简介</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#mybatis核心配置文件简介"><span class="post-toc-text">mybatis核心配置文件简介</span></a></li></ol>
         </nav>
     </aside>
     
+
+<nav id="article-nav">
+  
+  
+    <a href="/2018/03/29/20180329-mybatis学习日记—初识mybatis/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">mybatis学习日记—初识mybatis</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
 
 
 
