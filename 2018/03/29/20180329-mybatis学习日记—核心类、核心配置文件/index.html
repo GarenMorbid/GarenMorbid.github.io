@@ -18,16 +18,20 @@ SqlSessionFactoryBuilder  读取全局配置文件，得到数据源的信息，
 <meta property="og:description" content="mybatis核心类简介推荐像我一样初学者可以看看API 👉 mybatis在线API
 
 SqlSessionFactoryBuilder  读取全局配置文件，得到数据源的信息，创建连接的工厂(SqlSessionFactory)  通过SqlSessionFactoryBuilder创建会话工厂SqlSessionFactory  将SqlSessionFactoryBuilder当成一个工具">
+<meta property="og:image" content="https://s1.ax1x.com/2018/03/31/9xKuHf.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/03/31/9xQFld.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/03/31/9xQDXR.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/03/31/9xQf9e.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/03/29/9v9WXd.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/03/29/9v9R6H.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/03/29/9v9hnA.png">
-<meta property="og:updated_time" content="2018-03-29T12:27:36.527Z">
+<meta property="og:updated_time" content="2018-03-31T02:46:16.155Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis学习日记—核心类、核心配置文件">
 <meta name="twitter:description" content="mybatis核心类简介推荐像我一样初学者可以看看API 👉 mybatis在线API
 
 SqlSessionFactoryBuilder  读取全局配置文件，得到数据源的信息，创建连接的工厂(SqlSessionFactory)  通过SqlSessionFactoryBuilder创建会话工厂SqlSessionFactory  将SqlSessionFactoryBuilder当成一个工具">
-<meta name="twitter:image" content="https://s1.ax1x.com/2018/03/29/9v9WXd.png">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/03/31/9xKuHf.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -155,7 +159,7 @@ ga('send', 'pageview');
                         <a title="个人网站" target="_blank" href="http://hdqyf.club/">
                             <i class="fa fa-home fa-2x"></i></a>
                     
-                        <a title="手机QQ" target="_blank" href="http://qm.qq.com/cgi-bin/qm/qr?k=vG_te0JtZ-ZWhvNRf8vYmV0yvyIccSV1">
+                        <a title="联系我" target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=610717159&site=qq&menu=yes">
                             <i class="fa fa-qq fa-2x"></i></a>
                     
                         <a title="Weibo" target="_blank" href="https://weibo.com/u/5470832383?refer_flag=1005055013_">
@@ -209,12 +213,22 @@ ga('send', 'pageview');
             <h3 id="mybatis核心类简介"><a href="#mybatis核心类简介" class="headerlink" title="mybatis核心类简介"></a><font color="#0099ff" size="4" face="黑体">mybatis核心类简介</font></h3><p>推荐像我一样初学者可以看看API 👉 <a href="http://tool.oschina.net/apidocs/apidoc?api=mybatis-3.1.1" target="_blank" rel="external">mybatis在线API</a></p>
 <ul>
 <li><p><strong>SqlSessionFactoryBuilder</strong><br>  读取全局配置文件，得到数据源的信息，创建连接的工厂(SqlSessionFactory)<br>  通过SqlSessionFactoryBuilder创建会话工厂SqlSessionFactory<br>  将SqlSessionFactoryBuilder当成一个工具类使用，无需单例模式管理SqlSessionFactoryBuilder。<br>  在需要创建SqlSessionFactory时，只需new一次SqlSessionFactoryBuilder即可。</p>
+<p>  &emsp;&emsp;SqlSessionFactoryBuilder有五个build()方法，每个方法允许您从不同来源中创建SqlSession:<br>  <img src="https://s1.ax1x.com/2018/03/31/9xKuHf.png" alt=""></p>
 </li>
-<li><p><strong>SqlSessionFactory</strong><br>  连接工厂，通过SqlSessionFactory创建SqlSession，使用单例模式管理SqlSessionFactory（工厂一旦创建，使用一个单例）</p>
+<li><p><strong>SqlSessionFactory</strong><br>  连接工厂，通过SqlSessionFactory创建SqlSession，一个数据库会对应一个连接工厂(提供很多个连接)，存在于应用程序的整个运行生命周期，单例的。<br>  &emsp;&emsp;POOLED：factory中的连接是可以重用的，连接池<br>  &emsp;&emsp;UNPOOLED：每次使用由工厂提供一个新的连接<br>  &emsp;&emsp;JNDI：与框架容器整合的时候，数据连接配置项的使用<br>  <img src="https://s1.ax1x.com/2018/03/31/9xQFld.png" alt=""></p>
 </li>
-<li><p><strong>SqlSession</strong><br>  连接，SqlSession是一个面向用户（软件工程师）的接口<br>  SqlSession中提供了许多操纵数据库的方法，如：<br>  selectOne()：返回单个对象<br>  selectList():返回当个或多个对象<br>  …..</p>
+<li><p><strong>SqlSession</strong><br>  数据库的连接，SqlSession是一个面向用户（软件工程师）的接口，完成一次数据库的访问和结果的映射的对象<br>  <strong>注意</strong>：</p>
+<ul>
+<li>一个连接不能让多个线程同时使用</li>
+<li>每个线程都应该有一个SqlSession的实例来完成对数据库的操作</li>
+<li>JDBC中的事务是携带在Connection，mybatis中的事务是携带在SqlSession</li>
+<li><p>web模型：每次请求——一个线程——SqlSession，SqlSession在web的作用域对应的是request，每个请求其实是对应一个事务，事务——SqlSession，请求结束的时候，SqlSession会关闭</p>
+<p><img src="https://s1.ax1x.com/2018/03/31/9xQDXR.png" alt=""></p>
 </li>
-<li><p><strong>Mapper映射类</strong><br>  更映射关系对应，SQL</p>
+</ul>
+</li>
+<li><p><strong>Mapper映射类</strong><br>  更映射关系对应，SQL<br>  接口代理类<br>  session.getMapper(接口 Class 实例)<br>  &emsp;&emsp;将传入的接口类型与映射XML配置文件关联起来，接口的实现是基于XML配置文件中的SQL实现，生成代理类对象</p>
+<p>  <img src="https://s1.ax1x.com/2018/03/31/9xQf9e.png" alt=""></p>
 </li>
 </ul>
 <h3 id="mybatis核心配置文件简介"><a href="#mybatis核心配置文件简介" class="headerlink" title="mybatis核心配置文件简介"></a><font color="#0099ff" size="4" face="黑体">mybatis核心配置文件简介</font></h3><ul>
@@ -251,7 +265,7 @@ ga('send', 'pageview');
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年03月29日 20:27</p>
+        <p>最后更新： 2018年03月31日 10:46</p>
         <footer>
             <a href="#">
                 <img src="/images/logo.png" alt="Garen">
