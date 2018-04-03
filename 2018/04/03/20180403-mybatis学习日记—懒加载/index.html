@@ -11,7 +11,7 @@
   <meta name="description" content="什么是懒加载？懒加载概念：延迟加载，程序推迟对数据的访问，保证不必要的访问数据库
 
 
-第二次查询的对象是否一定会在程序中使用？&amp;emsp;&amp;emsp;如果使用，程序采才去真正的发送SQL语句；如果不使用，就不会去执行第二个SQL语句如果不使用第二次查询结果，如果使用懒加载不去查询Auhtor，Blog表中的author对象是什么样的体现？&amp;emsp;&amp;emsp;代理对象：第一个查询——Blog对象">
+第二次查询的对象是否一定会在程序中使用？&amp;emsp;&amp;emsp;如果使用，程序才去真正的发送SQL语句；如果不使用，就不会去执行第二个SQL语句如果不使用第二次查询结果，如果使用懒加载不去查询Auhtor，Blog表中的author对象是什么样的体现？&amp;emsp;&amp;emsp;代理对象：第一个查询——Blog对象，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mybatis学习日记—懒加载">
 <meta property="og:url" content="https://blog.hdqyf.club/2018/04/03/20180403-mybatis学习日记—懒加载/index.html">
@@ -19,17 +19,17 @@
 <meta property="og:description" content="什么是懒加载？懒加载概念：延迟加载，程序推迟对数据的访问，保证不必要的访问数据库
 
 
-第二次查询的对象是否一定会在程序中使用？&amp;emsp;&amp;emsp;如果使用，程序采才去真正的发送SQL语句；如果不使用，就不会去执行第二个SQL语句如果不使用第二次查询结果，如果使用懒加载不去查询Auhtor，Blog表中的author对象是什么样的体现？&amp;emsp;&amp;emsp;代理对象：第一个查询——Blog对象">
+第二次查询的对象是否一定会在程序中使用？&amp;emsp;&amp;emsp;如果使用，程序才去真正的发送SQL语句；如果不使用，就不会去执行第二个SQL语句如果不使用第二次查询结果，如果使用懒加载不去查询Auhtor，Blog表中的author对象是什么样的体现？&amp;emsp;&amp;emsp;代理对象：第一个查询——Blog对象，">
 <meta property="og:image" content="https://s1.ax1x.com/2018/04/03/Cp9PTs.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/04/03/Cp9Fkn.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/04/03/Cp9Cwj.png">
-<meta property="og:updated_time" content="2018-04-03T03:03:55.247Z">
+<meta property="og:updated_time" content="2018-04-03T08:11:13.462Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis学习日记—懒加载">
 <meta name="twitter:description" content="什么是懒加载？懒加载概念：延迟加载，程序推迟对数据的访问，保证不必要的访问数据库
 
 
-第二次查询的对象是否一定会在程序中使用？&amp;emsp;&amp;emsp;如果使用，程序采才去真正的发送SQL语句；如果不使用，就不会去执行第二个SQL语句如果不使用第二次查询结果，如果使用懒加载不去查询Auhtor，Blog表中的author对象是什么样的体现？&amp;emsp;&amp;emsp;代理对象：第一个查询——Blog对象">
+第二次查询的对象是否一定会在程序中使用？&amp;emsp;&amp;emsp;如果使用，程序才去真正的发送SQL语句；如果不使用，就不会去执行第二个SQL语句如果不使用第二次查询结果，如果使用懒加载不去查询Auhtor，Blog表中的author对象是什么样的体现？&amp;emsp;&amp;emsp;代理对象：第一个查询——Blog对象，">
 <meta name="twitter:image" content="https://s1.ax1x.com/2018/04/03/Cp9PTs.png">
   
   
@@ -212,7 +212,7 @@ ga('send', 'pageview');
             <h3 id="什么是懒加载？"><a href="#什么是懒加载？" class="headerlink" title="什么是懒加载？"></a><font color="#0099ff" size="4" face="黑体">什么是懒加载？</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><strong>懒加载概念：</strong>延迟加载，程序推迟对数据的访问，保证不必要的访问数据库</font>
 
 <p><img src="https://s1.ax1x.com/2018/04/03/Cp9PTs.png" alt=""></p>
-<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">第二次查询的对象是否一定会在程序中使用？<br>&emsp;&emsp;如果使用，程序采才去真正的发送SQL语句；如果不使用，就不会去执行第二个SQL语句<br>如果不使用第二次查询结果，如果使用懒加载不去查询Auhtor，Blog表中的author对象是什么样的体现？<br>&emsp;&emsp;代理对象：第一个查询——Blog对象，不执行第二个查询——Author的代理对象复制author属性<br>&emsp;&emsp;当真正使用author的时候，才真正发送第二个查询</font>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">第二次查询的对象是否一定会在程序中使用？<br>&emsp;&emsp;如果使用，程序才去真正的发送SQL语句；如果不使用，就不会去执行第二个SQL语句<br>如果不使用第二次查询结果，如果使用懒加载不去查询Auhtor，Blog表中的author对象是什么样的体现？<br>&emsp;&emsp;代理对象：第一个查询——Blog对象，不执行第二个查询——Author的代理对象复制author属性<br>&emsp;&emsp;当真正使用author的时候，才真正发送第二个查询</font>
 
 <h3 id="配置懒加载"><a href="#配置懒加载" class="headerlink" title="配置懒加载"></a><font color="#0099ff" size="4" face="黑体">配置懒加载</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">需要在核心配置文件里配置<br><strong>lazyLoadingEnabled</strong>：打开延迟加载的开关(true/false)；<br><strong>aggressiveLazyLoading</strong>：将积极加载改为消极加载(true/false);</font>
 
@@ -227,7 +227,7 @@ ga('send', 'pageview');
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年04月03日 11:03</p>
+        <p>最后更新： 2018年04月03日 16:11</p>
         <footer>
             <a href="#">
                 <img src="/images/logo.png" alt="Garen">
