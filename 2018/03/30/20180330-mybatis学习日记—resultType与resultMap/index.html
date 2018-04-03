@@ -24,7 +24,7 @@ resultMap
 type：pojo类型id：该map唯一的标志符result配置列别名与属性的映射关系，默认是type中的pojo类的属性与列名一致时自">
 <meta property="og:image" content="https://s1.ax1x.com/2018/03/30/9vHcgx.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/03/30/9vqtmT.png">
-<meta property="og:updated_time" content="2018-03-30T09:04:11.854Z">
+<meta property="og:updated_time" content="2018-04-03T03:13:30.030Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis学习日记—resultType与resultMap">
 <meta name="twitter:description" content="resultType
@@ -238,7 +238,7 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
-<font size="3" face="微软雅黑" style="line-height:2;"><strong>映射过程</strong>：resultType，创建pojo对象实例，再去将结果集与对象匹配，如果完全没有匹配上，创建pojo对象实例无用，返回null</font>
+<font size="3" face="微软雅黑" style="line-height:2;"><strong>映射过程</strong>：resultType，创建pojo对象实例，再去将结果集与对象匹配，如果完全没有匹配上，创建pojo对象实例无用，返回null<br><br><strong>resultType和resultMap的对比</strong><br>&emsp;&emsp;resultType：实现简单，pojo简单Java对象，如果是联查，通过构建VO对象实现映射，如果没有特殊要求，没有关系映射，推荐使用resultType<br>&emsp;&emsp;resultMap：需要单独定义<br>&emsp;&emsp;如果对查询结果有特殊要求，有关系映射，选用resultMap<br>懒加载：resultMap可以实现延迟加载，resultType无法实现懒加载</font>
 
 <p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
 <ul>
@@ -247,7 +247,7 @@ ga('send', 'pageview');
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年03月30日 17:04</p>
+        <p>最后更新： 2018年04月03日 11:13</p>
         <footer>
             <a href="#">
                 <img src="/images/logo.png" alt="Garen">

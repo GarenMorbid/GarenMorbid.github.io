@@ -3,20 +3,34 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Categorie: CAD | HDQ | Blog</title>
+  <title>mybatis学习日记—懒加载 | HDQ | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HDQ,HDQ's Blog" />
   
-  <meta name="description" content="Welcome to my blog.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="HDQ | Blog">
-<meta property="og:url" content="https://blog.hdqyf.club/categories/CAD/index.html">
+  <meta name="description" content="什么是懒加载？懒加载概念：延迟加载，程序推迟对数据的访问，保证不必要的访问数据库
+
+
+第二次查询的对象是否一定会在程序中使用？&amp;emsp;&amp;emsp;如果使用，程序采才去真正的发送SQL语句；如果不使用，就不会去执行第二个SQL语句如果不使用第二次查询结果，如果使用懒加载不去查询Auhtor，Blog表中的author对象是什么样的体现？&amp;emsp;&amp;emsp;代理对象：第一个查询——Blog对象">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis学习日记—懒加载">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/04/03/20180403-mybatis学习日记—懒加载/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
-<meta property="og:description" content="Welcome to my blog.">
+<meta property="og:description" content="什么是懒加载？懒加载概念：延迟加载，程序推迟对数据的访问，保证不必要的访问数据库
+
+
+第二次查询的对象是否一定会在程序中使用？&amp;emsp;&amp;emsp;如果使用，程序采才去真正的发送SQL语句；如果不使用，就不会去执行第二个SQL语句如果不使用第二次查询结果，如果使用懒加载不去查询Auhtor，Blog表中的author对象是什么样的体现？&amp;emsp;&amp;emsp;代理对象：第一个查询——Blog对象">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/03/Cp9PTs.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/03/Cp9Fkn.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/03/Cp9Cwj.png">
+<meta property="og:updated_time" content="2018-04-03T03:03:55.247Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HDQ | Blog">
-<meta name="twitter:description" content="Welcome to my blog.">
+<meta name="twitter:title" content="mybatis学习日记—懒加载">
+<meta name="twitter:description" content="什么是懒加载？懒加载概念：延迟加载，程序推迟对数据的访问，保证不必要的访问数据库
+
+
+第二次查询的对象是否一定会在程序中使用？&amp;emsp;&amp;emsp;如果使用，程序采才去真正的发送SQL语句；如果不使用，就不会去执行第二个SQL语句如果不使用第二次查询结果，如果使用懒加载不去查询Auhtor，Blog表中的author对象是什么样的体现？&amp;emsp;&amp;emsp;代理对象：第一个查询——Blog对象">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/04/03/Cp9PTs.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -159,55 +173,227 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap">
-  
-  
+        <section id="main" class="body-wrap"><article id="post-20180403-mybatis学习日记—懒加载" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/03/30/20180330-AutoCAD 2019 “珊瑚の海”精简优化版本/" class="archive-article-date">
-  <time datetime="2018-03-30T06:45:39.000Z" itemprop="datePublished">03-30</time>
-</a>
-      
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/30/20180330-AutoCAD 2019 “珊瑚の海”精简优化版本/"  target="_blank"  >AutoCAD “珊瑚の海”精简优化版本</a>
+    <h1 class="post-title" itemprop="name">
+      mybatis学习日记—懒加载
     </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/mybatis/">mybatis</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-04-03
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
   
 
-    </header>
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
       
-        <div class="archive-post-footer">
+            
+            <h3 id="什么是懒加载？"><a href="#什么是懒加载？" class="headerlink" title="什么是懒加载？"></a><font color="#0099ff" size="4" face="黑体">什么是懒加载？</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><strong>懒加载概念：</strong>延迟加载，程序推迟对数据的访问，保证不必要的访问数据库</font>
+
+<p><img src="https://s1.ax1x.com/2018/04/03/Cp9PTs.png" alt=""></p>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">第二次查询的对象是否一定会在程序中使用？<br>&emsp;&emsp;如果使用，程序采才去真正的发送SQL语句；如果不使用，就不会去执行第二个SQL语句<br>如果不使用第二次查询结果，如果使用懒加载不去查询Auhtor，Blog表中的author对象是什么样的体现？<br>&emsp;&emsp;代理对象：第一个查询——Blog对象，不执行第二个查询——Author的代理对象复制author属性<br>&emsp;&emsp;当真正使用author的时候，才真正发送第二个查询</font>
+
+<h3 id="配置懒加载"><a href="#配置懒加载" class="headerlink" title="配置懒加载"></a><font color="#0099ff" size="4" face="黑体">配置懒加载</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">需要在核心配置文件里配置<br><strong>lazyLoadingEnabled</strong>：打开延迟加载的开关(true/false)；<br><strong>aggressiveLazyLoading</strong>：将积极加载改为消极加载(true/false);</font>
+
+<p><img src="https://s1.ax1x.com/2018/04/03/Cp9Fkn.png" alt=""></p>
+<font color="red" size="3" face="微软雅黑" style="line-height:2;">SqlSession关闭之后，懒加载的代理对象还能被查询出来吗？<br>代理对象是携带了查询数据库相关的信息。</font>
+
+<p><img src="https://s1.ax1x.com/2018/04/03/Cp9Cwj.png" alt=""></p>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年04月03日 11:03</p>
+        <footer>
+            <a href="#">
+                <img src="/images/logo.png" alt="Garen">
+                Garen
+            </a>
+        </footer>
+    </div>
+</div>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
+    <script type="text/javascript">
+        (function (d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+
+            if (typeof LivereTower === 'function') { return; }
+
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/04/03/20180403-mybatis学习日记—懒加载/&title=《mybatis学习日记—懒加载》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/03/29/9jtCzF.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.hdqyf.club/2018/04/03/20180403-mybatis学习日记—懒加载/&title=《mybatis学习日记—懒加载》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/04/03/20180403-mybatis学习日记—懒加载/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mybatis学习日记—懒加载》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/04/03/20180403-mybatis学习日记—懒加载/&via=https://blog.hdqyf.club" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/04/03/20180403-mybatis学习日记—懒加载/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/04/03/20180403-mybatis学习日记—懒加载/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
             
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/资源/" class="color3">资源</a>
+    <a href="/tags/Java/" class="color5">Java</a>
       
-    <a href="/tags/CAD/" class="color4">CAD</a>
+    <a href="/tags/mybatis/" class="color3">mybatis</a>
+      
+    <a href="/tags/框架/" class="color3">框架</a>
       
   </li>
 
-        </div>
-      
+        </ul>
+        
+    </footer>
   </div>
 </article>
 
-  
-  
-    </div></section>
-  
 
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#什么是懒加载？"><span class="post-toc-text">什么是懒加载？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置懒加载"><span class="post-toc-text">配置懒加载</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/2018/04/03/20180403-mybatis学习日记—缓存/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          mybatis学习日记—缓存
+        
+      </span>
+    </a>
+  
+  
+    <a href="/2018/04/03/20180403-mybatis学习日记—一对一与一对多/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">mybatis学习日记—一对一与一对多</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
 </section>
         
       </div>

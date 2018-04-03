@@ -3,20 +3,51 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Categorie: CAD | HDQ | Blog</title>
+  <title>mybatis学习日记—缓存 | HDQ | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HDQ,HDQ's Blog" />
   
-  <meta name="description" content="Welcome to my blog.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="HDQ | Blog">
-<meta property="og:url" content="https://blog.hdqyf.club/categories/CAD/index.html">
+  <meta name="description" content="什么是缓存？将数据存放在程序内存中，提升读写速度。mybatis提供缓存，用于减轻数据查询的压力，提高性能。
+
+一级缓存：sqlSession级别的缓存
+查询blog1的时候，向数据库发送了SQL语句，但是查询blog2的时候，没有想数据库端发送SQL语句，而是从缓存中查询得到
+
+注意：1.数据被修改(insert/update/delete)的时候，一级缓存会清空
+
+
+2.手动清空缓存sessi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis学习日记—缓存">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/04/03/20180403-mybatis学习日记—缓存/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
-<meta property="og:description" content="Welcome to my blog.">
+<meta property="og:description" content="什么是缓存？将数据存放在程序内存中，提升读写速度。mybatis提供缓存，用于减轻数据查询的压力，提高性能。
+
+一级缓存：sqlSession级别的缓存
+查询blog1的时候，向数据库发送了SQL语句，但是查询blog2的时候，没有想数据库端发送SQL语句，而是从缓存中查询得到
+
+注意：1.数据被修改(insert/update/delete)的时候，一级缓存会清空
+
+
+2.手动清空缓存sessi">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/03/CpCXM8.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/03/CpCvqg.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/03/CpCjsS.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/03/CpCqRP.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/03/CpCLxf.png">
+<meta property="og:updated_time" content="2018-04-03T03:54:29.350Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HDQ | Blog">
-<meta name="twitter:description" content="Welcome to my blog.">
+<meta name="twitter:title" content="mybatis学习日记—缓存">
+<meta name="twitter:description" content="什么是缓存？将数据存放在程序内存中，提升读写速度。mybatis提供缓存，用于减轻数据查询的压力，提高性能。
+
+一级缓存：sqlSession级别的缓存
+查询blog1的时候，向数据库发送了SQL语句，但是查询blog2的时候，没有想数据库端发送SQL语句，而是从缓存中查询得到
+
+注意：1.数据被修改(insert/update/delete)的时候，一级缓存会清空
+
+
+2.手动清空缓存sessi">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/04/03/CpCXM8.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -159,55 +190,223 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap">
-  
-  
+        <section id="main" class="body-wrap"><article id="post-20180403-mybatis学习日记—缓存" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/03/30/20180330-AutoCAD 2019 “珊瑚の海”精简优化版本/" class="archive-article-date">
-  <time datetime="2018-03-30T06:45:39.000Z" itemprop="datePublished">03-30</time>
-</a>
-      
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/30/20180330-AutoCAD 2019 “珊瑚の海”精简优化版本/"  target="_blank"  >AutoCAD “珊瑚の海”精简优化版本</a>
+    <h1 class="post-title" itemprop="name">
+      mybatis学习日记—缓存
     </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/mybatis/">mybatis</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-04-03
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
   
 
-    </header>
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
       
-        <div class="archive-post-footer">
+            
+            <h3 id="什么是缓存？"><a href="#什么是缓存？" class="headerlink" title="什么是缓存？"></a><font color="#0099ff" size="4" face="黑体">什么是缓存？</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">将数据存放在程序内存中，提升读写速度。<br>mybatis提供缓存，用于减轻数据查询的压力，提高性能。</font>
+
+<h3 id="一级缓存：sqlSession级别的缓存"><a href="#一级缓存：sqlSession级别的缓存" class="headerlink" title="一级缓存：sqlSession级别的缓存"></a><font color="#0099ff" size="4" face="黑体">一级缓存：sqlSession级别的缓存</font></h3><p><img src="https://s1.ax1x.com/2018/04/03/CpCXM8.png" alt=""></p>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">查询blog1的时候，向数据库发送了SQL语句，但是查询blog2的时候，没有想数据库端发送SQL语句，而是从缓存中查询得到</font>
+
+<font color="red" size="3" face="微软雅黑" style="line-height:2;">注意：<br>1.数据被修改(insert/update/delete)的时候，一级缓存会清空</font>
+
+<p><img src="https://s1.ax1x.com/2018/04/03/CpCvqg.png" alt=""></p>
+<font color="red" size="3" face="微软雅黑" style="line-height:2;">2.手动清空缓存session.clearCache();</font>
+
+<p><img src="https://s1.ax1x.com/2018/04/03/CpCjsS.png" alt=""></p>
+<h3 id="二级缓存：sqlSessionFactory级别的缓存"><a href="#二级缓存：sqlSessionFactory级别的缓存" class="headerlink" title="二级缓存：sqlSessionFactory级别的缓存"></a><font color="#0099ff" size="4" face="黑体">二级缓存：sqlSessionFactory级别的缓存</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">使用二级缓存：核心配置文件加入cacheEnabled为true</font>
+
+<p><img src="https://s1.ax1x.com/2018/04/03/CpCqRP.png" alt=""></p>
+<font color="red" size="3" face="微软雅黑" style="line-height:2;">使用二级缓存的注意事项：<br>&emsp;&emsp;1.使用二级缓存的映射类要实现序列化：二级缓存的存储介质不一定在内存，实现序列化之后，存储的对象可以存放在远程服务器<br>&emsp;&emsp;2.要将数据刷入二级缓存的时候，调用session.close()<br>&emsp;&emsp;3.使用插入后，二级缓存也会被清空<br>&emsp;&emsp;4.禁用二级缓存(useCache)，一级缓存是没有被禁止的<br>&emsp;&emsp;5.设定是否刷新二级缓存(flushCache)，一级缓存在做插入的时候必然会被清空</font>
+
+<p><img src="https://s1.ax1x.com/2018/04/03/CpCLxf.png" alt=""></p>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年04月03日 11:54</p>
+        <footer>
+            <a href="#">
+                <img src="/images/logo.png" alt="Garen">
+                Garen
+            </a>
+        </footer>
+    </div>
+</div>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
+    <script type="text/javascript">
+        (function (d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+
+            if (typeof LivereTower === 'function') { return; }
+
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/04/03/20180403-mybatis学习日记—缓存/&title=《mybatis学习日记—缓存》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/03/29/9jtCzF.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.hdqyf.club/2018/04/03/20180403-mybatis学习日记—缓存/&title=《mybatis学习日记—缓存》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/04/03/20180403-mybatis学习日记—缓存/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mybatis学习日记—缓存》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/04/03/20180403-mybatis学习日记—缓存/&via=https://blog.hdqyf.club" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/04/03/20180403-mybatis学习日记—缓存/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/04/03/20180403-mybatis学习日记—缓存/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
             
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/资源/" class="color3">资源</a>
+    <a href="/tags/Java/" class="color5">Java</a>
       
-    <a href="/tags/CAD/" class="color4">CAD</a>
+    <a href="/tags/mybatis/" class="color3">mybatis</a>
+      
+    <a href="/tags/框架/" class="color3">框架</a>
       
   </li>
 
-        </div>
-      
+        </ul>
+        
+    </footer>
   </div>
 </article>
 
-  
-  
-    </div></section>
-  
 
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#什么是缓存？"><span class="post-toc-text">什么是缓存？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一级缓存：sqlSession级别的缓存"><span class="post-toc-text">一级缓存：sqlSession级别的缓存</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二级缓存：sqlSessionFactory级别的缓存"><span class="post-toc-text">二级缓存：sqlSessionFactory级别的缓存</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/03/20180403-mybatis学习日记—懒加载/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">mybatis学习日记—懒加载</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
 </section>
         
       </div>
