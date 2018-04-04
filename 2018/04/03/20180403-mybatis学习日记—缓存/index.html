@@ -35,7 +35,10 @@
 <meta property="og:image" content="https://s1.ax1x.com/2018/04/03/CpCjsS.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/04/03/CpCqRP.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/04/03/CpCLxf.png">
-<meta property="og:updated_time" content="2018-04-03T03:54:29.350Z">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/04/Cp25on.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/04/Cp24ds.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/04/Cp2hZj.png">
+<meta property="og:updated_time" content="2018-04-04T02:19:13.166Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis学习日记—缓存">
 <meta name="twitter:description" content="什么是缓存？将数据存放在程序内存中，提升读写速度。mybatis提供缓存，用于减轻数据查询的压力，提高性能。
@@ -243,6 +246,9 @@ ga('send', 'pageview');
 <font color="red" size="3" face="微软雅黑" style="line-height:2;">使用二级缓存的注意事项：<br>&emsp;&emsp;1.使用二级缓存的映射类要实现序列化：二级缓存的存储介质不一定在内存，实现序列化之后，存储的对象可以存放在远程服务器<br>&emsp;&emsp;2.要将数据刷入二级缓存的时候，调用session.close()<br>&emsp;&emsp;3.使用插入后，二级缓存也会被清空<br>&emsp;&emsp;4.禁用二级缓存(useCache)，一级缓存是没有被禁止的<br>&emsp;&emsp;5.设定是否刷新二级缓存(flushCache)，一级缓存在做插入的时候必然会被清空</font>
 
 <p><img src="https://s1.ax1x.com/2018/04/03/CpCLxf.png" alt=""></p>
+<h3 id="EHCache配置"><a href="#EHCache配置" class="headerlink" title="EHCache配置"></a><font color="#0099ff" size="4" face="黑体">EHCache配置</font></h3><h4 id="引入jar包"><a href="#引入jar包" class="headerlink" title="引入jar包"></a><font color="#0099ff" size="3" face="黑体">引入jar包</font></h4><p><img src="https://s1.ax1x.com/2018/04/04/Cp25on.png" alt=""></p>
+<h4 id="配置xml文件"><a href="#配置xml文件" class="headerlink" title="配置xml文件"></a><font color="#0099ff" size="3" face="黑体">配置xml文件</font></h4><p><img src="https://s1.ax1x.com/2018/04/04/Cp24ds.png" alt=""></p>
+<h4 id="设定缓存类型为ehcache"><a href="#设定缓存类型为ehcache" class="headerlink" title="设定缓存类型为ehcache"></a><font color="#0099ff" size="3" face="黑体">设定缓存类型为ehcache</font></h4><p><img src="https://s1.ax1x.com/2018/04/04/Cp2hZj.png" alt=""></p>
 <p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
 <ul>
 <li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
@@ -250,7 +256,7 @@ ga('send', 'pageview');
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年04月03日 11:54</p>
+        <p>最后更新： 2018年04月04日 10:19</p>
         <footer>
             <a href="#">
                 <img src="/images/logo.png" alt="Garen">
@@ -389,7 +395,7 @@ ga('send', 'pageview');
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#什么是缓存？"><span class="post-toc-text">什么是缓存？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一级缓存：sqlSession级别的缓存"><span class="post-toc-text">一级缓存：sqlSession级别的缓存</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二级缓存：sqlSessionFactory级别的缓存"><span class="post-toc-text">二级缓存：sqlSessionFactory级别的缓存</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#什么是缓存？"><span class="post-toc-text">什么是缓存？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一级缓存：sqlSession级别的缓存"><span class="post-toc-text">一级缓存：sqlSession级别的缓存</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二级缓存：sqlSessionFactory级别的缓存"><span class="post-toc-text">二级缓存：sqlSessionFactory级别的缓存</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#EHCache配置"><span class="post-toc-text">EHCache配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#引入jar包"><span class="post-toc-text">引入jar包</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#配置xml文件"><span class="post-toc-text">配置xml文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#设定缓存类型为ehcache"><span class="post-toc-text">设定缓存类型为ehcache</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
