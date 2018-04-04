@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Category: Java | HDQ | Blog</title>
+  <title>Catégorie: Java | HDQ | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HDQ,HDQ's Blog" />
@@ -68,10 +68,33 @@ ga('send', 'pageview');
     });
 
      if(window.console&&window.console.log){
-	console.log('版权所有：http://www.hdqyf.club');
-	console.log('官方微博：https://weibo.com/u/5470832383?refer_flag=1005055010_');
+	      console.log('版权所有：http://www.hdqyf.club');
+	      console.log('官方微博：https://weibo.com/u/5470832383?refer_flag=1005055010_');
         console.log(' _(:3」∠)_ HDQ只是一枚小白，求大神不要黑');
      }
+
+     var d = "<div class='maple'>🍁<div>";
+      setInterval(function () {
+        var f = $(document).width();
+        var e = Math.random() * f;
+        var o = 0.2 + Math.random();
+        var fon = 25 + Math.random() * 10;
+        var l = e - 100 + 200 * Math.random();
+        var k = 8000 + 5000 * Math.random();
+        var deg = Math.random() * 360;
+        $(d).clone().appendTo(".maplebg").css({
+          left: e + "px",
+          opacity: o,
+          transform: "rotate(" + deg + "deg)",
+          "font-size": fon
+        }).animate({
+          top: "550px",
+          left: l + "px",
+          opacity: 0.1,
+        }, k, "linear", function () {
+          $(this).remove();
+        });
+      }, 888);
   </script>
 
   <style>
@@ -80,17 +103,26 @@ ga('send', 'pageview');
     }
 
     * {
-        cursor: url(https://blog.hdqyf.club/Cursor.cur), default!important;
+      cursor: url(https://blog.hdqyf.club/Cursor.cur), default!important;
     }
 
     @keyframes pound{90%{transform:scale(1.2);}}
 
     .heart{ z-index: 999;animation:pound .5s infinite;}
+
+    .maple {
+      position: fixed;
+      top: 0;
+      color: #ff0000;
+      cursor:default;
+      z-index: 998;
+    }
   </style>
 </head>
 
 <body oncontextmenu="return false" onselectstart="return false" oncopy="return false">
   <div id="container">
+      <div class="maplebg"></div>
       <header id="header">
     <div id="banner"></div>
     <div id="header-outer">
