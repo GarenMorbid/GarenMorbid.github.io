@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>mybatis学习日记—逆向工程 | HDQ | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="HDQ,HDQ's Blog" />
+  
+  <meta name="description" content="什么是逆向工程？mybatis的一个主要的特点就是需要程序员自己编写sql，那么如果表太多的话，难免会很麻烦，所以mybatis官方提供了一个逆向工程，可以针对单表自动生成mybatis执行所需要的代码（包括mapper.xml、mapper.java、entity..）。一般在开发中，常用的逆向工程方式是通过数据库的表生成代码。
+
+逆向工程步骤使用mybatis的逆向工程，需要导入逆向工程的ja">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis学习日记—逆向工程">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/04/07/20180407-mybatis学习日记—逆向工程/index.html">
+<meta property="og:site_name" content="HDQ | Blog">
+<meta property="og:description" content="什么是逆向工程？mybatis的一个主要的特点就是需要程序员自己编写sql，那么如果表太多的话，难免会很麻烦，所以mybatis官方提供了一个逆向工程，可以针对单表自动生成mybatis执行所需要的代码（包括mapper.xml、mapper.java、entity..）。一般在开发中，常用的逆向工程方式是通过数据库的表生成代码。
+
+逆向工程步骤使用mybatis的逆向工程，需要导入逆向工程的ja">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/07/CP1FJI.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/07/CP1iFA.png">
+<meta property="og:updated_time" content="2018-04-07T08:09:56.359Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mybatis学习日记—逆向工程">
+<meta name="twitter:description" content="什么是逆向工程？mybatis的一个主要的特点就是需要程序员自己编写sql，那么如果表太多的话，难免会很麻烦，所以mybatis官方提供了一个逆向工程，可以针对单表自动生成mybatis执行所需要的代码（包括mapper.xml、mapper.java、entity..）。一般在开发中，常用的逆向工程方式是通过数据库的表生成代码。
+
+逆向工程步骤使用mybatis的逆向工程，需要导入逆向工程的ja">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/04/07/CP1FJI.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-113082369-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?a3fed5fc0a708f5e993575bc1ccaf623";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+  
+
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    (function (window, document, undefined) { var hearts = []; window.requestAnimationFrame = (function () { return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) { setTimeout(callback, 1000 / 60); } })(); init(); function init() { css(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: absolute;}.heart:after{top: -5px;}.heart:before{left: -5px;}"); attachEvent(); gameloop(); } function gameloop() { for (var i = 0; i < hearts.length; i++) { if (hearts[i].alpha <= 0) { document.body.removeChild(hearts[i].el); hearts.splice(i, 1); continue; } hearts[i].y--; hearts[i].scale += 0.004; hearts[i].alpha -= 0.013; hearts[i].el.style.cssText = "left:" + hearts[i].x + "px;top:" + hearts[i].y + "px;opacity:" + hearts[i].alpha + ";transform:scale(" + hearts[i].scale + "," + hearts[i].scale + ") rotate(45deg);background:" + hearts[i].color; } requestAnimationFrame(gameloop); } function attachEvent() { var old = typeof window.onclick === "function" && window.onclick; window.onclick = function (event) { old && old(); createHeart(event); } } function createHeart(event) { var d = document.createElement("div"); d.className = "heart"; hearts.push({ el: d, x: event.clientX - 5, y: event.clientY - 5, scale: 1, alpha: 1, color: randomColor() }); document.body.appendChild(d); } function css(css) { var style = document.createElement("style"); style.type = "text/css"; try { style.appendChild(document.createTextNode(css)); } catch (ex) { style.styleSheet.cssText = css; } document.getElementsByTagName('head')[0].appendChild(style); } function randomColor() { return "rgb(" + (~~(Math.random() * 255)) + "," + (~~(Math.random() * 255)) + "," + (~~(Math.random() * 255)) + ")"; } })(window, document);
+  </script>
+
+  <script>
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState == 'hidden') {
+        normal_title = document.title;
+        document.title = '(づ￣ 3￣)づ记得回来找HDQ噢~';
+      }
+      else
+        document.title = normal_title;
+    });
+
+     if(window.console&&window.console.log){
+	      console.log('版权所有：http://www.hdqyf.club');
+	      console.log('官方微博：https://weibo.com/u/5470832383?refer_flag=1005055010_');
+        console.log(' _(:3」∠)_ HDQ只是一枚小白，求大神不要黑');
+     }
+
+     var d = "<div class='maple'>❄️<div>";
+      setInterval(function () {
+        var f = $(document).width();
+        var e = Math.random() * f;
+        var o = 0.2 + Math.random();
+        var fon = 20 + Math.random() * 10;
+        var l = e - 100 + 200 * Math.random();
+        var k = 8000 + 5000 * Math.random();
+        var deg = Math.random() * 360;
+        $(d).clone().appendTo(".maplebg").css({
+          left: e + "px",
+          opacity: o,
+          transform: "rotate(" + deg + "deg)",
+          "font-size": fon
+        }).animate({
+          top: "550px",
+          left: l + "px",
+          opacity: 0.1,
+        }, k, "linear", function () {
+          $(this).remove();
+        });
+      }, 1888);
+  </script>
+
+  <style>
+    .pingfuADHolder{
+      display: none !important;
+    }
+
+    * {
+      cursor: url(https://blog.hdqyf.club/Cursor.cur), default!important;
+    }
+
+    @keyframes pound{90%{transform:scale(1.2);}}
+
+    .heart{ z-index: 999;animation:pound .5s infinite;}
+
+    .maple {
+      position: fixed;
+      top: 0;
+      color: #ff0000;
+      cursor:default;
+      z-index: 998;
+    }
+  </style>
+</head>
+
+<body oncontextmenu="return false" onselectstart="return false" oncopy="return false">
+  <div id="container">
+      <div class="maplebg"></div>
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">HDQ&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        HDQ&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 互联网生活 互联网资源的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="个人网站" target="_blank" href="http://hdqyf.club/">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="联系我" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=610717159&site=qq&menu=yes">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="https://weibo.com/u/5470832383?refer_flag=1005055013_">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Steam" target="_blank" href="http://steamcommunity.com/id/610717159/">
+                            <i class="fa fa-steam fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-20180407-mybatis学习日记—逆向工程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      mybatis学习日记—逆向工程
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/mybatis/">mybatis</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-04-07
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h3 id="什么是逆向工程？"><a href="#什么是逆向工程？" class="headerlink" title="什么是逆向工程？"></a><font color="#0099ff" size="4" face="黑体">什么是逆向工程？</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">mybatis的一个主要的特点就是需要程序员自己编写sql，那么如果表太多的话，难免会很麻烦，所以mybatis官方提供了一个逆向工程，可以针对单表自动生成mybatis执行所需要的代码（包括mapper.xml、mapper.java、entity..）。一般在开发中，常用的逆向工程方式是通过数据库的表生成代码。</font>
+
+<h3 id="逆向工程步骤"><a href="#逆向工程步骤" class="headerlink" title="逆向工程步骤"></a><font color="#0099ff" size="4" face="黑体">逆向工程步骤</font></h3><p>使用mybatis的逆向工程，需要导入逆向工程的jar包，我用的是<code>mybatis-generator-core-1.3.2.jar</code>，下面开始总结一下mybatis逆向工程的使用步骤。</p>
+<h4 id="新建一个工程（重要）"><a href="#新建一个工程（重要）" class="headerlink" title="新建一个工程（重要）"></a><font color="#0099ff" size="3" face="黑体">新建一个工程（重要）</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">我们要新建一个Java工程，这个工程专门用来使用逆向工程生成代码的。有些人可能会问，为什么要新建一个工程呢？直接在原来工程中你想生成不就可以了么？确实是这样，可以在原来的工程中生成，但是有风险，因为mybatis是根据配置文件来生成的（下面会说到），如果生成的路径中有相同的文件，那么就会覆盖原来的文件，这样会有风险。所以开发中一般都会新建一个Java工程来生成，然后将生成的文件拷贝到自己的工程中，这也不麻烦，而且很安全。如下：</font>
+
+<p><img src="https://s1.ax1x.com/2018/04/07/CP1FJI.png" alt=""></p>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">从上图中看，<br>① GeneratorSqlmap.java就是要执行的java代码，执行它即可生成我们需要的代码；<br>② 红色选中的三个jar包就是逆向工程必备的jar包；<br>③ generatorConfig.xml是配置文件，下面会详细分析</font>
+
+<h4 id="配置逆向工程的配置文件"><a href="#配置逆向工程的配置文件" class="headerlink" title="配置逆向工程的配置文件"></a><font color="#0099ff" size="3" face="黑体">配置逆向工程的配置文件</font></h4><p>mybatis逆向工程生成代码需要一个配置文件，名字随便起。然后mybatis会根据这个配置文件中的配置，生成相应的代码。<code>mybatis-generator-core-1.3.2.jar</code>这个jar包里面有帮助文档，打开后里面有配置文件的模板，这里就不再赘述了，下面先把配置文件写好：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="meta">&lt;!DOCTYPE generatorConfiguration</span></div><div class="line">  PUBLIC "-//mybatis.org//DTD mybatis Generator Configuration 1.0//EN"</div><div class="line">  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd"&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">generatorConfiguration</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">context</span> <span class="attr">id</span>=<span class="string">"testTables"</span> <span class="attr">targetRuntime</span>=<span class="string">"mybatis3"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">commentGenerator</span>&gt;</span></div><div class="line">            <span class="comment">&lt;!-- 是否去除自动生成的注释 true：是 ： false:否 --&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"suppressAllComments"</span> <span class="attr">value</span>=<span class="string">"true"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">commentGenerator</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!--数据库连接的信息：驱动类、连接地址、用户名、密码 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">jdbcConnection</span> <span class="attr">driverClass</span>=<span class="string">"com.mysql.jdbc.Driver"</span></span></div><div class="line">            <span class="attr">connectionURL</span>=<span class="string">"jdbc:mysql://localhost:3306/mybatis"</span> <span class="attr">userId</span>=<span class="string">"root"</span></div><div class="line">            <span class="attr">password</span>=<span class="string">"root"</span>&gt;</div><div class="line">        <span class="tag">&lt;/<span class="name">jdbcConnection</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和 </span></div><div class="line">            NUMERIC 类型解析为java.math.BigDecimal --&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">javaTypeResolver</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"forceBigDecimals"</span> <span class="attr">value</span>=<span class="string">"false"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">javaTypeResolver</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- targetProject:生成entity类的位置 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">javaModelGenerator</span> <span class="attr">targetPackage</span>=<span class="string">"entity"</span></span></div><div class="line">            <span class="attr">targetProject</span>=<span class="string">".\src"</span>&gt;</div><div class="line">            <span class="comment">&lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"enableSubPackages"</span> <span class="attr">value</span>=<span class="string">"false"</span> /&gt;</span></div><div class="line">            <span class="comment">&lt;!-- 从数据库返回的值被清理前后的空格 --&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"trimStrings"</span> <span class="attr">value</span>=<span class="string">"true"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">javaModelGenerator</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- targetProject:mapper映射文件生成的位置 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">sqlMapGenerator</span> <span class="attr">targetPackage</span>=<span class="string">"mapper"</span> </span></div><div class="line">            <span class="attr">targetProject</span>=<span class="string">".\src"</span>&gt;</div><div class="line">            <span class="comment">&lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"enableSubPackages"</span> <span class="attr">value</span>=<span class="string">"false"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">sqlMapGenerator</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- targetPackage：mapper接口生成的位置 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">javaClientGenerator</span> <span class="attr">type</span>=<span class="string">"XMLMAPPER"</span></span></div><div class="line">            <span class="attr">targetPackage</span>=<span class="string">"mapper"</span> </div><div class="line">            <span class="attr">targetProject</span>=<span class="string">".\src"</span>&gt;</div><div class="line">            <span class="comment">&lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"enableSubPackages"</span> <span class="attr">value</span>=<span class="string">"false"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">javaClientGenerator</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- 指定数据库表 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">schema</span>=<span class="string">""</span> <span class="attr">tableName</span>=<span class="string">"blog"</span>&gt;</span><span class="tag">&lt;/<span class="name">table</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">schema</span>=<span class="string">""</span> <span class="attr">tableName</span>=<span class="string">"author"</span>&gt;</span><span class="tag">&lt;/<span class="name">table</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- 有些表的字段需要指定java类型</span></div><div class="line">         &lt;table schema="" tableName=""&gt;</div><div class="line">            &lt;columnOverride column="" javaType="" /&gt;</div><div class="line">        &lt;/table&gt; --&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">context</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">generatorConfiguration</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>从上面的配置文件中可以看出，配置文件主要做的几件事是：</p>
+<ul>
+<li>连接数据库，这是必须的，要不然怎么根据数据库的表生成代码呢？</li>
+<li>指定要生成代码的位置，要生成的代码包括entity类，mapper.xml和mapper.java</li>
+<li>指定数据库中想要生成哪些表</li>
+</ul>
+<h4 id="执行逆向工程生成代码"><a href="#执行逆向工程生成代码" class="headerlink" title="执行逆向工程生成代码"></a><font color="#0099ff" size="3" face="黑体">执行逆向工程生成代码</font></h4><p>配置文件搞好了，然后就执行以下程序即可生成代码了，生成的java程序，下载的逆向工程文档中都有示例，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GeneratorSqlmap</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">generator</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line"></div><div class="line">        List&lt;String&gt; warnings = <span class="keyword">new</span> ArrayList&lt;String&gt;();</div><div class="line">        <span class="keyword">boolean</span> overwrite = <span class="keyword">true</span>;</div><div class="line">        <span class="comment">//指定 逆向工程配置文件</span></div><div class="line">        File configFile = <span class="keyword">new</span> File(<span class="string">"conf/generatorConfig.xml"</span>); </div><div class="line">        ConfigurationParser cp = <span class="keyword">new</span> ConfigurationParser(warnings);</div><div class="line">        Configuration config = cp.parseConfiguration(configFile);</div><div class="line">        DefaultShellCallback callback = <span class="keyword">new</span> DefaultShellCallback(overwrite);</div><div class="line">        mybatisGenerator mybatisGenerator = <span class="keyword">new</span> mybatisGenerator(config,</div><div class="line">                callback, warnings);</div><div class="line">        mybatisGenerator.generate(<span class="keyword">null</span>);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            GeneratorSqlmap generatorSqlmap = <span class="keyword">new</span> GeneratorSqlmap();</div><div class="line">            generatorSqlmap.generator();</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="逆向工程展示"><a href="#逆向工程展示" class="headerlink" title="逆向工程展示"></a><font color="#0099ff" size="3" face="黑体">逆向工程展示</font></h4><p>运行一下即可，运行完了后刷新一下工程，就可以看到最新生成的代码了。</p>
+<p><img src="https://s1.ax1x.com/2018/04/07/CP1iFA.png" alt=""></p>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年04月07日 16:09</p>
+        <footer>
+            <a href="#">
+                <img src="/images/logo.png" alt="Garen">
+                Garen
+            </a>
+        </footer>
+    </div>
+</div>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
+    <script type="text/javascript">
+        (function (d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+
+            if (typeof LivereTower === 'function') { return; }
+
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/04/07/20180407-mybatis学习日记—逆向工程/&title=《mybatis学习日记—逆向工程》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/03/29/9jtCzF.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/04/07/20180407-mybatis学习日记—逆向工程/&title=《mybatis学习日记—逆向工程》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+              <i class="fa fa-star"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/04/07/20180407-mybatis学习日记—逆向工程/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mybatis学习日记—逆向工程》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/04/07/20180407-mybatis学习日记—逆向工程/&via=https://blog.hdqyf.club" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/04/07/20180407-mybatis学习日记—逆向工程/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/04/07/20180407-mybatis学习日记—逆向工程/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Java/" class="color5">Java</a>
+      
+    <a href="/tags/mybatis/" class="color3">mybatis</a>
+      
+    <a href="/tags/框架/" class="color3">框架</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#什么是逆向工程？"><span class="post-toc-text">什么是逆向工程？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#逆向工程步骤"><span class="post-toc-text">逆向工程步骤</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#新建一个工程（重要）"><span class="post-toc-text">新建一个工程（重要）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#配置逆向工程的配置文件"><span class="post-toc-text">配置逆向工程的配置文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#执行逆向工程生成代码"><span class="post-toc-text">执行逆向工程生成代码</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#逆向工程展示"><span class="post-toc-text">逆向工程展示</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/07/20180407-分享一个自己在用的视频播放器：PotPlayer/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">分享一个自己在用的视频播放器：PotPlayer</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <span id="runtime_span"></span>
+            <br>
+            <p>
+                Powered by <a href="#" target="_blank">HDQ</a> Theme <a href="#" target="_blank">Garen</a> &copy;
+                2018
+                    Garen<br>
+            </p>
+        </div>
+    </div>
+</footer>
+<script>
+    function show_runtime() {
+            window.setTimeout("show_runtime()", 1000);
+            X = new Date("11/25/2017 05:20:00");
+            Y = new Date(); T = (Y.getTime() - X.getTime()); M = 24 * 60 * 60 * 1000;
+            a = T / M;
+            A = Math.floor(a);
+            b = (a - A) * 24;
+            B = Math.floor(b);
+            c = (b - B) * 60;
+            C = Math.floor((b - B) * 60);
+            D = Math.floor((c - C) * 60);
+            runtime_span.innerHTML = "本站勉强运行: " + A + "天" + B + "小时" + C + "分" + D + "秒";
+        }
+
+        show_runtime();
+</script>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://blog.hdqyf.club",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/3DS-MAX/">3DS MAX</a><a class="category-link" href="/categories/CAD/">CAD</a><a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/Java/">Java</a><a class="category-link" href="/categories/Linux/">Linux</a><a class="category-link" href="/categories/Mac/">Mac</a><a class="category-link" href="/categories/MySQL/">MySQL</a><a class="category-link" href="/categories/SQL/">SQL</a><a class="category-link" href="/categories/Steam/">Steam</a><a class="category-link" href="/categories/iOS/">iOS</a><a class="category-link" href="/categories/mybatis/">mybatis</a><a class="category-link" href="/categories/下载/">下载</a><a class="category-link" href="/categories/常识/">常识</a><a class="category-link" href="/categories/感悟/">感悟</a><a class="category-link" href="/categories/截屏/">截屏</a><a class="category-link" href="/categories/播放器/">播放器</a><a class="category-link" href="/categories/效率/">效率</a><a class="category-link" href="/categories/文档/">文档</a><a class="category-link" href="/categories/注册表/">注册表</a><a class="category-link" href="/categories/激活/">激活</a><a class="category-link" href="/categories/生活/">生活</a><a class="category-link" href="/categories/编辑器/">编辑器</a><a class="category-link" href="/categories/资源/">资源</a><a class="category-link" href="/categories/转换/">转换</a><a class="category-link" href="/categories/音乐/">音乐</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CSS/" style="font-size: 11.43px;">CSS</a> <a href="/tags/HTML/" style="font-size: 14.29px;">HTML</a> <a href="/tags/JS/" style="font-size: 11.43px;">JS</a> <a href="/tags/Java/" style="font-size: 18.57px;">Java</a> <a href="/tags/Linux/" style="font-size: 12.86px;">Linux</a> <a href="/tags/Mac/" style="font-size: 12.86px;">Mac</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/SQL/" style="font-size: 11.43px;">SQL</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/iOS/" style="font-size: 12.86px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 17.14px;">mybatis</a> <a href="/tags/office/" style="font-size: 11.43px;">office</a> <a href="/tags/下载/" style="font-size: 15.71px;">下载</a> <a href="/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/tags/办公/" style="font-size: 11.43px;">办公</a> <a href="/tags/图像处理/" style="font-size: 10px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 12.86px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 11.43px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 14.29px;">效率</a> <a href="/tags/数据库/" style="font-size: 14.29px;">数据库</a> <a href="/tags/文档/" style="font-size: 10px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/框架/" style="font-size: 17.14px;">框架</a> <a href="/tags/注册表/" style="font-size: 10px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 10px;">激活</a> <a href="/tags/生活/" style="font-size: 12.86px;">生活</a> <a href="/tags/终端/" style="font-size: 11.43px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/视频/" style="font-size: 11.43px;">视频</a> <a href="/tags/资源/" style="font-size: 20px;">资源</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CSS/" style="font-size: 11.43px;">CSS</a> <a href="/tags/HTML/" style="font-size: 14.29px;">HTML</a> <a href="/tags/JS/" style="font-size: 11.43px;">JS</a> <a href="/tags/Java/" style="font-size: 18.57px;">Java</a> <a href="/tags/Linux/" style="font-size: 12.86px;">Linux</a> <a href="/tags/Mac/" style="font-size: 12.86px;">Mac</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/SQL/" style="font-size: 11.43px;">SQL</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/iOS/" style="font-size: 12.86px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 17.14px;">mybatis</a> <a href="/tags/office/" style="font-size: 11.43px;">office</a> <a href="/tags/下载/" style="font-size: 15.71px;">下载</a> <a href="/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/tags/办公/" style="font-size: 11.43px;">办公</a> <a href="/tags/图像处理/" style="font-size: 10px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 12.86px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 11.43px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 14.29px;">效率</a> <a href="/tags/数据库/" style="font-size: 14.29px;">数据库</a> <a href="/tags/文档/" style="font-size: 10px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/框架/" style="font-size: 17.14px;">框架</a> <a href="/tags/注册表/" style="font-size: 10px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 10px;">激活</a> <a href="/tags/生活/" style="font-size: 12.86px;">生活</a> <a href="/tags/终端/" style="font-size: 11.43px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/视频/" style="font-size: 11.43px;">视频</a> <a href="/tags/资源/" style="font-size: 20px;">资源</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+<script>
+  $(".pingfuADHolder").remove();
+</script>
+</html>
