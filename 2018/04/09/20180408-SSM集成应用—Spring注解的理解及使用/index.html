@@ -27,11 +27,12 @@ Spring到底支持哪些注解？第一类
 @Service：业务层组件
 @Repos">
 <meta property="og:image" content="https://s1.ax1x.com/2018/04/09/CitFC4.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/12/CEaEqJ.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/04/09/CitCUU.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/04/09/CitA29.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/04/09/Citmb6.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/04/09/CitZK1.png">
-<meta property="og:updated_time" content="2018-04-09T03:28:30.255Z">
+<meta property="og:updated_time" content="2018-04-12T12:18:26.938Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSM集成应用—Spring注解的理解及使用">
 <meta name="twitter:description" content="注解的理解写给JVN看的注释，JVM可执行Java+XML：Java是跨平台的语言，XML是跨平台的数据交互格式零配置：Annotation来代替配置文件
@@ -281,6 +282,7 @@ ga('send', 'pageview');
 <li><strong>@ComponentScan</strong>：配置要扫描的包，从而达到所谓的零配置</li>
 </ul>
 <h3 id="注解配置的案例实现"><a href="#注解配置的案例实现" class="headerlink" title="注解配置的案例实现"></a><font color="#0099ff" size="4" face="黑体">注解配置的案例实现</font></h3><h4 id="引入jar包"><a href="#引入jar包" class="headerlink" title="引入jar包"></a><font color="#0099ff" size="3" face="黑体">引入jar包</font></h4><p><img src="https://s1.ax1x.com/2018/04/09/CitFC4.png" alt=""></p>
+<h4 id="配置核心配置文件"><a href="#配置核心配置文件" class="headerlink" title="配置核心配置文件"></a><font color="#0099ff" size="3" face="黑体">配置核心配置文件</font></h4><p><img src="https://s1.ax1x.com/2018/04/12/CEaEqJ.png" alt=""></p>
 <h4 id="Dao层"><a href="#Dao层" class="headerlink" title="Dao层"></a><font color="#0099ff" size="3" face="黑体">Dao层</font></h4><p><img src="https://s1.ax1x.com/2018/04/09/CitCUU.png" alt=""></p>
 <h4 id="Service层"><a href="#Service层" class="headerlink" title="Service层"></a><font color="#0099ff" size="3" face="黑体">Service层</font></h4><p><img src="https://s1.ax1x.com/2018/04/09/CitA29.png" alt=""></p>
 <h4 id="Servlet层"><a href="#Servlet层" class="headerlink" title="Servlet层"></a><font color="#0099ff" size="3" face="黑体">Servlet层</font></h4><p><img src="https://s1.ax1x.com/2018/04/09/Citmb6.png" alt=""></p>
@@ -292,7 +294,7 @@ ga('send', 'pageview');
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年04月09日 11:28</p>
+        <p>最后更新： 2018年04月12日 20:18</p>
         <footer>
             <a href="#">
                 <img src="/images/logo.png" alt="Garen">
@@ -431,7 +433,7 @@ ga('send', 'pageview');
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#注解的理解"><span class="post-toc-text">注解的理解</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Spring到底支持哪些注解？"><span class="post-toc-text">Spring到底支持哪些注解？</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第一类"><span class="post-toc-text">第一类</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第二类"><span class="post-toc-text">第二类</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第三类"><span class="post-toc-text">第三类</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#注解配置的案例实现"><span class="post-toc-text">注解配置的案例实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#引入jar包"><span class="post-toc-text">引入jar包</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Dao层"><span class="post-toc-text">Dao层</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Service层"><span class="post-toc-text">Service层</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Servlet层"><span class="post-toc-text">Servlet层</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#测试类"><span class="post-toc-text">测试类</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#注解的理解"><span class="post-toc-text">注解的理解</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Spring到底支持哪些注解？"><span class="post-toc-text">Spring到底支持哪些注解？</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第一类"><span class="post-toc-text">第一类</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第二类"><span class="post-toc-text">第二类</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第三类"><span class="post-toc-text">第三类</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#注解配置的案例实现"><span class="post-toc-text">注解配置的案例实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#引入jar包"><span class="post-toc-text">引入jar包</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#配置核心配置文件"><span class="post-toc-text">配置核心配置文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Dao层"><span class="post-toc-text">Dao层</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Service层"><span class="post-toc-text">Service层</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Servlet层"><span class="post-toc-text">Servlet层</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#测试类"><span class="post-toc-text">测试类</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
