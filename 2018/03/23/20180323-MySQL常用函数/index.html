@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="HDQ | Blog">
 <meta property="og:description" content="一、数学函数ABS(x)&amp;emsp;返回x的绝对值BIN(x)&amp;emsp;返回x的二进制（OCT返回八进制，HEX返回十六进制）EXP(x)&amp;emsp;返回值e（自然对数的底）的x次方GREATEST(x1,x2,…,xn)&amp;emsp;返回集合中最大的值LEAST(x1,x2,…,xn)&amp;emsp; 返回集合中最小的值LN(x)&amp;emsp;返回x的自然对数LOG(x,y)&amp;emsp;返回x的以y为">
 <meta property="og:image" content="https://s1.ax1x.com/2018/03/23/9bKzeH.png">
-<meta property="og:updated_time" content="2018-03-31T11:03:34.054Z">
+<meta property="og:updated_time" content="2018-04-13T13:43:33.858Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL常用函数">
 <meta name="twitter:description" content="一、数学函数ABS(x)&amp;emsp;返回x的绝对值BIN(x)&amp;emsp;返回x的二进制（OCT返回八进制，HEX返回十六进制）EXP(x)&amp;emsp;返回值e（自然对数的底）的x次方GREATEST(x1,x2,…,xn)&amp;emsp;返回集合中最大的值LEAST(x1,x2,…,xn)&amp;emsp; 返回集合中最小的值LN(x)&amp;emsp;返回x的自然对数LOG(x,y)&amp;emsp;返回x的以y为">
@@ -254,6 +254,8 @@ ga('send', 'pageview');
 <p><img src="https://s1.ax1x.com/2018/03/23/9bKzeH.png" alt=""></p>
 <h3 id="八、系统信息函数"><a href="#八、系统信息函数" class="headerlink" title="八、系统信息函数"></a><font color="#0099ff" size="4" face="微软雅黑">八、系统信息函数</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>DATABASE()</code>&emsp;返回当前数据库名</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>BENCHMARK(count,expr)</code>&emsp;将表达式expr重复运行count次</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>CONNECTION_ID()</code>&emsp;返回当前客户的连接ID</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>FOUND_ROWS()</code>&emsp;返回最后一个SELECT查询进行检索的总行数</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>USER()或SYSTEM_USER()</code>&emsp;返回当前登陆用户名</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>VERSION()</code>&emsp; 返回MySQL服务器的版本</font>
 
+<h3 id="九、条件判断函数"><a href="#九、条件判断函数" class="headerlink" title="九、条件判断函数"></a><font color="#0099ff" size="4" face="微软雅黑">九、条件判断函数</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>IF(expr,v1,v2)</code>&emsp;如果expr是TRUE则返回v1，否则返回v2</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>IFNULL(v1,v2)</code>&emsp;如果v1不为NULL，则返回v1，否则返回v2</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>CASE expr WHEN v1 THEN r1 [WHEN v2 THEN v2] [ELSE rn] END</code>&emsp;如果expr等于某个vn，则返回对应位置THEN后面的结果，如果与所有值都不想等，则返回ELSE后面的rn</font>
+
 <p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
 <ul>
 <li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
@@ -261,7 +263,7 @@ ga('send', 'pageview');
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年03月31日 19:03</p>
+        <p>最后更新： 2018年04月13日 21:43</p>
         <footer>
             <a href="#">
                 <img src="/images/logo.png" alt="Garen">
@@ -398,7 +400,7 @@ ga('send', 'pageview');
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、数学函数"><span class="post-toc-text">一、数学函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、聚合函数-常用于GROUP-BY从句的SELECT查询中"><span class="post-toc-text">二、聚合函数(常用于GROUP BY从句的SELECT查询中)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、字符串函数"><span class="post-toc-text">三、字符串函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、日期和时间函数"><span class="post-toc-text">四、日期和时间函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#五、加密函数"><span class="post-toc-text">五、加密函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#六、格式化函数"><span class="post-toc-text">六、格式化函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#七、数据类型转换函数"><span class="post-toc-text">七、数据类型转换函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#八、系统信息函数"><span class="post-toc-text">八、系统信息函数</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、数学函数"><span class="post-toc-text">一、数学函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、聚合函数-常用于GROUP-BY从句的SELECT查询中"><span class="post-toc-text">二、聚合函数(常用于GROUP BY从句的SELECT查询中)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、字符串函数"><span class="post-toc-text">三、字符串函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、日期和时间函数"><span class="post-toc-text">四、日期和时间函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#五、加密函数"><span class="post-toc-text">五、加密函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#六、格式化函数"><span class="post-toc-text">六、格式化函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#七、数据类型转换函数"><span class="post-toc-text">七、数据类型转换函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#八、系统信息函数"><span class="post-toc-text">八、系统信息函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#九、条件判断函数"><span class="post-toc-text">九、条件判断函数</span></a></li></ol>
         </nav>
     </aside>
     
