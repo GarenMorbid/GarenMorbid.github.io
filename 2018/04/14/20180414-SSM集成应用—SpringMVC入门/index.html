@@ -28,7 +28,7 @@ S">
 <meta property="og:image" content="https://s1.ax1x.com/2018/04/14/CZlV9e.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/04/14/CZlZ1H.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/04/14/CZlecd.png">
-<meta property="og:updated_time" content="2018-04-14T11:43:02.046Z">
+<meta property="og:updated_time" content="2018-04-14T11:51:40.963Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSM集成应用—SpringMVC入门">
 <meta name="twitter:description" content="前言SpringMVC属于SpringFrameWork的后续产品，已经融合在Spring Web Flow里面。Spring 框架提供了构建 Web 应用程序的全功能 MVC 模块。使用 Spring 可插入的 MVC 架构，从而在使用Spring进行WEB开发时，可以选择使用Spring的SpringMVC框架或集成其他MVC开发框架，如Struts1(现在一般不用)，Struts2等。
@@ -254,12 +254,12 @@ ga('send', 'pageview');
             <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font size="3" face="微软雅黑" style="line-height:2;"><strong>SpringMVC属于SpringFrameWork的后续产品，已经融合在Spring Web Flow里面。Spring 框架提供了构建 Web 应用程序的全功能 MVC 模块。使用 Spring 可插入的 MVC 架构，从而在使用Spring进行WEB开发时，可以选择使用Spring的SpringMVC框架或集成其他MVC开发框架，如Struts1(现在一般不用)，Struts2等。</strong></font>
 
 <h3 id="SpringMVC概念"><a href="#SpringMVC概念" class="headerlink" title="SpringMVC概念"></a><font color="#0099ff" size="4" face="黑体">SpringMVC概念</font></h3><p>简单通俗一点的说：SpringMVC本质是一个巨大的servlet</p>
-<h3 id="SpringMVC如何使用？"><a href="#SpringMVC如何使用？" class="headerlink" title="SpringMVC如何使用？"></a><font color="#0099ff" size="4" face="黑体">SpringMVC如何使用？</font></h3><h4 id="配置SpringMVC这个Servlet：web-xml"><a href="#配置SpringMVC这个Servlet：web-xml" class="headerlink" title="配置SpringMVC这个Servlet：web.xml"></a><font color="#0099ff" size="3" face="黑体">配置SpringMVC这个Servlet：web.xml</font></h4><p><img src="https://s1.ax1x.com/2018/04/14/CZQzc9.png" alt=""></p>
+<h3 id="SpringMVC如何使用？"><a href="#SpringMVC如何使用？" class="headerlink" title="SpringMVC如何使用？"></a><font color="#0099ff" size="4" face="黑体">SpringMVC如何使用？</font></h3><h4 id="配置SpringMVC这个Servlet：web-xml"><a href="#配置SpringMVC这个Servlet：web-xml" class="headerlink" title="配置SpringMVC这个Servlet：web.xml"></a><font color="#0099ff" size="3" face="黑体">配置SpringMVC这个Servlet：web.xml</font></h4><p><img src="https://s1.ax1x.com/2018/04/14/CZQzc9.png" alt=""><br></p>
 <h4 id="在web-xml中关联SpringMVC的核心配置文件"><a href="#在web-xml中关联SpringMVC的核心配置文件" class="headerlink" title="在web.xml中关联SpringMVC的核心配置文件"></a><font color="#0099ff" size="3" face="黑体">在web.xml中关联SpringMVC的核心配置文件</font></h4><ul>
 <li><strong>SpringMVC的核心配置文件本质是一个Spring的配置文件</strong></li>
 <li><strong>告诉DispatcherServlet要使用的核心配置文件在哪</strong></li>
 </ul>
-<p><img src="https://s1.ax1x.com/2018/04/14/CZlSXR.png" alt=""></p>
+<p><img src="https://s1.ax1x.com/2018/04/14/CZlSXR.png" alt=""><br></p>
 <ul>
 <li><strong>核心配置文件到底要配置什么内容？</strong><ul>
 <li>请求线：<ul>
@@ -279,35 +279,35 @@ ga('send', 'pageview');
 <h4 id="配置SpringMVC核心配置文件，并实现管理的Controller"><a href="#配置SpringMVC核心配置文件，并实现管理的Controller" class="headerlink" title="配置SpringMVC核心配置文件，并实现管理的Controller"></a><font color="#0099ff" size="3" face="黑体">配置SpringMVC核心配置文件，并实现管理的Controller</font></h4><ul>
 <li><strong>SpringMVC分发请求的普通Java类</strong></li>
 </ul>
-<p><img src="https://s1.ax1x.com/2018/04/14/CZl9n1.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2018/04/14/CZlP76.png" alt=""></p>
+<p><img src="https://s1.ax1x.com/2018/04/14/CZl9n1.png" alt=""><br></p>
+<p><img src="https://s1.ax1x.com/2018/04/14/CZlP76.png" alt=""><br></p>
 <font color="red" size="5" face="黑体"><strong>@RequestMapping</strong>：映射url的关键</font>
 
 <h3 id="SpringMVC配置详情"><a href="#SpringMVC配置详情" class="headerlink" title="SpringMVC配置详情"></a><font color="#0099ff" size="4" face="黑体">SpringMVC配置详情</font></h3><h4 id="RequestMapping的配置"><a href="#RequestMapping的配置" class="headerlink" title="@RequestMapping的配置"></a><font color="#0099ff" size="3" face="黑体">@RequestMapping的配置</font></h4><ul>
 <li><strong>窄化请求</strong></li>
 </ul>
-<p><img src="https://s1.ax1x.com/2018/04/14/CZlFAK.png" alt=""></p>
+<p><img src="https://s1.ax1x.com/2018/04/14/CZlFAK.png" alt=""><br></p>
 <ul>
 <li><strong>限制http请求方法</strong></li>
 </ul>
-<p><img src="https://s1.ax1x.com/2018/04/14/CZlktO.png" alt=""></p>
+<p><img src="https://s1.ax1x.com/2018/04/14/CZlktO.png" alt=""><br></p>
 <h4 id="Controller方法的返回"><a href="#Controller方法的返回" class="headerlink" title="Controller方法的返回"></a><font color="#0099ff" size="3" face="黑体">Controller方法的返回</font></h4><ul>
 <li><p><strong>返回String</strong></p>
 <ul>
 <li>直接返回逻辑视图名</li>
 <li><p>重定向和请求转发</p>
-<p><img src="https://s1.ax1x.com/2018/04/14/CZlAhD.png" alt=""></p>
+<p><img src="https://s1.ax1x.com/2018/04/14/CZlAhD.png" alt=""><br></p>
 </li>
 </ul>
 </li>
 <li><p><strong>返回void</strong></p>
 </li>
 </ul>
-<p><img src="https://s1.ax1x.com/2018/04/14/CZlV9e.png" alt=""></p>
+<p><img src="https://s1.ax1x.com/2018/04/14/CZlV9e.png" alt=""><br></p>
 <ul>
 <li><strong>返回ModeAndView</strong>：Model：参数模型，View：视图，同时完成参数的传递和页面的跳转</li>
 </ul>
-<p><img src="https://s1.ax1x.com/2018/04/14/CZlZ1H.png" alt=""></p>
+<p><img src="https://s1.ax1x.com/2018/04/14/CZlZ1H.png" alt=""><br></p>
 <ul>
 <li><strong>返回Model、ModelMap、Map、View</strong>……</li>
 </ul>
@@ -320,7 +320,7 @@ ga('send', 'pageview');
 </ul>
 </li>
 </ul>
-<p><img src="https://s1.ax1x.com/2018/04/14/CZlecd.png" alt=""></p>
+<p><img src="https://s1.ax1x.com/2018/04/14/CZlecd.png" alt=""><br></p>
 <p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
 <ul>
 <li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
@@ -328,7 +328,7 @@ ga('send', 'pageview');
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年04月14日 19:43</p>
+        <p>最后更新： 2018年04月14日 19:51</p>
         <footer>
             <a href="#">
                 <img src="/images/logo.png" alt="Garen">
