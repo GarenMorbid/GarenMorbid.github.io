@@ -3,66 +3,55 @@
 <head>
   <meta charset="utf-8">
   
-  <title>SSM集成应用—Spring整合MyBatis之映射整合 | HDQ | Blog</title>
+  <title>SSM集成应用—SpringMVC参数绑定 | HDQ | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HDQ,HDQ's Blog" />
   
-  <meta name="description" content="整合思路
-MyBatis到底做什么事情
-SqlSessionFactoryBuilder—SqlSessionFactory—SqlSession—操作数据库
+  <meta name="description" content="前言众所周知，SpringMVC是用来处理页面的一些请求，然后将数据再通过视图返回给用户的，为了能快速入门SpringMVC，在这一篇博文中，我将总结一下SpringMVC中如何接收前台页面的参数，即SpringMVC中的参数绑定问题。
 
-
-Spring到底做什么事情
-管理bean
-管理的bean和bean之间的关系
-
-
-SM整合
-Spring管理SessionFactory、bean
-Spring对于数据操作的支持：从Spring管理的factory中得到的SqlSess">
+简单参数类型绑定
+pojo类型绑定
+VO类型绑定
+数组类型参数绑定
+List类型参数绑定
+Map参数类型绑定
+自定义参数绑定实现日期转换创建一个类型转换器类，实">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SSM集成应用—Spring整合MyBatis之映射整合">
-<meta property="og:url" content="https://blog.hdqyf.club/2018/04/13/20180413-SSM集成应用—Spring整合MyBatis之映射整合/index.html">
+<meta property="og:title" content="SSM集成应用—SpringMVC参数绑定">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/04/16/20180416-SSM集成应用—SpringMVC参数绑定/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
-<meta property="og:description" content="整合思路
-MyBatis到底做什么事情
-SqlSessionFactoryBuilder—SqlSessionFactory—SqlSession—操作数据库
+<meta property="og:description" content="前言众所周知，SpringMVC是用来处理页面的一些请求，然后将数据再通过视图返回给用户的，为了能快速入门SpringMVC，在这一篇博文中，我将总结一下SpringMVC中如何接收前台页面的参数，即SpringMVC中的参数绑定问题。
 
-
-Spring到底做什么事情
-管理bean
-管理的bean和bean之间的关系
-
-
-SM整合
-Spring管理SessionFactory、bean
-Spring对于数据操作的支持：从Spring管理的factory中得到的SqlSess">
-<meta property="og:image" content="https://s1.ax1x.com/2018/04/13/CERUBt.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/04/13/CERJcd.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/04/13/CERNnI.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/04/13/CER89e.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/04/13/CERG1H.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/04/13/CERaHP.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/04/13/CERYjA.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/04/13/CER7v9.png">
-<meta property="og:updated_time" content="2018-04-13T02:06:32.004Z">
+简单参数类型绑定
+pojo类型绑定
+VO类型绑定
+数组类型参数绑定
+List类型参数绑定
+Map参数类型绑定
+自定义参数绑定实现日期转换创建一个类型转换器类，实">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/16/CeXTXR.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/16/CeXHn1.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/16/CeXb0x.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/16/CeXOAK.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/16/CeXz1H.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/16/CeXjhD.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/16/CeXx9e.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/16/CejScd.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/16/CejiHP.png">
+<meta property="og:updated_time" content="2018-04-16T10:01:36.425Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SSM集成应用—Spring整合MyBatis之映射整合">
-<meta name="twitter:description" content="整合思路
-MyBatis到底做什么事情
-SqlSessionFactoryBuilder—SqlSessionFactory—SqlSession—操作数据库
+<meta name="twitter:title" content="SSM集成应用—SpringMVC参数绑定">
+<meta name="twitter:description" content="前言众所周知，SpringMVC是用来处理页面的一些请求，然后将数据再通过视图返回给用户的，为了能快速入门SpringMVC，在这一篇博文中，我将总结一下SpringMVC中如何接收前台页面的参数，即SpringMVC中的参数绑定问题。
 
-
-Spring到底做什么事情
-管理bean
-管理的bean和bean之间的关系
-
-
-SM整合
-Spring管理SessionFactory、bean
-Spring对于数据操作的支持：从Spring管理的factory中得到的SqlSess">
-<meta name="twitter:image" content="https://s1.ax1x.com/2018/04/13/CERUBt.png">
+简单参数类型绑定
+pojo类型绑定
+VO类型绑定
+数组类型参数绑定
+List类型参数绑定
+Map参数类型绑定
+自定义参数绑定实现日期转换创建一个类型转换器类，实">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/04/16/CeXTXR.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -243,14 +232,14 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-20180413-SSM集成应用—Spring整合MyBatis之映射整合" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-20180416-SSM集成应用—SpringMVC参数绑定" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      SSM集成应用—Spring整合MyBatis之映射整合
+      SSM集成应用—SpringMVC参数绑定
     </h1>
     <div class="post-title-bar">
       <ul>
@@ -263,7 +252,7 @@ ga('send', 'pageview');
               </li>
           
         <li>
-          <i class="fa fa-calendar"></i>  2018-04-13
+          <i class="fa fa-calendar"></i>  2018-04-16
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -279,44 +268,18 @@ ga('send', 'pageview');
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <h3 id="整合思路"><a href="#整合思路" class="headerlink" title="整合思路"></a><font color="#0099ff" size="4" face="黑体">整合思路</font></h3><ul>
-<li>MyBatis到底做什么事情<ul>
-<li>SqlSessionFactoryBuilder—SqlSessionFactory—SqlSession—操作数据库</li>
-</ul>
-</li>
-<li>Spring到底做什么事情<ul>
-<li>管理bean</li>
-<li>管理的bean和bean之间的关系</li>
-</ul>
-</li>
-<li>SM整合<ul>
-<li>Spring管理SessionFactory、bean</li>
-<li>Spring对于数据操作的支持：从Spring管理的factory中得到的SqlSession</li>
-<li>SqlSession数据操作——mybatis</li>
-<li><strong>有哪些bean</strong><ul>
-<li>DataSource：Spring的核心配置文件中配置</li>
-<li>SessionFactory<ul>
-<li><strong>依赖DataSource这个bean</strong></li>
-<li>build读取MyBatis的核心配置文件：数据库环境/注册映射文件</li>
-<li>MyBatis的核心配置文件提供注册的映射文件</li>
-</ul>
-</li>
-<li>XXXDao：数据操作，SqlSession，后续service也要找Spring要dao的bean，<strong>XXXDao需要SessionFactory提供SqlSession来实现数据操作，依赖注入</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="基于映射的整合"><a href="#基于映射的整合" class="headerlink" title="基于映射的整合"></a><font color="#0099ff" size="4" face="黑体">基于映射的整合</font></h3><h4 id="第一步：引入jar包"><a href="#第一步：引入jar包" class="headerlink" title="第一步：引入jar包"></a><font color="#0099ff" size="3" face="黑体">第一步：引入jar包</font></h4><p><img src="https://s1.ax1x.com/2018/04/13/CERUBt.png" alt=""></p>
-<h4 id="第二步：搭建代码框架"><a href="#第二步：搭建代码框架" class="headerlink" title="第二步：搭建代码框架"></a><font color="#0099ff" size="3" face="黑体">第二步：搭建代码框架</font></h4><p><img src="https://s1.ax1x.com/2018/04/13/CERJcd.png" alt=""></p>
-<h4 id="第三步：配置Spring的核心文件"><a href="#第三步：配置Spring的核心文件" class="headerlink" title="第三步：配置Spring的核心文件"></a><font color="#0099ff" size="3" face="黑体">第三步：配置Spring的核心文件</font></h4><p><img src="https://s1.ax1x.com/2018/04/13/CERNnI.png" alt=""></p>
-<h4 id="第四步：在mybatis的核心配置文件中注册mapper映射文件"><a href="#第四步：在mybatis的核心配置文件中注册mapper映射文件" class="headerlink" title="第四步：在mybatis的核心配置文件中注册mapper映射文件"></a><font color="#0099ff" size="3" face="黑体">第四步：在mybatis的核心配置文件中注册mapper映射文件</font></h4><p><img src="https://s1.ax1x.com/2018/04/13/CER89e.png" alt=""></p>
-<h4 id="第五步：在Spring核心配置文件中配置dao实现类"><a href="#第五步：在Spring核心配置文件中配置dao实现类" class="headerlink" title="第五步：在Spring核心配置文件中配置dao实现类"></a><font color="#0099ff" size="3" face="黑体">第五步：在Spring核心配置文件中配置dao实现类</font></h4><p><img src="https://s1.ax1x.com/2018/04/13/CERG1H.png" alt=""></p>
-<h4 id="第六步：编写dao实现类"><a href="#第六步：编写dao实现类" class="headerlink" title="第六步：编写dao实现类"></a><font color="#0099ff" size="3" face="黑体">第六步：编写dao实现类</font></h4><p><strong>继承daoSupport类，从而才能实现SessionFactory的属性注入</strong></p>
-<p><img src="https://s1.ax1x.com/2018/04/13/CERaHP.png" alt=""></p>
-<h4 id="第七步：测试类的编写"><a href="#第七步：测试类的编写" class="headerlink" title="第七步：测试类的编写"></a><font color="#0099ff" size="3" face="黑体">第七步：测试类的编写</font></h4><p><img src="https://s1.ax1x.com/2018/04/13/CERYjA.png" alt=""></p>
-<p><strong>输出结果</strong></p>
-<p><img src="https://s1.ax1x.com/2018/04/13/CER7v9.png" alt=""></p>
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font size="3" face="微软雅黑" style="line-height:2;">众所周知，<strong>SpringMVC</strong>是用来处理页面的一些请求，然后将数据再通过视图返回给用户的，为了能快速入门<strong>SpringMVC</strong>，在这一篇博文中，我将总结一下<strong>SpringMVC</strong>中如何接收前台页面的参数，即SpringMVC中的参数绑定问题。</font>
+
+<h3 id="简单参数类型绑定"><a href="#简单参数类型绑定" class="headerlink" title="简单参数类型绑定"></a><font color="#0099ff" size="4" face="黑体">简单参数类型绑定</font></h3><p><img src="https://s1.ax1x.com/2018/04/16/CeXTXR.png" alt=""><br></p>
+<h3 id="pojo类型绑定"><a href="#pojo类型绑定" class="headerlink" title="pojo类型绑定"></a><font color="#0099ff" size="4" face="黑体">pojo类型绑定</font></h3><p><img src="https://s1.ax1x.com/2018/04/16/CeXHn1.png" alt=""><br></p>
+<h3 id="VO类型绑定"><a href="#VO类型绑定" class="headerlink" title="VO类型绑定"></a><font color="#0099ff" size="4" face="黑体">VO类型绑定</font></h3><p><img src="https://s1.ax1x.com/2018/04/16/CeXb0x.png" alt=""><br></p>
+<h3 id="数组类型参数绑定"><a href="#数组类型参数绑定" class="headerlink" title="数组类型参数绑定"></a><font color="#0099ff" size="4" face="黑体">数组类型参数绑定</font></h3><p><img src="https://s1.ax1x.com/2018/04/16/CeXOAK.png" alt=""><br></p>
+<h3 id="List类型参数绑定"><a href="#List类型参数绑定" class="headerlink" title="List类型参数绑定"></a><font color="#0099ff" size="4" face="黑体">List类型参数绑定</font></h3><p><img src="https://s1.ax1x.com/2018/04/16/CeXz1H.png" alt=""><br></p>
+<h3 id="Map参数类型绑定"><a href="#Map参数类型绑定" class="headerlink" title="Map参数类型绑定"></a><font color="#0099ff" size="4" face="黑体">Map参数类型绑定</font></h3><p><img src="https://s1.ax1x.com/2018/04/16/CeXjhD.png" alt=""><br></p>
+<h3 id="自定义参数绑定实现日期转换"><a href="#自定义参数绑定实现日期转换" class="headerlink" title="自定义参数绑定实现日期转换"></a><font color="#0099ff" size="4" face="黑体">自定义参数绑定实现日期转换</font></h3><h4 id="创建一个类型转换器类，实现Converter接口"><a href="#创建一个类型转换器类，实现Converter接口" class="headerlink" title="创建一个类型转换器类，实现Converter接口"></a><font color="#0099ff" size="3" face="黑体">创建一个类型转换器类，实现Converter接口</font></h4><p><img src="https://s1.ax1x.com/2018/04/16/CeXx9e.png" alt=""><br></p>
+<h4 id="注册为Spring中的类型转换的bean"><a href="#注册为Spring中的类型转换的bean" class="headerlink" title="注册为Spring中的类型转换的bean"></a><font color="#0099ff" size="3" face="黑体">注册为Spring中的类型转换的bean</font></h4><p><img src="https://s1.ax1x.com/2018/04/16/CejScd.png" alt=""><br></p>
+<p><img src="https://s1.ax1x.com/2018/04/16/CejiHP.png" alt=""><br></p>
+<p>这样就可以实现输入的参数如2009-11-25，SpringMVC会自动去读取配置文件，执行配置类里的String转Date。</p>
 <p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
 <ul>
 <li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
@@ -324,7 +287,7 @@ ga('send', 'pageview');
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年04月13日 10:06</p>
+        <p>最后更新： 2018年04月16日 18:01</p>
         <footer>
             <a href="#">
                 <img src="/images/logo.png" alt="Garen">
@@ -399,7 +362,7 @@ ga('send', 'pageview');
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/04/13/20180413-SSM集成应用—Spring整合MyBatis之映射整合/&title=《SSM集成应用—Spring整合MyBatis之映射整合》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/04/08/CPj43V.jpg" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/04/16/20180416-SSM集成应用—SpringMVC参数绑定/&title=《SSM集成应用—SpringMVC参数绑定》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/04/08/CPj43V.jpg" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -409,22 +372,22 @@ ga('send', 'pageview');
             </a>
           </li>
           <li>
-            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/04/13/20180413-SSM集成应用—Spring整合MyBatis之映射整合/&title=《SSM集成应用—Spring整合MyBatis之映射整合》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/04/16/20180416-SSM集成应用—SpringMVC参数绑定/&title=《SSM集成应用—SpringMVC参数绑定》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
               <i class="fa fa-star"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/04/13/20180413-SSM集成应用—Spring整合MyBatis之映射整合/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/04/16/20180416-SSM集成应用—SpringMVC参数绑定/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SSM集成应用—Spring整合MyBatis之映射整合》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/04/13/20180413-SSM集成应用—Spring整合MyBatis之映射整合/&via=https://blog.hdqyf.club" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SSM集成应用—SpringMVC参数绑定》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/04/16/20180416-SSM集成应用—SpringMVC参数绑定/&via=https://blog.hdqyf.club" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/04/13/20180413-SSM集成应用—Spring整合MyBatis之映射整合/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/04/16/20180416-SSM集成应用—SpringMVC参数绑定/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -434,7 +397,7 @@ ga('send', 'pageview');
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/04/13/20180413-SSM集成应用—Spring整合MyBatis之映射整合/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/04/16/20180416-SSM集成应用—SpringMVC参数绑定/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -463,26 +426,16 @@ ga('send', 'pageview');
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#整合思路"><span class="post-toc-text">整合思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基于映射的整合"><span class="post-toc-text">基于映射的整合</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第一步：引入jar包"><span class="post-toc-text">第一步：引入jar包</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第二步：搭建代码框架"><span class="post-toc-text">第二步：搭建代码框架</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第三步：配置Spring的核心文件"><span class="post-toc-text">第三步：配置Spring的核心文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第四步：在mybatis的核心配置文件中注册mapper映射文件"><span class="post-toc-text">第四步：在mybatis的核心配置文件中注册mapper映射文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第五步：在Spring核心配置文件中配置dao实现类"><span class="post-toc-text">第五步：在Spring核心配置文件中配置dao实现类</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第六步：编写dao实现类"><span class="post-toc-text">第六步：编写dao实现类</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第七步：测试类的编写"><span class="post-toc-text">第七步：测试类的编写</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简单参数类型绑定"><span class="post-toc-text">简单参数类型绑定</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#pojo类型绑定"><span class="post-toc-text">pojo类型绑定</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#VO类型绑定"><span class="post-toc-text">VO类型绑定</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数组类型参数绑定"><span class="post-toc-text">数组类型参数绑定</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#List类型参数绑定"><span class="post-toc-text">List类型参数绑定</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Map参数类型绑定"><span class="post-toc-text">Map参数类型绑定</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自定义参数绑定实现日期转换"><span class="post-toc-text">自定义参数绑定实现日期转换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#创建一个类型转换器类，实现Converter接口"><span class="post-toc-text">创建一个类型转换器类，实现Converter接口</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#注册为Spring中的类型转换的bean"><span class="post-toc-text">注册为Spring中的类型转换的bean</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
 
 <nav id="article-nav">
   
-    <a href="/2018/04/13/20180413-SSM集成应用—Spring整合MyBatis之mapper代理整合/" id="article-nav-newer" class="article-nav-link-wrap">
-
-      <span class="article-nav-title">
-        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
-        
-          SSM集成应用—Spring整合MyBatis之mapper代理整合
-        
-      </span>
-    </a>
   
-  
-    <a href="/2018/04/09/20180408-SSM集成应用—Spring注解的理解及使用/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">SSM集成应用—Spring注解的理解及使用</span>
+    <a href="/2018/04/15/20180415-说出来怕你不信，我创了个中文工程/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">说出来怕你不信，我创了个中文工程</span>
       <i class="fa fa-hand-o-right" aria-hidden="true"></i>
     </a>
   

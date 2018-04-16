@@ -3,66 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>SSM集成应用—Spring整合MyBatis之映射整合 | HDQ | Blog</title>
+  <title>Mot-clé: Java | HDQ | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HDQ,HDQ's Blog" />
   
-  <meta name="description" content="整合思路
-MyBatis到底做什么事情
-SqlSessionFactoryBuilder—SqlSessionFactory—SqlSession—操作数据库
-
-
-Spring到底做什么事情
-管理bean
-管理的bean和bean之间的关系
-
-
-SM整合
-Spring管理SessionFactory、bean
-Spring对于数据操作的支持：从Spring管理的factory中得到的SqlSess">
-<meta property="og:type" content="article">
-<meta property="og:title" content="SSM集成应用—Spring整合MyBatis之映射整合">
-<meta property="og:url" content="https://blog.hdqyf.club/2018/04/13/20180413-SSM集成应用—Spring整合MyBatis之映射整合/index.html">
+  <meta name="description" content="Welcome to my blog.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="HDQ | Blog">
+<meta property="og:url" content="https://blog.hdqyf.club/tags/Java/page/3/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
-<meta property="og:description" content="整合思路
-MyBatis到底做什么事情
-SqlSessionFactoryBuilder—SqlSessionFactory—SqlSession—操作数据库
-
-
-Spring到底做什么事情
-管理bean
-管理的bean和bean之间的关系
-
-
-SM整合
-Spring管理SessionFactory、bean
-Spring对于数据操作的支持：从Spring管理的factory中得到的SqlSess">
-<meta property="og:image" content="https://s1.ax1x.com/2018/04/13/CERUBt.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/04/13/CERJcd.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/04/13/CERNnI.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/04/13/CER89e.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/04/13/CERG1H.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/04/13/CERaHP.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/04/13/CERYjA.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/04/13/CER7v9.png">
-<meta property="og:updated_time" content="2018-04-13T02:06:32.004Z">
+<meta property="og:description" content="Welcome to my blog.">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SSM集成应用—Spring整合MyBatis之映射整合">
-<meta name="twitter:description" content="整合思路
-MyBatis到底做什么事情
-SqlSessionFactoryBuilder—SqlSessionFactory—SqlSession—操作数据库
-
-
-Spring到底做什么事情
-管理bean
-管理的bean和bean之间的关系
-
-
-SM整合
-Spring管理SessionFactory、bean
-Spring对于数据操作的支持：从Spring管理的factory中得到的SqlSess">
-<meta name="twitter:image" content="https://s1.ax1x.com/2018/04/13/CERUBt.png">
+<meta name="twitter:title" content="HDQ | Blog">
+<meta name="twitter:description" content="Welcome to my blog.">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -243,254 +197,57 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-20180413-SSM集成应用—Spring整合MyBatis之映射整合" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+        <section id="main" class="body-wrap">
   
-    <h1 class="post-title" itemprop="name">
-      SSM集成应用—Spring整合MyBatis之映射整合
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2018/02/02/20180202-Java：String和Date、Timestamp之间的转换/" class="archive-article-date">
+  <time datetime="2018-02-01T16:00:00.000Z" itemprop="datePublished">02-02</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/02/02/20180202-Java：String和Date、Timestamp之间的转换/"  target="_blank"  >Java小技巧(String和Date、Timestamp之间的转换)</a>
     </h1>
-    <div class="post-title-bar">
-      <ul>
-          
-              <li>
-                  <i class="fa fa-book"></i>
-                  
-                      <a href="/categories/Spring/">Spring</a>
-                  
-              </li>
-          
-        <li>
-          <i class="fa fa-calendar"></i>  2018-04-13
-        </li>
-        <li>
-          <i class="fa fa-eye"></i>
-          <span id="busuanzi_value_page_pv"></span>
-        </li>
-      </ul>
-    </div>
   
 
-          
-      </header>
-    
-    <div class="article-entry post-content" itemprop="articleBody">
+    </header>
       
-            
-            <h3 id="整合思路"><a href="#整合思路" class="headerlink" title="整合思路"></a><font color="#0099ff" size="4" face="黑体">整合思路</font></h3><ul>
-<li>MyBatis到底做什么事情<ul>
-<li>SqlSessionFactoryBuilder—SqlSessionFactory—SqlSession—操作数据库</li>
-</ul>
-</li>
-<li>Spring到底做什么事情<ul>
-<li>管理bean</li>
-<li>管理的bean和bean之间的关系</li>
-</ul>
-</li>
-<li>SM整合<ul>
-<li>Spring管理SessionFactory、bean</li>
-<li>Spring对于数据操作的支持：从Spring管理的factory中得到的SqlSession</li>
-<li>SqlSession数据操作——mybatis</li>
-<li><strong>有哪些bean</strong><ul>
-<li>DataSource：Spring的核心配置文件中配置</li>
-<li>SessionFactory<ul>
-<li><strong>依赖DataSource这个bean</strong></li>
-<li>build读取MyBatis的核心配置文件：数据库环境/注册映射文件</li>
-<li>MyBatis的核心配置文件提供注册的映射文件</li>
-</ul>
-</li>
-<li>XXXDao：数据操作，SqlSession，后续service也要找Spring要dao的bean，<strong>XXXDao需要SessionFactory提供SqlSession来实现数据操作，依赖注入</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="基于映射的整合"><a href="#基于映射的整合" class="headerlink" title="基于映射的整合"></a><font color="#0099ff" size="4" face="黑体">基于映射的整合</font></h3><h4 id="第一步：引入jar包"><a href="#第一步：引入jar包" class="headerlink" title="第一步：引入jar包"></a><font color="#0099ff" size="3" face="黑体">第一步：引入jar包</font></h4><p><img src="https://s1.ax1x.com/2018/04/13/CERUBt.png" alt=""></p>
-<h4 id="第二步：搭建代码框架"><a href="#第二步：搭建代码框架" class="headerlink" title="第二步：搭建代码框架"></a><font color="#0099ff" size="3" face="黑体">第二步：搭建代码框架</font></h4><p><img src="https://s1.ax1x.com/2018/04/13/CERJcd.png" alt=""></p>
-<h4 id="第三步：配置Spring的核心文件"><a href="#第三步：配置Spring的核心文件" class="headerlink" title="第三步：配置Spring的核心文件"></a><font color="#0099ff" size="3" face="黑体">第三步：配置Spring的核心文件</font></h4><p><img src="https://s1.ax1x.com/2018/04/13/CERNnI.png" alt=""></p>
-<h4 id="第四步：在mybatis的核心配置文件中注册mapper映射文件"><a href="#第四步：在mybatis的核心配置文件中注册mapper映射文件" class="headerlink" title="第四步：在mybatis的核心配置文件中注册mapper映射文件"></a><font color="#0099ff" size="3" face="黑体">第四步：在mybatis的核心配置文件中注册mapper映射文件</font></h4><p><img src="https://s1.ax1x.com/2018/04/13/CER89e.png" alt=""></p>
-<h4 id="第五步：在Spring核心配置文件中配置dao实现类"><a href="#第五步：在Spring核心配置文件中配置dao实现类" class="headerlink" title="第五步：在Spring核心配置文件中配置dao实现类"></a><font color="#0099ff" size="3" face="黑体">第五步：在Spring核心配置文件中配置dao实现类</font></h4><p><img src="https://s1.ax1x.com/2018/04/13/CERG1H.png" alt=""></p>
-<h4 id="第六步：编写dao实现类"><a href="#第六步：编写dao实现类" class="headerlink" title="第六步：编写dao实现类"></a><font color="#0099ff" size="3" face="黑体">第六步：编写dao实现类</font></h4><p><strong>继承daoSupport类，从而才能实现SessionFactory的属性注入</strong></p>
-<p><img src="https://s1.ax1x.com/2018/04/13/CERaHP.png" alt=""></p>
-<h4 id="第七步：测试类的编写"><a href="#第七步：测试类的编写" class="headerlink" title="第七步：测试类的编写"></a><font color="#0099ff" size="3" face="黑体">第七步：测试类的编写</font></h4><p><img src="https://s1.ax1x.com/2018/04/13/CERYjA.png" alt=""></p>
-<p><strong>输出结果</strong></p>
-<p><img src="https://s1.ax1x.com/2018/04/13/CER7v9.png" alt=""></p>
-<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
-<ul>
-<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
-</ul>
-
-            <div class="post-copyright">
-    <div class="content">
-        <p>最后更新： 2018年04月13日 10:06</p>
-        <footer>
-            <a href="#">
-                <img src="/images/logo.png" alt="Garen">
-                Garen
-            </a>
-        </footer>
-    </div>
-</div>
-<!-- 来必力City版安装代码 -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
-    <script type="text/javascript">
-        (function (d, s) {
-            var j, e = d.getElementsByTagName(s)[0];
-
-            if (typeof LivereTower === 'function') { return; }
-
-            j = d.createElement(s);
-            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-            j.async = true;
-
-            e.parentNode.insertBefore(j, e);
-        })(document, 'script');
-    </script>
-    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
-</div>
-<!-- City版安装代码已完成 -->
-
-      
-        
-            
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;">赏</a>
-</div>
-
-<div id="reward" class="post-modal reward-lay">
-    <a class="close" href="javascript:;" id="reward-close">×</a>
-    <span class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        请我吃糖~
-        <i class="icon icon-quote-right"></i>
-    </span>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
-        </div>
-        <div class="reward-select">
-            
-            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
-                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
-            </label>
-            
-            
-            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
-                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
-            </label>
-            
-        </div>
-    </div>
-</div>
-
-
-        
-    </div>
-    <footer class="article-footer">
-        
-        
-<div class="post-share">
-    <a href="javascript:;" id="share-sub" class="post-share-fab">
-        <i class="fa fa-share-alt"></i>
-    </a>
-    <div class="post-share-list" id="share-list">
-        <ul class="share-icons">
-          <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/04/13/20180413-SSM集成应用—Spring整合MyBatis之映射整合/&title=《SSM集成应用—Spring整合MyBatis之映射整合》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/04/08/CPj43V.jpg" data-title="微博">
-              <i class="fa fa-weibo"></i>
-            </a>
-          </li>
-          <li>
-            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
-              <i class="fa fa-weixin"></i>
-            </a>
-          </li>
-          <li>
-            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/04/13/20180413-SSM集成应用—Spring整合MyBatis之映射整合/&title=《SSM集成应用—Spring整合MyBatis之映射整合》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
-              <i class="fa fa-star"></i>
-            </a>
-          </li>
-          <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/04/13/20180413-SSM集成应用—Spring整合MyBatis之映射整合/" data-title="Facebook">
-              <i class="fa fa-facebook"></i>
-            </a>
-          </li>
-          <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SSM集成应用—Spring整合MyBatis之映射整合》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/04/13/20180413-SSM集成应用—Spring整合MyBatis之映射整合/&via=https://blog.hdqyf.club" data-title="Twitter">
-              <i class="fa fa-twitter"></i>
-            </a>
-          </li>
-          <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/04/13/20180413-SSM集成应用—Spring整合MyBatis之映射整合/" data-title="Google+">
-              <i class="fa fa-google-plus"></i>
-            </a>
-          </li>
-        </ul>
-     </div>
-</div>
-<div class="post-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;" id="wxShare-close">×</a>
-    <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/04/13/20180413-SSM集成应用—Spring整合MyBatis之映射整合/" alt="微信分享二维码">
-</div>
-
-<div class="mask"></div>
-
-        
-        <ul class="article-footer-menu">
-            
+        <div class="archive-post-footer">
             
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
     <a href="/tags/Java/" class="color5">Java</a>
       
-    <a href="/tags/框架/" class="color3">框架</a>
-      
-    <a href="/tags/Spring/" class="color2">Spring</a>
-      
   </li>
 
-        </ul>
-        
-    </footer>
+        </div>
+      
   </div>
 </article>
 
-
-    <aside class="post-toc-pos post-toc-top" id="post-toc">
-        <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#整合思路"><span class="post-toc-text">整合思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基于映射的整合"><span class="post-toc-text">基于映射的整合</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第一步：引入jar包"><span class="post-toc-text">第一步：引入jar包</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第二步：搭建代码框架"><span class="post-toc-text">第二步：搭建代码框架</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第三步：配置Spring的核心文件"><span class="post-toc-text">第三步：配置Spring的核心文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第四步：在mybatis的核心配置文件中注册mapper映射文件"><span class="post-toc-text">第四步：在mybatis的核心配置文件中注册mapper映射文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第五步：在Spring核心配置文件中配置dao实现类"><span class="post-toc-text">第五步：在Spring核心配置文件中配置dao实现类</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第六步：编写dao实现类"><span class="post-toc-text">第六步：编写dao实现类</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第七步：测试类的编写"><span class="post-toc-text">第七步：测试类的编写</span></a></li></ol></li></ol>
-        </nav>
-    </aside>
-    
-
-<nav id="article-nav">
-  
-    <a href="/2018/04/13/20180413-SSM集成应用—Spring整合MyBatis之mapper代理整合/" id="article-nav-newer" class="article-nav-link-wrap">
-
-      <span class="article-nav-title">
-        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
-        
-          SSM集成应用—Spring整合MyBatis之mapper代理整合
-        
-      </span>
-    </a>
   
   
-    <a href="/2018/04/09/20180408-SSM集成应用—Spring注解的理解及使用/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">SSM集成应用—Spring注解的理解及使用</span>
-      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
-    </a>
+    </div></section>
   
-</nav>
 
 
-
-    
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/tags/Java/page/2/"><< Prev</a><a class="page-number" href="/tags/Java/">1</a><a class="page-number" href="/tags/Java/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
 </section>
         
       </div>
