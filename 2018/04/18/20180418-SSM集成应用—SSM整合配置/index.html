@@ -3,20 +3,55 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archieven: 2018/4 | HDQ | Blog</title>
+  <title>SSM集成应用—SSM整合配置 | HDQ | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HDQ,HDQ's Blog" />
   
-  <meta name="description" content="Welcome to my blog.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="HDQ | Blog">
-<meta property="og:url" content="https://blog.hdqyf.club/archives/2018/04/index.html">
+  <meta name="description" content="前言Spring：bean的实例和bean之间关系的管理MyBatis：取代JDBC，实现Dao层SpringMVC：取代Servlet，分发请求给bean实例
+
+整合分析
+
+整合dao层，扫描mapper接口生成代理实现类的bean
+整合Service层，扫描Service包将有注解的Service实现类变成bean，实现事务控制
+SpringMVC：本质就是Spring，不需要整合
+
+整合ja">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSM集成应用—SSM整合配置">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/04/18/20180418-SSM集成应用—SSM整合配置/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
-<meta property="og:description" content="Welcome to my blog.">
+<meta property="og:description" content="前言Spring：bean的实例和bean之间关系的管理MyBatis：取代JDBC，实现Dao层SpringMVC：取代Servlet，分发请求给bean实例
+
+整合分析
+
+整合dao层，扫描mapper接口生成代理实现类的bean
+整合Service层，扫描Service包将有注解的Service实现类变成bean，实现事务控制
+SpringMVC：本质就是Spring，不需要整合
+
+整合ja">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/18/CnWJc8.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/18/CnWguF.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/18/CnW6jU.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/18/CnWycT.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/18/CnWr90.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/18/CnW0Nn.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/18/CnWBhq.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/18/CnWa7j.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/18/CnWwAs.png">
+<meta property="og:updated_time" content="2018-04-18T07:24:01.381Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HDQ | Blog">
-<meta name="twitter:description" content="Welcome to my blog.">
+<meta name="twitter:title" content="SSM集成应用—SSM整合配置">
+<meta name="twitter:description" content="前言Spring：bean的实例和bean之间关系的管理MyBatis：取代JDBC，实现Dao层SpringMVC：取代Servlet，分发请求给bean实例
+
+整合分析
+
+整合dao层，扫描mapper接口生成代理实现类的bean
+整合Service层，扫描Service包将有注解的Service实现类变成bean，实现事务控制
+SpringMVC：本质就是Spring，不需要整合
+
+整合ja">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/04/18/CnWJc8.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -133,35 +168,216 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap">
-  
-  
+        <section id="main" class="body-wrap"><article id="post-20180418-SSM集成应用—SSM整合配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/18/20180418-SSM集成应用—SSM整合案例/" class="archive-article-date">
-  <time datetime="2018-04-18T07:22:34.000Z" itemprop="datePublished">04-18</time>
-</a>
-      
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/18/20180418-SSM集成应用—SSM整合案例/"  target="_blank"  >SSM集成应用—SSM整合案例</a>
+    <h1 class="post-title" itemprop="name">
+      SSM集成应用—SSM整合配置
     </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/Spring/">Spring</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-04-18
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
   
 
-    </header>
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
       
-        <div class="archive-post-footer">
+            
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font size="3" face="微软雅黑" style="line-height:2;"><strong>Spring：</strong>bean的实例和bean之间关系的管理<br><strong>MyBatis：</strong>取代JDBC，实现Dao层<br><strong>SpringMVC：</strong>取代Servlet，分发请求给bean实例</font>
+
+<h3 id="整合分析"><a href="#整合分析" class="headerlink" title="整合分析"></a><font color="#0099ff" size="4" face="黑体">整合分析</font></h3><p><img src="https://s1.ax1x.com/2018/04/18/CnWJc8.png" alt=""><br></p>
+<ul>
+<li>整合dao层，扫描mapper接口生成代理实现类的bean</li>
+<li>整合Service层，扫描Service包将有注解的Service实现类变成bean，实现事务控制</li>
+<li>SpringMVC：本质就是Spring，不需要整合</li>
+</ul>
+<h3 id="整合jar包搭建工程结构"><a href="#整合jar包搭建工程结构" class="headerlink" title="整合jar包搭建工程结构"></a><font color="#0099ff" size="4" face="黑体">整合jar包搭建工程结构</font></h3><p><img src="https://s1.ax1x.com/2018/04/18/CnWguF.png" alt=""><br></p>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a><font color="#0099ff" size="4" face="黑体">配置文件</font></h3><p><img src="https://s1.ax1x.com/2018/04/18/CnW6jU.png" alt=""><br></p>
+<h3 id="整合dao层"><a href="#整合dao层" class="headerlink" title="整合dao层"></a><font color="#0099ff" size="4" face="黑体">整合dao层</font></h3><ul>
+<li>将MyBatis的代理实现类变成Spring中的bean<ul>
+<li>MapperScannerConfigurer类扫描包，将包中的接口和mapper映射文件关联起来生成代理对象</li>
+</ul>
+</li>
+<li>需要Spring管理SqlSessionFactory对象和DataSource对象</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/04/18/CnWycT.png" alt=""><br></p>
+<h3 id="整合service层"><a href="#整合service层" class="headerlink" title="整合service层"></a><font color="#0099ff" size="4" face="黑体">整合service层</font></h3><ul>
+<li><p>将service的实现类编程Spring中的bean</p>
+<ul>
+<li><p>基于配置文件配置bean</p>
+<p><img src="https://s1.ax1x.com/2018/04/18/CnWr90.png" alt=""><br></p>
+</li>
+<li><p>基于注解</p>
+<p><img src="https://s1.ax1x.com/2018/04/18/CnW0Nn.png" alt=""><br></p>
+</li>
+</ul>
+</li>
+<li>建立service与dao之间的关系</li>
+<li>基于事务的配置：AOP</li>
+</ul>
+<h3 id="整合SpringMVC"><a href="#整合SpringMVC" class="headerlink" title="整合SpringMVC"></a><font color="#0099ff" size="4" face="黑体">整合SpringMVC</font></h3><p><strong>SpringMVC本质上就是一个Spring，自己是一个Servlet的存在，将Controller类变成他管理的实例</strong></p>
+<ul>
+<li>配置SpringMVC为一个Servlet</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/04/18/CnWBhq.png" alt=""><br></p>
+<ul>
+<li>配置SpringMVC的核心配置文件<ul>
+<li>Controller的实例</li>
+<li>视图解析</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/04/18/CnWa7j.png" alt=""><br></p>
+<ul>
+<li>使用Spring的监听器，实现将配置的所有bean和bean之间的关系管理起来</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/04/18/CnWwAs.png" alt=""><br></p>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年04月18日 15:24</p>
+        <footer>
+            <a href="#">
+                <img src="/images/logo.png" alt="Garen">
+                Garen
+            </a>
+        </footer>
+    </div>
+</div>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
+    <script type="text/javascript">
+        (function (d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+
+            if (typeof LivereTower === 'function') { return; }
+
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/04/18/20180418-SSM集成应用—SSM整合配置/&title=《SSM集成应用—SSM整合配置》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/04/08/CPj43V.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/04/18/20180418-SSM集成应用—SSM整合配置/&title=《SSM集成应用—SSM整合配置》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+              <i class="fa fa-star"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/04/18/20180418-SSM集成应用—SSM整合配置/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SSM集成应用—SSM整合配置》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/04/18/20180418-SSM集成应用—SSM整合配置/&via=https://blog.hdqyf.club" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/04/18/20180418-SSM集成应用—SSM整合配置/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/04/18/20180418-SSM集成应用—SSM整合配置/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
             
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
@@ -174,340 +390,43 @@ ga('send', 'pageview');
       
   </li>
 
-        </div>
-      
+        </ul>
+        
+    </footer>
   </div>
 </article>
 
-  
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#整合分析"><span class="post-toc-text">整合分析</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#整合jar包搭建工程结构"><span class="post-toc-text">整合jar包搭建工程结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置文件"><span class="post-toc-text">配置文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#整合dao层"><span class="post-toc-text">整合dao层</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#整合service层"><span class="post-toc-text">整合service层</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#整合SpringMVC"><span class="post-toc-text">整合SpringMVC</span></a></li></ol>
+        </nav>
+    </aside>
     
+
+<nav id="article-nav">
+  
+    <a href="/2018/04/18/20180418-SSM集成应用—SSM整合案例/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          SSM集成应用—SSM整合案例
+        
+      </span>
+    </a>
+  
+  
+    <a href="/2018/04/17/20180417-硬核卸载软件，让无用软件从C盘连根拔起/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">硬核卸载软件，让无用软件从C盘连根拔起</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/18/20180418-SSM集成应用—SSM整合配置/" class="archive-article-date">
-  <time datetime="2018-04-18T06:07:30.000Z" itemprop="datePublished">04-18</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/18/20180418-SSM集成应用—SSM整合配置/"  target="_blank"  >SSM集成应用—SSM整合配置</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/Java/" class="color5">Java</a>
-      
-    <a href="/tags/框架/" class="color3">框架</a>
-      
-    <a href="/tags/Spring/" class="color2">Spring</a>
-      
-  </li>
-
-        </div>
-      
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/17/20180417-硬核卸载软件，让无用软件从C盘连根拔起/" class="archive-article-date">
-  <time datetime="2018-04-17T02:47:42.000Z" itemprop="datePublished">04-17</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/17/20180417-硬核卸载软件，让无用软件从C盘连根拔起/"  target="_blank"  >硬核卸载软件，让无用软件从C盘连根拔起</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/资源/" class="color3">资源</a>
-      
-    <a href="/tags/注册表/" class="color4">注册表</a>
-      
-    <a href="/tags/卸载/" class="color3">卸载</a>
-      
-  </li>
-
-        </div>
-      
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/16/20180416-SSM集成应用—SpringMVC参数绑定/" class="archive-article-date">
-  <time datetime="2018-04-16T09:38:37.000Z" itemprop="datePublished">04-16</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/16/20180416-SSM集成应用—SpringMVC参数绑定/"  target="_blank"  >SSM集成应用—SpringMVC参数绑定</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/Java/" class="color5">Java</a>
-      
-    <a href="/tags/框架/" class="color3">框架</a>
-      
-    <a href="/tags/Spring/" class="color2">Spring</a>
-      
-  </li>
-
-        </div>
-      
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/15/20180415-说出来怕你不信，我创了个中文工程/" class="archive-article-date">
-  <time datetime="2018-04-15T11:14:31.000Z" itemprop="datePublished">04-15</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/15/20180415-说出来怕你不信，我创了个中文工程/"  target="_blank"  >说出来怕你不信，我创了个中文工程</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/感悟/" class="color3">感悟</a>
-      
-  </li>
-
-        </div>
-      
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/14/20180414-SSM集成应用—SpringMVC入门/" class="archive-article-date">
-  <time datetime="2018-04-14T11:06:07.000Z" itemprop="datePublished">04-14</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/14/20180414-SSM集成应用—SpringMVC入门/"  target="_blank"  >SSM集成应用—SpringMVC入门</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/Java/" class="color5">Java</a>
-      
-    <a href="/tags/框架/" class="color3">框架</a>
-      
-    <a href="/tags/Spring/" class="color2">Spring</a>
-      
-  </li>
-
-        </div>
-      
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/13/20180413-SSM集成应用—Spring整合MyBatis之mapper代理整合/" class="archive-article-date">
-  <time datetime="2018-04-13T02:20:39.000Z" itemprop="datePublished">04-13</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/13/20180413-SSM集成应用—Spring整合MyBatis之mapper代理整合/"  target="_blank"  >SSM集成应用—Spring整合MyBatis之mapper代理整合</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/Java/" class="color5">Java</a>
-      
-    <a href="/tags/框架/" class="color3">框架</a>
-      
-    <a href="/tags/Spring/" class="color2">Spring</a>
-      
-  </li>
-
-        </div>
-      
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/13/20180413-SSM集成应用—Spring整合MyBatis之映射整合/" class="archive-article-date">
-  <time datetime="2018-04-13T01:28:57.000Z" itemprop="datePublished">04-13</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/13/20180413-SSM集成应用—Spring整合MyBatis之映射整合/"  target="_blank"  >SSM集成应用—Spring整合MyBatis之映射整合</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/Java/" class="color5">Java</a>
-      
-    <a href="/tags/框架/" class="color3">框架</a>
-      
-    <a href="/tags/Spring/" class="color2">Spring</a>
-      
-  </li>
-
-        </div>
-      
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/09/20180408-SSM集成应用—Spring注解的理解及使用/" class="archive-article-date">
-  <time datetime="2018-04-09T03:12:09.000Z" itemprop="datePublished">04-09</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/09/20180408-SSM集成应用—Spring注解的理解及使用/"  target="_blank"  >SSM集成应用—Spring注解的理解及使用</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/Java/" class="color5">Java</a>
-      
-    <a href="/tags/框架/" class="color3">框架</a>
-      
-    <a href="/tags/Spring/" class="color2">Spring</a>
-      
-  </li>
-
-        </div>
-      
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/08/20180408-SSM集成应用—Spring入门及案例/" class="archive-article-date">
-  <time datetime="2018-04-08T08:31:59.000Z" itemprop="datePublished">04-08</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/08/20180408-SSM集成应用—Spring入门及案例/"  target="_blank"  >SSM集成应用—Spring入门及案例</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/Java/" class="color5">Java</a>
-      
-    <a href="/tags/框架/" class="color3">框架</a>
-      
-    <a href="/tags/Spring/" class="color2">Spring</a>
-      
-  </li>
-
-        </div>
-      
-  </div>
-</article>
-
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2018/04/page/2/">2</a><a class="extend next" rel="next" href="/archives/2018/04/page/2/">Next >></a>
-  </nav>
 </section>
         
       </div>
