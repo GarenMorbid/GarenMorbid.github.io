@@ -3,20 +3,33 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Категория: 音乐 | HDQ | Blog</title>
+  <title>框架理论深入—Spring框架详解 | HDQ | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HDQ,HDQ's Blog" />
   
-  <meta name="description" content="Welcome to my blog.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="HDQ | Blog">
-<meta property="og:url" content="https://blog.hdqyf.club/categories/音乐/index.html">
+  <meta name="description" content="前言博主经过种种实战小案例之后，如今正准备深入框架理论，感谢有博友们的陪伴~
+
+Spring框架特点Spring文档 👉 Spring官方文档
+官方描述对Spring Framework的描述：The Spring Framework is a lightweight solution and a potential one-stop-shop for building your enterpr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="框架理论深入—Spring框架详解">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/04/20/20180418-框架理论深入—Spring框架详解/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
-<meta property="og:description" content="Welcome to my blog.">
+<meta property="og:description" content="前言博主经过种种实战小案例之后，如今正准备深入框架理论，感谢有博友们的陪伴~
+
+Spring框架特点Spring文档 👉 Spring官方文档
+官方描述对Spring Framework的描述：The Spring Framework is a lightweight solution and a potential one-stop-shop for building your enterpr">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/20/CKK4SO.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/20/CKK5lD.png">
+<meta property="og:updated_time" content="2018-04-20T06:04:15.001Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HDQ | Blog">
-<meta name="twitter:description" content="Welcome to my blog.">
+<meta name="twitter:title" content="框架理论深入—Spring框架详解">
+<meta name="twitter:description" content="前言博主经过种种实战小案例之后，如今正准备深入框架理论，感谢有博友们的陪伴~
+
+Spring框架特点Spring文档 👉 Spring官方文档
+官方描述对Spring Framework的描述：The Spring Framework is a lightweight solution and a potential one-stop-shop for building your enterpr">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/04/20/CKK4SO.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -133,59 +146,254 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap">
-  
-  
+        <section id="main" class="body-wrap"><article id="post-20180418-框架理论深入—Spring框架详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/03/28/20180328-音乐狂app 各大平台收费歌曲免费下载工具/" class="archive-article-date">
-  <time datetime="2018-03-28T02:49:07.000Z" itemprop="datePublished">03-28</time>
-</a>
-      
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/28/20180328-音乐狂app 各大平台收费歌曲免费下载工具/"  target="_blank"  >音乐狂app 各大平台收费歌曲免费下载工具</a>
+    <h1 class="post-title" itemprop="name">
+      框架理论深入—Spring框架详解
     </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/Spring/">Spring</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-04-20
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
   
 
-    </header>
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
       
-        <div class="archive-post-footer">
+            
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font size="3" face="微软雅黑" style="line-height:2;">博主经过种种实战小案例之后，如今正准备深入框架理论，感谢有博友们的陪伴~</font>
+
+<h3 id="Spring框架特点"><a href="#Spring框架特点" class="headerlink" title="Spring框架特点"></a><font color="#0099ff" size="4" face="黑体">Spring框架特点</font></h3><p>Spring文档 👉 <a href="https://docs.spring.io/spring/docs/4.3.15.BUILD-SNAPSHOT/spring-framework-reference/html/" target="_blank" rel="external">Spring官方文档</a></p>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">官方描述对<strong>Spring Framework</strong>的描述：<br>The Spring Framework is a lightweight solution and a potential one-stop-shop for building your enterprise-ready applications.<br>博主总结Spring如下的特点：<br></font>
+
+<ul>
+<li><strong>轻量级</strong>：与EJB相比<ul>
+<li>Spring本身就很小</li>
+<li>高度开放性，开发者可以自由选用Spring框架的全部或者部分</li>
+</ul>
+</li>
+<li><strong>一站式</strong><ul>
+<li>Spring提供了各种各样的模块，支持开发（不需要再用到其他的框架等）</li>
+</ul>
+</li>
+<li><strong>非侵入式框架</strong><ul>
+<li>框架不会影响、不会改变我们原有的编程过程</li>
+<li>我们编码写好后，Spring来管理</li>
+</ul>
+</li>
+<li><strong>IOC/DI</strong>：Spring管理bean和bean之间的关系，降低业务对象替换的复杂性，因为他提高了组件之间的解耦</li>
+<li><strong>AOP</strong>：支持将公共业务提取出来（安全、事务、日志）进行集中处理，面向核心业务编程</li>
+<li><strong>Spring提供了对于持久层的支持，可以与多种第三方持久层框架进行整合（Hibernate/MyBatis/JDBC）</strong></li>
+<li><strong>Spring提供web MVC框架</strong></li>
+</ul>
+<h3 id="Spring框架"><a href="#Spring框架" class="headerlink" title="Spring框架"></a><font color="#0099ff" size="4" face="黑体">Spring框架</font></h3><p><img src="https://s1.ax1x.com/2018/04/20/CKK4SO.png" alt=""><br></p>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">The Spring Framework consists of features organized into about 20 modules. These modules are grouped into Core Container, Data Access/Integration, Web, AOP (Aspect Oriented Programming), Instrumentation, Messaging, and Test, as shown in the figure above.</font>
+
+<ul>
+<li><strong>Core Container</strong>：IOC/DI(控制反转/依赖注入)<ul>
+<li>Beans</li>
+<li>Core</li>
+<li>Context</li>
+</ul>
+</li>
+<li><strong>AOP</strong><ul>
+<li>面向切面编程</li>
+<li>Aspects：面向切面的框架</li>
+</ul>
+</li>
+<li><strong>Data Access/Integration</strong><ul>
+<li>ORM框架</li>
+<li>JDBC</li>
+</ul>
+</li>
+<li><strong>Web</strong></li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/04/20/CKK5lD.png" alt=""><br></p>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年04月20日 14:04</p>
+        <footer>
+            <a href="#">
+                <img src="/images/logo.png" alt="Garen">
+                Garen
+            </a>
+        </footer>
+    </div>
+</div>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
+    <script type="text/javascript">
+        (function (d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+
+            if (typeof LivereTower === 'function') { return; }
+
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/04/20/20180418-框架理论深入—Spring框架详解/&title=《框架理论深入—Spring框架详解》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/04/20/CKKffK.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/04/20/20180418-框架理论深入—Spring框架详解/&title=《框架理论深入—Spring框架详解》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+              <i class="fa fa-star"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/04/20/20180418-框架理论深入—Spring框架详解/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《框架理论深入—Spring框架详解》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/04/20/20180418-框架理论深入—Spring框架详解/&via=https://blog.hdqyf.club" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/04/20/20180418-框架理论深入—Spring框架详解/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/04/20/20180418-框架理论深入—Spring框架详解/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
             
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/资源/" class="color3">资源</a>
+    <a href="/tags/Java/" class="color5">Java</a>
       
-    <a href="/tags/下载/" class="color3">下载</a>
+    <a href="/tags/框架/" class="color3">框架</a>
       
-    <a href="/tags/音乐/" class="color3">音乐</a>
-      
-    <a href="/tags/Android/" class="color3">Android</a>
+    <a href="/tags/Spring/" class="color2">Spring</a>
       
   </li>
 
-        </div>
-      
+        </ul>
+        
+    </footer>
   </div>
 </article>
 
-  
-  
-    </div></section>
-  
 
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Spring框架特点"><span class="post-toc-text">Spring框架特点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Spring框架"><span class="post-toc-text">Spring框架</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/18/20180418-SSM集成应用—SSM整合案例/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">SSM集成应用—SSM整合案例</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
 </section>
         
       </div>
