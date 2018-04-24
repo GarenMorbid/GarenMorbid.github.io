@@ -3,25 +3,38 @@
 <head>
   <meta charset="utf-8">
   
-  <title>AutoCAD “珊瑚の海”精简优化版本 | HDQ | Blog</title>
+  <title>框架理论深入—IOC与DI详解 | HDQ | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HDQ,HDQ's Blog" />
   
-  <meta name="description" content="前言Autodesk® AutoCAD是全球著名的专业计算机辅助设计软件，用于二维绘图、详细绘制、设计文档和基本三维设计，广泛应用于机械设计、工业制图、工程制图、土木建筑、装饰装潢、服装加工等多个行业领域。借助Autodesk AutoCAD绘图程序软件您可以准确地和客户共享设计数据，您可以体验本地DWG格式所带来的强大优势。DWG是业界使用最广泛的设计数据格式之一，您可以通过它让所有人员随时了解">
+  <meta name="description" content="概念IOC（控制反转）：基于OO的设计原则（Don`t call us, we`ll call you 别来找我，我会来找你）；程序中各个组件之间的关系，不是由程序代码直接操控的，而是有Spring容器控制；控制权从应用代码移交到Spring容器上。
+DI（依赖注入）：Spring容器中有很多bean的实例，他会将符合依赖关系的对象通过属性注入或者构造注入的方式进行关联
+温馨提示：
+
+Spring">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AutoCAD “珊瑚の海”精简优化版本">
-<meta property="og:url" content="https://blog.hdqyf.club/2018/03/30/20180330-AutoCAD 2019 “珊瑚の海”精简优化版本/index.html">
+<meta property="og:title" content="框架理论深入—IOC与DI详解">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/04/24/20180424-框架理论深入—IOC与DI详解/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
-<meta property="og:description" content="前言Autodesk® AutoCAD是全球著名的专业计算机辅助设计软件，用于二维绘图、详细绘制、设计文档和基本三维设计，广泛应用于机械设计、工业制图、工程制图、土木建筑、装饰装潢、服装加工等多个行业领域。借助Autodesk AutoCAD绘图程序软件您可以准确地和客户共享设计数据，您可以体验本地DWG格式所带来的强大优势。DWG是业界使用最广泛的设计数据格式之一，您可以通过它让所有人员随时了解">
-<meta property="og:image" content="https://s1.ax1x.com/2018/03/30/9v298e.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/03/30/9v2CgH.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/03/30/9v2pCD.png">
-<meta property="og:updated_time" content="2018-03-30T07:11:11.937Z">
+<meta property="og:description" content="概念IOC（控制反转）：基于OO的设计原则（Don`t call us, we`ll call you 别来找我，我会来找你）；程序中各个组件之间的关系，不是由程序代码直接操控的，而是有Spring容器控制；控制权从应用代码移交到Spring容器上。
+DI（依赖注入）：Spring容器中有很多bean的实例，他会将符合依赖关系的对象通过属性注入或者构造注入的方式进行关联
+温馨提示：
+
+Spring">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/24/Cl3Y9A.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/24/Cl33Ae.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/24/Cl38tH.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/04/24/Cl3Ghd.png">
+<meta property="og:updated_time" content="2018-04-24T06:49:27.107Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AutoCAD “珊瑚の海”精简优化版本">
-<meta name="twitter:description" content="前言Autodesk® AutoCAD是全球著名的专业计算机辅助设计软件，用于二维绘图、详细绘制、设计文档和基本三维设计，广泛应用于机械设计、工业制图、工程制图、土木建筑、装饰装潢、服装加工等多个行业领域。借助Autodesk AutoCAD绘图程序软件您可以准确地和客户共享设计数据，您可以体验本地DWG格式所带来的强大优势。DWG是业界使用最广泛的设计数据格式之一，您可以通过它让所有人员随时了解">
-<meta name="twitter:image" content="https://s1.ax1x.com/2018/03/30/9v298e.png">
+<meta name="twitter:title" content="框架理论深入—IOC与DI详解">
+<meta name="twitter:description" content="概念IOC（控制反转）：基于OO的设计原则（Don`t call us, we`ll call you 别来找我，我会来找你）；程序中各个组件之间的关系，不是由程序代码直接操控的，而是有Spring容器控制；控制权从应用代码移交到Spring容器上。
+DI（依赖注入）：Spring容器中有很多bean的实例，他会将符合依赖关系的对象通过属性注入或者构造注入的方式进行关联
+温馨提示：
+
+Spring">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/04/24/Cl3Y9A.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -138,14 +151,14 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-20180330-AutoCAD 2019 “珊瑚の海”精简优化版本" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-20180424-框架理论深入—IOC与DI详解" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      AutoCAD “珊瑚の海”精简优化版本
+      框架理论深入—IOC与DI详解
     </h1>
     <div class="post-title-bar">
       <ul>
@@ -153,12 +166,12 @@ ga('send', 'pageview');
               <li>
                   <i class="fa fa-book"></i>
                   
-                      <a href="/categories/CAD/">CAD</a>
+                      <a href="/categories/Spring/">Spring</a>
                   
               </li>
           
         <li>
-          <i class="fa fa-calendar"></i>  2018-03-30
+          <i class="fa fa-calendar"></i>  2018-04-24
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -174,36 +187,81 @@ ga('send', 'pageview');
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font size="3" face="微软雅黑" style="line-height:2;"><strong>Autodesk® AutoCAD</strong>是全球著名的专业计算机辅助设计软件，用于二维绘图、详细绘制、设计文档和基本三维设计，广泛应用于机械设计、工业制图、工程制图、土木建筑、装饰装潢、服装加工等多个行业领域。借助Autodesk AutoCAD绘图程序软件您可以准确地和客户共享设计数据，您可以体验本地DWG格式所带来的强大优势。DWG是业界使用最广泛的设计数据格式之一，您可以通过它让所有人员随时了解您的最新设计决策。<strong>AutoCAD</strong>支持演示的图形、渲染工具和强大的绘图及三维打印功能，让您的设计将会更加出色。</font>
-
-<p><img src="https://s1.ax1x.com/2018/03/30/9v298e.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2018/03/30/9v2CgH.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2018/03/30/9v2pCD.png" alt=""></p>
-<h3 id="此版本特点"><a href="#此版本特点" class="headerlink" title="此版本特点"></a><font color="#0099ff" size="4" face="黑体">此版本特点</font></h3><blockquote>
-<p>2018/03/26 utoCAD 2019 “珊瑚の海” 32&amp;64位精简优化版<br>注：Win7/10 测试通过，特别强调Win7/8请勿关闭 Windows update 服务，否则安装报错；</p>
+            <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a><font color="#0099ff" size="4" face="黑体">概念</font></h3><p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><strong>IOC（控制反转）</strong>：基于OO的设计原则（<code>Don`t call us, we`ll call you 别来找我，我会来找你</code>）；程序中各个组件之间的关系，不是由程序代码直接操控的，而是有Spring容器控制；控制权从应用代码移交到Spring容器上。<br></font></p>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><strong>DI（依赖注入）</strong>：Spring容器中有很多bean的实例，他会将符合依赖关系的对象通过属性注入或者构造注入的方式进行关联<br></font></p>
+<p><font color="red" size="3" face="微软雅黑" style="line-height:2;">温馨提示：<br></font></p>
 <ul>
-<li>🚩 精简多余组件，保留必须的 VC、.Net 4.7、DirectX组件运行库方便第一次安装高版本CAD的朋友；</li>
-<li>🚩 保留Express扩展工具；可以选择安装</li>
-<li>🚩 安装完成默认AutoCAD 经典空间，喜欢草图及标注界面的朋友可以 工具–工作空间，选择“草图与注释”界面</li>
-<li>🚩 自定有设置好布局的背景颜色为黑色、调整鼠标指针为全屏，不启动欢迎界面，加快启动速度；</li>
-<li>🚩 屏蔽并删除AutoCAD通讯中心，防止AutoCAD给Autodesk服务器发送你的IP地址及机器信息；</li>
-<li>🚩 屏蔽AutoCADFTP中心；</li>
-<li>🚩 完善一些字体库，通常打开文件不会提示找不到字体；</li>
-<li>🚩 快捷方式名为“AutoCAD 2019”</li>
-<li>🚩 默认保存格式为2004版DWG文件</li>
-<li>🚩 保留设置迁移；</li>
-<li>🚩 移植DWG比较命令到工具菜单下</li>
+<li>Spring框架什么时候被加载？<ul>
+<li>读取配置文件的时候，或者加载注解的时候，Spring上下文就启动了</li>
 </ul>
+</li>
+<li>bean什么时候被创建？<ul>
+<li>跟获取bean的方式（ApplicationContext/BeanFactory）有关，也跟bean的生命周期有关</li>
+<li>反射：类名</li>
+</ul>
+</li>
+<li>bean之间的关系到底如何被维护？<ul>
+<li>所有的bean被创建后会进入Spring容器</li>
+<li>Spring根据依赖关系来进行注入</li>
+</ul>
+</li>
+<li>ApplicationContext：重量级对象，要保证单例</li>
+</ul>
+<h3 id="获取bean的方式"><a href="#获取bean的方式" class="headerlink" title="获取bean的方式"></a><font color="#0099ff" size="4" face="黑体">获取bean的方式</font></h3><ol>
+<li>ApplicationContext</li>
+<li>BeanFactory</li>
+</ol>
+<p>ApplicationContext是继承了BeanFactory，尽量使用ApplicationContext，因为它提供了更多的功能（国际化、事件机制、多配制文件）<br><img src="https://s1.ax1x.com/2018/04/24/Cl3Y9A.png" alt=""><br></p>
+<p><font color="red" size="3" face="微软雅黑" style="line-height:2;">bean诞生的方式的区别：<br></font></p>
+<ul>
+<li><strong>BeanFactory</strong>：配置的bean不会没马上被实例化，而是使用的时候才会被实例化<ol>
+<li>快速启动，运行相对慢</li>
+<li>内存要求较低</li>
+</ol>
+</li>
+<li><strong>ApplicationContext</strong>：配置的bean在启动的时候会被实例化<ol>
+<li>启动缓慢，运行速度加快</li>
+<li>内存要求较大</li>
+</ol>
+</li>
+</ul>
+<h3 id="读取配置文件的方式"><a href="#读取配置文件的方式" class="headerlink" title="读取配置文件的方式"></a><font color="#0099ff" size="4" face="黑体">读取配置文件的方式</font></h3><p><img src="https://s1.ax1x.com/2018/04/24/Cl33Ae.png" alt=""><br></p>
+<h3 id="bean的作用域"><a href="#bean的作用域" class="headerlink" title="bean的作用域"></a><font color="#0099ff" size="4" face="黑体">bean的作用域</font></h3><p>在不进行任何作用域配置的时候，不管是ApplicationContext还是BeanFactory，我们的bean都是singleton(单例)，在Spring上下文空间只有一个实例<br><img src="https://s1.ax1x.com/2018/04/24/Cl38tH.png" alt=""><br></p>
+<ul>
+<li><strong>prototype</strong>：每次使用的时候都会创建一个新的实例，ApplicationContext也不会再读取配置文件的时候创建该实例，也是与BeanFactory一样，都是用的时候才创建。</li>
+<li><strong>web开发中bean的作用域</strong><ul>
+<li>SSM：绑定request对象到服务请求的Thread上，使得后面的bean在之后的调用链上在请求和会话的范围上可见</li>
+<li>controller是请求级别的作用域（<strong>每个请求对应一个controller实例</strong>）</li>
+<li>一个请求对应的是一个完整的业务，代表是一个事务</li>
+</ul>
+</li>
+</ul>
+<h3 id="bean的生命周期"><a href="#bean的生命周期" class="headerlink" title="bean的生命周期"></a><font color="#0099ff" size="4" face="黑体">bean的生命周期</font></h3><p><img src="https://s1.ax1x.com/2018/04/24/Cl3Ghd.png" alt=""><br></p>
+<blockquote>
+<p><strong>bean实例化过程</strong></p>
+<ol>
+<li>读取配置文件加载Spring上下文的时候，bean被创建</li>
+<li>属性的注入</li>
+<li>设置当前实例的名字</li>
+<li>设置当前实例所在的BeanFactory工厂</li>
+<li>设置当前实例所在的ApplicationContext上下文空间</li>
+<li>后置处理器的before初始化被调用（<strong>后置处理器：在实例被初始化之前和之后都做一些事情，类似于filter，拦截住，添加功能再继续往后</strong>）</li>
+<li>用户自定义初始化</li>
+<li>在后置处理器的before和after之间做初始化</li>
+<li>后置处理器的after初始化方法被调用</li>
+<li>使用<br><strong>销毁</strong></li>
+<li>DisposableBean的销毁方法调用</li>
+<li>用户自定有销毁方法调用</li>
+</ol>
 </blockquote>
-<h3 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a><font color="#0099ff" size="4" face="黑体">下载地址</font></h3><p>AutoCAD 2019激活，可以使用网盘的破解永久许可文件。<br><a href="https://pan.baidu.com/s/1-ULWKZUMXyH5Q62YePEovg" target="_blank" rel="external">百度云盘下载 密码：6qc0</a></p>
-<p><strong>ps:如果需求更多稳定的AutoCAD版本(2004-2018)，可以在下方留言，博主收到会立即回复</strong></p>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
 <ul>
 <li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
 </ul>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年03月30日 15:11</p>
+        <p>最后更新： 2018年04月24日 14:49</p>
         <footer>
             <a href="#">
                 <img src="/images/logo.png" alt="Garen">
@@ -278,7 +336,7 @@ ga('send', 'pageview');
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/03/30/20180330-AutoCAD 2019 “珊瑚の海”精简优化版本/&title=《AutoCAD “珊瑚の海”精简优化版本》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/03/30/9v2e58.png" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/04/24/20180424-框架理论深入—IOC与DI详解/&title=《框架理论深入—IOC与DI详解》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/04/20/CKKffK.jpg" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -288,22 +346,22 @@ ga('send', 'pageview');
             </a>
           </li>
           <li>
-            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/03/30/20180330-AutoCAD 2019 “珊瑚の海”精简优化版本/&title=《AutoCAD “珊瑚の海”精简优化版本》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/04/24/20180424-框架理论深入—IOC与DI详解/&title=《框架理论深入—IOC与DI详解》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
               <i class="fa fa-star"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/03/30/20180330-AutoCAD 2019 “珊瑚の海”精简优化版本/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/04/24/20180424-框架理论深入—IOC与DI详解/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《AutoCAD “珊瑚の海”精简优化版本》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/03/30/20180330-AutoCAD 2019 “珊瑚の海”精简优化版本/&via=https://blog.hdqyf.club" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《框架理论深入—IOC与DI详解》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/04/24/20180424-框架理论深入—IOC与DI详解/&via=https://blog.hdqyf.club" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/03/30/20180330-AutoCAD 2019 “珊瑚の海”精简优化版本/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/04/24/20180424-框架理论深入—IOC与DI详解/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -313,7 +371,7 @@ ga('send', 'pageview');
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/03/30/20180330-AutoCAD 2019 “珊瑚の海”精简优化版本/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/04/24/20180424-框架理论深入—IOC与DI详解/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -325,9 +383,11 @@ ga('send', 'pageview');
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/资源/" class="color3">资源</a>
+    <a href="/tags/Java/" class="color5">Java</a>
       
-    <a href="/tags/CAD/" class="color4">CAD</a>
+    <a href="/tags/框架/" class="color3">框架</a>
+      
+    <a href="/tags/Spring/" class="color2">Spring</a>
       
   </li>
 
@@ -340,26 +400,16 @@ ga('send', 'pageview');
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#此版本特点"><span class="post-toc-text">此版本特点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#下载地址"><span class="post-toc-text">下载地址</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#概念"><span class="post-toc-text">概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#获取bean的方式"><span class="post-toc-text">获取bean的方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#读取配置文件的方式"><span class="post-toc-text">读取配置文件的方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#bean的作用域"><span class="post-toc-text">bean的作用域</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#bean的生命周期"><span class="post-toc-text">bean的生命周期</span></a></li></ol>
         </nav>
     </aside>
     
 
 <nav id="article-nav">
   
-    <a href="/2018/03/30/20180330-mybatis学习日记—resultType与resultMap/" id="article-nav-newer" class="article-nav-link-wrap">
-
-      <span class="article-nav-title">
-        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
-        
-          mybatis学习日记—resultType与resultMap
-        
-      </span>
-    </a>
   
-  
-    <a href="/2018/03/30/20180330-mybatis学习日记—表达式、接口代理/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">mybatis学习日记—表达式、接口代理</span>
+    <a href="/2018/04/20/20180418-框架理论深入—Spring框架详解/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">框架理论深入—Spring框架详解</span>
       <i class="fa fa-hand-o-right" aria-hidden="true"></i>
     </a>
   
