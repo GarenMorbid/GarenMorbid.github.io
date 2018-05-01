@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Oracle常用函数 | HDQ | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="HDQ,HDQ's Blog" />
+  
+  <meta name="description" content="一、通用函数NULLIF（表达式1，表达式2）&amp;emsp;如果表达式1和表达式2相等则返回空值，如果表达式1和表达式2不相等则返回表达式1的结果。注意：表达式1和表达式2应该是相同数据类型或能隐含转换成相同数据类型，表达式1不能用字符null,但’’不报错COALESCE(表达式1,表达式2,…,表达式n)&amp;emsp;n&amp;gt;=2,此表达式的功能为返回第一个不为空的表达式，如果都为空则返回空值。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Oracle常用函数">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/05/01/20180501-Oracle常用函数/index.html">
+<meta property="og:site_name" content="HDQ | Blog">
+<meta property="og:description" content="一、通用函数NULLIF（表达式1，表达式2）&amp;emsp;如果表达式1和表达式2相等则返回空值，如果表达式1和表达式2不相等则返回表达式1的结果。注意：表达式1和表达式2应该是相同数据类型或能隐含转换成相同数据类型，表达式1不能用字符null,但’’不报错COALESCE(表达式1,表达式2,…,表达式n)&amp;emsp;n&amp;gt;=2,此表达式的功能为返回第一个不为空的表达式，如果都为空则返回空值。">
+<meta property="og:updated_time" content="2018-05-01T05:34:53.822Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Oracle常用函数">
+<meta name="twitter:description" content="一、通用函数NULLIF（表达式1，表达式2）&amp;emsp;如果表达式1和表达式2相等则返回空值，如果表达式1和表达式2不相等则返回表达式1的结果。注意：表达式1和表达式2应该是相同数据类型或能隐含转换成相同数据类型，表达式1不能用字符null,但’’不报错COALESCE(表达式1,表达式2,…,表达式n)&amp;emsp;n&amp;gt;=2,此表达式的功能为返回第一个不为空的表达式，如果都为空则返回空值。">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/mySetting.css">
+  <script src="/js/pace.min.js"></script>
+  <script src="/js/mySetting.js"></script>
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-113082369-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?a3fed5fc0a708f5e993575bc1ccaf623";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+  
+
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body oncontextmenu="return false" onselectstart="return false" oncopy="return false">
+  <div id="container">
+      <div class="maplebg"></div>
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">HDQ&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        HDQ&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 互联网生活 互联网资源的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="个人网站" target="_blank" href="http://hdqyf.club/">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="联系我" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=610717159&site=qq&menu=yes">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="https://weibo.com/u/5470832383?refer_flag=1005055013_">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Steam" target="_blank" href="http://steamcommunity.com/id/610717159/">
+                            <i class="fa fa-steam fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-20180501-Oracle常用函数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      Oracle常用函数
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/Oracle/">Oracle</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-05-01
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h3 id="一、通用函数"><a href="#一、通用函数" class="headerlink" title="一、通用函数"></a><font color="#0099ff" size="4" face="微软雅黑">一、通用函数</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>NULLIF（表达式1，表达式2）</code>&emsp;如果表达式1和表达式2相等则返回空值，如果表达式1和表达式2不相等则返回表达式1的结果。<br><strong>注意：表达式1和表达式2应该是相同数据类型或能隐含转换成相同数据类型，表达式1不能用字符null,但’’不报错</strong></font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>COALESCE(表达式1,表达式2,…,表达式n)</code>&emsp;n&gt;=2,此表达式的功能为返回第一个不为空的表达式，如果都为空则返回空值。<br><strong>注意：所有表达式必须为同一类型或者能转换成同一类型</strong></font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>CASE</code>&emsp;表达式和java中的switch 类似</font><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> empno,ename,sal,</div><div class="line">    <span class="keyword">case</span> deptno</div><div class="line">        <span class="keyword">when</span> <span class="number">10</span> <span class="keyword">then</span> <span class="string">'财务部'</span></div><div class="line">        <span class="keyword">when</span> <span class="number">20</span> <span class="keyword">then</span> <span class="string">'开发部'</span></div><div class="line">        <span class="keyword">when</span> <span class="number">30</span> <span class="keyword">then</span> <span class="string">'行政部'</span></div><div class="line">    <span class="keyword">else</span> <span class="string">'未知部门'</span></div><div class="line">    <span class="keyword">end</span> dept_name</div><div class="line"><span class="keyword">from</span> emp;</div></pre></td></tr></table></figure><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>DECODE(value,if1,then1,if2,then2,if3,then3,…,else)</code>&emsp;表示如果value等于if1时，DECODE函数的结果返then1,…,如果不等于任何一个if值，则返回else。<br>可以用函数或表达式来替代value，if，then，else从而作出一些更有用的比较</font>
+
+<h3 id="二、数学函数"><a href="#二、数学函数" class="headerlink" title="二、数学函数"></a><font color="#0099ff" size="4" face="微软雅黑">二、数学函数</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>ABS(x)</code>&emsp;返回x的绝对值</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>BITAND(x,y)</code>&emsp;返回对x,y进行位与(AND)操作的结果</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>CEIL(x)</code>&emsp;返回大于或等于x的最小整数<strong>(注意负数)</strong></font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>FLOOR(x)</code>&emsp;返回小于或等于x的最大整数<strong>(注意负数)</strong></font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>EXP(x)</code>&emsp;返回值e（自然对数的底）的x次方</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>LN(x)</code>&emsp;返回x的自然对数</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>LOG(x)</code>&emsp;返回以x为底y的对数</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>POWER(x)</code>&emsp;返回x的y次幂</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>SQRT(x)</code>&emsp;返回x的平方根</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>MOD(x)</code>&emsp;返回x除以y的余数</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>SIGN(x)</code>&emsp;返回x的符号</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>ROUND(x[,y])</code>&emsp;返回对x取整的结果。y为可选参数，说明对第几位小数处取整。没有指定y的时候则对x的0位小数取整；如果是负数，则对x在小数点的左边的第|y|位取整。此函数是四舍五入取整</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>TRUNC(x[,y])</code>&emsp;与ROUND类似，之不过是直接舍去尾数</font>
+
+<h3 id="三、聚合函数-常用于GROUP-BY从句的SELECT查询中"><a href="#三、聚合函数-常用于GROUP-BY从句的SELECT查询中" class="headerlink" title="三、聚合函数(常用于GROUP BY从句的SELECT查询中)"></a><font color="#0099ff" size="4" face="微软雅黑">三、聚合函数(常用于GROUP BY从句的SELECT查询中)</font></h3><blockquote>
+<p>All：针对所有值<br>DISTINCT：表示只对不同值</p>
+</blockquote>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>AVG(DISTINCT|ALL)</code>&emsp;返回指定列的平均值</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>MIN(DISTINCT|ALL)</code>&emsp;返回指定列的最小值</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>MAX(DISTINCT|ALL)</code>&emsp;返回指定列的最大值</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>SUM(DISTINCT|ALL)</code>&emsp;返回指定列的所有值之和</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>STDDEV(DISTINCT|ALL)</code>&emsp;返回指定列的标准差</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>VARIANCE(DISTINCT|ALL)</code>&emsp;返回指定列的协方差</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>COUNT(DISTINCT|ALL)</code>&emsp;求记录、数据个数</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>MEDIAN(col)</code>&emsp;求中位数</font>
+
+<h3 id="四、字符串函数"><a href="#四、字符串函数" class="headerlink" title="四、字符串函数"></a><font color="#0099ff" size="4" face="微软雅黑">四、字符串函数</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>ASCII(arg1)</code>&emsp;返回字符的ASCII码值，<strong>如果数据库设置为ASCII,则采用的是ASCII码字符.如果设置为EBCDIC,则采用的是EBCDIC字符</strong></font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>CHR(arg1,[using nchar_cs])</code>&emsp;返回由参数arg1的代码所指定的字符.所返回的字符依赖于oracle所使用的底层字符编码设置</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>CONCAT(arg1,arg2)</code>&emsp;返回arg1与arg2的字符串拼接结果.等同于arg1||arg2</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>INITCAP(arg1)</code>&emsp;将参数arg1转换为每个单词的首字母大写的格式</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>INSTR(arg1,to_find,pos,occurrence)</code>&emsp;在arg1中查找<strong>to_find</strong>子字符串,并返回一个整数表示它出现的位置.参数<strong>pos</strong>指定在参数arg1中开始搜索的位置.如果pos为正,则在该数字指定的位置开始搜索.如果pos为负,则在该数字指定的位置开始搜索,但位置指定是从字符串结尾处开始的.并且反向搜索.参数<strong>occurrence</strong>指定搜索第几次出现的了字符串</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>LENGTH(arg1)</code>&emsp;返回参数arg1的长度.arg1可以是char,varchar2,nchar,nvarchar2,clob或nclob</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>LOWER(arg1)</code>&emsp;返回参数arg1的小写形式</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>UPPER(arg1)</code>&emsp;返回参数arg1的大写形式</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>TRIM([LEADING][TRAILING][BOTH] char FROM source)</code>&emsp;Trim返回varchar2 类型的字符串,其中前导的、尾随的字符char被从source中剪裁。如果指定leading 则与char匹配的前导字符被剪裁。如果指定trailing,则与char匹配的尾随字符被剪裁。指定both,则字符串的首尾都被剪裁。如果没有给出char则默认为空白。如果只指定source参数，则将从source参数中删除尾随和前导的空白</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>LTRIM(arg1,arg2)</code>&emsp;在arg1左面删除连续出现的arg2.不指定arg2则默认删除空格</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>RTRIM(arg1,arg2)</code>&emsp;在arg1右面删除连续出现的arg2.不指定arg2则默认删除空格</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>REPLACE(arg1,search,replace)</code>&emsp;该函数用replace 参数替换出现arg1里的所有search参数</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>TRANSLATE(arg1,match,replace)</code>&emsp;类似于replace函数.差别在于,translate允许一次执行多个字符替换(但只是单个字符的替换)</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>RPAD(arg1,n,arg3)</code>&emsp;在字符串arg1右边连续重复填充arg3直到填充后的字符串总长度到达n为止</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>SOUNDEX(arg1)</code>&emsp;返回arg1的语音学表示.通常用于在某个表中执行搜索,以便查找那些相互之间发音相同但拼写不同的单词</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>SUBSTR(arg1,pos.len)</code>&emsp;从arg1中指定的位置pos开始向右侧截取指定长度len的子字符串.如果pos为正则从字符串arg1左侧开始计数,如果为负则从字符串右侧开始计数.如果未指定len,则返回至该字符串从位置pos开始到串尾的子串</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>NVL(VALUE1, VALUE2)</code>&emsp;如果X是空值，返回VALUE，否则返回X；这里VALUE1和VALUE2必须是同一数据类型</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>NVL2(X, VALUE1, VALUE2)</code>&emsp;如果X是空值，返回VALUE1， 否则返回VALUE2</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>NANVI(X, VALUE)</code>&emsp;如果X不是数字，那么返回VALUE，否则返回X</font>
+
+<h3 id="五、日期和时间函数"><a href="#五、日期和时间函数" class="headerlink" title="五、日期和时间函数"></a><font color="#0099ff" size="4" face="微软雅黑">五、日期和时间函数</font></h3><p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>SYSDATE</code>&emsp;用来得到系统的当前日期</font><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">SYSDATE</span> <span class="keyword">FROM</span> DUAL;</div></pre></td></tr></table></figure></p>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>ADD_MONTHS</code>&emsp;增加或减去月份</font><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> TO_CHAR(ADD_MONTHS(<span class="keyword">TO_DATE</span>(<span class="string">'20080818'</span>,<span class="string">'YYYYMMDD'</span>),<span class="number">2</span>), <span class="string">'YYYY-MM-DD'</span>) <span class="keyword">FROM</span> DUAL;</div><div class="line"><span class="keyword">SELECT</span> TO_CHAR(ADD_MONTHS(<span class="keyword">SYSDATE</span>, <span class="number">-1</span>), <span class="string">'YYYY-MM-DD'</span>) <span class="keyword">FROM</span> DUAL</div></pre></td></tr></table></figure></p>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>LAST_DAY</code>&emsp;返回日期的最后一天</font><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">LAST_DAY</span>(<span class="keyword">SYSDATE</span>) <span class="keyword">FROM</span> DUAL;</div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">LAST_DAY</span>(ADD_MONTHS(<span class="keyword">SYSDATE</span>, <span class="number">-2</span>)) <span class="keyword">FROM</span> DUAL;</div></pre></td></tr></table></figure></p>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>MONTHS_BETWEEN(date2,date1)</code>&emsp;给出date2-date1的月份</font><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> MONTHS_BETWEEN(<span class="string">'19-12月-1999'</span>,<span class="string">'19-3月-1999'</span>) mon_between <span class="keyword">FROM</span> DUAL;</div></pre></td></tr></table></figure></p>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>NEW_TIME(date,’this’,’that’)</code>&emsp;给出在this时区等于other时区的日期和时间</font><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> TO_CHAR(<span class="keyword">SYSDATE</span>, <span class="string">'YYYY.MM.DD HH24:MI:SS'</span>) BeiJing_Time,TO_CHAR(NEW_TIME(<span class="keyword">SYSDATE</span>, <span class="string">'PDT'</span>, <span class="string">'GMT'</span>), <span class="string">'YYYY.MM.DD HH24:MI:SS'</span>) LOS_ANGELS <span class="keyword">FROM</span> DUAL;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p><strong>简写 时区</strong><br>💦 AST OR ADT 大西洋标准时间<br>💦 HST OR HDT 阿拉斯加—夏威夷时间<br>💦 BST OR BDT 英国夏令时<br>💦 MST OR MDT 美国山区时间<br>💦 CST OR CDT 美国中央时区<br>💦 NST 新大陆标准时间<br>💦 EST OR EDT 美国东部时间<br>💦 PST OR PDT 太平洋标准时间<br>💦 GMT 格伦威治标准时间<br>💦 YST OR YDT Yukon标准时间</p>
+</blockquote>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>NEXT_DAY</code>&emsp;返回与指定日期在同一个星期或之后一个星期内的，你所要求的星期天数的确切日期<br>❤ 星期日 = 1 星期一 = 2 星期二 = 3 星期三 = 4 星期四 = 5 星期五 = 6 星期六 = 7</font><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> NEXT_DAY(<span class="keyword">SYSDATE</span>, <span class="number">2</span>) <span class="keyword">FROM</span> DUAL;</div></pre></td></tr></table></figure></p>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>CURRENT_DATE</code>&emsp;当前会话时区中的当前日期</font><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">CURRENT_DATE</span> <span class="keyword">FROM</span> DUAL;</div></pre></td></tr></table></figure></p>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>CURRENT_TIMESTAMP</code>&emsp;以timestamp with time zone数据类型返回当前会话时区中的当前日期</font><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">CURRENT_TIMESTAMP</span> <span class="keyword">FROM</span> DUAL;</div></pre></td></tr></table></figure></p>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>DBTIMEZONE()</code>&emsp;以timestamp with time 返回时区</font><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">DBTIMEZONE</span> <span class="keyword">FROM</span> DUAL;</div></pre></td></tr></table></figure></p>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>SESSIONTIMEZONE</code>&emsp;返回会话时区 其中DBTIMEZONE是数据库的，session是针对当前会话的，因为时区在会话级可以改变</font><br></p>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>EXTRACT</code>&emsp;找出日期或间隔值的字段值</font><br></p>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>TRUNC(for dates)</code>&emsp;TRUNC函数为指定元素而截去的日期值<br>其具体的语法格式如下：<br>&emsp;&emsp;TRUNC（date[,fmt]）<br>&emsp;&emsp;其中：<br>&emsp;&emsp;date 一个日期值<br>&emsp;&emsp;fmt 日期格式，该日期将由指定的元素格式所截去。忽略它则由最近的日期截去</font><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> TRUNC(<span class="keyword">SYSDATE</span>,<span class="string">'YYYY'</span>) <span class="keyword">FROM</span> DUAL; <span class="comment">--返回当年第一天</span></div><div class="line"><span class="keyword">SELECT</span> TRUNC(<span class="keyword">SYSDATE</span>,<span class="string">'MM'</span>) <span class="keyword">FROM</span> DUAL; <span class="comment">--返回当月第一天</span></div><div class="line"><span class="keyword">SELECT</span> TRUNC(<span class="keyword">SYSDATE</span>,<span class="string">'D'</span>) <span class="keyword">FROM</span> DUAL; <span class="comment">--返回当前星期的第一天</span></div><div class="line"><span class="keyword">SELECT</span> TRUNC(<span class="keyword">SYSDATE</span>,<span class="string">'DD'</span>) <span class="keyword">FROM</span> DUAL;<span class="comment">--返回当前年月日</span></div><div class="line"></div><div class="line"><span class="comment">----  上月最后一天</span></div><div class="line"><span class="keyword">SELECT</span> TO_CHAR(<span class="keyword">LAST_DAY</span>(ADD_MONTHS(<span class="keyword">SYSDATE</span>, <span class="number">-1</span>)), <span class="string">'YYYY/MM/DD'</span>) <span class="keyword">FROM</span> DUAL;</div><div class="line"><span class="comment">----: 上个月的今天</span></div><div class="line"><span class="keyword">SELECT</span> TO_CHAR(ADD_MONTHS(<span class="keyword">SYSDATE</span>, <span class="number">-1</span>), <span class="string">'YYYY-MM-DD'</span>) <span class="keyword">FROM</span> DUAL;</div><div class="line"><span class="comment">---- 上个月第一天</span></div><div class="line"><span class="keyword">SELECT</span> TO_CHAR(ADD_MONTHS(<span class="keyword">LAST_DAY</span>(<span class="keyword">SYSDATE</span>)+<span class="number">1</span>,<span class="number">-2</span>),<span class="string">'YYYY-MM-DD'</span>) FirstDay <span class="keyword">FROM</span> DUAL;</div><div class="line"><span class="comment">---  按照每周进行统计</span></div><div class="line"><span class="keyword">SELECT</span> TO_CHAR(<span class="keyword">SYSDATE</span>, <span class="string">'WW'</span>) <span class="keyword">FROM</span> DUAL;</div><div class="line"><span class="comment">---  按照每月进行统计</span></div><div class="line"><span class="keyword">SELECT</span> TO_CHAR(<span class="keyword">SYSDATE</span>, <span class="string">'MM'</span>) <span class="keyword">FROM</span> DUAL;</div><div class="line"><span class="comment">----  按照每季度进行统计</span></div><div class="line"><span class="keyword">SELECT</span> TO_CHAR(<span class="keyword">SYSDATE</span>, <span class="string">'Q'</span>) <span class="keyword">FROM</span> DUAL;</div><div class="line"><span class="comment">---  按照每年进行统计</span></div><div class="line"><span class="keyword">SELECT</span> TO_CHAR(<span class="keyword">SYSDATE</span>, <span class="string">'YYYY'</span>) <span class="keyword">FROM</span> DUAL;</div></pre></td></tr></table></figure></p>
+<h3 id="六、数据转换函数"><a href="#六、数据转换函数" class="headerlink" title="六、数据转换函数"></a><font color="#0099ff" size="4" face="微软雅黑">六、数据转换函数</font></h3><p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>TO_CHAR(DATE,’FORMAT’)</code>&emsp;把对应的数据转换为字符串类型</font><br></p>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>TO_DATE(STRING,’FORMAT’)</code>&emsp;将字符串转化为ORACLE中的一个日期</font><br></p>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>TO_NUMBER(str)</code>&emsp;将给出的字符转换为数字</font><br></p>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>RUNC(for number)</code>&emsp;按照指定的精度截取一个数</font><br></p>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>TRUNC(number[,decimals])</code>&emsp;返回处理后的数值，其工作机制与ROUND函数极为类似，只是该函数不对指定小数前或后的部分做相应舍入选择处理，而统统截去。<br><strong>number</strong> 待做截取处理的数值<br><strong>decimals</strong> 指明需保留小数点后面的位数。可选项，忽略它则截去所有的小数部分</font><br></p>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>CHARTOROWID</code>&emsp;把包含外部格式的ROWID的CHAR或VARCHAR2数值转换为内部的二进制格式.参数string必须是包含外部格式的ROWID的18字符的字符串</font><br></p>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>ROWIDTOCHAR</code>&emsp;将ROWID数据类型转换为字符类型，将ROWID类型的数值rowid转换为其外部的18字符的字符串表示</font><br></p>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>CONVERT(c,dset,sset)</code>&emsp;将源字符串 sset从一个语言字符集转换到另一个目的dset字符集</font><br></p>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>HEXTORAW(x)</code>&emsp;将一个十六进制构成的字符串x转换raw</font><br></p>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>RAWTOHEX</code>&emsp;将RAW类数值rawvalue转换为一个相应的十六进制表示的字符串. rawvalue中的每个字节都被转换为一个双字节的字符串. RAWTOHEX和HEXTORAW是两个相反的函数</font><br></p>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>TO_MULTI_BYTE</code>&emsp;将字符串中的单字节字符转化为多字节字符即将指定字符转换为全角并返回char类型字串</font><br></p>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>DUMP(s,fmt,start,length)</code>&emsp;DUMP函数以fmt指定的内部数字格式返回一个VARCHAR2类型的值<br>fmt含4种格式：8||10||16||17，分别表示8进制，10进制，16进制和单字符，默认为10进制。start参数表示开始位置，length表示字串数长度</font><br></p>
+<p><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>EMPTY_BLOB()，EMPTY_CLOB()</code>&emsp;这两个函数都是用来对大数据类型字段进行初始化操作的函数</font><br></p>
+<h3 id="七、控制流函数（常用在PL-SQL语句中）"><a href="#七、控制流函数（常用在PL-SQL语句中）" class="headerlink" title="七、控制流函数（常用在PL/SQL语句中）"></a><font color="#0099ff" size="4" face="微软雅黑">七、控制流函数（常用在PL/SQL语句中）</font></h3><ul>
+<li>流程控制：<ul>
+<li>IF (表达式) then  执行的语句   end if; （end if ：结束IF）　　判断满足一种情况的条件</li>
+<li>IF (表达式) then  执行的语句  else  执行的语句   end if；　　判断满足两种情况的条件</li>
+<li>IF (表达式) then 执行的语句 elseif 执行的语句  elseif 执行的语句 ….   end if; 　　判断满足多种情况的 条件</li>
+<li>Case (表达式) when （条件表达式结果1 ）then 执行语句1  when（条件表达式结果2） then 执行的语句 2 else 执行的语句 n end Caase; （end case 结束 Case）</li>
+<li>Case when (条件表达式1)  then 执行语句1  when (条件表达式2) then 执行语句2  else 执行语句n end case;</li>
+</ul>
+</li>
+<li>循环控制：<ul>
+<li>LOOP  语句段； exit [when/if 条件表达式]  end Loop；　　至少执行一次  相当于 do｛｝ while（条件表达式）；当满足when/if条件时，使用exit退出，否则，end Loop;</li>
+<li>while  条件表达式 LOOP 执行语句 end  LOOP ;　　只有条件表达式 为 true时候就会运行；</li>
+<li>for 循环变量 IN [reverse] 初始值表达式 … 终值表达式 LOOP 执行语句  END　LOOP</li>
+</ul>
+</li>
+</ul>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年05月01日 13:34</p>
+        <footer>
+            <a href="#">
+                <img src="/images/logo.png" alt="Garen">
+                Garen
+            </a>
+        </footer>
+    </div>
+</div>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/05/01/20180501-Oracle常用函数/&title=《Oracle常用函数》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/03/23/9bM86U.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/05/01/20180501-Oracle常用函数/&title=《Oracle常用函数》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+              <i class="fa fa-star"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/05/01/20180501-Oracle常用函数/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Oracle常用函数》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/05/01/20180501-Oracle常用函数/&via=https://blog.hdqyf.club" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/05/01/20180501-Oracle常用函数/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/05/01/20180501-Oracle常用函数/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/数据库/" class="color4">数据库</a>
+      
+    <a href="/tags/Oracle/" class="color2">Oracle</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、通用函数"><span class="post-toc-text">一、通用函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、数学函数"><span class="post-toc-text">二、数学函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、聚合函数-常用于GROUP-BY从句的SELECT查询中"><span class="post-toc-text">三、聚合函数(常用于GROUP BY从句的SELECT查询中)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、字符串函数"><span class="post-toc-text">四、字符串函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#五、日期和时间函数"><span class="post-toc-text">五、日期和时间函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#六、数据转换函数"><span class="post-toc-text">六、数据转换函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#七、控制流函数（常用在PL-SQL语句中）"><span class="post-toc-text">七、控制流函数（常用在PL/SQL语句中）</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/27/20180427-会声会影2018正式版v21.2.0.113完整旗舰版/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">会声会影2018正式版v21.2.0.113完整旗舰版</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <span id="runtime_span"></span>
+            <br>
+            <p>
+                Powered by <a href="#" target="_blank">HDQ</a> Theme <a href="#" target="_blank">Garen</a> &copy;
+                2018
+                    Garen<br>
+            </p>
+        </div>
+    </div>
+</footer>
+<script>
+    function show_runtime() {
+            window.setTimeout("show_runtime()", 1000);
+            X = new Date("11/25/2017 05:20:00");
+            Y = new Date(); T = (Y.getTime() - X.getTime()); M = 24 * 60 * 60 * 1000;
+            a = T / M;
+            A = Math.floor(a);
+            b = (a - A) * 24;
+            B = Math.floor(b);
+            c = (b - B) * 60;
+            C = Math.floor((b - B) * 60);
+            D = Math.floor((c - C) * 60);
+            runtime_span.innerHTML = "本站勉强运行: " + A + "天" + B + "小时" + C + "分" + D + "秒";
+        }
+
+        show_runtime();
+</script>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://blog.hdqyf.club",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/3DS-MAX/">3DS MAX</a><a class="category-link" href="/categories/CAD/">CAD</a><a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/Java/">Java</a><a class="category-link" href="/categories/Linux/">Linux</a><a class="category-link" href="/categories/Mac/">Mac</a><a class="category-link" href="/categories/MySQL/">MySQL</a><a class="category-link" href="/categories/Oracle/">Oracle</a><a class="category-link" href="/categories/SQL/">SQL</a><a class="category-link" href="/categories/Spring/">Spring</a><a class="category-link" href="/categories/Steam/">Steam</a><a class="category-link" href="/categories/iOS/">iOS</a><a class="category-link" href="/categories/mybatis/">mybatis</a><a class="category-link" href="/categories/下载/">下载</a><a class="category-link" href="/categories/卸载/">卸载</a><a class="category-link" href="/categories/常识/">常识</a><a class="category-link" href="/categories/感悟/">感悟</a><a class="category-link" href="/categories/截屏/">截屏</a><a class="category-link" href="/categories/播放器/">播放器</a><a class="category-link" href="/categories/效率/">效率</a><a class="category-link" href="/categories/文档/">文档</a><a class="category-link" href="/categories/注册表/">注册表</a><a class="category-link" href="/categories/激活/">激活</a><a class="category-link" href="/categories/生活/">生活</a><a class="category-link" href="/categories/编辑器/">编辑器</a><a class="category-link" href="/categories/资源/">资源</a><a class="category-link" href="/categories/转换/">转换</a><a class="category-link" href="/categories/音乐/">音乐</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CSS/" style="font-size: 11.25px;">CSS</a> <a href="/tags/HTML/" style="font-size: 13.75px;">HTML</a> <a href="/tags/JS/" style="font-size: 11.25px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/Mac/" style="font-size: 12.5px;">Mac</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/SQL/" style="font-size: 11.25px;">SQL</a> <a href="/tags/Spring/" style="font-size: 16.25px;">Spring</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/iOS/" style="font-size: 12.5px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 17.5px;">mybatis</a> <a href="/tags/office/" style="font-size: 11.25px;">office</a> <a href="/tags/下载/" style="font-size: 15px;">下载</a> <a href="/tags/前端/" style="font-size: 13.75px;">前端</a> <a href="/tags/办公/" style="font-size: 11.25px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 10px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 12.5px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.5px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 13.75px;">效率</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/文档/" style="font-size: 10px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/框架/" style="font-size: 18.75px;">框架</a> <a href="/tags/注册表/" style="font-size: 11.25px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 10px;">激活</a> <a href="/tags/生活/" style="font-size: 12.5px;">生活</a> <a href="/tags/终端/" style="font-size: 11.25px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/视频/" style="font-size: 12.5px;">视频</a> <a href="/tags/资源/" style="font-size: 18.75px;">资源</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CSS/" style="font-size: 11.25px;">CSS</a> <a href="/tags/HTML/" style="font-size: 13.75px;">HTML</a> <a href="/tags/JS/" style="font-size: 11.25px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/Mac/" style="font-size: 12.5px;">Mac</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/SQL/" style="font-size: 11.25px;">SQL</a> <a href="/tags/Spring/" style="font-size: 16.25px;">Spring</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/iOS/" style="font-size: 12.5px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 17.5px;">mybatis</a> <a href="/tags/office/" style="font-size: 11.25px;">office</a> <a href="/tags/下载/" style="font-size: 15px;">下载</a> <a href="/tags/前端/" style="font-size: 13.75px;">前端</a> <a href="/tags/办公/" style="font-size: 11.25px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 10px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 12.5px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.5px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 13.75px;">效率</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/文档/" style="font-size: 10px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/框架/" style="font-size: 18.75px;">框架</a> <a href="/tags/注册表/" style="font-size: 11.25px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 10px;">激活</a> <a href="/tags/生活/" style="font-size: 12.5px;">生活</a> <a href="/tags/终端/" style="font-size: 11.25px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/视频/" style="font-size: 12.5px;">视频</a> <a href="/tags/资源/" style="font-size: 18.75px;">资源</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+<script>
+  $(".pingfuADHolder").remove();
+</script>
+</html>
