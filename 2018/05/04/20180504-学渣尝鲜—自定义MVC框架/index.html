@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>学渣尝鲜—自定义MVC框架 | HDQ | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="HDQ,HDQ's Blog" />
+  
+  <meta name="description" content="前言&amp;emsp;&amp;emsp;MVC是三个单词的缩写，这三个单词分别为：模型（Model）、视图(View)和控制(Controller)。一种软件设计典范，用一种业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。
+
+开发自己的MVC框架第一步：准备jar包
+博主也为懒人准备了下载地址 👉 dom4j下载地址该">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学渣尝鲜—自定义MVC框架">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/05/04/20180504-学渣尝鲜—自定义MVC框架/index.html">
+<meta property="og:site_name" content="HDQ | Blog">
+<meta property="og:description" content="前言&amp;emsp;&amp;emsp;MVC是三个单词的缩写，这三个单词分别为：模型（Model）、视图(View)和控制(Controller)。一种软件设计典范，用一种业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。
+
+开发自己的MVC框架第一步：准备jar包
+博主也为懒人准备了下载地址 👉 dom4j下载地址该">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/04/CtwHvq.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/04/CtwqK0.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/04/CtwvaF.png">
+<meta property="og:updated_time" content="2018-05-04T01:27:37.130Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学渣尝鲜—自定义MVC框架">
+<meta name="twitter:description" content="前言&amp;emsp;&amp;emsp;MVC是三个单词的缩写，这三个单词分别为：模型（Model）、视图(View)和控制(Controller)。一种软件设计典范，用一种业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。
+
+开发自己的MVC框架第一步：准备jar包
+博主也为懒人准备了下载地址 👉 dom4j下载地址该">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/05/04/CtwHvq.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/mySetting.css">
+  <script src="/js/pace.min.js"></script>
+  <script src="/js/mySetting.js"></script>
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-113082369-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?a3fed5fc0a708f5e993575bc1ccaf623";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+  
+
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body oncontextmenu="return false" onselectstart="return false" oncopy="return false">
+  <div id="container">
+      <div class="maplebg"></div>
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">HDQ&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        HDQ&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 互联网生活 互联网资源的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="个人网站" target="_blank" href="http://hdqyf.club/">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="联系我" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=610717159&site=qq&menu=yes">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="https://weibo.com/u/5470832383?refer_flag=1005055013_">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Steam" target="_blank" href="http://steamcommunity.com/id/610717159/">
+                            <i class="fa fa-steam fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-20180504-学渣尝鲜—自定义MVC框架" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      学渣尝鲜—自定义MVC框架
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/MVC/">MVC</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-05-04
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;MVC是三个单词的缩写，这三个单词分别为：模型（Model）、视图(View)和控制(Controller)。一种软件设计典范，用一种业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。</font>
+
+<h3 id="开发自己的MVC框架"><a href="#开发自己的MVC框架" class="headerlink" title="开发自己的MVC框架"></a><font color="#0099ff" size="4" face="黑体">开发自己的MVC框架</font></h3><h4 id="第一步：准备jar包"><a href="#第一步：准备jar包" class="headerlink" title="第一步：准备jar包"></a><font color="#0099ff" size="3" face="黑体">第一步：准备jar包</font></h4><p><img src="https://s1.ax1x.com/2018/05/04/CtwHvq.png" alt=""><br></p>
+<p>博主也为懒人准备了下载地址 👉 <a href="https://dom4j.github.io/" target="_blank" rel="external">dom4j下载地址</a><br><strong>该jar包的作用就是解析xml文件</strong></p>
+<h4 id="第二步：准备配置文档"><a href="#第二步：准备配置文档" class="headerlink" title="第二步：准备配置文档"></a><font color="#0099ff" size="3" face="黑体">第二步：准备配置文档</font></h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="comment">&lt;!-- 定义我们的DOC约束文件 --&gt;</span></div><div class="line"><span class="comment">&lt;!-- 定义根节点 (包含元素)--&gt;</span></div><div class="line"><span class="comment">&lt;!-- ELEMENT 表示元素  --&gt;</span></div><div class="line"><span class="comment">&lt;!-- ATTLIST 表示属性 --&gt;</span></div><div class="line"><span class="meta">&lt;!DOCTYPE myMVC[</span></div><div class="line">    &lt;!-- 表示 myframework根节点下有actions子节点--&gt;</div><div class="line">    &lt;!ELEMENT myMVC (actions)&gt;</div><div class="line"></div><div class="line">    &lt;!-- 一个actions根节点下可以有多个action节点 --&gt;</div><div class="line">    &lt;!ELEMENT actions (action*)&gt;</div><div class="line"></div><div class="line">    &lt;!-- 一个action下可以有多个result节点 --&gt;</div><div class="line">    &lt;!ELEMENT action (result*)&gt;</div><div class="line"></div><div class="line">    &lt;!-- </div><div class="line">    	CDATA表示字符串的数据</div><div class="line">    	#REQUIRED表示该属性必须得写</div><div class="line">    	#IMPLIED表示该属性可写可不写</div><div class="line">    	redirect可以简单理解为重定向，默认false转发</div><div class="line">     --&gt;</div><div class="line">    &lt;!ATTLIST action </div><div class="line">       name CDATA #REQUIRED</div><div class="line">       class CDATA #REQUIRED</div><div class="line">    &gt;</div><div class="line">    &lt;!ATTLIST result </div><div class="line">       name CDATA #IMPLIED</div><div class="line">       redirect (true|false) "false"</div><div class="line">    &gt;</div><div class="line">]</div><div class="line">&gt;</div><div class="line"><span class="tag">&lt;<span class="name">myMVC</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">actions</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- 根据上面的约束条件配置而成 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"loginAction"</span> <span class="attr">class</span>=<span class="string">"action.LoginAction"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"input"</span>&gt;</span>index.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">action</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">actions</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">myMVC</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="第三步：我们准备自己的Action接口，用于存放结果集和要执行的方法"><a href="#第三步：我们准备自己的Action接口，用于存放结果集和要执行的方法" class="headerlink" title="第三步：我们准备自己的Action接口，用于存放结果集和要执行的方法"></a><font color="#0099ff" size="3" face="黑体">第三步：我们准备自己的Action接口，用于存放结果集和要执行的方法</font></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> action;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 我们准备自己的Action接口，用于存放结果集和要执行的方法</div><div class="line"> * <span class="doctag">@author</span> Garen</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Action</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 定义字符串常量</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String SUCCESS=<span class="string">"success"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String NONE=<span class="string">"none"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ERROR=<span class="string">"error"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String INPUT=<span class="string">"input"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String LOGIN=<span class="string">"login"</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 准备一个方法,用于获取数据</div><div class="line">     * <span class="doctag">@param</span> request</div><div class="line">     * <span class="doctag">@param</span> sponse</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     * <span class="doctag">@throws</span> Exception</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">(HttpServletRequest request, HttpServletResponse sponse)</span><span class="keyword">throws</span> Exception</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="第四步：定义一个ActionMapping用来存放Action节点"><a href="#第四步：定义一个ActionMapping用来存放Action节点" class="headerlink" title="第四步：定义一个ActionMapping用来存放Action节点"></a><font color="#0099ff" size="3" face="黑体">第四步：定义一个ActionMapping用来存放Action节点</font></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> action;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.HashMap;</div><div class="line"><span class="keyword">import</span> java.util.Map;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 定义一个ActionMapping用来存放Action节点</div><div class="line"> * Action 的配置文件信息</div><div class="line"> * <span class="doctag">@author</span> Garen</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ActionMapping</span> </span>&#123;</div><div class="line">    <span class="comment">//访问的Action的名称</span></div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="comment">//访问的Action的对应的Action的类全称</span></div><div class="line">    <span class="keyword">private</span> String ClassName;</div><div class="line">    <span class="comment">//result定义的结果集</span></div><div class="line">    <span class="keyword">private</span> Map&lt;String,String&gt; resultMAp=<span class="keyword">new</span> HashMap&lt;String, String&gt;();</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 往集合里面添加配置文件中的数据信息</div><div class="line">     * <span class="doctag">@param</span> resultName</div><div class="line">     * <span class="doctag">@param</span> result</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addResult</span><span class="params">(String resultName,String result)</span></span>&#123;</div><div class="line">        resultMAp.put(resultName, result);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 根据resultName获取对应的result页面</div><div class="line">     * <span class="doctag">@param</span> resultName</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getResult</span><span class="params">(String resultName)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> resultMAp.get(resultName);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> name;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getClassName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> ClassName;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setClassName</span><span class="params">(String className)</span> </span>&#123;</div><div class="line">        ClassName = className;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="第五步：定义ActionMappingManager，管理ActionMapping"><a href="#第五步：定义ActionMappingManager，管理ActionMapping" class="headerlink" title="第五步：定义ActionMappingManager，管理ActionMapping"></a><font color="#0099ff" size="3" face="黑体">第五步：定义ActionMappingManager，管理ActionMapping</font></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> action;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.InputStream;</div><div class="line"><span class="keyword">import</span> java.util.HashMap;</div><div class="line"><span class="keyword">import</span> java.util.Iterator;</div><div class="line"><span class="keyword">import</span> java.util.Map;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.dom4j.Document;</div><div class="line"><span class="keyword">import</span> org.dom4j.Element;</div><div class="line"><span class="keyword">import</span> org.dom4j.io.SAXReader;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 定义ActionMappingManager，管理ActionMapping</div><div class="line"> * ActionMapping 的管理类</div><div class="line"> * <span class="doctag">@author</span> Garen</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ActionMappingManager</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 管理ActionMapping  一个ActionMapping表示一个Action  </div><div class="line">     * 但是我们配置文件中可能出现多个Action节点,所以我们需要一个ActionMapping的管理类 </div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String,ActionMapping&gt; actionMappings=<span class="keyword">new</span> HashMap&lt;String,ActionMapping&gt;();</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 无参构造函数</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ActionMappingManager</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 带参构造函数</div><div class="line">     * <span class="doctag">@param</span> configFileNames</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ActionMappingManager</span><span class="params">(String[] configFileNames)</span></span>&#123;</div><div class="line">        <span class="keyword">for</span> (String filaName : configFileNames) &#123;</div><div class="line">            <span class="comment">//调用根据文件名读取配置文件的方法</span></div><div class="line">            init(filaName);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 根据Action名称获取到某一个具体的Action</div><div class="line">     * <span class="doctag">@param</span> actionName</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> ActionMapping <span class="title">getActionMapping</span><span class="params">(String actionName)</span></span>&#123;</div><div class="line">        <span class="comment">//根据ActionName获取到Action</span></div><div class="line">        ActionMapping actionMapping=actionMappings.get(actionName);</div><div class="line">        <span class="keyword">return</span> actionMapping;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(String configFileName)</span></span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">//读取配置文件，肯定用到了输入流</span></div><div class="line">            InputStream is=<span class="keyword">this</span>.getClass().getResourceAsStream(<span class="string">"/"</span>+configFileName);</div><div class="line">            <span class="comment">//开始读取xml文件</span></div><div class="line">            Document doc=<span class="keyword">new</span> SAXReader().read(is);</div><div class="line">            <span class="comment">//获取根节点</span></div><div class="line">            Element root=doc.getRootElement();</div><div class="line">            <span class="comment">//获取Actions节点</span></div><div class="line">            Element actions = (Element)root.elementIterator(<span class="string">"actions"</span>).next();</div><div class="line">            <span class="comment">//开始遍历Actions节点</span></div><div class="line">            <span class="keyword">for</span>(Iterator&lt;Element&gt; action=actions.elementIterator(<span class="string">"action"</span>);action.hasNext();)&#123;</div><div class="line">                <span class="comment">//获取到Action节点，将其属性进行封装</span></div><div class="line">                Element actionElement=action.next();</div><div class="line">                <span class="comment">//获取到name</span></div><div class="line">                String name=actionElement.attributeValue(<span class="string">"name"</span>);</div><div class="line">                <span class="comment">//获取到ClassName</span></div><div class="line">                String ClassName=actionElement.attributeValue(<span class="string">"class"</span>);</div><div class="line">                <span class="comment">//一个Action对应着一个ActionMapping，创建ActionMapping进行赋值</span></div><div class="line">                ActionMapping actionMapping =<span class="keyword">new</span> ActionMapping();</div><div class="line">                actionMapping.setName(name);</div><div class="line">                actionMapping.setClassName(ClassName);</div><div class="line">                <span class="comment">//遍历Action的子元素result</span></div><div class="line">                <span class="keyword">for</span>(Iterator&lt;Element&gt; result=actionElement.elementIterator(<span class="string">"result"</span>);result.hasNext();)&#123;</div><div class="line">                    Element resultElement = result.next();</div><div class="line">                    <span class="comment">//获取result属性值</span></div><div class="line">                    String resultName=resultElement.attributeValue(<span class="string">"name"</span>);</div><div class="line">                    String resultValue=resultElement.getText();</div><div class="line">                    <span class="comment">//将每个result封装到ActionMapping中去</span></div><div class="line">                    actionMapping.addResult(resultName, resultValue);</div><div class="line">                &#125;</div><div class="line">                <span class="comment">//将ActionMapping放入ActionMappingManager中去</span></div><div class="line">                actionMappings.put(actionMapping.getName(), actionMapping);</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="第六步：利用反射机制，找到具体类的实例"><a href="#第六步：利用反射机制，找到具体类的实例" class="headerlink" title="第六步：利用反射机制，找到具体类的实例"></a><font color="#0099ff" size="3" face="黑体">第六步：利用反射机制，找到具体类的实例</font></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> action;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 利用反射机制，根据类的类类型获取到类的实例</div><div class="line"> * <span class="doctag">@author</span> Garen</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ActionManager</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 根据类的类类型获取到类的实例</div><div class="line">     * <span class="doctag">@param</span> className</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Action <span class="title">creatAction</span><span class="params">(String className)</span></span>&#123;</div><div class="line">        Class clazz=<span class="keyword">null</span>;</div><div class="line"></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">//判断当前线程是否有该Action</span></div><div class="line">             clazz = Thread.currentThread().getContextClassLoader().loadClass(className);</div><div class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(clazz==<span class="keyword">null</span>)&#123;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                <span class="comment">//根据类的全路径，手动创建一个类的类类型</span></div><div class="line">                clazz=Class.forName(className);</div><div class="line">            &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        Action action=<span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">//根据类的类类型创建出一个类的实例</span></div><div class="line">            action=(Action)clazz.newInstance();</div><div class="line">        &#125; <span class="keyword">catch</span> (InstantiationException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> action;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="第七步：写业务逻辑Action"><a href="#第七步：写业务逻辑Action" class="headerlink" title="第七步：写业务逻辑Action"></a><font color="#0099ff" size="3" face="黑体">第七步：写业务逻辑Action</font></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> action;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 写业务逻辑Action</div><div class="line"> * <span class="doctag">@author</span> Garen</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginAction</span> <span class="keyword">implements</span> <span class="title">Action</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">(HttpServletRequest request, HttpServletResponse sponse)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">//写具体的业务逻辑</span></div><div class="line">        <span class="keyword">return</span> SUCCESS;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="第八步：准备Servlet"><a href="#第八步：准备Servlet" class="headerlink" title="第八步：准备Servlet"></a><font color="#0099ff" size="3" face="黑体">第八步：准备Servlet</font></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> servlet;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.servlet.ServletConfig;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletException;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</div><div class="line"></div><div class="line"><span class="keyword">import</span> action.Action;</div><div class="line"><span class="keyword">import</span> action.ActionManager;</div><div class="line"><span class="keyword">import</span> action.ActionMapping;</div><div class="line"><span class="keyword">import</span> action.ActionMappingManager;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MVCServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</div><div class="line">    ActionMappingManager actionMappingManager=<span class="keyword">null</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">            <span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">        doPost(request, response);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">            <span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">//根据ActionName获取到ActionMapping</span></div><div class="line">            ActionMapping actionMapping = actionMappingManager.getActionMapping(getActionName(request));</div><div class="line">            <span class="comment">//根据ActionMapping中的ClassName获取到具体的类的实例</span></div><div class="line">            Action action = ActionManager.creatAction(actionMapping.getClassName());</div><div class="line">            <span class="comment">//执行业务逻辑，获取到resultName</span></div><div class="line">            String resultName = action.execute(request, response);</div><div class="line">            <span class="comment">//根据resultName获取具体的result视图</span></div><div class="line">            String result = actionMapping.getResult(resultName);</div><div class="line">            <span class="comment">//重定向到页面</span></div><div class="line">            response.sendRedirect(result);</div><div class="line"></div><div class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 根据请求的上下文获取到ActionName</div><div class="line">     * <span class="doctag">@param</span> request</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getActionName</span><span class="params">(HttpServletRequest request)</span></span>&#123;</div><div class="line">        <span class="comment">//获取到URI</span></div><div class="line">        String uri = request.getRequestURI();</div><div class="line">        <span class="comment">//获取上下文路径</span></div><div class="line">        String contextPath = request.getContextPath();</div><div class="line">        <span class="comment">//从上下文中截取ActionPath</span></div><div class="line">        String actionPath = uri.substring(contextPath.length());</div><div class="line">        <span class="comment">//获取到ActionName</span></div><div class="line">        String actionName=actionPath.substring(<span class="number">1</span>,actionPath.lastIndexOf(<span class="string">'.'</span>)).trim();</div><div class="line">        <span class="keyword">return</span> actionName;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/*</span></div><div class="line">     *  在加载Servlet的时候就读取配置文件信息</div><div class="line">     * （非 Javadoc）</div><div class="line">     * @see javax.servlet.GenericServlet#init(javax.servlet.ServletConfig)</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(ServletConfig config)</span> <span class="keyword">throws</span> ServletException </span>&#123;</div><div class="line">        <span class="comment">//读取配置信息</span></div><div class="line">        String configStr = config.getInitParameter(<span class="string">"config"</span>);</div><div class="line">        String[] fileNames=<span class="keyword">null</span>;</div><div class="line">        <span class="keyword">if</span>(configStr==<span class="keyword">null</span>||configStr.isEmpty())&#123;</div><div class="line">            fileNames=<span class="keyword">new</span> String[]&#123;<span class="string">"myMVC.xml"</span>&#125;;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            fileNames=configStr.split(<span class="string">","</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//读取配置文件，将文件中的信息保存到ActionMappingManager中</span></div><div class="line">        actionMappingManager=<span class="keyword">new</span> ActionMappingManager(fileNames);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="第九步：修改web-xml，配置servlet"><a href="#第九步：修改web-xml，配置servlet" class="headerlink" title="第九步：修改web.xml，配置servlet"></a><font color="#0099ff" size="3" face="黑体">第九步：修改web.xml，配置servlet</font></h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="attr">xmlns</span>=<span class="string">"http://xmlns.jcp.org/xml/ns/javaee"</span> <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"</span> <span class="attr">id</span>=<span class="string">"WebApp_ID"</span> <span class="attr">version</span>=<span class="string">"3.1"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">display-name</span>&gt;</span>The_custom_of_MVC<span class="tag">&lt;/<span class="name">display-name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">welcome-file-list</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.html<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.htm<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.jsp<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>default.html<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>default.htm<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>default.jsp<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">welcome-file-list</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="comment">&lt;!-- web.xml里配置servlet --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">servlet</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>This is the description of my J2EE component<span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">display-name</span>&gt;</span>This is the display name of my J2EE component<span class="tag">&lt;/<span class="name">display-name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>MVCServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>servlet.MVCServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>MVCServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>*.action<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="第十步：测试login-jsp是否能跳转到success-jsp"><a href="#第十步：测试login-jsp是否能跳转到success-jsp" class="headerlink" title="第十步：测试login.jsp是否能跳转到success.jsp"></a><font color="#0099ff" size="3" face="黑体">第十步：测试login.jsp是否能跳转到success.jsp</font></h4><p><img src="https://s1.ax1x.com/2018/05/04/CtwqK0.png" alt=""><br></p>
+<h3 id="博主总结"><a href="#博主总结" class="headerlink" title="博主总结"></a><font color="#0099ff" size="3" face="黑体">博主总结</font></h3><p><img src="https://s1.ax1x.com/2018/05/04/CtwvaF.png" alt=""><br></p>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年05月04日 09:27</p>
+        <footer>
+            <a href="#">
+                <img src="/images/logo.png" alt="Garen">
+                Garen
+            </a>
+        </footer>
+    </div>
+</div>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/05/04/20180504-学渣尝鲜—自定义MVC框架/&title=《学渣尝鲜—自定义MVC框架》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/05/04/Ctw72n.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/05/04/20180504-学渣尝鲜—自定义MVC框架/&title=《学渣尝鲜—自定义MVC框架》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+              <i class="fa fa-star"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/05/04/20180504-学渣尝鲜—自定义MVC框架/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《学渣尝鲜—自定义MVC框架》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/05/04/20180504-学渣尝鲜—自定义MVC框架/&via=https://blog.hdqyf.club" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/05/04/20180504-学渣尝鲜—自定义MVC框架/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/05/04/20180504-学渣尝鲜—自定义MVC框架/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Java/" class="color5">Java</a>
+      
+    <a href="/tags/框架/" class="color3">框架</a>
+      
+    <a href="/tags/MVC/" class="color4">MVC</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#开发自己的MVC框架"><span class="post-toc-text">开发自己的MVC框架</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第一步：准备jar包"><span class="post-toc-text">第一步：准备jar包</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第二步：准备配置文档"><span class="post-toc-text">第二步：准备配置文档</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第三步：我们准备自己的Action接口，用于存放结果集和要执行的方法"><span class="post-toc-text">第三步：我们准备自己的Action接口，用于存放结果集和要执行的方法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第四步：定义一个ActionMapping用来存放Action节点"><span class="post-toc-text">第四步：定义一个ActionMapping用来存放Action节点</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第五步：定义ActionMappingManager，管理ActionMapping"><span class="post-toc-text">第五步：定义ActionMappingManager，管理ActionMapping</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第六步：利用反射机制，找到具体类的实例"><span class="post-toc-text">第六步：利用反射机制，找到具体类的实例</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第七步：写业务逻辑Action"><span class="post-toc-text">第七步：写业务逻辑Action</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第八步：准备Servlet"><span class="post-toc-text">第八步：准备Servlet</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第九步：修改web-xml，配置servlet"><span class="post-toc-text">第九步：修改web.xml，配置servlet</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第十步：测试login-jsp是否能跳转到success-jsp"><span class="post-toc-text">第十步：测试login.jsp是否能跳转到success.jsp</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#博主总结"><span class="post-toc-text">博主总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/03/20180503-CorelDRAW 2018 v20.0.0.633 官方正式版/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">CorelDRAW 2018 v20.0.0.633 官方正式版</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <span id="runtime_span"></span>
+            <br>
+            <p>
+                Powered by <a href="#" target="_blank">HDQ</a> Theme <a href="#" target="_blank">Garen</a> &copy;
+                2018
+                    Garen<br>
+            </p>
+        </div>
+    </div>
+</footer>
+<script>
+    function show_runtime() {
+            window.setTimeout("show_runtime()", 1000);
+            X = new Date("11/25/2017 05:20:00");
+            Y = new Date(); T = (Y.getTime() - X.getTime()); M = 24 * 60 * 60 * 1000;
+            a = T / M;
+            A = Math.floor(a);
+            b = (a - A) * 24;
+            B = Math.floor(b);
+            c = (b - B) * 60;
+            C = Math.floor((b - B) * 60);
+            D = Math.floor((c - C) * 60);
+            runtime_span.innerHTML = "本站勉强运行: " + A + "天" + B + "小时" + C + "分" + D + "秒";
+        }
+
+        show_runtime();
+</script>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://blog.hdqyf.club",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/3DS-MAX/">3DS MAX</a><a class="category-link" href="/categories/CAD/">CAD</a><a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/Java/">Java</a><a class="category-link" href="/categories/Linux/">Linux</a><a class="category-link" href="/categories/MVC/">MVC</a><a class="category-link" href="/categories/Mac/">Mac</a><a class="category-link" href="/categories/MySQL/">MySQL</a><a class="category-link" href="/categories/Oracle/">Oracle</a><a class="category-link" href="/categories/SQL/">SQL</a><a class="category-link" href="/categories/Spring/">Spring</a><a class="category-link" href="/categories/Steam/">Steam</a><a class="category-link" href="/categories/iOS/">iOS</a><a class="category-link" href="/categories/mybatis/">mybatis</a><a class="category-link" href="/categories/下载/">下载</a><a class="category-link" href="/categories/卸载/">卸载</a><a class="category-link" href="/categories/常识/">常识</a><a class="category-link" href="/categories/感悟/">感悟</a><a class="category-link" href="/categories/截屏/">截屏</a><a class="category-link" href="/categories/播放器/">播放器</a><a class="category-link" href="/categories/效率/">效率</a><a class="category-link" href="/categories/文档/">文档</a><a class="category-link" href="/categories/注册表/">注册表</a><a class="category-link" href="/categories/激活/">激活</a><a class="category-link" href="/categories/生活/">生活</a><a class="category-link" href="/categories/编辑器/">编辑器</a><a class="category-link" href="/categories/资源/">资源</a><a class="category-link" href="/categories/转换/">转换</a><a class="category-link" href="/categories/音乐/">音乐</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CSS/" style="font-size: 11.25px;">CSS</a> <a href="/tags/HTML/" style="font-size: 13.75px;">HTML</a> <a href="/tags/JS/" style="font-size: 11.25px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Mac/" style="font-size: 12.5px;">Mac</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/SQL/" style="font-size: 11.25px;">SQL</a> <a href="/tags/Spring/" style="font-size: 16.25px;">Spring</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/iOS/" style="font-size: 12.5px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 17.5px;">mybatis</a> <a href="/tags/office/" style="font-size: 11.25px;">office</a> <a href="/tags/下载/" style="font-size: 15px;">下载</a> <a href="/tags/前端/" style="font-size: 13.75px;">前端</a> <a href="/tags/办公/" style="font-size: 11.25px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 11.25px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 12.5px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.5px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 13.75px;">效率</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/文档/" style="font-size: 10px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/框架/" style="font-size: 18.75px;">框架</a> <a href="/tags/注册表/" style="font-size: 11.25px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 10px;">激活</a> <a href="/tags/生活/" style="font-size: 12.5px;">生活</a> <a href="/tags/终端/" style="font-size: 11.25px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/视频/" style="font-size: 12.5px;">视频</a> <a href="/tags/资源/" style="font-size: 18.75px;">资源</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CSS/" style="font-size: 11.25px;">CSS</a> <a href="/tags/HTML/" style="font-size: 13.75px;">HTML</a> <a href="/tags/JS/" style="font-size: 11.25px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Mac/" style="font-size: 12.5px;">Mac</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/SQL/" style="font-size: 11.25px;">SQL</a> <a href="/tags/Spring/" style="font-size: 16.25px;">Spring</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/iOS/" style="font-size: 12.5px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 17.5px;">mybatis</a> <a href="/tags/office/" style="font-size: 11.25px;">office</a> <a href="/tags/下载/" style="font-size: 15px;">下载</a> <a href="/tags/前端/" style="font-size: 13.75px;">前端</a> <a href="/tags/办公/" style="font-size: 11.25px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 11.25px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 12.5px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.5px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 13.75px;">效率</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/文档/" style="font-size: 10px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/框架/" style="font-size: 18.75px;">框架</a> <a href="/tags/注册表/" style="font-size: 11.25px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 10px;">激活</a> <a href="/tags/生活/" style="font-size: 12.5px;">生活</a> <a href="/tags/终端/" style="font-size: 11.25px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/视频/" style="font-size: 12.5px;">视频</a> <a href="/tags/资源/" style="font-size: 18.75px;">资源</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+<script>
+  $(".pingfuADHolder").remove();
+</script>
+</html>
