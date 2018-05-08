@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>框架理论深入—AOP面向切面 | HDQ | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="HDQ,HDQ's Blog" />
+  
+  <meta name="description" content="前言面向机器 ➡️ 汇编 ➡️ 面向过程 ➡️ 面向对象 ➡️ 面向切面（面向多个对象编程，不增加代码的基础上，增加新的功能）IOC/DI：自动将要使用的对象送到执行者的手上AOP：公共功能本身
+AOP概述
+核心关注点（核心业务）：真个系统的主业务流程，要实现的功能
+横切关注点（系统业务）：公共功能，如事务、日志、安全等
+
+
+AOP并不是Spring框架特有的，Spring只是支持AOP编程的框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="框架理论深入—AOP面向切面">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/05/08/20180508-框架理论深入—AOP面向切面/index.html">
+<meta property="og:site_name" content="HDQ | Blog">
+<meta property="og:description" content="前言面向机器 ➡️ 汇编 ➡️ 面向过程 ➡️ 面向对象 ➡️ 面向切面（面向多个对象编程，不增加代码的基础上，增加新的功能）IOC/DI：自动将要使用的对象送到执行者的手上AOP：公共功能本身
+AOP概述
+核心关注点（核心业务）：真个系统的主业务流程，要实现的功能
+横切关注点（系统业务）：公共功能，如事务、日志、安全等
+
+
+AOP并不是Spring框架特有的，Spring只是支持AOP编程的框架">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/08/CdPklt.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/08/CdPCYd.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/08/CdPFSI.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/08/CdP9FH.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/08/CdPSTe.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/08/CdCXy6.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/08/CdCxeO.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/08/CdCjOK.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/08/CdCzwD.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/08/CdPPfA.png">
+<meta property="og:updated_time" content="2018-05-08T05:22:35.304Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="框架理论深入—AOP面向切面">
+<meta name="twitter:description" content="前言面向机器 ➡️ 汇编 ➡️ 面向过程 ➡️ 面向对象 ➡️ 面向切面（面向多个对象编程，不增加代码的基础上，增加新的功能）IOC/DI：自动将要使用的对象送到执行者的手上AOP：公共功能本身
+AOP概述
+核心关注点（核心业务）：真个系统的主业务流程，要实现的功能
+横切关注点（系统业务）：公共功能，如事务、日志、安全等
+
+
+AOP并不是Spring框架特有的，Spring只是支持AOP编程的框架">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/05/08/CdPklt.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/mySetting.css">
+  <script src="/js/pace.min.js"></script>
+  <script src="/js/mySetting.js"></script>
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-113082369-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?a3fed5fc0a708f5e993575bc1ccaf623";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+  
+
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body oncontextmenu="return false" onselectstart="return false" oncopy="return false">
+  <div id="container">
+      <div class="maplebg"></div>
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">HDQ&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        HDQ&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 互联网生活 互联网资源的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="个人网站" target="_blank" href="http://hdqyf.club/">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="联系我" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=610717159&site=qq&menu=yes">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="https://weibo.com/u/5470832383?refer_flag=1005055013_">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Steam" target="_blank" href="http://steamcommunity.com/id/610717159/">
+                            <i class="fa fa-steam fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-20180508-框架理论深入—AOP面向切面" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      框架理论深入—AOP面向切面
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/Spring/">Spring</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-05-08
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>面向机器 ➡️ 汇编 ➡️ 面向过程 ➡️ 面向对象 ➡️ 面向切面（面向多个对象编程，不增加代码的基础上，增加新的功能）<br><strong>IOC/DI</strong>：自动将要使用的对象送到执行者的手上<br><strong>AOP</strong>：公共功能本身</p>
+<h3 id="AOP概述"><a href="#AOP概述" class="headerlink" title="AOP概述"></a><font color="#0099ff" size="4" face="黑体">AOP概述</font></h3><ul>
+<li>核心关注点（核心业务）：真个系统的主业务流程，要实现的功能</li>
+<li>横切关注点（系统业务）：公共功能，如事务、日志、安全等</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/05/08/CdPklt.png" alt=""><br></p>
+<p>AOP并不是Spring框架特有的，Spring只是支持AOP编程的框架之一，整合第三方AOP框架来实现面向切面编程。（Aspect）</p>
+<ul>
+<li>现实的应用场景：使用面向切面编程，AOP框架已经实现了面向切面的很多内容，程序员使用AOP要做的事情：<ul>
+<li>编写公共功能，切面</li>
+<li>基于AOP框架的配置，直接把核心业务和切面关联起来</li>
+</ul>
+</li>
+<li>Spring中实现AOP方式有三种<ul>
+<li>基于AspectJ注解的方式实现</li>
+<li>基于schema的xml配置</li>
+<li>基于Spring工厂的代理类ProxyFactoryBean代理类来实现</li>
+</ul>
+</li>
+</ul>
+<h3 id="AOP入门案例——基于AspectJ注解"><a href="#AOP入门案例——基于AspectJ注解" class="headerlink" title="AOP入门案例——基于AspectJ注解"></a><font color="#0099ff" size="4" face="黑体">AOP入门案例——基于AspectJ注解</font></h3><h4 id="引入jar包"><a href="#引入jar包" class="headerlink" title="引入jar包"></a><font color="#0099ff" size="3" face="黑体">引入jar包</font></h4><p><img src="https://s1.ax1x.com/2018/05/08/CdPCYd.png" alt=""><br></p>
+<h4 id="编写核心业务的接口和实现类"><a href="#编写核心业务的接口和实现类" class="headerlink" title="编写核心业务的接口和实现类"></a><font color="#0099ff" size="3" face="黑体">编写核心业务的接口和实现类</font></h4><p><img src="https://s1.ax1x.com/2018/05/08/CdPFSI.png" alt=""><br></p>
+<h4 id="编写切面"><a href="#编写切面" class="headerlink" title="编写切面"></a><font color="#0099ff" size="3" face="黑体">编写切面</font></h4><p><img src="https://s1.ax1x.com/2018/05/08/CdP9FH.png" alt=""><br></p>
+<h4 id="配置基本信息"><a href="#配置基本信息" class="headerlink" title="配置基本信息"></a><font color="#0099ff" size="3" face="黑体">配置基本信息</font></h4><p><img src="https://s1.ax1x.com/2018/05/08/CdPSTe.png" alt=""><br></p>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a><font color="#0099ff" size="3" face="黑体">测试</font></h4><p><img src="https://s1.ax1x.com/2018/05/08/CdCXy6.png" alt=""><br></p>
+<h3 id="AOP概念详解"><a href="#AOP概念详解" class="headerlink" title="AOP概念详解"></a><font color="#0099ff" size="4" face="黑体">AOP概念详解</font></h3><ul>
+<li>AOP理解<br>利用一种横切的技术，剖析封装的对象的内部，将影响了多个类的行为封装到了一个可重用的模块，称为Aspect切面<br>将应用程序中的商业逻辑与其提供支持的通用服务进行分离</li>
+<li>AOP术语</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/05/08/CdCxeO.png" alt=""><br></p>
+<ul>
+<li><strong>切面</strong>：公共功能、交叉功能的描述</li>
+<li><strong>连接点</strong>：静态概念，通知执行的地方</li>
+<li><strong>通知</strong>：实现切面功能的类</li>
+<li><strong>切入点</strong>：动态概念，运行时执行通知的地方，实现切面功能是，连接点变为切入点</li>
+<li><strong>引入</strong>：静态概念，将切面与目标对象关联起来</li>
+<li><strong>目标对象</strong>：被通知的对象，核心关注点的对象</li>
+<li><strong>代理对象</strong>：代理的目标对象，通过代理目标对象就增加了切面功能<ul>
+<li>目标对象+切面功能</li>
+</ul>
+</li>
+<li><strong>织入</strong>：将切面应用到代理对象，是一个过程</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/05/08/CdCjOK.png" alt=""><br></p>
+<ul>
+<li>通知类型<br>面与核心业务关联时，什么时候织入切面的执行？</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/05/08/CdCzwD.png" alt=""><br><br><img src="https://s1.ax1x.com/2018/05/08/CdPPfA.png" alt=""><br></p>
+<ul>
+<li><strong>前置通知</strong>：核心业务执行前执行</li>
+<li><strong>返回后通知</strong></li>
+<li><strong>异常通知</strong></li>
+<li><strong>后置通知</strong>：核心业务执行后执行</li>
+<li><strong>环绕通知</strong></li>
+</ul>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年05月08日 13:22</p>
+        <footer>
+            <a href="#">
+                <img src="/images/logo.png" alt="Garen">
+                Garen
+            </a>
+        </footer>
+    </div>
+</div>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/05/08/20180508-框架理论深入—AOP面向切面/&title=《框架理论深入—AOP面向切面》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/04/20/CKKffK.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/05/08/20180508-框架理论深入—AOP面向切面/&title=《框架理论深入—AOP面向切面》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+              <i class="fa fa-star"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/05/08/20180508-框架理论深入—AOP面向切面/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《框架理论深入—AOP面向切面》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/05/08/20180508-框架理论深入—AOP面向切面/&via=https://blog.hdqyf.club" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/05/08/20180508-框架理论深入—AOP面向切面/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/05/08/20180508-框架理论深入—AOP面向切面/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Java/" class="color5">Java</a>
+      
+    <a href="/tags/框架/" class="color3">框架</a>
+      
+    <a href="/tags/Spring/" class="color2">Spring</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#AOP概述"><span class="post-toc-text">AOP概述</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#AOP入门案例——基于AspectJ注解"><span class="post-toc-text">AOP入门案例——基于AspectJ注解</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#引入jar包"><span class="post-toc-text">引入jar包</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#编写核心业务的接口和实现类"><span class="post-toc-text">编写核心业务的接口和实现类</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#编写切面"><span class="post-toc-text">编写切面</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#配置基本信息"><span class="post-toc-text">配置基本信息</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#测试"><span class="post-toc-text">测试</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#AOP概念详解"><span class="post-toc-text">AOP概念详解</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/2018/05/08/20180508-显卡检测神器！知名显卡识别软件—GPU-Z/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          显卡检测神器！知名显卡识别软件—GPU-Z
+        
+      </span>
+    </a>
+  
+  
+    <a href="/2018/05/07/20180507-框架理论深入—Bean的装配/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">框架理论深入—Bean的装配</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <span id="runtime_span"></span>
+            <br>
+            <p>
+                Powered by <a href="#" target="_blank">HDQ</a> Theme <a href="#" target="_blank">Garen</a> &copy;
+                2018
+                    Garen<br>
+            </p>
+        </div>
+    </div>
+</footer>
+<script>
+    function show_runtime() {
+            window.setTimeout("show_runtime()", 1000);
+            X = new Date("11/25/2017 05:20:00");
+            Y = new Date(); T = (Y.getTime() - X.getTime()); M = 24 * 60 * 60 * 1000;
+            a = T / M;
+            A = Math.floor(a);
+            b = (a - A) * 24;
+            B = Math.floor(b);
+            c = (b - B) * 60;
+            C = Math.floor((b - B) * 60);
+            D = Math.floor((c - C) * 60);
+            runtime_span.innerHTML = "本站勉强运行: " + A + "天" + B + "小时" + C + "分" + D + "秒";
+        }
+
+        show_runtime();
+</script>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://blog.hdqyf.club",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/3DS-MAX/">3DS MAX</a><a class="category-link" href="/categories/CAD/">CAD</a><a class="category-link" href="/categories/CPU/">CPU</a><a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/GPU/">GPU</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/Java/">Java</a><a class="category-link" href="/categories/Linux/">Linux</a><a class="category-link" href="/categories/MVC/">MVC</a><a class="category-link" href="/categories/Mac/">Mac</a><a class="category-link" href="/categories/MySQL/">MySQL</a><a class="category-link" href="/categories/Oracle/">Oracle</a><a class="category-link" href="/categories/SQL/">SQL</a><a class="category-link" href="/categories/Spring/">Spring</a><a class="category-link" href="/categories/Steam/">Steam</a><a class="category-link" href="/categories/iOS/">iOS</a><a class="category-link" href="/categories/mybatis/">mybatis</a><a class="category-link" href="/categories/下载/">下载</a><a class="category-link" href="/categories/卸载/">卸载</a><a class="category-link" href="/categories/常识/">常识</a><a class="category-link" href="/categories/感悟/">感悟</a><a class="category-link" href="/categories/截屏/">截屏</a><a class="category-link" href="/categories/播放器/">播放器</a><a class="category-link" href="/categories/效率/">效率</a><a class="category-link" href="/categories/文档/">文档</a><a class="category-link" href="/categories/注册表/">注册表</a><a class="category-link" href="/categories/激活/">激活</a><a class="category-link" href="/categories/生活/">生活</a><a class="category-link" href="/categories/编辑器/">编辑器</a><a class="category-link" href="/categories/资源/">资源</a><a class="category-link" href="/categories/转换/">转换</a><a class="category-link" href="/categories/音乐/">音乐</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/CSS/" style="font-size: 11.25px;">CSS</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/HTML/" style="font-size: 13.75px;">HTML</a> <a href="/tags/JS/" style="font-size: 11.25px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Mac/" style="font-size: 12.5px;">Mac</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/SQL/" style="font-size: 11.25px;">SQL</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/iOS/" style="font-size: 12.5px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 16.25px;">mybatis</a> <a href="/tags/office/" style="font-size: 11.25px;">office</a> <a href="/tags/下载/" style="font-size: 15px;">下载</a> <a href="/tags/前端/" style="font-size: 13.75px;">前端</a> <a href="/tags/办公/" style="font-size: 11.25px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 11.25px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 12.5px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.5px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 13.75px;">效率</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/文档/" style="font-size: 10px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/框架/" style="font-size: 18.75px;">框架</a> <a href="/tags/检测/" style="font-size: 11.25px;">检测</a> <a href="/tags/注册表/" style="font-size: 11.25px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 10px;">激活</a> <a href="/tags/生活/" style="font-size: 12.5px;">生活</a> <a href="/tags/终端/" style="font-size: 11.25px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/视频/" style="font-size: 12.5px;">视频</a> <a href="/tags/资源/" style="font-size: 18.75px;">资源</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/CSS/" style="font-size: 11.25px;">CSS</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/HTML/" style="font-size: 13.75px;">HTML</a> <a href="/tags/JS/" style="font-size: 11.25px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Mac/" style="font-size: 12.5px;">Mac</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/SQL/" style="font-size: 11.25px;">SQL</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/iOS/" style="font-size: 12.5px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 16.25px;">mybatis</a> <a href="/tags/office/" style="font-size: 11.25px;">office</a> <a href="/tags/下载/" style="font-size: 15px;">下载</a> <a href="/tags/前端/" style="font-size: 13.75px;">前端</a> <a href="/tags/办公/" style="font-size: 11.25px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 11.25px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 12.5px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.5px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 13.75px;">效率</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/文档/" style="font-size: 10px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/框架/" style="font-size: 18.75px;">框架</a> <a href="/tags/检测/" style="font-size: 11.25px;">检测</a> <a href="/tags/注册表/" style="font-size: 11.25px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 10px;">激活</a> <a href="/tags/生活/" style="font-size: 12.5px;">生活</a> <a href="/tags/终端/" style="font-size: 11.25px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/视频/" style="font-size: 12.5px;">视频</a> <a href="/tags/资源/" style="font-size: 18.75px;">资源</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+<script>
+  $(".pingfuADHolder").remove();
+</script>
+</html>
