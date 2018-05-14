@@ -2005,6 +2005,10 @@ pre .javascript .function {
   .article .article-feed p {
     margin: 0;
   }
+  .article .article-entry iframe,
+  .article .article-feed iframe {
+    max-width: 100%;
+  }
   .article .article-footer .article-footer-menu .article-footer-tags {
     display: none;
   }
