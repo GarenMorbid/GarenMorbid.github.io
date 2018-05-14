@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SpringMVC深入—SpringMVC配置详解 | HDQ | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="HDQ,HDQ's Blog" />
+  
+  <meta name="description" content="SpringMVC web模型
+@RequestMapping参数说明
+value：定义处理方法的请求的URL地址
+method：定义处理方法的http method类型，如GET/POST方法，不指定的时候，可以处理任何http请求
+params：定义请求的URL中必须包含的参数，用于窄化请求
+headers：定义请求的request headers必须包含的参数，与params是类似的
+con">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringMVC深入—SpringMVC配置详解">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/05/14/20180514-SpringMVC深入—SpringMVC配置详解/index.html">
+<meta property="og:site_name" content="HDQ | Blog">
+<meta property="og:description" content="SpringMVC web模型
+@RequestMapping参数说明
+value：定义处理方法的请求的URL地址
+method：定义处理方法的http method类型，如GET/POST方法，不指定的时候，可以处理任何http请求
+params：定义请求的URL中必须包含的参数，用于窄化请求
+headers：定义请求的request headers必须包含的参数，与params是类似的
+con">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/CrAj9f.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/CrALNt.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/CrAqAI.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/CrAHHA.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/CrA7Bd.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/CrATnH.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/CrA5cD.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/CrAIje.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/CrA41O.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/CrAO4P.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/CrAv38.png">
+<meta property="og:updated_time" content="2018-05-14T02:38:26.614Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SpringMVC深入—SpringMVC配置详解">
+<meta name="twitter:description" content="SpringMVC web模型
+@RequestMapping参数说明
+value：定义处理方法的请求的URL地址
+method：定义处理方法的http method类型，如GET/POST方法，不指定的时候，可以处理任何http请求
+params：定义请求的URL中必须包含的参数，用于窄化请求
+headers：定义请求的request headers必须包含的参数，与params是类似的
+con">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/05/14/CrAj9f.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/mySetting.css">
+  <script src="/js/pace.min.js"></script>
+  <script src="/js/mySetting.js"></script>
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-113082369-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?a3fed5fc0a708f5e993575bc1ccaf623";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+  
+
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body oncontextmenu="return false" onselectstart="return false" oncopy="return false">
+  <div id="container">
+      <div class="maplebg"></div>
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">HDQ&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        HDQ&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 互联网生活 互联网资源的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="个人网站" target="_blank" href="http://hdqyf.club/">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="GitHub" target="_blank" href="https://github.com/GarenMorbid">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="https://weibo.com/u/5470832383?refer_flag=1005055013_">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Steam" target="_blank" href="http://steamcommunity.com/id/610717159/">
+                            <i class="fa fa-steam fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-20180514-SpringMVC深入—SpringMVC配置详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      SpringMVC深入—SpringMVC配置详解
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/Spring/">Spring</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-05-14
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h3 id="SpringMVC-web模型"><a href="#SpringMVC-web模型" class="headerlink" title="SpringMVC web模型"></a><font color="#0099ff" size="4" face="黑体">SpringMVC web模型</font></h3><p><img src="https://s1.ax1x.com/2018/05/14/CrAj9f.png" alt=""><br></p>
+<h3 id="RequestMapping参数说明"><a href="#RequestMapping参数说明" class="headerlink" title="@RequestMapping参数说明"></a><font color="#0099ff" size="4" face="黑体">@RequestMapping参数说明</font></h3><ul>
+<li>value：定义处理方法的请求的URL地址</li>
+<li>method：定义处理方法的http method类型，如GET/POST方法，不指定的时候，可以处理任何http请求</li>
+<li>params：定义请求的URL中必须包含的参数，用于窄化请求</li>
+<li>headers：定义请求的request headers必须包含的参数，与params是类似的</li>
+<li>consums：指定处理请求的提交类型（content-type），application/json，窄化请求</li>
+<li>produces：指定返回的内容类型，仅当request请求头中的类型中包含指定类型才返回</li>
+</ul>
+<h4 id="Params的使用"><a href="#Params的使用" class="headerlink" title="Params的使用"></a><font color="#0099ff" size="3" face="黑体">Params的使用</font></h4><p><img src="https://s1.ax1x.com/2018/05/14/CrALNt.png" alt=""><br></p>
+<h4 id="Value配置详解"><a href="#Value配置详解" class="headerlink" title="Value配置详解"></a><font color="#0099ff" size="3" face="黑体">Value配置详解</font></h4><ul>
+<li>支持通配符<ul>
+<li>?：代表匹配文件名中的一个字符，test/t?.action——test/t3.action</li>
+<li>*：代表匹配文件名中的任意字符，test/t*.action——test/t333.action</li>
+<li>**：匹配多层路径，/**/test.action</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/05/14/CrAqAI.png" alt=""><br></p>
+<ul>
+<li>支持或关系：一个value的配置可以支持两个URL路径的映射</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/05/14/CrAHHA.png" alt=""><br></p>
+<ul>
+<li>支持正则表达式</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/05/14/CrA7Bd.png" alt=""><br></p>
+<p><img src="https://s1.ax1x.com/2018/05/14/CrATnH.png" alt=""><br></p>
+<h4 id="RESTFUL支持"><a href="#RESTFUL支持" class="headerlink" title="RESTFUL支持"></a><font color="#0099ff" size="3" face="黑体">RESTFUL支持</font></h4><p>轻量级的SOA（面向服务）的实现，将一个个的请求做出的相应以资源的形式返回<br>🌱 请求资源：<br>    URL风格：将参数通过URL传递到服务器端<br>    SpringMVC支持restful风格，可以通过URL进行参数的传递</p>
+<p><img src="https://s1.ax1x.com/2018/05/14/CrA5cD.png" alt=""><br></p>
+<h3 id="基于注解的参数绑定"><a href="#基于注解的参数绑定" class="headerlink" title="基于注解的参数绑定"></a><font color="#0099ff" size="4" face="黑体">基于注解的参数绑定</font></h3><ul>
+<li>@RequestParam：设置绑定的参数名和传入的参数名的值</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/05/14/CrAIje.png" alt=""><br></p>
+<ul>
+<li>@PathVarible</li>
+</ul>
+<h3 id="数据回显深入理解"><a href="#数据回显深入理解" class="headerlink" title="数据回显深入理解"></a><font color="#0099ff" size="4" face="黑体">数据回显深入理解</font></h3><p><strong>🌱 数据回显方式</strong>:</p>
+<ul>
+<li>原生servlet的api</li>
+<li>ModelAndView</li>
+<li>Model/ModelMap：默认在request作用域实现数据传递</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/05/14/CrA41O.png" alt=""><br></p>
+<ul>
+<li>@ModeAttribute<ul>
+<li>用于方法返回值：用来在处理@RequestMapping之前，为请求绑定需要从后台查询到的model</li>
+<li>当前RequestMapping的每一个返回都可以携带modeAttribute中的属性和属性值，默认作用域在请求（request）作用域</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/05/14/CrAO4P.png" alt=""><br></p>
+<ul>
+<li>@SessionAttribute：用于类和接口<ul>
+<li>将ModelAttribute中的key相同的属性值也放到session作用域中</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/05/14/CrAv38.png" alt=""><br></p>
+<ul>
+<li>@CookieValue</li>
+<li>…</li>
+</ul>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年05月14日 10:38</p>
+        <footer>
+            <a href="#">
+                <img src="/images/logo.png" alt="Garen">
+                Garen
+            </a>
+        </footer>
+    </div>
+</div>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/05/14/20180514-SpringMVC深入—SpringMVC配置详解/&title=《SpringMVC深入—SpringMVC配置详解》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/05/14/CrEJgO.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/05/14/20180514-SpringMVC深入—SpringMVC配置详解/&title=《SpringMVC深入—SpringMVC配置详解》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+              <i class="fa fa-star"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/05/14/20180514-SpringMVC深入—SpringMVC配置详解/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SpringMVC深入—SpringMVC配置详解》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/05/14/20180514-SpringMVC深入—SpringMVC配置详解/&via=https://blog.hdqyf.club" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/05/14/20180514-SpringMVC深入—SpringMVC配置详解/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/05/14/20180514-SpringMVC深入—SpringMVC配置详解/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Java/" class="color5">Java</a>
+      
+    <a href="/tags/框架/" class="color3">框架</a>
+      
+    <a href="/tags/Spring/" class="color2">Spring</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SpringMVC-web模型"><span class="post-toc-text">SpringMVC web模型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#RequestMapping参数说明"><span class="post-toc-text">@RequestMapping参数说明</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Params的使用"><span class="post-toc-text">Params的使用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Value配置详解"><span class="post-toc-text">Value配置详解</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#RESTFUL支持"><span class="post-toc-text">RESTFUL支持</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基于注解的参数绑定"><span class="post-toc-text">基于注解的参数绑定</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数据回显深入理解"><span class="post-toc-text">数据回显深入理解</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/10/20180510-框架理论深入—Spring中的事务/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">框架理论深入—Spring中的事务</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <span id="runtime_span"></span>
+            <br>
+            <p>
+                Powered by <a href="#" target="_blank">HDQ</a> Theme <a href="#" target="_blank">Garen</a> &copy;
+                2018
+                    Garen<br>
+            </p>
+        </div>
+    </div>
+</footer>
+<script>
+    function show_runtime() {
+            window.setTimeout("show_runtime()", 1000);
+            X = new Date("11/25/2017 05:20:00");
+            Y = new Date(); T = (Y.getTime() - X.getTime()); M = 24 * 60 * 60 * 1000;
+            a = T / M;
+            A = Math.floor(a);
+            b = (a - A) * 24;
+            B = Math.floor(b);
+            c = (b - B) * 60;
+            C = Math.floor((b - B) * 60);
+            D = Math.floor((c - C) * 60);
+            runtime_span.innerHTML = "本站勉强运行: " + A + "天" + B + "小时" + C + "分" + D + "秒";
+        }
+
+        show_runtime();
+</script>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://blog.hdqyf.club",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/3DS-MAX/">3DS MAX</a><a class="category-link" href="/categories/CAD/">CAD</a><a class="category-link" href="/categories/CPU/">CPU</a><a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/GPU/">GPU</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/Java/">Java</a><a class="category-link" href="/categories/Linux/">Linux</a><a class="category-link" href="/categories/MVC/">MVC</a><a class="category-link" href="/categories/Mac/">Mac</a><a class="category-link" href="/categories/MySQL/">MySQL</a><a class="category-link" href="/categories/Oracle/">Oracle</a><a class="category-link" href="/categories/SQL/">SQL</a><a class="category-link" href="/categories/Spring/">Spring</a><a class="category-link" href="/categories/Steam/">Steam</a><a class="category-link" href="/categories/iOS/">iOS</a><a class="category-link" href="/categories/mybatis/">mybatis</a><a class="category-link" href="/categories/下载/">下载</a><a class="category-link" href="/categories/卸载/">卸载</a><a class="category-link" href="/categories/常识/">常识</a><a class="category-link" href="/categories/感悟/">感悟</a><a class="category-link" href="/categories/截屏/">截屏</a><a class="category-link" href="/categories/播放器/">播放器</a><a class="category-link" href="/categories/效率/">效率</a><a class="category-link" href="/categories/文档/">文档</a><a class="category-link" href="/categories/注册表/">注册表</a><a class="category-link" href="/categories/激活/">激活</a><a class="category-link" href="/categories/生活/">生活</a><a class="category-link" href="/categories/编辑器/">编辑器</a><a class="category-link" href="/categories/资源/">资源</a><a class="category-link" href="/categories/转换/">转换</a><a class="category-link" href="/categories/音乐/">音乐</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/CSS/" style="font-size: 11.11px;">CSS</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/HTML/" style="font-size: 13.33px;">HTML</a> <a href="/tags/JS/" style="font-size: 11.11px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 12.22px;">Linux</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Mac/" style="font-size: 12.22px;">Mac</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/SQL/" style="font-size: 11.11px;">SQL</a> <a href="/tags/Spring/" style="font-size: 16.67px;">Spring</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/iOS/" style="font-size: 12.22px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 15.56px;">mybatis</a> <a href="/tags/office/" style="font-size: 11.11px;">office</a> <a href="/tags/下载/" style="font-size: 14.44px;">下载</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/办公/" style="font-size: 11.11px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 11.11px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 12.22px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.22px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 13.33px;">效率</a> <a href="/tags/数据库/" style="font-size: 14.44px;">数据库</a> <a href="/tags/文档/" style="font-size: 10px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/框架/" style="font-size: 18.89px;">框架</a> <a href="/tags/检测/" style="font-size: 11.11px;">检测</a> <a href="/tags/注册表/" style="font-size: 11.11px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 10px;">激活</a> <a href="/tags/生活/" style="font-size: 12.22px;">生活</a> <a href="/tags/终端/" style="font-size: 11.11px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/视频/" style="font-size: 12.22px;">视频</a> <a href="/tags/资源/" style="font-size: 17.78px;">资源</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/CSS/" style="font-size: 11.11px;">CSS</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/HTML/" style="font-size: 13.33px;">HTML</a> <a href="/tags/JS/" style="font-size: 11.11px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 12.22px;">Linux</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Mac/" style="font-size: 12.22px;">Mac</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/SQL/" style="font-size: 11.11px;">SQL</a> <a href="/tags/Spring/" style="font-size: 16.67px;">Spring</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/iOS/" style="font-size: 12.22px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 15.56px;">mybatis</a> <a href="/tags/office/" style="font-size: 11.11px;">office</a> <a href="/tags/下载/" style="font-size: 14.44px;">下载</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/办公/" style="font-size: 11.11px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 11.11px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 12.22px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.22px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 13.33px;">效率</a> <a href="/tags/数据库/" style="font-size: 14.44px;">数据库</a> <a href="/tags/文档/" style="font-size: 10px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/框架/" style="font-size: 18.89px;">框架</a> <a href="/tags/检测/" style="font-size: 11.11px;">检测</a> <a href="/tags/注册表/" style="font-size: 11.11px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 10px;">激活</a> <a href="/tags/生活/" style="font-size: 12.22px;">生活</a> <a href="/tags/终端/" style="font-size: 11.11px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/视频/" style="font-size: 12.22px;">视频</a> <a href="/tags/资源/" style="font-size: 17.78px;">资源</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+<script>
+  $(".pingfuADHolder").remove();
+</script>
+</html>
