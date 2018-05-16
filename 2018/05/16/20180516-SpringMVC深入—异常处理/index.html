@@ -3,24 +3,28 @@
 <head>
   <meta charset="utf-8">
   
-  <title>微软常用运行库合集包 | HDQ | Blog</title>
+  <title>SpringMVC深入—异常处理 | HDQ | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HDQ,HDQ's Blog" />
   
-  <meta name="description" content="前言&amp;emsp;&amp;emsp;运行库就是支持大部分程序运行的基础，由于很多常用软件都是采用 Microsoft Visual Studio 编写的，所以这类软件的运行需要依赖微软Visual C++运行库，比如像 QQ、迅雷、Adobe 软件等等，如果没有安装VC++运行库或者安装的版本不完整，就可能会导致这些软件启动时报错，提示缺少库文件。然而，很多朋友却不知道到底要安装哪些运行库版本。微软常用运">
+  <meta name="description" content="异常处理机制
+自定义异常处理自定义异常类：所有其他的异常放入ExpList123456789101112131415161718192021222324package exception;/** * 全局异常类：其他所有异常都变成该类的异常 * 从而实现其他所有异常都能定位到一个错误页面 * @author Garen * */public class MyDefineGlobalExp exte">
 <meta property="og:type" content="article">
-<meta property="og:title" content="微软常用运行库合集包">
-<meta property="og:url" content="https://blog.hdqyf.club/2018/05/14/20180514-微软常用运行库合集包/index.html">
+<meta property="og:title" content="SpringMVC深入—异常处理">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/05/16/20180516-SpringMVC深入—异常处理/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
-<meta property="og:description" content="前言&amp;emsp;&amp;emsp;运行库就是支持大部分程序运行的基础，由于很多常用软件都是采用 Microsoft Visual Studio 编写的，所以这类软件的运行需要依赖微软Visual C++运行库，比如像 QQ、迅雷、Adobe 软件等等，如果没有安装VC++运行库或者安装的版本不完整，就可能会导致这些软件启动时报错，提示缺少库文件。然而，很多朋友却不知道到底要安装哪些运行库版本。微软常用运">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/Cr0ZuD.jpg">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/Cr0AgK.jpg">
-<meta property="og:updated_time" content="2018-05-14T12:35:27.053Z">
+<meta property="og:description" content="异常处理机制
+自定义异常处理自定义异常类：所有其他的异常放入ExpList123456789101112131415161718192021222324package exception;/** * 全局异常类：其他所有异常都变成该类的异常 * 从而实现其他所有异常都能定位到一个错误页面 * @author Garen * */public class MyDefineGlobalExp exte">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/16/CynptJ.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/16/CynSk4.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/16/Cymv0U.png">
+<meta property="og:updated_time" content="2018-05-16T06:42:38.850Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="微软常用运行库合集包">
-<meta name="twitter:description" content="前言&amp;emsp;&amp;emsp;运行库就是支持大部分程序运行的基础，由于很多常用软件都是采用 Microsoft Visual Studio 编写的，所以这类软件的运行需要依赖微软Visual C++运行库，比如像 QQ、迅雷、Adobe 软件等等，如果没有安装VC++运行库或者安装的版本不完整，就可能会导致这些软件启动时报错，提示缺少库文件。然而，很多朋友却不知道到底要安装哪些运行库版本。微软常用运">
-<meta name="twitter:image" content="https://s1.ax1x.com/2018/05/14/Cr0ZuD.jpg">
+<meta name="twitter:title" content="SpringMVC深入—异常处理">
+<meta name="twitter:description" content="异常处理机制
+自定义异常处理自定义异常类：所有其他的异常放入ExpList123456789101112131415161718192021222324package exception;/** * 全局异常类：其他所有异常都变成该类的异常 * 从而实现其他所有异常都能定位到一个错误页面 * @author Garen * */public class MyDefineGlobalExp exte">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/05/16/CynptJ.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -140,14 +144,14 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-20180514-微软常用运行库合集包" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-20180516-SpringMVC深入—异常处理" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      微软常用运行库合集包
+      SpringMVC深入—异常处理
     </h1>
     <div class="post-title-bar">
       <ul>
@@ -155,12 +159,12 @@ ga('send', 'pageview');
               <li>
                   <i class="fa fa-book"></i>
                   
-                      <a href="/categories/运行库/">运行库</a>
+                      <a href="/categories/Spring/">Spring</a>
                   
               </li>
           
         <li>
-          <i class="fa fa-calendar"></i>  2018-05-14
+          <i class="fa fa-calendar"></i>  2018-05-16
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -176,24 +180,20 @@ ga('send', 'pageview');
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;<strong>运行库</strong>就是支持大部分程序运行的基础，由于很多常用软件都是采用 Microsoft Visual Studio 编写的，所以这类软件的运行需要依赖微软Visual C++运行库，比如像 QQ、迅雷、Adobe 软件等等，如果没有安装VC++运行库或者安装的版本不完整，就可能会导致这些软件启动时报错，提示缺少库文件。然而，很多朋友却不知道到底要安装哪些运行库版本。微软常用运行库合集就是为了解决安装运行库的难题。此微软系统运行库集合包整合了目前最新的、最常用的VC运行库版本，一键全部安装，方便操作，堪称装机必备神器！</font>
-
-<p><img src="https://s1.ax1x.com/2018/05/14/Cr0ZuD.jpg" alt=""></p>
-<p><img src="https://s1.ax1x.com/2018/05/14/Cr0AgK.jpg" alt=""></p>
-<h3 id="此版本VC-运行库集合包含"><a href="#此版本VC-运行库集合包含" class="headerlink" title="此版本VC++运行库集合包含"></a><font color="#0099ff" size="4" face="黑体">此版本VC++运行库集合包含</font></h3><blockquote>
-<p>Visual Basic Virtual Machine(5.1)<br>Visual Basic Virtual Machine (6.0)<br>Microsoft C Runtime Library(7.0)<br>Microsoft C Runtime Library(7.10)<br>Microsoft Visual C++ 2005 SP1(8.0.61187)<br>Microsoft Visual C++ 2008 SP1(9.0.30729.7523)<br>Microsoft Visual C++ 2010 SP1(10.0.40219.473)<br>Microsoft Visual C++ 2012 up4(11.0.61135)<br>Microsoft Visual C++ 2013(12.0.40664)<br>Microsoft Visual C++ 2017(14.14.26329)<br>Microsoft Universal C Runtime (10.0.10586.9)<br>VS 2010 Tools For Office Runtime(10.0.60830)</p>
-</blockquote>
-<p>软件名称：微软常用运行库合集 by roustar31<br>支持WinXP/2003/Win7/8/8.1/10（32+64位）</p>
-<h3 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a><font color="#0099ff" size="4" face="黑体">下载地址</font></h3><p>微软常用运行库合集 x32/x64<br>微软DirectX9.0c 最终用户运行库 x32/x64</p>
-<p><a href="https://pan.baidu.com/s/1sx-p06wwtM8e15zmmBDvBA" target="_blank" rel="external">百度云盘下载 密码：m0tr</a></p>
-<p><strong>ps:如果你还满意的话，请留下你宝贵的评论或者投喂我喔~</strong></p>
+            <h3 id="异常处理机制"><a href="#异常处理机制" class="headerlink" title="异常处理机制"></a><font color="#0099ff" size="4" face="黑体">异常处理机制</font></h3><p><img src="https://s1.ax1x.com/2018/05/16/CynptJ.png" alt=""><br><br><img src="https://s1.ax1x.com/2018/05/16/CynSk4.png" alt=""><br></p>
+<h3 id="自定义异常处理"><a href="#自定义异常处理" class="headerlink" title="自定义异常处理"></a><font color="#0099ff" size="4" face="黑体">自定义异常处理</font></h3><h4 id="自定义异常类：所有其他的异常放入ExpList"><a href="#自定义异常类：所有其他的异常放入ExpList" class="headerlink" title="自定义异常类：所有其他的异常放入ExpList"></a><font color="#0099ff" size="3" face="黑体">自定义异常类：所有其他的异常放入ExpList</font></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> exception;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 全局异常类：其他所有异常都变成该类的异常</div><div class="line"> * 从而实现其他所有异常都能定位到一个错误页面</div><div class="line"> * <span class="doctag">@author</span> Garen</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyDefineGlobalExp</span> <span class="keyword">extends</span> <span class="title">Exception</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String message;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getMessage</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> message;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMessage</span><span class="params">(String message)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.message = message;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyDefineGlobalExp</span><span class="params">(String message)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(message);</div><div class="line">        <span class="keyword">this</span>.message = message;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="定义异常处理类"><a href="#定义异常处理类" class="headerlink" title="定义异常处理类"></a><font color="#0099ff" size="3" face="黑体">定义异常处理类</font></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> exception;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.HandlerExceptionResolver;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.ModelAndView;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 处理异常</div><div class="line"> * <span class="doctag">@author</span> Garen</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlobalExceptionHandler</span> <span class="keyword">implements</span> <span class="title">HandlerExceptionResolver</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">        * modelAndView：异常要返回的页面</div><div class="line">        * arg3：到底抛出了那种异常——MyDefineGlobalExp</div><div class="line">        * 异常——页面</div><div class="line">        */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">resolveException</span><span class="params">(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2,</span></span></div><div class="line">            Exception arg3) &#123;</div><div class="line">        MyDefineGlobalExp myDefineGlobalExp = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">if</span>(arg3 <span class="keyword">instanceof</span> MyDefineGlobalExp) &#123;</div><div class="line">            myDefineGlobalExp = (MyDefineGlobalExp) arg3;</div><div class="line">        &#125;<span class="keyword">else</span> &#123;</div><div class="line">            myDefineGlobalExp = <span class="keyword">new</span> MyDefineGlobalExp(<span class="string">"未知异常"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        ModelAndView modelAndView = <span class="keyword">new</span> ModelAndView();</div><div class="line">        modelAndView.addObject(<span class="string">"msg"</span>,myDefineGlobalExp.getMessage());</div><div class="line">        modelAndView.setViewName(<span class="string">"error"</span>);</div><div class="line"></div><div class="line">        <span class="keyword">return</span> modelAndView;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="自定义错误页面"><a href="#自定义错误页面" class="headerlink" title="自定义错误页面"></a><font color="#0099ff" size="3" face="黑体">自定义错误页面</font></h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=UTF-8"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>error页面<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">        error:$&#123;msg&#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="配置异常处理：SpringMVC中让上述bean起作用"><a href="#配置异常处理：SpringMVC中让上述bean起作用" class="headerlink" title="配置异常处理：SpringMVC中让上述bean起作用"></a><font color="#0099ff" size="3" face="黑体">配置异常处理：SpringMVC中让上述bean起作用</font></h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 配置异常处理器，class里面是处理异常类的路径 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"exception.GlobalExceptionHandler"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a><font color="#0099ff" size="3" face="黑体">测试</font></h4><p><img src="https://s1.ax1x.com/2018/05/16/Cymv0U.png" alt=""><br></p>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
 <ul>
 <li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
 </ul>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年05月14日 20:35</p>
+        <p>最后更新： 2018年05月16日 14:42</p>
         <footer>
             <a href="#">
                 <img src="/images/logo.png" alt="Garen">
@@ -267,7 +267,7 @@ ga('send', 'pageview');
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/05/14/20180514-微软常用运行库合集包/&title=《微软常用运行库合集包》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/05/14/CrwXcT.jpg" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/05/16/20180516-SpringMVC深入—异常处理/&title=《SpringMVC深入—异常处理》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/05/14/CrEJgO.jpg" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -277,22 +277,22 @@ ga('send', 'pageview');
             </a>
           </li>
           <li>
-            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/05/14/20180514-微软常用运行库合集包/&title=《微软常用运行库合集包》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/05/16/20180516-SpringMVC深入—异常处理/&title=《SpringMVC深入—异常处理》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
               <i class="fa fa-star"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/05/14/20180514-微软常用运行库合集包/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/05/16/20180516-SpringMVC深入—异常处理/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《微软常用运行库合集包》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/05/14/20180514-微软常用运行库合集包/&via=https://blog.hdqyf.club" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SpringMVC深入—异常处理》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/05/16/20180516-SpringMVC深入—异常处理/&via=https://blog.hdqyf.club" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/05/14/20180514-微软常用运行库合集包/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/05/16/20180516-SpringMVC深入—异常处理/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -302,7 +302,7 @@ ga('send', 'pageview');
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/05/14/20180514-微软常用运行库合集包/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/05/16/20180516-SpringMVC深入—异常处理/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -314,11 +314,11 @@ ga('send', 'pageview');
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/资源/" class="color3">资源</a>
+    <a href="/tags/Java/" class="color5">Java</a>
       
-    <a href="/tags/运行库/" class="color4">运行库</a>
+    <a href="/tags/框架/" class="color3">框架</a>
       
-    <a href="/tags/系统必备/" class="color5">系统必备</a>
+    <a href="/tags/Spring/" class="color2">Spring</a>
       
   </li>
 
@@ -331,26 +331,26 @@ ga('send', 'pageview');
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#此版本VC-运行库集合包含"><span class="post-toc-text">此版本VC++运行库集合包含</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#下载地址"><span class="post-toc-text">下载地址</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#异常处理机制"><span class="post-toc-text">异常处理机制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自定义异常处理"><span class="post-toc-text">自定义异常处理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#自定义异常类：所有其他的异常放入ExpList"><span class="post-toc-text">自定义异常类：所有其他的异常放入ExpList</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#定义异常处理类"><span class="post-toc-text">定义异常处理类</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#自定义错误页面"><span class="post-toc-text">自定义错误页面</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#配置异常处理：SpringMVC中让上述bean起作用"><span class="post-toc-text">配置异常处理：SpringMVC中让上述bean起作用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#测试"><span class="post-toc-text">测试</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
 
 <nav id="article-nav">
   
-    <a href="/2018/05/16/20180516-SpringMVC深入—异常处理/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/05/16/20180516-SpringMVC深入—拦截器/" id="article-nav-newer" class="article-nav-link-wrap">
 
       <span class="article-nav-title">
         <i class="fa fa-hand-o-left" aria-hidden="true"></i>
         
-          SpringMVC深入—异常处理
+          20180516-SpringMVC深入—拦截器
         
       </span>
     </a>
   
   
-    <a href="/2018/05/14/20180514-SpringMVC深入—文件上传/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">SpringMVC深入—文件上传</span>
+    <a href="/2018/05/14/20180514-微软常用运行库合集包/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">微软常用运行库合集包</span>
       <i class="fa fa-hand-o-right" aria-hidden="true"></i>
     </a>
   
