@@ -3,32 +3,31 @@
 <head>
   <meta charset="utf-8">
   
-  <title>PPT那些常用的保存格式可以做什么 | HDQ | Blog</title>
+  <title>SpringBoot—表单验证@Valid | HDQ | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HDQ,HDQ's Blog" />
   
-  <meta name="description" content="每个软件在保存或导出时，都可以选择保存类型，对于 PPT 来说，有 28 种存储格式，如果你利用其中一些，就可以做出更多花样。
-以 MS PPT 2016为例，打开已经制作好的一个 PPT，点击【文件】、【另存为】，选择好位置之后，在【保存类型】这里，我们可以看到所有的 28 种左右的存储格式。
+  <meta name="description" content="前言&amp;emsp;&amp;emsp;SpringBoot提供了强大的表单验证功能实现，给我们省去了写验证的麻烦；表单验证，即校验用户提交的数据的合理性的，比如是否为空了，密码长度是否大于6位，是否是纯数字的，等等。Spring boot是如何帮我们实现表单验证的呢？&amp;emsp;&amp;emsp;接下来我们来编写一个小案例：一个注册页面，判断用户输入的信息是否合理
 
-pptx_pptx 是 2007 以上版本 PPT 的默认格式，相比原先的 ppt 格式，能兼容更">
+注册页面代码12345678910111213">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PPT那些常用的保存格式可以做什么">
-<meta property="og:url" content="https://blog.hdqyf.club/2018/02/04/20180204-PPT那些常用的保存格式可以做什么/index.html">
+<meta property="og:title" content="SpringBoot—表单验证@Valid">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/05/20/20180520-SpringBoot—表单验证@Valid/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
-<meta property="og:description" content="每个软件在保存或导出时，都可以选择保存类型，对于 PPT 来说，有 28 种存储格式，如果你利用其中一些，就可以做出更多花样。
-以 MS PPT 2016为例，打开已经制作好的一个 PPT，点击【文件】、【另存为】，选择好位置之后，在【保存类型】这里，我们可以看到所有的 28 种左右的存储格式。
+<meta property="og:description" content="前言&amp;emsp;&amp;emsp;SpringBoot提供了强大的表单验证功能实现，给我们省去了写验证的麻烦；表单验证，即校验用户提交的数据的合理性的，比如是否为空了，密码长度是否大于6位，是否是纯数字的，等等。Spring boot是如何帮我们实现表单验证的呢？&amp;emsp;&amp;emsp;接下来我们来编写一个小案例：一个注册页面，判断用户输入的信息是否合理
 
-pptx_pptx 是 2007 以上版本 PPT 的默认格式，相比原先的 ppt 格式，能兼容更">
-<meta property="og:image" content="https://s1.ax1x.com/2018/02/04/9uCR4e.jpg">
-<meta property="og:updated_time" content="2018-03-25T13:03:54.416Z">
+注册页面代码12345678910111213">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/20/Cg0Pln.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/20/Cg0FO0.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/20/Cg0CSs.png">
+<meta property="og:updated_time" content="2018-05-20T09:03:34.157Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PPT那些常用的保存格式可以做什么">
-<meta name="twitter:description" content="每个软件在保存或导出时，都可以选择保存类型，对于 PPT 来说，有 28 种存储格式，如果你利用其中一些，就可以做出更多花样。
-以 MS PPT 2016为例，打开已经制作好的一个 PPT，点击【文件】、【另存为】，选择好位置之后，在【保存类型】这里，我们可以看到所有的 28 种左右的存储格式。
+<meta name="twitter:title" content="SpringBoot—表单验证@Valid">
+<meta name="twitter:description" content="前言&amp;emsp;&amp;emsp;SpringBoot提供了强大的表单验证功能实现，给我们省去了写验证的麻烦；表单验证，即校验用户提交的数据的合理性的，比如是否为空了，密码长度是否大于6位，是否是纯数字的，等等。Spring boot是如何帮我们实现表单验证的呢？&amp;emsp;&amp;emsp;接下来我们来编写一个小案例：一个注册页面，判断用户输入的信息是否合理
 
-pptx_pptx 是 2007 以上版本 PPT 的默认格式，相比原先的 ppt 格式，能兼容更">
-<meta name="twitter:image" content="https://s1.ax1x.com/2018/02/04/9uCR4e.jpg">
+注册页面代码12345678910111213">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/05/20/Cg0Pln.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -148,14 +147,14 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-20180204-PPT那些常用的保存格式可以做什么" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-20180520-SpringBoot—表单验证@Valid" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      PPT那些常用的保存格式可以做什么
+      SpringBoot—表单验证@Valid
     </h1>
     <div class="post-title-bar">
       <ul>
@@ -163,12 +162,12 @@ ga('send', 'pageview');
               <li>
                   <i class="fa fa-book"></i>
                   
-                      <a href="/categories/常识/">常识</a>
+                      <a href="/categories/Java/">Java</a>
                   
               </li>
           
         <li>
-          <i class="fa fa-calendar"></i>  2018-02-04
+          <i class="fa fa-calendar"></i>  2018-05-20
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -184,28 +183,107 @@ ga('send', 'pageview');
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <p><img src="https://s1.ax1x.com/2018/02/04/9uCR4e.jpg" alt=""></p>
-<p>每个软件在保存或导出时，都可以选择保存类型，对于 PPT 来说，有 28 种存储格式，如果你利用其中一些，就可以做出更多花样。</p>
-<p>以 MS PPT 2016为例，打开已经制作好的一个 PPT，点击【文件】、【另存为】，选择好位置之后，在【保存类型】这里，我们可以看到所有的 28 种左右的存储格式。</p>
-<hr>
-<h4 id="pptx"><a href="#pptx" class="headerlink" title="pptx_"></a><font color="#0099ff" size="3" face="微软雅黑">pptx_</font></h4><p>pptx 是 2007 以上版本 PPT 的默认格式，相比原先的 ppt 格式，能兼容更多的图形、渐变、动画等格式；低版本的，也就是 2003 版本的 PPT，是无法打开 pptx 格式的；除非你安装一个兼容包，如果你不愿意升级或者公司不让升级你那老旧的 Office 2003 版本，欢迎在我们的微信公众号后台回复【演示文档兼容包】获取兼容软件。</p>
-<hr>
-<h4 id="ppt"><a href="#ppt" class="headerlink" title="ppt_"></a><font color="#0099ff" size="3" face="微软雅黑">ppt_</font></h4><p>你可以选择把 PPT 保存为 1997-2003 的 PPT 版本，它的后缀名是 ppt，保存老版本是为了在某些旧电脑、旧系统或旧软件上，不产生格式变化或者不兼容的情况；然而，这种情况下，某些图形、渐变和动画效果自然会丢失。</p>
-<hr>
-<h4 id="PDF"><a href="#PDF" class="headerlink" title="PDF_"></a><font color="#0099ff" size="3" face="微软雅黑">PDF_</font></h4><p>我们之前讲过，保存为 PDF 可以一定程度上保证格式不变，方便传输，也保证了版权，对于一些不需要动画的演示文档很有用，有创意想法的你，甚至可以用 PPT 做一本牛哄哄的画册，保存为 PDF 格式，分享给同事和客户。</p>
-<hr>
-<h4 id="图片格式"><a href="#图片格式" class="headerlink" title="图片格式_"></a><font color="#0099ff" size="3" face="微软雅黑">图片格式_</font></h4><p>图片格式包括 JPEG、PNG和GIF等等好几种格式，选择这些格式，保存的话，软件会自动帮助你把每一页 PPT 以图片的形式全部保存下来，放在一个文件夹当中。当然你也可以选择保存一种一张为图片格式。</p>
-<hr>
-<h4 id="自动放映格式"><a href="#自动放映格式" class="headerlink" title="自动放映格式_"></a><font color="#0099ff" size="3" face="微软雅黑">自动放映格式_</font></h4><p>自动放映格式为 ppsx 和旧版本的 pps 格式，这种格式的 PPT 生成的是直接放映的文件，也就是说，打开软件时，自动放映。如果需要编辑，你可以直接修改后缀名为 对应的 ppt 或 pptx 格式就行了。</p>
-<p>其他格式，我们就不多做介绍，除非你对 PPT 有更深入的研究，否则，掌握刚才我们说的内容基本可以应付平常的使用了。<br></p>
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;SpringBoot提供了强大的表单验证功能实现，给我们省去了写验证的麻烦；表单验证，即校验用户提交的数据的合理性的，比如是否为空了，密码长度是否大于6位，是否是纯数字的，等等。Spring boot是如何帮我们实现表单验证的呢？<br>&emsp;&emsp;接下来我们来编写一个小案例：一个注册页面，判断用户输入的信息是否合理</font>
+
+<h3 id="注册页面代码"><a href="#注册页面代码" class="headerlink" title="注册页面代码"></a><font color="#0099ff" size="4" face="黑体">注册页面代码</font></h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Register<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line">        span&#123;</div><div class="line">            color: red;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        form&#123;</div><div class="line">            display: inline-block;</div><div class="line">            margin-left: 350px;</div><div class="line">        &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/register"</span> <span class="attr">method</span>=<span class="string">"get"</span>&gt;</span></div><div class="line">        username:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span>/&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>* 用户名最小长度为5<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line">        password:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"password"</span>/&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>* 密码长度是6-16位<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line">        age:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"age"</span>/&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>* 年龄为13~80之间<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"注册"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="controller代码，注意传入的参数前加注解-Valid"><a href="#controller代码，注意传入的参数前加注解-Valid" class="headerlink" title="controller代码，注意传入的参数前加注解@Valid"></a><font color="#0099ff" size="4" face="黑体">controller代码，注意传入的参数前加注解@Valid</font></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> club.test.www.springbootdemo.controller;</div><div class="line"></div><div class="line"><span class="keyword">import</span> club.test.www.springbootdemo.entity.User;</div><div class="line"><span class="keyword">import</span> org.springframework.validation.BindingResult;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.validation.Valid;</div><div class="line"></div><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginController</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@Valid</span>标记需要验证的对象</div><div class="line">     */</div><div class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/register"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">register</span><span class="params">(@Valid User user,BindingResult bindingResult)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span>(bindingResult.hasErrors())&#123;</div><div class="line">            <span class="keyword">return</span> bindingResult.getFieldError().getDefaultMessage();</div><div class="line">        &#125;<span class="keyword">else</span></div><div class="line">            <span class="keyword">return</span> <span class="string">"注册成功！"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="实体类User的编写"><a href="#实体类User的编写" class="headerlink" title="实体类User的编写"></a><font color="#0099ff" size="4" face="黑体">实体类User的编写</font></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> club.test.www.springbootdemo.entity;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.validation.constraints.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line">    <span class="comment">//着重看属性定义这一块</span></div><div class="line"></div><div class="line">    <span class="meta">@Size</span>(min = <span class="number">5</span>,message = <span class="string">"用户名最小长度为5"</span>)</div><div class="line">    <span class="meta">@NotNull</span>(message = <span class="string">"password不能为空"</span>)</div><div class="line">    <span class="keyword">private</span> String username;</div><div class="line"></div><div class="line">    <span class="meta">@Size</span>(min = <span class="number">6</span>,max = <span class="number">16</span>,message = <span class="string">"密码长度是6-16位"</span>)</div><div class="line">    <span class="meta">@NotNull</span>(message = <span class="string">"password不能为空"</span>)</div><div class="line">    <span class="keyword">private</span> String password;</div><div class="line"></div><div class="line">    <span class="meta">@Min</span>(value = <span class="number">13</span>,message = <span class="string">"最小年龄为13"</span>)</div><div class="line">    <span class="meta">@Max</span>(value = <span class="number">80</span>,message = <span class="string">"最大年龄为80"</span>)</div><div class="line">    <span class="keyword">private</span>  <span class="keyword">int</span> age;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUsername</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> username;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsername</span><span class="params">(String username)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.username = username;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPassword</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> password;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.password = password;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> age;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.age = age;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">(String username, String password, <span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.username = username;</div><div class="line">        <span class="keyword">this</span>.password = password;</div><div class="line">        <span class="keyword">this</span>.age = age;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">()</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a><font color="#0099ff" size="4" face="黑体">测试结果</font></h3><ul>
+<li><p>输入用户名没有达到要求<br><img src="https://s1.ax1x.com/2018/05/20/Cg0Pln.png" alt=""><br></p>
+</li>
+<li><p>输入密码没有达到要求<br><img src="https://s1.ax1x.com/2018/05/20/Cg0FO0.png" alt=""><br></p>
+</li>
+<li><p>输入年龄没有达到要求<br><img src="https://s1.ax1x.com/2018/05/20/Cg0CSs.png" alt=""><br></p>
+</li>
+</ul>
+<h3 id="注解清单"><a href="#注解清单" class="headerlink" title="注解清单"></a><font color="#0099ff" size="4" face="黑体">注解清单</font></h3><p>这里只用了几个注解，下面列下清单，平时可以参考使用</p>
+<table>
+<thead>
+<tr>
+<th>限制</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@Null</td>
+<td>限制只能为null</td>
+</tr>
+<tr>
+<td>@NotNull</td>
+<td>限制必须不为null</td>
+</tr>
+<tr>
+<td>@AssertFalse</td>
+<td>限制必须为false</td>
+</tr>
+<tr>
+<td>@AssertTrue</td>
+<td>限制必须为true</td>
+</tr>
+<tr>
+<td>@DecimalMax(value)</td>
+<td>限制必须为一个不大于指定值的数字</td>
+</tr>
+<tr>
+<td>@DecimalMin(value)</td>
+<td>限制必须为一个不小于指定值的数字</td>
+</tr>
+<tr>
+<td>@Digits(integer,fraction)</td>
+<td>限制必须为一个小数，且整数部分的位数不能超过integer，小数部分的位数不能超过fraction</td>
+</tr>
+<tr>
+<td>@Future</td>
+<td>限制必须是一个将来的日期</td>
+</tr>
+<tr>
+<td>@Max(value)</td>
+<td>限制必须为一个不大于指定值的数字</td>
+</tr>
+<tr>
+<td>@Min(value)</td>
+<td>限制必须为一个不小于指定值的数字</td>
+</tr>
+<tr>
+<td>@Past</td>
+<td>限制必须是一个过去的日期</td>
+</tr>
+<tr>
+<td>@Pattern(value)</td>
+<td>限制必须符合指定的正则表达式</td>
+</tr>
+<tr>
+<td>@Size(max,min)</td>
+<td>限制字符长度必须在min到max之间</td>
+</tr>
+<tr>
+<td>@Past</td>
+<td>验证注解的元素值（日期类型）比当前时间早</td>
+</tr>
+<tr>
+<td>@NotEmpty</td>
+<td>验证注解的元素值不为null且不为空（字符串长度不为0、集合大小不为0）</td>
+</tr>
+<tr>
+<td>@NotBlank</td>
+<td>验证注解的元素值不为空（不为null、去除首位空格后长度为0），不同于@NotEmpty，<br>@NotBlank只应用于字符串且在比较时会去除字符串的空格</td>
+</tr>
+<tr>
+<td>@Email</td>
+<td>验证注解的元素值是Email，也可以通过正则表达式和flag指定自定义的email格式</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
 <ul>
 <li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
 </ul>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年03月25日 21:03</p>
-	<p>原始链接： <a class="post-url" href="/2018/02/04/20180204-PPT那些常用的保存格式可以做什么/" title="PPT那些常用的保存格式可以做什么">https://blog.hdqyf.club/2018/02/04/20180204-PPT那些常用的保存格式可以做什么/</a></p>
+        <p>最后更新： 2018年05月20日 17:03</p>
+	<p>原始链接： <a class="post-url" href="/2018/05/20/20180520-SpringBoot—表单验证@Valid/" title="SpringBoot—表单验证@Valid">https://blog.hdqyf.club/2018/05/20/20180520-SpringBoot—表单验证@Valid/</a></p>
         <footer>
             <a href="https://blog.hdqyf.club">
                 <img src="/images/logo.png" alt="Garen">
@@ -279,7 +357,7 @@ ga('send', 'pageview');
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/02/04/20180204-PPT那些常用的保存格式可以做什么/&title=《PPT那些常用的保存格式可以做什么》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/02/04/9uCgAO.jpg" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/05/20/20180520-SpringBoot—表单验证@Valid/&title=《SpringBoot—表单验证@Valid》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/05/20/Cg0DnP.jpg" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -289,22 +367,22 @@ ga('send', 'pageview');
             </a>
           </li>
           <li>
-            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/02/04/20180204-PPT那些常用的保存格式可以做什么/&title=《PPT那些常用的保存格式可以做什么》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/05/20/20180520-SpringBoot—表单验证@Valid/&title=《SpringBoot—表单验证@Valid》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
               <i class="fa fa-star"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/02/04/20180204-PPT那些常用的保存格式可以做什么/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/05/20/20180520-SpringBoot—表单验证@Valid/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《PPT那些常用的保存格式可以做什么》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/02/04/20180204-PPT那些常用的保存格式可以做什么/&via=https://blog.hdqyf.club" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SpringBoot—表单验证@Valid》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/05/20/20180520-SpringBoot—表单验证@Valid/&via=https://blog.hdqyf.club" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/02/04/20180204-PPT那些常用的保存格式可以做什么/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/05/20/20180520-SpringBoot—表单验证@Valid/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -314,7 +392,7 @@ ga('send', 'pageview');
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/02/04/20180204-PPT那些常用的保存格式可以做什么/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/05/20/20180520-SpringBoot—表单验证@Valid/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -326,11 +404,11 @@ ga('send', 'pageview');
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/PPT/" class="color4">PPT</a>
+    <a href="/tags/Java/" class="color5">Java</a>
       
-    <a href="/tags/office/" class="color2">office</a>
+    <a href="/tags/框架/" class="color3">框架</a>
       
-    <a href="/tags/办公/" class="color3">办公</a>
+    <a href="/tags/Spring/" class="color2">Spring</a>
       
   </li>
 
@@ -343,26 +421,16 @@ ga('send', 'pageview');
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#pptx"><span class="post-toc-text">pptx_</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ppt"><span class="post-toc-text">ppt_</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#PDF"><span class="post-toc-text">PDF_</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#图片格式"><span class="post-toc-text">图片格式_</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#自动放映格式"><span class="post-toc-text">自动放映格式_</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#注册页面代码"><span class="post-toc-text">注册页面代码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#controller代码，注意传入的参数前加注解-Valid"><span class="post-toc-text">controller代码，注意传入的参数前加注解@Valid</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实体类User的编写"><span class="post-toc-text">实体类User的编写</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试结果"><span class="post-toc-text">测试结果</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#注解清单"><span class="post-toc-text">注解清单</span></a></li></ol>
         </nav>
     </aside>
     
 
 <nav id="article-nav">
   
-    <a href="/2018/02/06/20180206-你追求的幸福到底是什么？/" id="article-nav-newer" class="article-nav-link-wrap">
-
-      <span class="article-nav-title">
-        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
-        
-          你追求的幸福到底是什么？
-        
-      </span>
-    </a>
   
-  
-    <a href="/2018/02/03/20180203-Java：String类常用方法集锦/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">Java小技巧(String类常用方法集锦)</span>
+    <a href="/2018/05/18/20180518-Weekly Diary—Java四种引用/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Weekly Diary—Java四种引用</span>
       <i class="fa fa-hand-o-right" aria-hidden="true"></i>
     </a>
   
