@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux 常用命令—screen 命令详解 | HDQ | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="HDQ,HDQ's Blog" />
+  
+  <meta name="description" content="背景&amp;emsp;&amp;emsp;系统管理员经常需要SSH 或者telent 远程登录到Linux 服务器，经常运行一些需要很长时间才能完成的任务，比如系统备份、ftp 传输等等。通常情况下我们都是为每一个这样的任务开一个远程终端窗口，因为它们执行的时间太长了。必须等待它们执行完毕，在此期间不能关掉窗口或者断开连接，否则这个任务就会被杀掉，一切半途而废了。
+
+简介&amp;emsp;&amp;emsp;GNU Scre">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 常用命令—screen 命令详解">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/05/21/20180521-Linux 常用命令—screen 命令详解/index.html">
+<meta property="og:site_name" content="HDQ | Blog">
+<meta property="og:description" content="背景&amp;emsp;&amp;emsp;系统管理员经常需要SSH 或者telent 远程登录到Linux 服务器，经常运行一些需要很长时间才能完成的任务，比如系统备份、ftp 传输等等。通常情况下我们都是为每一个这样的任务开一个远程终端窗口，因为它们执行的时间太长了。必须等待它们执行完毕，在此期间不能关掉窗口或者断开连接，否则这个任务就会被杀掉，一切半途而废了。
+
+简介&amp;emsp;&amp;emsp;GNU Scre">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/21/C28T3V.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2018/05/21/C287cT.jpg">
+<meta property="og:updated_time" content="2018-05-21T08:34:31.738Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux 常用命令—screen 命令详解">
+<meta name="twitter:description" content="背景&amp;emsp;&amp;emsp;系统管理员经常需要SSH 或者telent 远程登录到Linux 服务器，经常运行一些需要很长时间才能完成的任务，比如系统备份、ftp 传输等等。通常情况下我们都是为每一个这样的任务开一个远程终端窗口，因为它们执行的时间太长了。必须等待它们执行完毕，在此期间不能关掉窗口或者断开连接，否则这个任务就会被杀掉，一切半途而废了。
+
+简介&amp;emsp;&amp;emsp;GNU Scre">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/05/21/C28T3V.jpg">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/mySetting.css">
+  <script src="/js/pace.min.js"></script>
+  <script src="/js/mySetting.js"></script>
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-113082369-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?a3fed5fc0a708f5e993575bc1ccaf623";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+  
+
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body oncontextmenu="return false" onselectstart="return false" oncopy="return false">
+  <div id="container">
+      <div class="maplebg"></div>
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">HDQ&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        HDQ&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 互联网生活 互联网资源的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="个人网站" target="_blank" href="http://hdqyf.club/">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="GitHub" target="_blank" href="https://github.com/GarenMorbid">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="https://weibo.com/u/5470832383?refer_flag=1005055013_">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Steam" target="_blank" href="http://steamcommunity.com/id/610717159/">
+                            <i class="fa fa-steam fa-2x"></i></a>
+                    
+                        <a title="Blog&#39;s App Download" target="_blank" href="https://pan.lanzou.com/i10yfxi">
+                            <i class="fa fa-android fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-20180521-Linux 常用命令—screen 命令详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      Linux 常用命令—screen 命令详解
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/Linux/">Linux</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-05-21
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a><font color="#0099ff" size="4" face="黑体">背景</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;系统管理员经常需要SSH 或者telent 远程登录到Linux 服务器，经常运行一些需要很长时间才能完成的任务，比如系统备份、ftp 传输等等。通常情况下我们都是为每一个这样的任务开一个远程终端窗口，因为它们执行的时间太长了。必须等待它们执行完毕，在此期间不能关掉窗口或者断开连接，否则这个任务就会被杀掉，一切半途而废了。</font>
+
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a><font color="#0099ff" size="4" face="黑体">简介</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;<strong>GNU Screen</strong>是一款由GNU计划开发的用于命令行终端切换的自由软件。用户可以通过该软件同时连接多个本地或远程的命令行会话，并在其间自由切换。<br>&emsp;&emsp;<strong>GNU Screen</strong>可以看作是窗口管理器的命令行界面版本。它提供了统一的管理多个会话的界面和相应的功能。</font>
+
+<ul>
+<li><strong>🕶️ 会话恢复</strong><br>只要Screen本身没有终止，在其内部运行的会话都可以恢复。这一点对于远程登录的用户特别有用——即使网络连接中断，用户也不会失去对已经打开的命令行会话的控制。只要再次登录到主机上执行screen -r就可以恢复会话的运行。同样在暂时离开的时候，也可以执行分离命令detach，在保证里面的程序正常运行的情况下让Screen挂起（切换到后台）。这一点和图形界面下的VNC很相似。</li>
+<li><strong>🕶️ 多窗口</strong><br>在Screen环境下，所有的会话都独立的运行，并拥有各自的编号、输入、输出和窗口缓存。用户可以通过快捷键在不同的窗口下切换，并可以自由的重定向各个窗口的输入和输出。Screen实现了基本的文本操作，如复制粘贴等；还提供了类似滚动条的功能，可以查看窗口状况的历史记录。窗口还可以被分区和命名，还可以监视后台窗口的活动。</li>
+<li><strong>🕶️ 会话共享</strong><br>Screen可以让一个或多个用户从不同终端多次登录一个会话，并共享会话的所有特性（比如可以看到完全相同的输出）。它同时提供了窗口访问权限的机制，可以对窗口进行密码保护。</li>
+</ul>
+<p><strong>GNU’s Screen</strong> 官方站点：<a href="http://www.gnu.org/software/screen/" target="_blank" rel="external">http://www.gnu.org/software/screen/</a></p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a><font color="#0099ff" size="4" face="黑体">语法</font></h3><p><code># screen [-AmRvx -ls -wipe][-d &lt;作业名称&gt;][-h &lt;行数&gt;][-r &lt;作业名称&gt;][-s ][-S &lt;作业名称&gt;]</code></p>
+<blockquote>
+<p><strong>参数说明</strong></p>
+<blockquote>
+<p>-A 　将所有的视窗都调整为目前终端机的大小。<br>-d &lt;作业名称&gt; 　将指定的screen作业离线。<br>-h &lt;行数&gt; 　指定视窗的缓冲区行数。<br>-m 　即使目前已在作业中的screen作业，仍强制建立新的screen作业。<br>-r &lt;作业名称&gt; 　恢复离线的screen作业。<br>-R 　先试图恢复离线的作业。若找不到离线的作业，即建立新的screen作业。<br>-s 　指定建立新视窗时，所要执行的shell。<br>-S &lt;作业名称&gt; 　指定screen作业的名称。<br>-v 　显示版本信息。<br>-x 　恢复之前离线的screen作业。<br>-ls或–list 　显示目前所有的screen作业。<br>-wipe 　检查目前所有的screen作业，并删除已经无法使用的screen作业。</p>
+</blockquote>
+</blockquote>
+<h3 id="常用Screen参数"><a href="#常用Screen参数" class="headerlink" title="常用Screen参数"></a><font color="#0099ff" size="4" face="黑体">常用Screen参数</font></h3><p><code>screen -S yourname</code> 👉 新建一个叫yourname的session<br><code>screen -ls</code> 👉 列出当前所有的session(窗口)<br><code>screen -r yourname</code> 👉 回到yourname这个session<br><code>screen -d yourname</code> 👉 远程detach某个session<br><code>screen -d -r yourname</code> 👉 结束当前session并回到yourname这个session</p>
+<p>在每个screen session 下，所有命令都以 ctrl+a(C-a) 开始。</p>
+<p><code>C-a ?</code> 👉 显示所有键绑定信息<br><code>C-a c</code> 👉 创建一个新的运行shell的窗口并切换到该窗口<br><code>C-a n</code> 👉 Next，切换到下一个 window<br><code>C-a p</code> 👉 Previous，切换到前一个 window<br><code>C-a 0..9</code> 👉 切换到第 0..9 个 window<br><code>Ctrl+a [Space]</code> 👉 由视窗0循序切换到视窗9<br><code>C-a C-a</code> 👉 在两个最近使用的 window 间切换<br><code>C-a x</code> 👉 锁住当前的 window，需用用户密码解锁<br><code>C-a d</code> 👉 detach，暂时离开当前session，将目前的 screen session (可能含有多个 windows) 丢到后台执行，并会回到还没进 screen 时的状态，此时在 screen session 里，每个 window 内运行的 process (无论是前台/后台)都在继续执行，即使 logout 也不影响<br><code>C-a z</code> 👉 把当前session放到后台执行，用 shell 的 fg 命令则可回去<br><code>C-a w</code> 👉 显示所有窗口列表<br><code>C-a t</code> 👉 Time，显示当前时间，和系统的 load<br><code>C-a k</code> 👉 kill window，强行关闭当前的 window<br><code>C-a [</code> 👉 进入 copy mode，在 copy mode 下可以回滚、搜索、复制就像用使用 vi 一样</p>
+<blockquote>
+<p>C-b Backward，PageUp<br>C-f Forward，PageDown<br>H(大写) High，将光标移至左上角<br>L Low，将光标移至左下角<br>0 移到行首<br>$ 行末<br>w forward one word，以字为单位往前移<br>b backward one word，以字为单位往后移<br>Space 第一次按为标记区起点，第二次按为终点<br>Esc 结束 copy mode</p>
+</blockquote>
+<p><code>C-a ]</code> 👉 Paste，把刚刚在 copy mode 选定的内容贴上</p>
+<h3 id="使用screen"><a href="#使用screen" class="headerlink" title="使用screen"></a><font color="#0099ff" size="4" face="黑体">使用screen</font></h3><h4 id="安装screen"><a href="#安装screen" class="headerlink" title="安装screen"></a><font color="#0099ff" size="3" face="黑体">安装screen</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;流行的Linux发行版（例如Red Hat Enterprise Linux）通常会自带screen实用程序，如果没有的话，可以从<strong>GNU screen</strong>的官方网站下载。</font>
+
+<p>在线安装screen，也可以离线安装（网址下载与系统对应的RPM安装包）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@root ~]# yum install screen</div></pre></td></tr></table></figure>
+<h4 id="创建一个新的窗口"><a href="#创建一个新的窗口" class="headerlink" title="创建一个新的窗口"></a><font color="#0099ff" size="3" face="黑体">创建一个新的窗口</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;安装完成后，直接敲命令screen就可以启动它。但是这样启动的screen会话没有名字，实践上推荐为每个screen会话取一个名字，方便分辨：</font>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@root ~]# screen -S ASF</div></pre></td></tr></table></figure>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;screen启动后，会创建第一个窗口，也就是窗口No. 0，并在其中打开一个系统默认的shell，一般都会是bash。所以你敲入命令screen之后，会立刻又返回到命令提示符，仿佛什么也没有发生似的，其实你已经进入Screen的世界了。当然，也可以在screen命令之后加入你喜欢的参数，使之直接打开你指定的程序，例如：</font>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@root ~]# screen vi david.txt</div></pre></td></tr></table></figure>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;screen创建一个执行vi david.txt的单窗口会话，退出vi 将退出该窗口/会话。</font>
+
+<h4 id="查看窗口和窗口名称"><a href="#查看窗口和窗口名称" class="headerlink" title="查看窗口和窗口名称"></a><font color="#0099ff" size="3" face="黑体">查看窗口和窗口名称</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;打开多个窗口后，可以使用快捷键C-a w列出当前所有窗口。如果使用文本终端，这个列表会列在屏幕左下角，如果使用X环境下的终端模拟器，这个列表会列在标题栏里。窗口列表的样子一般是这样：</font>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">0$ bash  1-$ bash  2*$ bash</div></pre></td></tr></table></figure>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">这个例子中我开启了三个窗口，其中*号表示当前位于窗口2，-号表示上一次切换窗口时位于窗口1。<br><br>Screen默认会为窗口命名为编号和窗口中运行程序名的组合，上面的例子中窗口都是默认名字。练习了上面查看窗口的方法，你可能就希望各个窗口可以有不同的名字以方便区分了。可以使用快捷键C-a A来为当前窗口重命名，按下快捷键后，Screen会允许你为当前窗口输入新的名字，回车确认。</font>
+
+<h4 id="会话分离与恢复"><a href="#会话分离与恢复" class="headerlink" title="会话分离与恢复"></a><font color="#0099ff" size="3" face="黑体">会话分离与恢复</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;你可以不中断screen窗口中程序的运行而暂时断开（detach）screen会话，并在随后时间重新连接（attach）该会话，重新控制各窗口中运行的程序。例如，我们打开一个screen窗口编辑/tmp/david.txt文件：</font>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@root ~]# screen vi /tmp/david.txt</div></pre></td></tr></table></figure>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;之后我们想暂时退出做点别的事情，比如出去散散步，那么在screen窗口键入<code>C-a d</code>，Screen会给出detached提示：暂时中断会话</font>
+
+<p><img src="https://s1.ax1x.com/2018/05/21/C28T3V.jpg" alt=""><br></p>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;半个小时之后回来了，输入命令<code>screen -ls</code>查看所有窗口，找到该screen会话：</font>
+
+<p><img src="https://s1.ax1x.com/2018/05/21/C287cT.jpg" alt=""><br></p>
+<p>输入<code>screen -r 12865</code>恢复12865窗口</p>
+<h4 id="清除dead-会话"><a href="#清除dead-会话" class="headerlink" title="清除dead 会话"></a><font color="#0099ff" size="3" face="黑体">清除dead 会话</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;如果由于某种原因其中一个会话死掉了（例如人为杀掉该会话），这时<code>screen -ls</code>会显示该会话为dead状态。使用<code>screen -wipe</code>命令清除该会话</font>
+
+<h4 id="关闭或杀死窗口"><a href="#关闭或杀死窗口" class="headerlink" title="关闭或杀死窗口"></a><font color="#0099ff" size="3" face="黑体">关闭或杀死窗口</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;正常情况下，当你退出一个窗口中最后一个程序（通常是bash）后，这个窗口就关闭了。另一个关闭窗口的方法是使用<code>C-a k</code>，这个快捷键杀死当前的窗口，同时也将杀死这个窗口中正在运行的进程。<br>&emsp;&emsp;如果一个Screen会话中最后一个窗口被关闭了，那么整个Screen会话也就退出了，screen进程会被终止。<br>&emsp;&emsp;除了依次退出/杀死当前Screen会话中所有窗口这种方法之外，还可以使用快捷键<code>C-a :</code>，然后输入quit命令退出Screen会话。需要注意的是，这样退出会杀死所有窗口并退出其中运行的所有程序。其实<code>C-a :</code>这个快捷键允许用户直接输入的命令有很多，包括分屏可以输入split等，这也是实现Screen功能的一个途径，不过个人认为还是快捷键比较方便些。</font>
+
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年05月21日 16:34</p>
+	<p>原始链接： <a class="post-url" href="/2018/05/21/20180521-Linux 常用命令—screen 命令详解/" title="Linux 常用命令—screen 命令详解">https://blog.hdqyf.club/2018/05/21/20180521-Linux 常用命令—screen 命令详解/</a></p>
+        <footer>
+            <a href="https://blog.hdqyf.club">
+                <img src="/images/logo.png" alt="Garen">
+                Garen
+            </a>
+        </footer>
+    </div>
+</div>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/05/21/20180521-Linux 常用命令—screen 命令详解/&title=《Linux 常用命令—screen 命令详解》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/05/21/C282ng.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/05/21/20180521-Linux 常用命令—screen 命令详解/&title=《Linux 常用命令—screen 命令详解》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+              <i class="fa fa-star"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/05/21/20180521-Linux 常用命令—screen 命令详解/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux 常用命令—screen 命令详解》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/05/21/20180521-Linux 常用命令—screen 命令详解/&via=https://blog.hdqyf.club" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/05/21/20180521-Linux 常用命令—screen 命令详解/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/05/21/20180521-Linux 常用命令—screen 命令详解/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Linux/" class="color1">Linux</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#背景"><span class="post-toc-text">背景</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简介"><span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#语法"><span class="post-toc-text">语法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#常用Screen参数"><span class="post-toc-text">常用Screen参数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用screen"><span class="post-toc-text">使用screen</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#安装screen"><span class="post-toc-text">安装screen</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#创建一个新的窗口"><span class="post-toc-text">创建一个新的窗口</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#查看窗口和窗口名称"><span class="post-toc-text">查看窗口和窗口名称</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#会话分离与恢复"><span class="post-toc-text">会话分离与恢复</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#清除dead-会话"><span class="post-toc-text">清除dead 会话</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#关闭或杀死窗口"><span class="post-toc-text">关闭或杀死窗口</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/20/20180520-SpringBoot—表单验证@Valid/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">SpringBoot—表单验证@Valid</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <span id="runtime_span"></span>
+            <br>
+            <p>
+                Powered by <a href="#" target="_blank">HDQ</a> Theme <a href="#" target="_blank">Garen</a> &copy;
+                2018
+                    Garen<br>
+            </p>
+        </div>
+    </div>
+</footer>
+<script>
+    function show_runtime() {
+            window.setTimeout("show_runtime()", 1000);
+            X = new Date("11/25/2017 05:20:00");
+            Y = new Date(); T = (Y.getTime() - X.getTime()); M = 24 * 60 * 60 * 1000;
+            a = T / M;
+            A = Math.floor(a);
+            b = (a - A) * 24;
+            B = Math.floor(b);
+            c = (b - B) * 60;
+            C = Math.floor((b - B) * 60);
+            D = Math.floor((c - C) * 60);
+            runtime_span.innerHTML = "本站勉强运行: " + A + "天" + B + "小时" + C + "分" + D + "秒";
+        }
+
+        show_runtime();
+</script>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://blog.hdqyf.club",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/3DS-MAX/">3DS MAX</a><a class="category-link" href="/categories/CAD/">CAD</a><a class="category-link" href="/categories/CPU/">CPU</a><a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/GPU/">GPU</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/Java/">Java</a><a class="category-link" href="/categories/Linux/">Linux</a><a class="category-link" href="/categories/MVC/">MVC</a><a class="category-link" href="/categories/Mac/">Mac</a><a class="category-link" href="/categories/MySQL/">MySQL</a><a class="category-link" href="/categories/Oracle/">Oracle</a><a class="category-link" href="/categories/SQL/">SQL</a><a class="category-link" href="/categories/Spring/">Spring</a><a class="category-link" href="/categories/Steam/">Steam</a><a class="category-link" href="/categories/iOS/">iOS</a><a class="category-link" href="/categories/mybatis/">mybatis</a><a class="category-link" href="/categories/下载/">下载</a><a class="category-link" href="/categories/卸载/">卸载</a><a class="category-link" href="/categories/字体/">字体</a><a class="category-link" href="/categories/常识/">常识</a><a class="category-link" href="/categories/感悟/">感悟</a><a class="category-link" href="/categories/截屏/">截屏</a><a class="category-link" href="/categories/播放器/">播放器</a><a class="category-link" href="/categories/效率/">效率</a><a class="category-link" href="/categories/文档/">文档</a><a class="category-link" href="/categories/注册表/">注册表</a><a class="category-link" href="/categories/激活/">激活</a><a class="category-link" href="/categories/生活/">生活</a><a class="category-link" href="/categories/编辑器/">编辑器</a><a class="category-link" href="/categories/资源/">资源</a><a class="category-link" href="/categories/转换/">转换</a><a class="category-link" href="/categories/运行库/">运行库</a><a class="category-link" href="/categories/音乐/">音乐</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 11.11px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/CSS/" style="font-size: 11.11px;">CSS</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/HTML/" style="font-size: 13.33px;">HTML</a> <a href="/tags/JS/" style="font-size: 11.11px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Mac/" style="font-size: 12.22px;">Mac</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/SQL/" style="font-size: 11.11px;">SQL</a> <a href="/tags/Spring/" style="font-size: 16.67px;">Spring</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/iOS/" style="font-size: 12.22px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 15.56px;">mybatis</a> <a href="/tags/office/" style="font-size: 11.11px;">office</a> <a href="/tags/下载/" style="font-size: 14.44px;">下载</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/办公/" style="font-size: 11.11px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 11.11px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 12.22px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.22px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 13.33px;">效率</a> <a href="/tags/数据库/" style="font-size: 14.44px;">数据库</a> <a href="/tags/文档/" style="font-size: 10px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/框架/" style="font-size: 18.89px;">框架</a> <a href="/tags/检测/" style="font-size: 11.11px;">检测</a> <a href="/tags/注册表/" style="font-size: 11.11px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 10px;">激活</a> <a href="/tags/生活/" style="font-size: 12.22px;">生活</a> <a href="/tags/系统必备/" style="font-size: 10px;">系统必备</a> <a href="/tags/终端/" style="font-size: 11.11px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/视频/" style="font-size: 12.22px;">视频</a> <a href="/tags/资源/" style="font-size: 17.78px;">资源</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/运行库/" style="font-size: 10px;">运行库</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 11.11px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/CSS/" style="font-size: 11.11px;">CSS</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/HTML/" style="font-size: 13.33px;">HTML</a> <a href="/tags/JS/" style="font-size: 11.11px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Mac/" style="font-size: 12.22px;">Mac</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/SQL/" style="font-size: 11.11px;">SQL</a> <a href="/tags/Spring/" style="font-size: 16.67px;">Spring</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/iOS/" style="font-size: 12.22px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 15.56px;">mybatis</a> <a href="/tags/office/" style="font-size: 11.11px;">office</a> <a href="/tags/下载/" style="font-size: 14.44px;">下载</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/办公/" style="font-size: 11.11px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 11.11px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 12.22px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.22px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 13.33px;">效率</a> <a href="/tags/数据库/" style="font-size: 14.44px;">数据库</a> <a href="/tags/文档/" style="font-size: 10px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/框架/" style="font-size: 18.89px;">框架</a> <a href="/tags/检测/" style="font-size: 11.11px;">检测</a> <a href="/tags/注册表/" style="font-size: 11.11px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 10px;">激活</a> <a href="/tags/生活/" style="font-size: 12.22px;">生活</a> <a href="/tags/系统必备/" style="font-size: 10px;">系统必备</a> <a href="/tags/终端/" style="font-size: 11.11px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/视频/" style="font-size: 12.22px;">视频</a> <a href="/tags/资源/" style="font-size: 17.78px;">资源</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/运行库/" style="font-size: 10px;">运行库</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+<script>
+  $(".pingfuADHolder").remove();
+</script>
+</html>
