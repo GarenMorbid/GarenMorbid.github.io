@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux安装并部署Redis | HDQ | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="HDQ,HDQ's Blog" />
+  
+  <meta name="description" content="前言Redis 是完全开源免费的，遵守BSD协议，是一个高性能的key-value数据库。
+
+Redis 与其他 key - value 缓存产品有以下三个特点：
+
+✨ Redis支持数据的持久化，可以将内存中的数据保存在磁盘中，重启的时候可以再次加载进行使用。
+✨ Redis不仅仅支持简单的key-value类型的数据，同时还提供list，set，zset，hash等数据结构的存储。
+✨ Red">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux安装并部署Redis">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/06/05/20180605-Linux安装并部署Redis/index.html">
+<meta property="og:site_name" content="HDQ | Blog">
+<meta property="og:description" content="前言Redis 是完全开源免费的，遵守BSD协议，是一个高性能的key-value数据库。
+
+Redis 与其他 key - value 缓存产品有以下三个特点：
+
+✨ Redis支持数据的持久化，可以将内存中的数据保存在磁盘中，重启的时候可以再次加载进行使用。
+✨ Redis不仅仅支持简单的key-value类型的数据，同时还提供list，set，zset，hash等数据结构的存储。
+✨ Red">
+<meta property="og:image" content="https://s1.ax1x.com/2018/06/05/C76Eyn.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/06/05/C76VLq.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/06/05/C76ee0.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/06/05/C76mwV.png">
+<meta property="og:updated_time" content="2018-06-05T11:48:09.307Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux安装并部署Redis">
+<meta name="twitter:description" content="前言Redis 是完全开源免费的，遵守BSD协议，是一个高性能的key-value数据库。
+
+Redis 与其他 key - value 缓存产品有以下三个特点：
+
+✨ Redis支持数据的持久化，可以将内存中的数据保存在磁盘中，重启的时候可以再次加载进行使用。
+✨ Redis不仅仅支持简单的key-value类型的数据，同时还提供list，set，zset，hash等数据结构的存储。
+✨ Red">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/06/05/C76Eyn.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/mySetting.css">
+  <script src="/js/pace.min.js"></script>
+  <script src="/js/mySetting.js"></script>
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-113082369-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?a3fed5fc0a708f5e993575bc1ccaf623";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+  
+
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body oncontextmenu="return false" onselectstart="return false" oncopy="return false">
+  <div id="container">
+      <div class="maplebg"></div>
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">HDQ&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        HDQ&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 互联网生活 互联网资源的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="个人网站" target="_blank" href="http://hdqyf.club/">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="GitHub" target="_blank" href="https://github.com/GarenMorbid">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="https://weibo.com/u/5470832383?refer_flag=1005055013_">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Steam" target="_blank" href="http://steamcommunity.com/id/610717159/">
+                            <i class="fa fa-steam fa-2x"></i></a>
+                    
+                        <a title="Blog&#39;s App Download" target="_blank" href="https://pan.lanzou.com/i10yfxi">
+                            <i class="fa fa-android fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-20180605-Linux安装并部署Redis" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      Linux安装并部署Redis
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/Redis/">Redis</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-06-05
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><strong>Redis</strong> 是完全开源免费的，遵守BSD协议，是一个高性能的key-value数据库。</font>
+
+<p><strong>Redis</strong> 与其他 key - value 缓存产品有以下三个特点：</p>
+<ul>
+<li>✨ <strong>Redis</strong>支持数据的持久化，可以将内存中的数据保存在磁盘中，重启的时候可以再次加载进行使用。</li>
+<li>✨ <strong>Redis</strong>不仅仅支持简单的key-value类型的数据，同时还提供list，set，zset，hash等数据结构的存储。</li>
+<li>✨ <strong>Redis</strong>支持数据的备份，即master-slave模式的数据备份。</li>
+</ul>
+<p><strong>下面所有安装实例都是以centOS 7 系统所展示</strong></p>
+<h3 id="方法一：docker安装Redis"><a href="#方法一：docker安装Redis" class="headerlink" title="方法一：docker安装Redis"></a><font color="#0099ff" size="4" face="黑体">方法一：docker安装Redis</font></h3><h4 id="centOS-安装docker"><a href="#centOS-安装docker" class="headerlink" title="centOS 安装docker"></a><font color="#0099ff" size="3" face="黑体">centOS 安装docker</font></h4><p>Docker支持以下的CentOS版本：</p>
+<ul>
+<li>CentOS 7 (64-bit)</li>
+<li>CentOS 6.5 (64-bit) 或更高的版本</li>
+</ul>
+<h5 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a><font color="#147698" size="3" face="黑体">前提条件</font></h5><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">目前，CentOS 仅发行版本中的内核支持 Docker。<br>Docker 运行在 CentOS 7 上，要求系统为64位、系统内核版本为 3.10 以上。<br>Docker 运行在 CentOS-6.5 或更高的版本的 CentOS 上，要求系统为64位、系统内核版本为 2.6.32-431 或者更高版本。</font>
+
+<p>在Linux中可以使用命令<code>uname -r</code> 查看你的内核版本</p>
+<h5 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a><font color="#147698" size="3" face="黑体">安装docker</font></h5><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">Docker 软件包和依赖包已经包含在默认的 CentOS-Extras 软件源里，安装命令如下：<br><code>[root@hdq ~]# yum install docker</code><br>中间应该有一些确认过程，直接输入y即可<br>安装完成后退出到命令符下，输入docker version即可查看安装的docker版本</font>
+
+<p><img src="https://s1.ax1x.com/2018/06/05/C76Eyn.png" alt=""><br></p>
+<h5 id="启动docker服务"><a href="#启动docker服务" class="headerlink" title="启动docker服务"></a><font color="#147698" size="3" face="黑体">启动docker服务</font></h5><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">安装完成后，使用下面的命令来启动 docker 服务<br><code>[root@hdq ~]# service docker start</code><br>返回<br><code>Redirecting to /bin/systemctl start  docker.service</code><br>将其设置为开机启动<br><code>[root@hdq ~]# chkconfig docker on</code></font>
+
+<h4 id="使用docker部署Redis"><a href="#使用docker部署Redis" class="headerlink" title="使用docker部署Redis"></a><font color="#0099ff" size="3" face="黑体">使用docker部署Redis</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>docker pull redis</code> 命令源于 👉 <a href="https://hub.docker.com/_/redis/" target="_blank" rel="external">docker hub里的Redis镜像</a><br>运行Redis并暴露端口：<code>docker run -d -p 6379:6379 --name myredis 镜像名</code><br>成功运行之后，就可以用Redis管理工具进行连接了<br><strong>管理工具下载链接</strong> 👉 <a href="https://redisdesktop.com/download" target="_blank" rel="external">Redis Desktop Manager</a></font>
+
+<h3 id="方法二：下载Redis离线安装包进行部署"><a href="#方法二：下载Redis离线安装包进行部署" class="headerlink" title="方法二：下载Redis离线安装包进行部署"></a><font color="#0099ff" size="4" face="黑体">方法二：下载Redis离线安装包进行部署</font></h3><h4 id="官网下载Redis安装包"><a href="#官网下载Redis安装包" class="headerlink" title="官网下载Redis安装包"></a><font color="#0099ff" size="3" face="黑体">官网下载Redis安装包</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">下载<a href="https://redis.io/download" target="_blank" rel="external">Redis官网安装包</a>，并上传到Linux目录<strong>/usr/local/src</strong>下</font>
+
+<h4 id="解压Redis安装包"><a href="#解压Redis安装包" class="headerlink" title="解压Redis安装包"></a><font color="#0099ff" size="3" face="黑体">解压Redis安装包</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">cd到存放Redis的文件下目录下：<code>cd /src/local/src</code><br>解压：<code>tar xzf redis-4.0.9.tar.gz</code></font>
+
+<h4 id="使用make命令进行编译"><a href="#使用make命令进行编译" class="headerlink" title="使用make命令进行编译"></a><font color="#0099ff" size="3" face="黑体">使用make命令进行编译</font></h4><font color="red" size="3" face="微软雅黑" style="line-height:2;">如果出现：cc: 未找到命令证明虚拟机系统中缺少gcc，安装gcc，命令：<code>yum install gcc</code></font><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">执行命令：<code>make PREFIX=/usr/local/redis install</code><br>执行完毕后会在<strong>/src/local</strong>目录下有一个redis目录</font>
+
+<p><img src="https://s1.ax1x.com/2018/06/05/C76VLq.png" alt=""><br></p>
+<p>redis目录下有：redis-server、redis-cli等。每个文件的作用不在此说明</p>
+<h4 id="启动Redis"><a href="#启动Redis" class="headerlink" title="启动Redis"></a><font color="#0099ff" size="3" face="黑体">启动Redis</font></h4><p><code>./bin/redis-server</code>，启动后redis会占用当前的窗口，知道离开该窗口或者<code>Ctrl+C</code>，redis就会停止</p>
+<p><img src="https://s1.ax1x.com/2018/06/05/C76ee0.png" alt=""><br></p>
+<h4 id="使redis一直默默在后台运行"><a href="#使redis一直默默在后台运行" class="headerlink" title="使redis一直默默在后台运行"></a><font color="#0099ff" size="3" face="黑体">使redis一直默默在后台运行</font></h4><p>把redis的配置文件拷贝到本地：<code>cp /usr/local/src/redis-4.0.2/redis.conf</code><br>这是redis目录下多出两个文件</p>
+<p><img src="https://s1.ax1x.com/2018/06/05/C76mwV.png" alt=""><br></p>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">打开redis.conf文件：vim redis.conf<br>找到daemonize no，daemonize 是守护进程，把no改为yes，并保存退出<br>(由于文本内容太多，可在命令模式下使用”/”查找关键字 daemonize 如：/daemonize )<br><br>如果需要本地链接远程还需要把远程服务器的redis.conf文件里protected mode修改为no，就好了，其他在安装的时候，还需要修改bind127.0.0.1为你的主机ip，这样所有都能远程连接这个redis不安全，可以设置一个密码，这里暂时没有设置，密码设置如下叙述</font>
+
+<h4 id="为redis设置密码"><a href="#为redis设置密码" class="headerlink" title="为redis设置密码"></a><font color="#0099ff" size="3" face="黑体">为redis设置密码</font></h4><h5 id="第一种方式：命令设置"><a href="#第一种方式：命令设置" class="headerlink" title="第一种方式：命令设置"></a><font color="#147698" size="3" face="黑体">第一种方式：命令设置</font></h5><p>当前这种linux配置redis密码的方法是一种临时的，如果redis重启之后密码就会失效</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//查看当前redis有没有设置密码：</div><div class="line"><span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">6379</span>&gt; config get requirepass</div><div class="line"><span class="number">1</span>) “requirepass”</div><div class="line"><span class="number">2</span>) “”</div><div class="line">//为以上显示说明没有密码，那么现在来设置密码：</div><div class="line"><span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">6379</span>&gt; config <span class="built_in">set</span> requirepass abcdefg</div><div class="line">OK</div><div class="line"><span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">6379</span>&gt;</div><div class="line">//再次查看当前redis就提示需要密码：</div><div class="line"><span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">6379</span>&gt; config get requirepass</div><div class="line">(error) NOAUTH Authentication required.</div><div class="line"><span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">6379</span>&gt;</div></pre></td></tr></table></figure>
+<h5 id="第一种方式：修改配置文件"><a href="#第一种方式：修改配置文件" class="headerlink" title="第一种方式：修改配置文件"></a><font color="#147698" size="3" face="黑体">第一种方式：修改配置文件</font></h5><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">第二种方式 （永久方式）<br>需要永久配置密码的话就去redis.conf的配置文件中找到requirepass这个参数<br><code>#requirepass foobared</code><br>去掉行前的注释，并修改密码为所需的密码,保存文件<br><code>requirepass 123456</code><br>这里密码就是123456</font>
+
+<h3 id="Redis官方文档"><a href="#Redis官方文档" class="headerlink" title="Redis官方文档"></a><font color="#0099ff" size="4" face="黑体">Redis官方文档</font></h3><p><a href="http://www.redis.cn/" target="_blank" rel="external">Redis官方文档</a></p>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年06月05日 19:48</p>
+	<p>原始链接： <a class="post-url" href="/2018/06/05/20180605-Linux安装并部署Redis/" title="Linux安装并部署Redis">https://blog.hdqyf.club/2018/06/05/20180605-Linux安装并部署Redis/</a></p>
+        <footer>
+            <a href="https://blog.hdqyf.club">
+                <img src="/images/logo.png" alt="Garen">
+                Garen
+            </a>
+        </footer>
+    </div>
+</div>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/06/05/20180605-Linux安装并部署Redis/&title=《Linux安装并部署Redis》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/06/05/C76AQs.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/06/05/20180605-Linux安装并部署Redis/&title=《Linux安装并部署Redis》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+              <i class="fa fa-star"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/06/05/20180605-Linux安装并部署Redis/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux安装并部署Redis》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/06/05/20180605-Linux安装并部署Redis/&via=https://blog.hdqyf.club" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/06/05/20180605-Linux安装并部署Redis/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/06/05/20180605-Linux安装并部署Redis/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Linux/" class="color1">Linux</a>
+      
+    <a href="/tags/Redis/" class="color1">Redis</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#方法一：docker安装Redis"><span class="post-toc-text">方法一：docker安装Redis</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#centOS-安装docker"><span class="post-toc-text">centOS 安装docker</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#前提条件"><span class="post-toc-text">前提条件</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#安装docker"><span class="post-toc-text">安装docker</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#启动docker服务"><span class="post-toc-text">启动docker服务</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#使用docker部署Redis"><span class="post-toc-text">使用docker部署Redis</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#方法二：下载Redis离线安装包进行部署"><span class="post-toc-text">方法二：下载Redis离线安装包进行部署</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#官网下载Redis安装包"><span class="post-toc-text">官网下载Redis安装包</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#解压Redis安装包"><span class="post-toc-text">解压Redis安装包</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#使用make命令进行编译"><span class="post-toc-text">使用make命令进行编译</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#启动Redis"><span class="post-toc-text">启动Redis</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#使redis一直默默在后台运行"><span class="post-toc-text">使redis一直默默在后台运行</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#为redis设置密码"><span class="post-toc-text">为redis设置密码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#第一种方式：命令设置"><span class="post-toc-text">第一种方式：命令设置</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#第一种方式：修改配置文件"><span class="post-toc-text">第一种方式：修改配置文件</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Redis官方文档"><span class="post-toc-text">Redis官方文档</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2018/06/03/20180603-天若OCR文字识别工具 最全的OCR接口/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">天若OCR文字识别工具 最全的OCR接口</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <span id="runtime_span"></span>
+            <br>
+            <p>
+                Powered by <a href="#" target="_blank">HDQ</a> Theme <a href="#" target="_blank">Garen</a> &copy;
+                2018
+                    Garen<br>
+            </p>
+        </div>
+    </div>
+</footer>
+<script>
+    function show_runtime() {
+            window.setTimeout("show_runtime()", 1000);
+            X = new Date("11/25/2017 05:20:00");
+            Y = new Date(); T = (Y.getTime() - X.getTime()); M = 24 * 60 * 60 * 1000;
+            a = T / M;
+            A = Math.floor(a);
+            b = (a - A) * 24;
+            B = Math.floor(b);
+            c = (b - B) * 60;
+            C = Math.floor((b - B) * 60);
+            D = Math.floor((c - C) * 60);
+            runtime_span.innerHTML = "本站勉强运行: " + A + "天" + B + "小时" + C + "分" + D + "秒";
+        }
+
+        show_runtime();
+</script>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://blog.hdqyf.club",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/3DS-MAX/">3DS MAX</a><a class="category-link" href="/categories/CAD/">CAD</a><a class="category-link" href="/categories/CPU/">CPU</a><a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/GPU/">GPU</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/Java/">Java</a><a class="category-link" href="/categories/Linux/">Linux</a><a class="category-link" href="/categories/MVC/">MVC</a><a class="category-link" href="/categories/Mac/">Mac</a><a class="category-link" href="/categories/MySQL/">MySQL</a><a class="category-link" href="/categories/OCR识别/">OCR识别</a><a class="category-link" href="/categories/Oracle/">Oracle</a><a class="category-link" href="/categories/PDF工具/">PDF工具</a><a class="category-link" href="/categories/Redis/">Redis</a><a class="category-link" href="/categories/SQL/">SQL</a><a class="category-link" href="/categories/Spring/">Spring</a><a class="category-link" href="/categories/Steam/">Steam</a><a class="category-link" href="/categories/iOS/">iOS</a><a class="category-link" href="/categories/mybatis/">mybatis</a><a class="category-link" href="/categories/下载/">下载</a><a class="category-link" href="/categories/卸载/">卸载</a><a class="category-link" href="/categories/字体/">字体</a><a class="category-link" href="/categories/常识/">常识</a><a class="category-link" href="/categories/感悟/">感悟</a><a class="category-link" href="/categories/截屏/">截屏</a><a class="category-link" href="/categories/播放器/">播放器</a><a class="category-link" href="/categories/效率/">效率</a><a class="category-link" href="/categories/文档/">文档</a><a class="category-link" href="/categories/注册表/">注册表</a><a class="category-link" href="/categories/激活/">激活</a><a class="category-link" href="/categories/生活/">生活</a><a class="category-link" href="/categories/编辑器/">编辑器</a><a class="category-link" href="/categories/翻译/">翻译</a><a class="category-link" href="/categories/虚拟机/">虚拟机</a><a class="category-link" href="/categories/资源/">资源</a><a class="category-link" href="/categories/转换/">转换</a><a class="category-link" href="/categories/运行库/">运行库</a><a class="category-link" href="/categories/音乐/">音乐</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 11.11px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/CSS/" style="font-size: 11.11px;">CSS</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/HTML/" style="font-size: 13.33px;">HTML</a> <a href="/tags/JS/" style="font-size: 11.11px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 14.44px;">Linux</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Mac/" style="font-size: 12.22px;">Mac</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/OCR识别/" style="font-size: 10px;">OCR识别</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PDF工具/" style="font-size: 10px;">PDF工具</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SQL/" style="font-size: 11.11px;">SQL</a> <a href="/tags/Spring/" style="font-size: 16.67px;">Spring</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/iOS/" style="font-size: 12.22px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 15.56px;">mybatis</a> <a href="/tags/office/" style="font-size: 11.11px;">office</a> <a href="/tags/下载/" style="font-size: 14.44px;">下载</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/办公/" style="font-size: 12.22px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 11.11px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 12.22px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.22px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 13.33px;">效率</a> <a href="/tags/数据库/" style="font-size: 14.44px;">数据库</a> <a href="/tags/文档/" style="font-size: 10px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/框架/" style="font-size: 18.89px;">框架</a> <a href="/tags/检测/" style="font-size: 11.11px;">检测</a> <a href="/tags/注册表/" style="font-size: 11.11px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 11.11px;">激活</a> <a href="/tags/生活/" style="font-size: 12.22px;">生活</a> <a href="/tags/系统必备/" style="font-size: 10px;">系统必备</a> <a href="/tags/终端/" style="font-size: 11.11px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/视频/" style="font-size: 12.22px;">视频</a> <a href="/tags/词典/" style="font-size: 10px;">词典</a> <a href="/tags/资源/" style="font-size: 17.78px;">资源</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/运行库/" style="font-size: 10px;">运行库</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 11.11px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/CSS/" style="font-size: 11.11px;">CSS</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/HTML/" style="font-size: 13.33px;">HTML</a> <a href="/tags/JS/" style="font-size: 11.11px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 14.44px;">Linux</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Mac/" style="font-size: 12.22px;">Mac</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/OCR识别/" style="font-size: 10px;">OCR识别</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PDF工具/" style="font-size: 10px;">PDF工具</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SQL/" style="font-size: 11.11px;">SQL</a> <a href="/tags/Spring/" style="font-size: 16.67px;">Spring</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/iOS/" style="font-size: 12.22px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 15.56px;">mybatis</a> <a href="/tags/office/" style="font-size: 11.11px;">office</a> <a href="/tags/下载/" style="font-size: 14.44px;">下载</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/办公/" style="font-size: 12.22px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 11.11px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发技巧/" style="font-size: 12.22px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.22px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 13.33px;">效率</a> <a href="/tags/数据库/" style="font-size: 14.44px;">数据库</a> <a href="/tags/文档/" style="font-size: 10px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/框架/" style="font-size: 18.89px;">框架</a> <a href="/tags/检测/" style="font-size: 11.11px;">检测</a> <a href="/tags/注册表/" style="font-size: 11.11px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 11.11px;">激活</a> <a href="/tags/生活/" style="font-size: 12.22px;">生活</a> <a href="/tags/系统必备/" style="font-size: 10px;">系统必备</a> <a href="/tags/终端/" style="font-size: 11.11px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/视频/" style="font-size: 12.22px;">视频</a> <a href="/tags/词典/" style="font-size: 10px;">词典</a> <a href="/tags/资源/" style="font-size: 17.78px;">资源</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/运行库/" style="font-size: 10px;">运行库</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+<script>
+  $(".pingfuADHolder").remove();
+</script>
+</html>
