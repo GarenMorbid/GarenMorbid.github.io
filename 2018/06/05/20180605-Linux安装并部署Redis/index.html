@@ -28,9 +28,10 @@ Redis 与其他 key - value 缓存产品有以下三个特点：
 ✨ Red">
 <meta property="og:image" content="https://s1.ax1x.com/2018/06/05/C76Eyn.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/06/05/C76VLq.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/06/06/C7LgYQ.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/06/05/C76ee0.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/06/05/C76mwV.png">
-<meta property="og:updated_time" content="2018-06-05T11:48:09.307Z">
+<meta property="og:updated_time" content="2018-06-06T06:42:06.479Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux安装并部署Redis">
 <meta name="twitter:description" content="前言Redis 是完全开源免费的，遵守BSD协议，是一个高性能的key-value数据库。
@@ -228,11 +229,13 @@ ga('send', 'pageview');
 
 <p><img src="https://s1.ax1x.com/2018/06/05/C76VLq.png" alt=""><br></p>
 <p>redis目录下有：redis-server、redis-cli等。每个文件的作用不在此说明</p>
+<p>输入<code>./bin/redis-server ./redis.conf</code>命令启动Redis<br>查看redis的启动状态：<code>ps aux|grep redis</code>,如果出现如下图证明redis已经启动</p>
+<p><img src="https://s1.ax1x.com/2018/06/06/C7LgYQ.png" alt=""><br></p>
 <h4 id="启动Redis"><a href="#启动Redis" class="headerlink" title="启动Redis"></a><font color="#0099ff" size="3" face="黑体">启动Redis</font></h4><p><code>./bin/redis-server</code>，启动后redis会占用当前的窗口，知道离开该窗口或者<code>Ctrl+C</code>，redis就会停止</p>
 <p><img src="https://s1.ax1x.com/2018/06/05/C76ee0.png" alt=""><br></p>
 <h4 id="使redis一直默默在后台运行"><a href="#使redis一直默默在后台运行" class="headerlink" title="使redis一直默默在后台运行"></a><font color="#0099ff" size="3" face="黑体">使redis一直默默在后台运行</font></h4><p>把redis的配置文件拷贝到本地：<code>cp /usr/local/src/redis-4.0.2/redis.conf</code><br>这是redis目录下多出两个文件</p>
 <p><img src="https://s1.ax1x.com/2018/06/05/C76mwV.png" alt=""><br></p>
-<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">打开redis.conf文件：vim redis.conf<br>找到daemonize no，daemonize 是守护进程，把no改为yes，并保存退出<br>(由于文本内容太多，可在命令模式下使用”/”查找关键字 daemonize 如：/daemonize )<br><br>如果需要本地链接远程还需要把远程服务器的redis.conf文件里protected mode修改为no，就好了，其他在安装的时候，还需要修改bind127.0.0.1为你的主机ip，这样所有都能远程连接这个redis不安全，可以设置一个密码，这里暂时没有设置，密码设置如下叙述</font>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">打开redis.conf文件：vim redis.conf<br>找到daemonize no，daemonize 是守护进程，把no改为yes，并保存退出<br>(由于文本内容太多，可在命令模式下使用”/”查找关键字 daemonize 如：/daemonize )<br><br>如果需要本地链接远程还需要把远程服务器的redis.conf文件里protected mode修改为no，就好了，其他在安装的时候，还需要注释掉bind127.0.0.1，这样所有都能远程连接这个redis不安全，可以设置一个密码，这里暂时没有设置，密码设置如下叙述，如果连不上，可以试试关掉服务器的防火墙，用命令<code>service iptables stop</code></font>
 
 <h4 id="为redis设置密码"><a href="#为redis设置密码" class="headerlink" title="为redis设置密码"></a><font color="#0099ff" size="3" face="黑体">为redis设置密码</font></h4><h5 id="第一种方式：命令设置"><a href="#第一种方式：命令设置" class="headerlink" title="第一种方式：命令设置"></a><font color="#147698" size="3" face="黑体">第一种方式：命令设置</font></h5><p>当前这种linux配置redis密码的方法是一种临时的，如果redis重启之后密码就会失效</p>
 <figure class="highlight dos"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//查看当前redis有没有设置密码：</div><div class="line"><span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">6379</span>&gt; config get requirepass</div><div class="line"><span class="number">1</span>) “requirepass”</div><div class="line"><span class="number">2</span>) “”</div><div class="line">//为以上显示说明没有密码，那么现在来设置密码：</div><div class="line"><span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">6379</span>&gt; config <span class="built_in">set</span> requirepass abcdefg</div><div class="line">OK</div><div class="line"><span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">6379</span>&gt;</div><div class="line">//再次查看当前redis就提示需要密码：</div><div class="line"><span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">6379</span>&gt; config get requirepass</div><div class="line">(error) NOAUTH Authentication required.</div><div class="line"><span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">6379</span>&gt;</div></pre></td></tr></table></figure>
@@ -246,7 +249,7 @@ ga('send', 'pageview');
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年06月05日 19:48</p>
+        <p>最后更新： 2018年06月06日 14:42</p>
 	<p>原始链接： <a class="post-url" href="/2018/06/05/20180605-Linux安装并部署Redis/" title="Linux安装并部署Redis">https://blog.hdqyf.club/2018/06/05/20180605-Linux安装并部署Redis/</a></p>
         <footer>
             <a href="https://blog.hdqyf.club">
