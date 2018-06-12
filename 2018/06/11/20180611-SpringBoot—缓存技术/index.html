@@ -19,7 +19,7 @@ JSR107Java Caching定义了5个核心接口，分别是 CachingProvider, CacheMa
 
 JSR107Java Caching定义了5个核心接口，分别是 CachingProvider, CacheMa">
 <meta property="og:image" content="https://s1.ax1x.com/2018/06/12/CLT5ut.png">
-<meta property="og:updated_time" content="2018-06-12T00:07:17.014Z">
+<meta property="og:updated_time" content="2018-06-12T00:16:47.514Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot—缓存技术">
 <meta name="twitter:description" content="前言&amp;emsp;&amp;emsp;我们知道一个程序的瓶颈在于数据库，我们也知道内存的速度是大大快于硬盘的速度的。当我们需要重复的获取相同的数据的时候，我们一次又一次的请求数据库或者远程服务，导致大量的时间耗费在数据库查询或者远程方法的调用上，导致程序性能的恶化，这更是数据缓存要解决的问题。
@@ -195,50 +195,18 @@ ga('send', 'pageview');
 <p><img src="https://s1.ax1x.com/2018/06/12/CLT5ut.png" alt=""><br></p>
 <h3 id="Spring的缓存支持"><a href="#Spring的缓存支持" class="headerlink" title="Spring的缓存支持"></a><font color="#0099ff" size="4" face="黑体">Spring的缓存支持</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;Spring定义了<code>org.springframework.cache.CacheManager</code>和<code>org.springframework.cache.Cache</code>接口来统一不同的缓存技术。其中，CacheManager是Spring提供的各种缓存技术抽象接口，Cache接口包含了缓存的各种操作（增加、删除获得缓存，我们一般不会直接和此接口打交道）</font>
 
-<h3 id="Spring支持的CacheManager"><a href="#Spring支持的CacheManager" class="headerlink" title="Spring支持的CacheManager"></a><font color="#0099ff" size="4" face="黑体">Spring支持的CacheManager</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;针对不同的缓存技术，需要实现不同的CacheManager ,Spring 定义了如下表的CacheManager实现</font>
+<h3 id="Spring支持的CacheManager"><a href="#Spring支持的CacheManager" class="headerlink" title="Spring支持的CacheManager"></a><font color="#0099ff" size="4" face="黑体">Spring支持的CacheManager</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">针对不同的缓存技术，需要实现不同的CacheManager，下面我们来介绍这些CacheManager</font>
 
-<table>
-<thead>
-<tr>
-<th>CacheManager</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>SimpleCacheManager</code></td>
-<td>使用检点的Collection来存储缓存，主要用来测试</td>
-</tr>
-<tr>
-<td><code>ConcurrentMapCacheManager</code></td>
-<td>使用ConcurrentMap来存储缓存</td>
-</tr>
-<tr>
-<td><code>NoOpCacheManager</code></td>
-<td>仅测试用途，不会实际存储缓存</td>
-</tr>
-<tr>
-<td><code>EhCacheManager</code></td>
-<td>使用EhCache作为缓存技术</td>
-</tr>
-<tr>
-<td><code>GuavaCacheManager</code></td>
-<td>使用Google Guava的GuavaCache作为缓存技术</td>
-</tr>
-<tr>
-<td><code>HazelcastCacheManager</code></td>
-<td>使用Hazelcast作为缓存技术</td>
-</tr>
-<tr>
-<td><code>JCacheManager</code></td>
-<td>支持JCache（JSR—107）标准的实现作为缓存技术</td>
-</tr>
-<tr>
-<td><code>RedisCacheManager</code></td>
-<td>使用Redis作为缓存技术</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li>💎 <strong>SimpleCacheManager</strong>：使用检点的Collection来存储缓存，主要用来测试</li>
+<li>💎 <strong>ConcurrentMapCacheManager</strong>：使用ConcurrentMap来存储缓存</li>
+<li>💎 <strong>NoOpCacheManager</strong>：仅测试用途，不会实际存储缓存</li>
+<li>💎 <strong>EhCacheManager</strong>：使用EhCache作为缓存技术</li>
+<li>💎 <strong>GuavaCacheManager</strong>：使用Google Guava的GuavaCache作为缓存技术</li>
+<li>💎 <strong>HazelcastCacheManager</strong>：使用Hazelcast作为缓存技术</li>
+<li>💎 <strong>JCacheManager</strong>：支持JCache（JSR—107）标准的实现作为缓存技术</li>
+<li>💎 <strong>RedisCacheManager</strong>：使用Redis作为缓存技术</li>
+</ul>
 <font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;实现任意一种CacheManager 的时候，需要注册实现CacheManager的bean，当然每种缓存技术都有很多额外的配置，但配置CacheManager 是必不可少的</font>
 
 <h3 id="声明式缓存注解"><a href="#声明式缓存注解" class="headerlink" title="声明式缓存注解"></a><font color="#0099ff" size="4" face="黑体">声明式缓存注解</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;Spring提供了4个注解来声明缓存规则（又是使用注解式的AOP的一个生动例子），如表</font>
@@ -337,7 +305,7 @@ ga('send', 'pageview');
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年06月12日 08:07</p>
+        <p>最后更新： 2018年06月12日 08:16</p>
 	<p>原始链接： <a class="post-url" href="/2018/06/11/20180611-SpringBoot—缓存技术/" title="SpringBoot—缓存技术">https://blog.hdqyf.club/2018/06/11/20180611-SpringBoot—缓存技术/</a></p>
         <footer>
             <a href="https://blog.hdqyf.club">
