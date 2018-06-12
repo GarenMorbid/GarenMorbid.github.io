@@ -10,20 +10,22 @@
   
   <meta name="description" content="前言&amp;emsp;&amp;emsp;我们知道一个程序的瓶颈在于数据库，我们也知道内存的速度是大大快于硬盘的速度的。当我们需要重复的获取相同的数据的时候，我们一次又一次的请求数据库或者远程服务，导致大量的时间耗费在数据库查询或者远程方法的调用上，导致程序性能的恶化，这更是数据缓存要解决的问题。
 
-Spring的缓存支持&amp;emsp;&amp;emsp;Spring定义了 org.springframework.cac">
+JSR107Java Caching定义了5个核心接口，分别是 CachingProvider, CacheMa">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot—缓存技术">
 <meta property="og:url" content="https://blog.hdqyf.club/2018/06/11/20180611-SpringBoot—缓存技术/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
 <meta property="og:description" content="前言&amp;emsp;&amp;emsp;我们知道一个程序的瓶颈在于数据库，我们也知道内存的速度是大大快于硬盘的速度的。当我们需要重复的获取相同的数据的时候，我们一次又一次的请求数据库或者远程服务，导致大量的时间耗费在数据库查询或者远程方法的调用上，导致程序性能的恶化，这更是数据缓存要解决的问题。
 
-Spring的缓存支持&amp;emsp;&amp;emsp;Spring定义了 org.springframework.cac">
-<meta property="og:updated_time" content="2018-06-11T06:30:37.299Z">
+JSR107Java Caching定义了5个核心接口，分别是 CachingProvider, CacheMa">
+<meta property="og:image" content="https://s1.ax1x.com/2018/06/12/CLT5ut.png">
+<meta property="og:updated_time" content="2018-06-12T00:07:17.014Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot—缓存技术">
 <meta name="twitter:description" content="前言&amp;emsp;&amp;emsp;我们知道一个程序的瓶颈在于数据库，我们也知道内存的速度是大大快于硬盘的速度的。当我们需要重复的获取相同的数据的时候，我们一次又一次的请求数据库或者远程服务，导致大量的时间耗费在数据库查询或者远程方法的调用上，导致程序性能的恶化，这更是数据缓存要解决的问题。
 
-Spring的缓存支持&amp;emsp;&amp;emsp;Spring定义了 org.springframework.cac">
+JSR107Java Caching定义了5个核心接口，分别是 CachingProvider, CacheMa">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/06/12/CLT5ut.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -181,7 +183,17 @@ ga('send', 'pageview');
             
             <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;我们知道一个程序的瓶颈在于数据库，我们也知道内存的速度是大大快于硬盘的速度的。当我们需要重复的获取相同的数据的时候，我们一次又一次的请求数据库或者远程服务，导致大量的时间耗费在数据库查询或者远程方法的调用上，导致程序性能的恶化，这更是数据缓存要解决的问题。</font>
 
-<h3 id="Spring的缓存支持"><a href="#Spring的缓存支持" class="headerlink" title="Spring的缓存支持"></a><font color="#0099ff" size="4" face="黑体">Spring的缓存支持</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;Spring定义了 org.springframework.cache.CacheManager和org.springframework.cache.Cache接口来统一不同的缓存技术。其中，CacheManager是Spring提供的各种缓存技术抽象接口，Cache接口包含了缓存的各种操作（增加、删除获得缓存，我们一般不会直接和此接口打交道）</font>
+<h3 id="JSR107"><a href="#JSR107" class="headerlink" title="JSR107"></a><font color="#0099ff" size="4" face="黑体">JSR107</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">Java Caching定义了5个核心接口，分别是 <strong>CachingProvider</strong>, <strong>CacheManager</strong>, <strong>Cache</strong>, <strong>Entry</strong> 和 <strong>Expiry</strong></font>
+
+<ul>
+<li><strong>CachingProvider</strong>定义了创建、配置、获取、管理和控制多个CacheManager。一个应用可以在运行期访问多个CachingProvider。</li>
+<li><strong>CacheManager</strong>定义了创建、配置、获取、管理和控制多个唯一命名的Cache，这些Cache存在于CacheManager的上下文中。一个CacheManager仅被一个CachingProvider所拥有。</li>
+<li><strong>Cache</strong>是一个类似Map的数据结构并临时存储以Key为索引的值。一个Cache仅被一个CacheManager所拥有。</li>
+<li><strong>Entry</strong>是一个存储在Cache中的key-value对。</li>
+<li><strong>Expiry</strong> 每一个存储在Cache中的条目有一个定义的有效期。一旦超过这个时间，条目为过期的状态。一旦过期，条目将不可访问、更新和删除。缓存有效期可以通过ExpiryPolicy设置</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/06/12/CLT5ut.png" alt=""><br></p>
+<h3 id="Spring的缓存支持"><a href="#Spring的缓存支持" class="headerlink" title="Spring的缓存支持"></a><font color="#0099ff" size="4" face="黑体">Spring的缓存支持</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;Spring定义了<code>org.springframework.cache.CacheManager</code>和<code>org.springframework.cache.Cache</code>接口来统一不同的缓存技术。其中，CacheManager是Spring提供的各种缓存技术抽象接口，Cache接口包含了缓存的各种操作（增加、删除获得缓存，我们一般不会直接和此接口打交道）</font>
 
 <h3 id="Spring支持的CacheManager"><a href="#Spring支持的CacheManager" class="headerlink" title="Spring支持的CacheManager"></a><font color="#0099ff" size="4" face="黑体">Spring支持的CacheManager</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;针对不同的缓存技术，需要实现不同的CacheManager ,Spring 定义了如下表的CacheManager实现</font>
 
@@ -194,35 +206,35 @@ ga('send', 'pageview');
 </thead>
 <tbody>
 <tr>
-<td>SimpleCacheManager</td>
+<td><code>SimpleCacheManager</code></td>
 <td>使用检点的Collection来存储缓存，主要用来测试</td>
 </tr>
 <tr>
-<td>ConcurrentMapCacheManager</td>
+<td><code>ConcurrentMapCacheManager</code></td>
 <td>使用ConcurrentMap来存储缓存</td>
 </tr>
 <tr>
-<td>NoOpCacheManager</td>
+<td><code>NoOpCacheManager</code></td>
 <td>仅测试用途，不会实际存储缓存</td>
 </tr>
 <tr>
-<td>EhCacheManager</td>
+<td><code>EhCacheManager</code></td>
 <td>使用EhCache作为缓存技术</td>
 </tr>
 <tr>
-<td>GuavaCacheManager</td>
+<td><code>GuavaCacheManager</code></td>
 <td>使用Google Guava的GuavaCache作为缓存技术</td>
 </tr>
 <tr>
-<td>HazelcastCacheManager</td>
+<td><code>HazelcastCacheManager</code></td>
 <td>使用Hazelcast作为缓存技术</td>
 </tr>
 <tr>
-<td>JCacheManager</td>
+<td><code>JCacheManager</code></td>
 <td>支持JCache（JSR—107）标准的实现作为缓存技术</td>
 </tr>
 <tr>
-<td>RedisCacheManager</td>
+<td><code>RedisCacheManager</code></td>
 <td>使用Redis作为缓存技术</td>
 </tr>
 </tbody>
@@ -264,7 +276,25 @@ ga('send', 'pageview');
 <h3 id="开启声明式缓存"><a href="#开启声明式缓存" class="headerlink" title="开启声明式缓存"></a><font color="#0099ff" size="4" face="黑体">开启声明式缓存</font></h3><p>开启声明式缓存支持非常简单，只需要在配置类上使用<code>@EnabelCaching</code> 注解即可</p>
 <h3 id="SpringBoot的支持"><a href="#SpringBoot的支持" class="headerlink" title="SpringBoot的支持"></a><font color="#0099ff" size="4" face="黑体">SpringBoot的支持</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;在Spring中国年使用缓存技术的关键是配置CacheManager 而Springbok 为我门自动配置了多个CacheManager的实现。在spring boot 环境下，使用缓存技术只需要在项目中导入相关缓存技术的依赖包，并配置类使用@EnabelCaching开启缓存支持即可</font>
 
-<h3 id="使用案例"><a href="#使用案例" class="headerlink" title="使用案例"></a><font color="#0099ff" size="4" face="黑体">使用案例</font></h3><h4 id="Cacheable"><a href="#Cacheable" class="headerlink" title="@Cacheable"></a><font color="#0099ff" size="3" face="黑体">@Cacheable</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>@Cacheable</code> 将方法的运行结果进行缓存；如果以后再要相同的数据，直接从缓存中获取，不在进行调用方法<br>&emsp;&emsp;CacheManager管理多个Cache组件的，对缓存的真正CRUD操作在Cache组建中，每一个缓存组件有自己唯一一个组件名字</font>
+<h3 id="使用案例"><a href="#使用案例" class="headerlink" title="使用案例"></a><font color="#0099ff" size="4" face="黑体">使用案例</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">案例都可以使用SpEL表达式</font>
+
+<ul>
+<li>💜 <strong>root object</strong><ul>
+<li>💙 <strong>methodName</strong>：当前被调用的方法名，示例：<code>#root.methodName</code></li>
+<li>💙 <strong>method</strong>：当前被调用的方法，示例：<code>#root.method.name</code></li>
+<li>💙 <strong>target</strong>：当前被调用的目标对象，示例：<code>#root.target</code></li>
+<li>💙 <strong>targetClass</strong>：当前被调用的目标对象类，示例：<code>#root.targetClass</code></li>
+<li>💙 <strong>args</strong>：当前被调用的方法的参数列表，示例：<code>#root.args[0]</code></li>
+<li>💙 <strong>caches</strong>：当前方法调用使用的缓存列表（如@Cacheable(value={“cache1”, “cache2”})），则有两个cache，示例：<code>#root.caches[0].name</code></li>
+</ul>
+</li>
+<li>💜 <strong>evaluation context</strong><ul>
+<li>💙 <strong>argument name</strong>：方法参数的名字. 可以直接 #参数名 ，也可以使用 #p0或#a0 的形式，0代表参数的索引，示例：<code>#iban、#a0、#p0</code></li>
+<li>💙 <strong>result</strong>：方法执行后的返回值（仅当方法执行之后的判断有效，如‘unless’，’cache put’的表达式 ’cache evict’的表达式beforeInvocation=false），示例<code>#result</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="Cacheable"><a href="#Cacheable" class="headerlink" title="@Cacheable"></a><font color="#0099ff" size="3" face="黑体">@Cacheable</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>@Cacheable</code> 将方法的运行结果进行缓存；如果以后再要相同的数据，直接从缓存中获取，不在进行调用方法<br>&emsp;&emsp;CacheManager管理多个Cache组件的，对缓存的真正CRUD操作在Cache组建中，每一个缓存组件有自己唯一一个组件名字</font>
 
 <p>属性：</p>
 <ul>
@@ -307,7 +337,7 @@ ga('send', 'pageview');
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年06月11日 14:30</p>
+        <p>最后更新： 2018年06月12日 08:07</p>
 	<p>原始链接： <a class="post-url" href="/2018/06/11/20180611-SpringBoot—缓存技术/" title="SpringBoot—缓存技术">https://blog.hdqyf.club/2018/06/11/20180611-SpringBoot—缓存技术/</a></p>
         <footer>
             <a href="https://blog.hdqyf.club">
@@ -446,7 +476,7 @@ ga('send', 'pageview');
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Spring的缓存支持"><span class="post-toc-text">Spring的缓存支持</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Spring支持的CacheManager"><span class="post-toc-text">Spring支持的CacheManager</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#声明式缓存注解"><span class="post-toc-text">声明式缓存注解</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#开启声明式缓存"><span class="post-toc-text">开启声明式缓存</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SpringBoot的支持"><span class="post-toc-text">SpringBoot的支持</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用案例"><span class="post-toc-text">使用案例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Cacheable"><span class="post-toc-text">@Cacheable</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#CachePut"><span class="post-toc-text">@CachePut</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#CacheEvict"><span class="post-toc-text">@CacheEvict</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Caching"><span class="post-toc-text">@Caching</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#CacheConfig"><span class="post-toc-text">@CacheConfig</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#JSR107"><span class="post-toc-text">JSR107</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Spring的缓存支持"><span class="post-toc-text">Spring的缓存支持</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Spring支持的CacheManager"><span class="post-toc-text">Spring支持的CacheManager</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#声明式缓存注解"><span class="post-toc-text">声明式缓存注解</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#开启声明式缓存"><span class="post-toc-text">开启声明式缓存</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SpringBoot的支持"><span class="post-toc-text">SpringBoot的支持</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用案例"><span class="post-toc-text">使用案例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Cacheable"><span class="post-toc-text">@Cacheable</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#CachePut"><span class="post-toc-text">@CachePut</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#CacheEvict"><span class="post-toc-text">@CacheEvict</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Caching"><span class="post-toc-text">@Caching</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#CacheConfig"><span class="post-toc-text">@CacheConfig</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
