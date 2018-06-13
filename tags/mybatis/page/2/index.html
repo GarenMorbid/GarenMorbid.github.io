@@ -24,6 +24,7 @@
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/mylive.css">
   <link rel="stylesheet" href="/css/mySetting.css">
   <script src="/js/pace.min.js"></script>
   <script src="/js/mySetting.js"></script>
@@ -307,13 +308,22 @@ ga('send', 'pageview');
 
         show_runtime();
 </script>
-<div id="mygirl" class="mygirl">
-	<div id="message">加载中……</div>
-	<div id="mumu" class="mumu"></div>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-user"></span>
+    <span class="fui-photo"></span>
+    <span class="fui-info-circle"></span>
+    <span class="fui-cross"></span>
 </div>
-<!--.end mygirl-->
-<span class="hitokoto" id="hitokoto" style="display:none">Loading...</span>
-<div id="hjsbox" style="display:none"></div>
+</div>
+<script src="/js/mylive-tips.js"></script>
+<script src="/js/mylive.js"></script>
+<script type="text/javascript">initModel(window.location.protocol+'//'+window.location.hostname+'/'+'json/')</script>
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script>
