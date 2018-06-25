@@ -3,20 +3,51 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Category: Spring | HDQ | Blog</title>
+  <title>SpringBoot—配置文件 | HDQ | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HDQ,HDQ's Blog" />
   
-  <meta name="description" content="Welcome to my blog.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="HDQ | Blog">
-<meta property="og:url" content="https://blog.hdqyf.club/categories/Spring/page/2/index.html">
+  <meta name="description" content="前言我们知道SpringBoot使用一个全局的配置文件，配置文件名是固定的：
+
+
+application.properties
+application.yml
+
+配置文件的作用：修改SpringBoot自动配置的默认值，SpringBoot在底层都给我们自动配置好，今天主要在这里介绍下YAML文件
+
+YAML简介YAML（YAML Ain’t Markup Language）
+
+​YAML A M">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot—配置文件">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/06/25/20180625-SpringBoot—配置文件/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
-<meta property="og:description" content="Welcome to my blog.">
+<meta property="og:description" content="前言我们知道SpringBoot使用一个全局的配置文件，配置文件名是固定的：
+
+
+application.properties
+application.yml
+
+配置文件的作用：修改SpringBoot自动配置的默认值，SpringBoot在底层都给我们自动配置好，今天主要在这里介绍下YAML文件
+
+YAML简介YAML（YAML Ain’t Markup Language）
+
+​YAML A M">
+<meta property="og:updated_time" content="2018-06-25T09:46:54.892Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HDQ | Blog">
-<meta name="twitter:description" content="Welcome to my blog.">
+<meta name="twitter:title" content="SpringBoot—配置文件">
+<meta name="twitter:description" content="前言我们知道SpringBoot使用一个全局的配置文件，配置文件名是固定的：
+
+
+application.properties
+application.yml
+
+配置文件的作用：修改SpringBoot自动配置的默认值，SpringBoot在底层都给我们自动配置好，今天主要在这里介绍下YAML文件
+
+YAML简介YAML（YAML Ain’t Markup Language）
+
+​YAML A M">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -137,35 +168,222 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap">
-  
-  
+        <section id="main" class="body-wrap"><article id="post-20180625-SpringBoot—配置文件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/17/20180517-SpringMVC深入—Json数据交互/" class="archive-article-date">
-  <time datetime="2018-05-17T05:10:31.000Z" itemprop="datePublished">05-17</time>
-</a>
-      
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/17/20180517-SpringMVC深入—Json数据交互/"  target="_blank"  >SpringMVC深入—Json数据交互</a>
+    <h1 class="post-title" itemprop="name">
+      SpringBoot—配置文件
     </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/Spring/">Spring</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-06-25
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
   
 
-    </header>
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
       
-        <div class="archive-post-footer">
+            
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">我们知道SpringBoot使用一个全局的配置文件，配置文件名是固定的：</font>
+
+<ul>
+<li>application.properties</li>
+<li>application.yml</li>
+</ul>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">配置文件的作用：修改SpringBoot自动配置的默认值，SpringBoot在底层都给我们自动配置好，今天主要在这里介绍下YAML文件</font>
+
+<h3 id="YAML简介"><a href="#YAML简介" class="headerlink" title="YAML简介"></a><font color="#0099ff" size="4" face="黑体">YAML简介</font></h3><font size="3" face="微软雅黑" style="line-height:2;background:yellow;"><strong>YAML（YAML Ain’t Markup Language）</strong></font>
+
+<p>​YAML A Markup Language：是一个标记语言</p>
+<p>​YAML isn’t Markup Language：不是一个标记语言；</p>
+<blockquote>
+<p>标记语言：</p>
+<ul>
+<li>以前的配置文件；大多都使用的是 xxxx.xml文件；</li>
+<li>YAML：以数据为中心，比json、xml等更适合做配置文件；</li>
+</ul>
+</blockquote>
+<p>YAML 例子：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attr">server:</span></div><div class="line"><span class="attr">  port:</span> <span class="number">8081</span></div></pre></td></tr></table></figure>
+<p>XML 例子</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">server</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">port</span>&gt;</span>8081<span class="tag">&lt;/<span class="name">port</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">server</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="YAML语法"><a href="#YAML语法" class="headerlink" title="YAML语法"></a><font color="#0099ff" size="4" face="黑体">YAML语法</font></h3><h4 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a><font color="#0099ff" size="3" face="黑体">基本语法</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">k:(空格)v：表示一对键值对（空格必须有）；<br>以<strong>空格</strong>的缩进来控制层级关系；只要是左对齐的一列数据，都是同一个层级的</font>
+
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">server:</span></div><div class="line"><span class="attr">    port:</span> <span class="number">8081</span></div><div class="line"><span class="attr">    path:</span> <span class="string">/hello</span></div></pre></td></tr></table></figure>
+<p><strong>属性和值也是大小写敏感</strong></p>
+<h4 id="值的写法"><a href="#值的写法" class="headerlink" title="值的写法"></a><font color="#0099ff" size="3" face="黑体">值的写法</font></h4><ul>
+<li>🍎 <strong>字面量：普通的值（数字，字符串，布尔）</strong></li>
+</ul>
+<p>k: v：字面直接来写；</p>
+<p>字符串默认不用加上单引号或者双引号；</p>
+<p>​””：双引号；不会转义字符串里面的特殊字符；特殊字符会作为本身想表示的意思</p>
+<p>​name: “zhangsan \n lisi”：输出；zhangsan 换行 lisi</p>
+<p>​’’：单引号；会转义特殊字符，特殊字符最终只是一个普通的字符串数据</p>
+<p>​name: ‘zhangsan \n lisi’：输出；zhangsan \n lisi</p>
+<ul>
+<li>🍎 <strong>对象、Map（属性和值）（键值对）</strong></li>
+</ul>
+<p>k: v：在下一行来写对象的属性和值的关系；注意缩进</p>
+<p>​对象还是k: v的方式</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="attr">friends:</span></div><div class="line"><span class="attr">    lastName:</span> <span class="string">zhangsan</span></div><div class="line"><span class="attr">    age:</span> <span class="number">20</span></div><div class="line"></div><div class="line"><span class="comment">#行内写法</span></div><div class="line"><span class="attr">friends:</span> <span class="string">&#123;lastName:</span> <span class="string">zhangsan,age:</span> <span class="number">18</span><span class="string">&#125;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>🍎 <strong>数组（List、Set）</strong></li>
+</ul>
+<p>用 - 值表示数组中的一个元素</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="attr">pets:</span></div><div class="line"><span class="bullet"> -</span> <span class="string">cat</span></div><div class="line"><span class="bullet"> -</span> <span class="string">dog</span></div><div class="line"><span class="bullet"> -</span> <span class="string">pig</span></div><div class="line"></div><div class="line"><span class="comment">#行内写法</span></div><div class="line"><span class="attr">pets:</span> <span class="string">[cat,dog,pig]</span></div></pre></td></tr></table></figure>
+<h3 id="配置文件值注入"><a href="#配置文件值注入" class="headerlink" title="配置文件值注入"></a><font color="#0099ff" size="4" face="黑体">配置文件值注入</font></h3><ol>
+<li>配置文件</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="attr">person:</span></div><div class="line"><span class="attr">    lastName:</span> <span class="string">hello</span></div><div class="line"><span class="attr">    age:</span> <span class="number">18</span></div><div class="line"><span class="attr">    boss:</span> <span class="literal">false</span></div><div class="line"><span class="attr">    birth:</span> <span class="number">2017</span><span class="string">/12/12</span></div><div class="line"><span class="attr">    maps:</span> <span class="string">&#123;k1:</span> <span class="string">v1,k2:</span> <span class="number">12</span><span class="string">&#125;</span></div><div class="line"><span class="attr">    lists:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">lisi</span></div><div class="line"><span class="bullet">      -</span> <span class="string">zhaoliu</span></div><div class="line"><span class="attr">    dog:</span></div><div class="line"><span class="attr">      name:</span> <span class="string">小狗</span></div><div class="line"><span class="attr">      age:</span> <span class="number">12</span></div></pre></td></tr></table></figure>
+<ol>
+<li>JavaBean</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 将配置文件中配置的每一个属性的值，映射到这个组件中</div><div class="line"> * <span class="doctag">@ConfigurationProperties</span>：告诉SpringBoot将本类中的所有属性和配置文件中相关的配置进行绑定；</div><div class="line"> *      prefix = "person"：配置文件中哪个下面的所有属性进行一一映射</div><div class="line"> *</div><div class="line"> * <span class="doctag">@Component</span> 只有这个组件是容器中的组件，才能容器提供的<span class="doctag">@ConfigurationProperties</span>功能；</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"person"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> String lastName;</div><div class="line">    <span class="keyword">private</span> Integer age;</div><div class="line">    <span class="keyword">private</span> Boolean boss;</div><div class="line">    <span class="keyword">private</span> Date birth;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Map&lt;String,Object&gt; maps;</div><div class="line">    <span class="keyword">private</span> List&lt;Object&gt; lists;</div><div class="line">    <span class="keyword">private</span> Dog dog;</div></pre></td></tr></table></figure>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年06月25日 17:46</p>
+	<p>原始链接： <a class="post-url" href="/2018/06/25/20180625-SpringBoot—配置文件/" title="SpringBoot—配置文件">https://blog.hdqyf.club/2018/06/25/20180625-SpringBoot—配置文件/</a></p>
+        <footer>
+            <a href="https://blog.hdqyf.club">
+                <img src="/images/logo.png" alt="Garen">
+                Garen
+            </a>
+        </footer>
+    </div>
+</div>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/06/25/20180625-SpringBoot—配置文件/&title=《SpringBoot—配置文件》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/05/20/Cg0DnP.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/06/25/20180625-SpringBoot—配置文件/&title=《SpringBoot—配置文件》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+              <i class="fa fa-star"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/06/25/20180625-SpringBoot—配置文件/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SpringBoot—配置文件》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/06/25/20180625-SpringBoot—配置文件/&via=https://blog.hdqyf.club" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/06/25/20180625-SpringBoot—配置文件/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/06/25/20180625-SpringBoot—配置文件/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
             
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
@@ -178,272 +396,33 @@ ga('send', 'pageview');
       
   </li>
 
-        </div>
-      
+        </ul>
+        
+    </footer>
   </div>
 </article>
 
-  
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#YAML简介"><span class="post-toc-text">YAML简介</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#YAML语法"><span class="post-toc-text">YAML语法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#基本语法"><span class="post-toc-text">基本语法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#值的写法"><span class="post-toc-text">值的写法</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置文件值注入"><span class="post-toc-text">配置文件值注入</span></a></li></ol>
+        </nav>
+    </aside>
     
+
+<nav id="article-nav">
+  
+  
+    <a href="/2018/06/15/20180615-Weekly Diary—设计模式(Design Patterns)/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Weekly Diary—设计模式(Design Patterns)</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/16/20180516-SpringMVC深入—拦截器/" class="archive-article-date">
-  <time datetime="2018-05-16T06:59:28.000Z" itemprop="datePublished">05-16</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/16/20180516-SpringMVC深入—拦截器/"  target="_blank"  >SpringMVC深入—拦截器</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/Java/" class="color5">Java</a>
-      
-    <a href="/tags/框架/" class="color3">框架</a>
-      
-    <a href="/tags/Spring/" class="color2">Spring</a>
-      
-  </li>
-
-        </div>
-      
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/16/20180516-SpringMVC深入—异常处理/" class="archive-article-date">
-  <time datetime="2018-05-16T06:25:07.000Z" itemprop="datePublished">05-16</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/16/20180516-SpringMVC深入—异常处理/"  target="_blank"  >SpringMVC深入—异常处理</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/Java/" class="color5">Java</a>
-      
-    <a href="/tags/框架/" class="color3">框架</a>
-      
-    <a href="/tags/Spring/" class="color2">Spring</a>
-      
-  </li>
-
-        </div>
-      
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/14/20180514-SpringMVC深入—文件上传/" class="archive-article-date">
-  <time datetime="2018-05-14T12:00:09.000Z" itemprop="datePublished">05-14</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/14/20180514-SpringMVC深入—文件上传/"  target="_blank"  >SpringMVC深入—文件上传</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/Java/" class="color5">Java</a>
-      
-    <a href="/tags/框架/" class="color3">框架</a>
-      
-    <a href="/tags/Spring/" class="color2">Spring</a>
-      
-  </li>
-
-        </div>
-      
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/14/20180514-SpringMVC深入—SpringMVC配置详解/" class="archive-article-date">
-  <time datetime="2018-05-14T02:04:26.000Z" itemprop="datePublished">05-14</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/14/20180514-SpringMVC深入—SpringMVC配置详解/"  target="_blank"  >SpringMVC深入—SpringMVC配置详解</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/Java/" class="color5">Java</a>
-      
-    <a href="/tags/框架/" class="color3">框架</a>
-      
-    <a href="/tags/Spring/" class="color2">Spring</a>
-      
-  </li>
-
-        </div>
-      
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/10/20180510-框架理论深入—Spring中的事务/" class="archive-article-date">
-  <time datetime="2018-05-10T05:47:18.000Z" itemprop="datePublished">05-10</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/10/20180510-框架理论深入—Spring中的事务/"  target="_blank"  >框架理论深入—Spring中的事务</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/Java/" class="color5">Java</a>
-      
-    <a href="/tags/框架/" class="color3">框架</a>
-      
-    <a href="/tags/Spring/" class="color2">Spring</a>
-      
-  </li>
-
-        </div>
-      
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/09/20180509-学渣尝鲜—SpringMVC实现国际化/" class="archive-article-date">
-  <time datetime="2018-05-09T05:18:49.000Z" itemprop="datePublished">05-09</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/09/20180509-学渣尝鲜—SpringMVC实现国际化/"  target="_blank"  >学渣尝鲜—SpringMVC实现国际化</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/Java/" class="color5">Java</a>
-      
-    <a href="/tags/框架/" class="color3">框架</a>
-      
-    <a href="/tags/Spring/" class="color2">Spring</a>
-      
-  </li>
-
-        </div>
-      
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/05/08/20180508-框架理论深入—AOP面向切面/" class="archive-article-date">
-  <time datetime="2018-05-08T04:56:48.000Z" itemprop="datePublished">05-08</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/08/20180508-框架理论深入—AOP面向切面/"  target="_blank"  >框架理论深入—AOP面向切面</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/Java/" class="color5">Java</a>
-      
-    <a href="/tags/框架/" class="color3">框架</a>
-      
-    <a href="/tags/Spring/" class="color2">Spring</a>
-      
-  </li>
-
-        </div>
-      
-  </div>
-</article>
-
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/categories/Spring/"><< Prev</a><a class="page-number" href="/categories/Spring/">1</a><span class="page-number current">2</span><a class="page-number" href="/categories/Spring/page/3/">3</a><a class="page-number" href="/categories/Spring/page/4/">4</a><a class="extend next" rel="next" href="/categories/Spring/page/3/">Next >></a>
-  </nav>
 </section>
         
       </div>
