@@ -3,20 +3,40 @@
 <head>
   <meta charset="utf-8">
   
-  <title>HDQ | Blog</title>
+  <title>Weekly Diary—浅谈Java中final、finalize、finally | HDQ | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HDQ,HDQ's Blog" />
   
-  <meta name="description" content="Welcome to my blog.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="HDQ | Blog">
-<meta property="og:url" content="https://blog.hdqyf.club/page/6/index.html">
+  <meta name="description" content="finalfinal关键字可以用于类，方法，变量前，用来表示该关键字修饰的类，方法，变量具有不可变的特性
+1.final关键字用于基本数据类型前：这时表明该关键字修饰的变量是一个常量，在定义后该变量的值就不能被修改
+
+2.final关键字用于方法声明前：这时意味着该方法时最终方法，只能被调用，不能被覆盖，但是可以被重载
+
+3.final关键字用于类名前：此时该类被称为最终类，该类不能被其他类继承">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Weekly Diary—浅谈Java中final、finalize、finally">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/08/06/20180806-Weekly Diary—浅谈Java中final、finalize、finally/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
-<meta property="og:description" content="Welcome to my blog.">
+<meta property="og:description" content="finalfinal关键字可以用于类，方法，变量前，用来表示该关键字修饰的类，方法，变量具有不可变的特性
+1.final关键字用于基本数据类型前：这时表明该关键字修饰的变量是一个常量，在定义后该变量的值就不能被修改
+
+2.final关键字用于方法声明前：这时意味着该方法时最终方法，只能被调用，不能被覆盖，但是可以被重载
+
+3.final关键字用于类名前：此时该类被称为最终类，该类不能被其他类继承">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/06/PrwJJS.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/06/PrwGi8.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/06/Prw3If.png">
+<meta property="og:updated_time" content="2018-08-06T09:56:38.905Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HDQ | Blog">
-<meta name="twitter:description" content="Welcome to my blog.">
+<meta name="twitter:title" content="Weekly Diary—浅谈Java中final、finalize、finally">
+<meta name="twitter:description" content="finalfinal关键字可以用于类，方法，变量前，用来表示该关键字修饰的类，方法，变量具有不可变的特性
+1.final关键字用于基本数据类型前：这时表明该关键字修饰的变量是一个常量，在定义后该变量的值就不能被修改
+
+2.final关键字用于方法声明前：这时意味着该方法时最终方法，只能被调用，不能被覆盖，但是可以被重载
+
+3.final关键字用于类名前：此时该类被称为最终类，该类不能被其他类继承">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/08/06/PrwJJS.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -137,53 +157,179 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap">
-  
-    <article id="post-20180507-框架理论深入—Bean的装配" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-20180806-Weekly Diary—浅谈Java中final、finalize、finally" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/07/20180507-框架理论深入—Bean的装配/"  target="_blank"  >框架理论深入—Bean的装配</a>
+    <h1 class="post-title" itemprop="name">
+      Weekly Diary—浅谈Java中final、finalize、finally
     </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/Java/">Java</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-08-06
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
   
 
           
-              <span class="header-cate">
-                <i class="fa fa-map-marker"></i>
-                  
-                  <a href="/categories/Spring/">Spring</a>
-                  
-              </span>
-          
       </header>
     
-    <div class="article-entry " itemprop="articleBody">
+    <div class="article-entry post-content" itemprop="articleBody">
       
-        <div class="article-img">
-            <a href="/2018/05/07/20180507-框架理论深入—Bean的装配/"  target="_blank" >
-                
-                <img src="https://s1.ax1x.com/2018/04/20/CKKffK.jpg" alt="框架理论深入—Bean的装配" title="框架理论深入—Bean的装配">
-                
+            
+            <h3 id="final"><a href="#final" class="headerlink" title="final"></a><font color="#0099ff" size="4" face="黑体">final</font></h3><p>final关键字可以用于类，方法，变量前，用来表示该关键字修饰的类，方法，变量具有不可变的特性</p>
+<p>1.final关键字用于基本数据类型前：这时表明该关键字修饰的变量是一个常量，在定义后该变量的值就不能被修改</p>
+<p><img src="https://s1.ax1x.com/2018/08/06/PrwJJS.png" alt=""><br></p>
+<p>2.final关键字用于方法声明前：这时意味着该方法时最终方法，只能被调用，不能被覆盖，但是可以被重载</p>
+<p><img src="https://s1.ax1x.com/2018/08/06/PrwGi8.png" alt=""><br></p>
+<p>3.final关键字用于类名前：此时该类被称为最终类，该类不能被其他类继承</p>
+<p><img src="https://s1.ax1x.com/2018/08/06/Prw3If.png" alt=""><br></p>
+<h3 id="finalize"><a href="#finalize" class="headerlink" title="finalize"></a><font color="#0099ff" size="4" face="黑体">finalize</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;Java 技术允许使用 finalize() 方法在垃圾收集器将对象从内存中清除出去之前做必要的清理工作。这个方法是由垃圾收集器在确定这个对象没有被引用时对这个对象调用的。它是在 Object 类中定义的，因此所有的类都继承了它。子类覆盖 finalize() 方法以整理系统资源或者执行其他清理工作。finalize() 方法是在垃圾收集器删除对象之前对这个对象调用的。在实际应用中，不要依赖使用该方法回收任何短缺的资源，这是因为很难知道这个方法什么时候被调用。</font>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">output</span><span class="params">(String name)</span></span>&#123;</div><div class="line">    System.out.println(name);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stu</span> <span class="keyword">extends</span> <span class="title">People</span></span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">output</span><span class="params">(String name,<span class="keyword">int</span> id)</span></span>&#123;<span class="comment">//可以被重载</span></div><div class="line">        System.out.println(name);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable</span>&#123;</div><div class="line">        <span class="keyword">super</span>.finalize();  </div><div class="line">        System.out.println(<span class="string">"finalize method was called!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="finally"><a href="#finally" class="headerlink" title="finally"></a><font color="#0099ff" size="4" face="黑体">finally</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;在异常处理时提供 finally 块来执行任何清除操作。如果抛出一个异常，那么相匹配的 catch 子句就会执行，然后控制就会进入 finally 块（如果有的话）.<br>&emsp;&emsp;假如我们打开了一个文件，但在处理文件过程中发生异常，这时文件还没有被关闭，此时就会产生资源回收问题。对此，java提供了一种好的解决方案，那就是finally子句，finally子句中的语句是一定会被执行的，所以我们只要把前面说的文件关闭的语句放在finally子句中无论在读写文件中是否遇到异常退出，文件关闭语句都会执行，保证了资源的合理回收。</font>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Finally</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">fileWith</span><span class="params">()</span></span>&#123;</div><div class="line">        InputStream in = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            in = <span class="keyword">new</span> FileInputStream(<span class="string">"garen.txt"</span>);</div><div class="line">            <span class="comment">//其他操作</span></div><div class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;<span class="keyword">finally</span>&#123;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                in.close();</div><div class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年08月06日 17:56</p>
+	<p>原始链接： <a class="post-url" href="/2018/08/06/20180806-Weekly Diary—浅谈Java中final、finalize、finally/" title="Weekly Diary—浅谈Java中final、finalize、finally">https://blog.hdqyf.club/2018/08/06/20180806-Weekly Diary—浅谈Java中final、finalize、finally/</a></p>
+        <footer>
+            <a href="https://blog.hdqyf.club">
+                <img src="/images/logo.png" alt="Garen">
+                Garen
             </a>
-        </div>
-        <div class="article-feed">
-            <p>
-                基本装配使用
-基于配置文件
-1234&lt;bean id="实例的名字，唯一的" class="实例的类"&gt;    &lt;property name="基本类型属性名" value="值"&gt;&lt;/property&gt;    &lt;property name="引用属性名" ref="该类对应的实例ID"&gt;&lt;/property&gt;&...
-            </p>
-        </div>
+        </footer>
+    </div>
+</div>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
       
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
         
     </div>
     <footer class="article-footer">
         
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/08/06/20180806-Weekly Diary—浅谈Java中final、finalize、finally/&title=《Weekly Diary—浅谈Java中final、finalize、finally》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/08/06/Pr08mR.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/08/06/20180806-Weekly Diary—浅谈Java中final、finalize、finally/&title=《Weekly Diary—浅谈Java中final、finalize、finally》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+              <i class="fa fa-star"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/08/06/20180806-Weekly Diary—浅谈Java中final、finalize、finally/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Weekly Diary—浅谈Java中final、finalize、finally》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/08/06/20180806-Weekly Diary—浅谈Java中final、finalize、finally/&via=https://blog.hdqyf.club" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/08/06/20180806-Weekly Diary—浅谈Java中final、finalize、finally/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/08/06/20180806-Weekly Diary—浅谈Java中final、finalize、finally/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
         <ul class="article-footer-menu">
-            
-                <li><i class="fa fa-calendar"></i>2018-05-07</li>
             
             
   <li class="article-footer-tags">
@@ -191,493 +337,35 @@ ga('send', 'pageview');
       
     <a href="/tags/Java/" class="color5">Java</a>
       
-    <a href="/tags/框架/" class="color3">框架</a>
-      
-    <a href="/tags/Spring/" class="color2">Spring</a>
-      
   </li>
 
         </ul>
-        
-            <a href="/2018/05/07/20180507-框架理论深入—Bean的装配/#more" class="article-more-link"  target="_blank" >more&gt;&gt;</a>
         
     </footer>
   </div>
 </article>
 
 
-  
-    <article id="post-20180504-学渣尝鲜—自定义MVC框架" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#final"><span class="post-toc-text">final</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#finalize"><span class="post-toc-text">finalize</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#finally"><span class="post-toc-text">finally</span></a></li></ol>
+        </nav>
+    </aside>
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/04/20180504-学渣尝鲜—自定义MVC框架/"  target="_blank"  >学渣尝鲜—自定义MVC框架</a>
-    </h1>
-  
 
-          
-              <span class="header-cate">
-                <i class="fa fa-map-marker"></i>
-                  
-                  <a href="/categories/MVC/">MVC</a>
-                  
-              </span>
-          
-      </header>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/08/06/20180806-Weekly Diary—集合各实现类的底层实现原理/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Weekly Diary—集合各实现类的底层实现原理</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
     
-    <div class="article-entry " itemprop="articleBody">
-      
-        <div class="article-img">
-            <a href="/2018/05/04/20180504-学渣尝鲜—自定义MVC框架/"  target="_blank" >
-                
-                <img src="https://s1.ax1x.com/2018/05/04/Ctw72n.jpg" alt="学渣尝鲜—自定义MVC框架" title="学渣尝鲜—自定义MVC框架">
-                
-            </a>
-        </div>
-        <div class="article-feed">
-            <p>
-                前言&emsp;&emsp;MVC是三个单词的缩写，这三个单词分别为：模型（Model）、视图(View)和控制(Controller)。一种软件设计典范，用一种业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。
-
-开发自己的MVC框架第一步：准备jar包
-博主也为懒人准备了下载地址 ...
-            </p>
-        </div>
-      
-        
-    </div>
-    <footer class="article-footer">
-        
-        <ul class="article-footer-menu">
-            
-                <li><i class="fa fa-calendar"></i>2018-05-04</li>
-            
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/Java/" class="color5">Java</a>
-      
-    <a href="/tags/框架/" class="color3">框架</a>
-      
-    <a href="/tags/MVC/" class="color4">MVC</a>
-      
-  </li>
-
-        </ul>
-        
-            <a href="/2018/05/04/20180504-学渣尝鲜—自定义MVC框架/#more" class="article-more-link"  target="_blank" >more&gt;&gt;</a>
-        
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article id="post-20180503-CorelDRAW 2018 v20.0.0.633 官方正式版" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/03/20180503-CorelDRAW 2018 v20.0.0.633 官方正式版/"  target="_blank"  >CorelDRAW 2018 v20.0.0.633 官方正式版</a>
-    </h1>
-  
-
-          
-              <span class="header-cate">
-                <i class="fa fa-map-marker"></i>
-                  
-                  <a href="/categories/资源/">资源</a>
-                  
-              </span>
-          
-      </header>
-    
-    <div class="article-entry " itemprop="articleBody">
-      
-        <div class="article-img">
-            <a href="/2018/05/03/20180503-CorelDRAW 2018 v20.0.0.633 官方正式版/"  target="_blank" >
-                
-                <img src="https://s1.ax1x.com/2018/05/03/CYzCXd.jpg" alt="CorelDRAW 2018 v20.0.0.633 官方正式版" title="CorelDRAW 2018 v20.0.0.633 官方正式版">
-                
-            </a>
-        </div>
-        <div class="article-feed">
-            <p>
-                前言&emsp;&emsp;矢量图形设计软件CorelDRAW Graphics Suite 2018 版本于2018年4月初推出，Corel公司官网CorelDRAW 2018 在本月中旬已经全球正式发售，国内售价8200元人民币，感兴趣的可以体验。2018 版本带来了全新对称绘图模式、图块阴影工具、位图透视、以及支持发布至WordPress等令人印象深刻的创意功能！&...
-            </p>
-        </div>
-      
-        
-    </div>
-    <footer class="article-footer">
-        
-        <ul class="article-footer-menu">
-            
-                <li><i class="fa fa-calendar"></i>2018-05-03</li>
-            
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/资源/" class="color3">资源</a>
-      
-    <a href="/tags/图像处理/" class="color5">图像处理</a>
-      
-  </li>
-
-        </ul>
-        
-            <a href="/2018/05/03/20180503-CorelDRAW 2018 v20.0.0.633 官方正式版/#more" class="article-more-link"  target="_blank" >more&gt;&gt;</a>
-        
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article id="post-20180501-Oracle常用函数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/01/20180501-Oracle常用函数/"  target="_blank"  >Oracle常用函数</a>
-    </h1>
-  
-
-          
-              <span class="header-cate">
-                <i class="fa fa-map-marker"></i>
-                  
-                  <a href="/categories/Oracle/">Oracle</a>
-                  
-              </span>
-          
-      </header>
-    
-    <div class="article-entry " itemprop="articleBody">
-      
-        <div class="article-img">
-            <a href="/2018/05/01/20180501-Oracle常用函数/"  target="_blank" >
-                
-                <img src="https://s1.ax1x.com/2018/03/23/9bM86U.jpg" alt="Oracle常用函数" title="Oracle常用函数">
-                
-            </a>
-        </div>
-        <div class="article-feed">
-            <p>
-                一、通用函数NULLIF（表达式1，表达式2）&emsp;如果表达式1和表达式2相等则返回空值，如果表达式1和表达式2不相等则返回表达式1的结果。注意：表达式1和表达式2应该是相同数据类型或能隐含转换成相同数据类型，表达式1不能用字符null,但’’不报错COALESCE(表达式1,表达式2,…,表达式n)&emsp;n&gt;=2,此表达式的功能为返回第一个不为空的表达...
-            </p>
-        </div>
-      
-        
-    </div>
-    <footer class="article-footer">
-        
-        <ul class="article-footer-menu">
-            
-                <li><i class="fa fa-calendar"></i>2018-05-01</li>
-            
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/数据库/" class="color4">数据库</a>
-      
-    <a href="/tags/Oracle/" class="color2">Oracle</a>
-      
-  </li>
-
-        </ul>
-        
-            <a href="/2018/05/01/20180501-Oracle常用函数/#more" class="article-more-link"  target="_blank" >more&gt;&gt;</a>
-        
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article id="post-20180427-会声会影2018正式版v21.2.0.113完整旗舰版" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/27/20180427-会声会影2018正式版v21.2.0.113完整旗舰版/"  target="_blank"  >会声会影2018正式版v21.2.0.113完整旗舰版</a>
-    </h1>
-  
-
-          
-              <span class="header-cate">
-                <i class="fa fa-map-marker"></i>
-                  
-                  <a href="/categories/资源/">资源</a>
-                  
-              </span>
-          
-      </header>
-    
-    <div class="article-entry " itemprop="articleBody">
-      
-        <div class="article-img">
-            <a href="/2018/04/27/20180427-会声会影2018正式版v21.2.0.113完整旗舰版/"  target="_blank" >
-                
-                <img src="https://s1.ax1x.com/2018/04/27/C3NkNV.jpg" alt="会声会影2018正式版v21.2.0.113完整旗舰版" title="会声会影2018正式版v21.2.0.113完整旗舰版">
-                
-            </a>
-        </div>
-        <div class="article-feed">
-            <p>
-                前言&emsp;&emsp;会声会影 Corel VideoStudio 2018 版本于2018年2月2号推出在2月13号全球正式发布，Corel公司官网正式发售的会声会影2018完整旗舰版，售价99美元！会声会影2018正式版增加了诸多全新功能，例如：镜头校正/鱼眼校正功能、分割视频画面模块、360度视频编辑、轨透明度等等，另外新增2,000多种独一无二的视频特效、滤...
-            </p>
-        </div>
-      
-        
-    </div>
-    <footer class="article-footer">
-        
-        <ul class="article-footer-menu">
-            
-                <li><i class="fa fa-calendar"></i>2018-04-27</li>
-            
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/资源/" class="color3">资源</a>
-      
-    <a href="/tags/视频/" class="color3">视频</a>
-      
-  </li>
-
-        </ul>
-        
-            <a href="/2018/04/27/20180427-会声会影2018正式版v21.2.0.113完整旗舰版/#more" class="article-more-link"  target="_blank" >more&gt;&gt;</a>
-        
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article id="post-20180424-框架理论深入—IOC与DI详解" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/24/20180424-框架理论深入—IOC与DI详解/"  target="_blank"  >框架理论深入—IOC与DI详解</a>
-    </h1>
-  
-
-          
-              <span class="header-cate">
-                <i class="fa fa-map-marker"></i>
-                  
-                  <a href="/categories/Spring/">Spring</a>
-                  
-              </span>
-          
-      </header>
-    
-    <div class="article-entry " itemprop="articleBody">
-      
-        <div class="article-img">
-            <a href="/2018/04/24/20180424-框架理论深入—IOC与DI详解/"  target="_blank" >
-                
-                <img src="https://s1.ax1x.com/2018/04/20/CKKffK.jpg" alt="框架理论深入—IOC与DI详解" title="框架理论深入—IOC与DI详解">
-                
-            </a>
-        </div>
-        <div class="article-feed">
-            <p>
-                概念IOC（控制反转）：基于OO的设计原则（Don`t call us, we`ll call you 别来找我，我会来找你）；程序中各个组件之间的关系，不是由程序代码直接操控的，而是有Spring容器控制；控制权从应用代码移交到Spring容器上。
-DI（依赖注入）：Spring容器中有很多bean的实例，他会将符合依赖关系的对象通过属性注入或者构造注入的方式进行关联
-...
-            </p>
-        </div>
-      
-        
-    </div>
-    <footer class="article-footer">
-        
-        <ul class="article-footer-menu">
-            
-                <li><i class="fa fa-calendar"></i>2018-04-24</li>
-            
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/Java/" class="color5">Java</a>
-      
-    <a href="/tags/框架/" class="color3">框架</a>
-      
-    <a href="/tags/Spring/" class="color2">Spring</a>
-      
-  </li>
-
-        </ul>
-        
-            <a href="/2018/04/24/20180424-框架理论深入—IOC与DI详解/#more" class="article-more-link"  target="_blank" >more&gt;&gt;</a>
-        
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article id="post-20180418-框架理论深入—Spring框架详解" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/20/20180418-框架理论深入—Spring框架详解/"  target="_blank"  >框架理论深入—Spring框架详解</a>
-    </h1>
-  
-
-          
-              <span class="header-cate">
-                <i class="fa fa-map-marker"></i>
-                  
-                  <a href="/categories/Spring/">Spring</a>
-                  
-              </span>
-          
-      </header>
-    
-    <div class="article-entry " itemprop="articleBody">
-      
-        <div class="article-img">
-            <a href="/2018/04/20/20180418-框架理论深入—Spring框架详解/"  target="_blank" >
-                
-                <img src="https://s1.ax1x.com/2018/04/20/CKKffK.jpg" alt="框架理论深入—Spring框架详解" title="框架理论深入—Spring框架详解">
-                
-            </a>
-        </div>
-        <div class="article-feed">
-            <p>
-                前言博主经过种种实战小案例之后，如今正准备深入框架理论，感谢有博友们的陪伴~
-
-Spring框架特点Spring文档 👉 Spring官方文档
-官方描述对Spring Framework的描述：The Spring Framework is a lightweight solution and a potential one-stop-shop for building...
-            </p>
-        </div>
-      
-        
-    </div>
-    <footer class="article-footer">
-        
-        <ul class="article-footer-menu">
-            
-                <li><i class="fa fa-calendar"></i>2018-04-20</li>
-            
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/Java/" class="color5">Java</a>
-      
-    <a href="/tags/框架/" class="color3">框架</a>
-      
-    <a href="/tags/Spring/" class="color2">Spring</a>
-      
-  </li>
-
-        </ul>
-        
-            <a href="/2018/04/20/20180418-框架理论深入—Spring框架详解/#more" class="article-more-link"  target="_blank" >more&gt;&gt;</a>
-        
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article id="post-20180418-SSM集成应用—SSM整合案例" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/18/20180418-SSM集成应用—SSM整合案例/"  target="_blank"  >SSM集成应用—SSM整合案例</a>
-    </h1>
-  
-
-          
-              <span class="header-cate">
-                <i class="fa fa-map-marker"></i>
-                  
-                  <a href="/categories/Spring/">Spring</a>
-                  
-              </span>
-          
-      </header>
-    
-    <div class="article-entry " itemprop="articleBody">
-      
-        <div class="article-img">
-            <a href="/2018/04/18/20180418-SSM集成应用—SSM整合案例/"  target="_blank" >
-                
-                <img src="https://s1.ax1x.com/2018/04/08/CPj43V.jpg" alt="SSM集成应用—SSM整合案例" title="SSM集成应用—SSM整合案例">
-                
-            </a>
-        </div>
-        <div class="article-feed">
-            <p>
-                前言基于前面的SSM整合配置文件，博主带大家来做一个小案例，来练练手。😁😁😁任务描述：数据库有一张作者表（Author），这张表包含属性：id、username、password、email、bio，使用SSM整合来完成这张作者表的查询所有作者操作，其实你们也可以衍生删除、修改、增加等操作，都是大同小异~
-
-编写Author实体类123456789101112131...
-            </p>
-        </div>
-      
-        
-    </div>
-    <footer class="article-footer">
-        
-        <ul class="article-footer-menu">
-            
-                <li><i class="fa fa-calendar"></i>2018-04-18</li>
-            
-            
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/Java/" class="color5">Java</a>
-      
-    <a href="/tags/框架/" class="color3">框架</a>
-      
-    <a href="/tags/Spring/" class="color2">Spring</a>
-      
-  </li>
-
-        </ul>
-        
-            <a href="/2018/04/18/20180418-SSM集成应用—SSM整合案例/#more" class="article-more-link"  target="_blank" >more&gt;&gt;</a>
-        
-    </footer>
-  </div>
-</article>
-
-
-  
-
-
-  <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/5/"><< Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/7/">Next >></a>
-  </nav>
 </section>
         
       </div>
@@ -744,7 +432,7 @@ Spring框架特点Spring文档 👉 Spring官方文档
   var mihoConfig = {
       root: "https://blog.hdqyf.club",
       animate: true,
-      isHome: true,
+      isHome: false,
       share: true,
       reward: 1
   }
@@ -846,6 +534,11 @@ Spring框架特点Spring文档 👉 Spring官方文档
   <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
   <script src="/js/animate.js"></script>
 
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
 
   </div>
 </body>
