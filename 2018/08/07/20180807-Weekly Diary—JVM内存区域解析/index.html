@@ -3,23 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>文件搜索利器everything | HDQ | Blog</title>
+  <title>Weekly Diary—JVM内存区域解析 | HDQ | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HDQ,HDQ's Blog" />
   
-  <meta name="description" content="前言最快文件搜索利器Everything时隔半年迎来v1.4.1正式版，修复了诸多问题，详情见更新日志。Everything 速度极快，生成的索引文件极小，索引之后，简洁的界面呈现在你的面前，状态栏中会显示索引的数量！Everything是速度最快的文件名搜索工具，其速度之快令人震惊，百G硬盘几十万个文件，可以在几秒钟之内完成索引；文件名搜索瞬间呈现结果。它小巧免费，界面简洁，实时跟踪更新，轻松分">
+  <meta name="description" content="前言&amp;emsp;&amp;emsp;Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域。这些区域都有各自的用途，以及创建和销毁的时间。有的区域随着虚拟机进程的启动而存在，有些区域则是依赖用户线程的启动和结束而建立和销毁。&amp;emsp;&amp;emsp;JVM内存模型可以分为两个部分，如下图所示，堆和方法区是所有线程共有的，而虚拟机栈，本地方法栈和程序计数器则是线程私有的。下面我们">
 <meta property="og:type" content="article">
-<meta property="og:title" content="文件搜索利器everything">
-<meta property="og:url" content="https://blog.hdqyf.club/2018/03/13/20180313-文件搜索利器Everything v1.4.1.896 正式版/index.html">
+<meta property="og:title" content="Weekly Diary—JVM内存区域解析">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/08/07/20180807-Weekly Diary—JVM内存区域解析/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
-<meta property="og:description" content="前言最快文件搜索利器Everything时隔半年迎来v1.4.1正式版，修复了诸多问题，详情见更新日志。Everything 速度极快，生成的索引文件极小，索引之后，简洁的界面呈现在你的面前，状态栏中会显示索引的数量！Everything是速度最快的文件名搜索工具，其速度之快令人震惊，百G硬盘几十万个文件，可以在几秒钟之内完成索引；文件名搜索瞬间呈现结果。它小巧免费，界面简洁，实时跟踪更新，轻松分">
-<meta property="og:image" content="https://s1.ax1x.com/2018/03/13/9fhftf.jpg">
-<meta property="og:updated_time" content="2018-03-23T11:02:45.141Z">
+<meta property="og:description" content="前言&amp;emsp;&amp;emsp;Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域。这些区域都有各自的用途，以及创建和销毁的时间。有的区域随着虚拟机进程的启动而存在，有些区域则是依赖用户线程的启动和结束而建立和销毁。&amp;emsp;&amp;emsp;JVM内存模型可以分为两个部分，如下图所示，堆和方法区是所有线程共有的，而虚拟机栈，本地方法栈和程序计数器则是线程私有的。下面我们">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/07/PsPfTU.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/07/PsP4kF.png">
+<meta property="og:updated_time" content="2018-08-07T08:00:17.981Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="文件搜索利器everything">
-<meta name="twitter:description" content="前言最快文件搜索利器Everything时隔半年迎来v1.4.1正式版，修复了诸多问题，详情见更新日志。Everything 速度极快，生成的索引文件极小，索引之后，简洁的界面呈现在你的面前，状态栏中会显示索引的数量！Everything是速度最快的文件名搜索工具，其速度之快令人震惊，百G硬盘几十万个文件，可以在几秒钟之内完成索引；文件名搜索瞬间呈现结果。它小巧免费，界面简洁，实时跟踪更新，轻松分">
-<meta name="twitter:image" content="https://s1.ax1x.com/2018/03/13/9fhftf.jpg">
+<meta name="twitter:title" content="Weekly Diary—JVM内存区域解析">
+<meta name="twitter:description" content="前言&amp;emsp;&amp;emsp;Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域。这些区域都有各自的用途，以及创建和销毁的时间。有的区域随着虚拟机进程的启动而存在，有些区域则是依赖用户线程的启动和结束而建立和销毁。&amp;emsp;&amp;emsp;JVM内存模型可以分为两个部分，如下图所示，堆和方法区是所有线程共有的，而虚拟机栈，本地方法栈和程序计数器则是线程私有的。下面我们">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/08/07/PsPfTU.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -140,14 +141,14 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-20180313-文件搜索利器Everything v1.4.1.896 正式版" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-20180807-Weekly Diary—JVM内存区域解析" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      文件搜索利器everything
+      Weekly Diary—JVM内存区域解析
     </h1>
     <div class="post-title-bar">
       <ul>
@@ -155,12 +156,12 @@ ga('send', 'pageview');
               <li>
                   <i class="fa fa-book"></i>
                   
-                      <a href="/categories/效率/">效率</a>
+                      <a href="/categories/Java/">Java</a>
                   
               </li>
           
         <li>
-          <i class="fa fa-calendar"></i>  2018-03-13
+          <i class="fa fa-calendar"></i>  2018-08-07
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -176,18 +177,54 @@ ga('send', 'pageview');
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font size="3" face="微软雅黑" style="line-height:2;">最快文件搜索利器<strong>Everything</strong>时隔半年迎来v1.4.1正式版，修复了诸多问题，详情见更新日志。Everything 速度极快，生成的索引文件极小，索引之后，简洁的界面呈现在你的面前，状态栏中会显示索引的数量！<br><strong>Everything</strong>是速度最快的文件名搜索工具，其速度之快令人震惊，百G硬盘几十万个文件，可以在几秒钟之内完成索引；文件名搜索瞬间呈现结果。<strong>它小巧免费，界面简洁，实时跟踪更新，轻松分享文件索引，支持通配符、正则表达式，可以通过HTTP或FTP分享搜索结果。Everything只适用NTFS文件系统 ^_^ </strong></font>
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域。这些区域都有各自的用途，以及创建和销毁的时间。有的区域随着虚拟机进程的启动而存在，有些区域则是依赖用户线程的启动和结束而建立和销毁。<br>&emsp;&emsp;JVM内存模型可以分为两个部分，如下图所示，堆和方法区是所有线程共有的，而虚拟机栈，本地方法栈和程序计数器则是线程私有的。下面我们就来分析一下这些不同区域的作用。</font>
 
-<p><img src="https://s1.ax1x.com/2018/03/13/9fhftf.jpg" alt=""></p>
-<h3 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a><font color="#0099ff" size="4" face="黑体">下载地址</font></h3><p><a href="http://www.voidtools.com/" target="_blank" rel="external">官网下载地址</a></p>
+<p><img src="https://s1.ax1x.com/2018/08/07/PsPfTU.png" alt=""><br></p>
+<h3 id="堆内存"><a href="#堆内存" class="headerlink" title="堆内存"></a><font color="#0099ff" size="4" face="黑体">堆内存</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;<strong>堆内存是所有线程共有的，可以分为两个部分：年轻代和老年代。下图中的Perm代表的是永久代，但是注意永久代并不属于堆内存中的一部分，同时jdk1.8之后永久代也将被移除。</strong></font>
+
+<p><img src="https://s1.ax1x.com/2018/08/07/PsP4kF.png" alt=""><br></p>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;GC(垃圾回收器)对年轻代中的对象进行回收被称为Minor GC，用通俗一点的话说年轻代就是用来存放年轻的对象，年轻对象是什么意思呢？年轻对象可以简单的理解为没有经历过多次垃圾回收的对象，如果一个对象经历过了一定次数的Minor GC，JVM一般就会将这个对象放入到年老代，而JVM对年老代的对象的回收则称为Major GC。<br>如上图所示，年轻代中还可以细分为三个部分，我们需要重点关注这几点：</font>
+
+<ol>
+<li>大部分对象刚创建的时候，JVM会将其分布到Eden区域。</li>
+<li>当Eden区域中的对象达到一定的数目的时候，就会进行Minor GC，经历这次垃圾回收后所有存活的对象都会进入两个Suvivor Place中的一个。</li>
+<li>同一时刻两个Suvivor Place，即s0和s1中总有一个总是空的。</li>
+<li>年轻代中的对象经历过了多次的垃圾回收就会转移到年老代中。</li>
+<li>当申请不到空间时会抛出 OutOfMemoryError。</li>
+</ol>
+<p>下面我们简单的模拟一个堆内存溢出的情况：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"><span class="comment">/* java -Xms20m -Xmx20m HeapOOM */</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HeapOOM</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">OOMObject</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        List&lt;OOMObject&gt; list = <span class="keyword">new</span> ArrayList&lt;OOMObject&gt;();</div><div class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">            list.add(<span class="keyword">new</span> OOMObject());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>下面是执行结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Exception in thread <span class="string">"main"</span> java.lang.OutOfMemoryError: Java heap space</div><div class="line">    at java.util.Arrays.copyOf(Arrays.java:<span class="number">3210</span>)</div><div class="line">    at java.util.Arrays.copyOf(Arrays.java:<span class="number">3181</span>)</div><div class="line">    at java.util.ArrayList.grow(ArrayList.java:<span class="number">261</span>)</div><div class="line">    at java.util.ArrayList.ensureExplicitCapacity(ArrayList.java:<span class="number">235</span>)</div><div class="line">    at java.util.ArrayList.ensureCapacityInternal(ArrayList.java:<span class="number">227</span>)</div><div class="line">    at java.util.ArrayList.add(ArrayList.java:<span class="number">458</span>)</div><div class="line">    at HeapOOM.main(HeapOOM.java:<span class="number">13</span>)</div></pre></td></tr></table></figure>
+<p>堆内存是我们平时在生产环境中进行性能调优中的一个非常重要的部分。</p>
+<h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a><font color="#0099ff" size="4" face="黑体">方法区</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;<strong>方法区与Java堆一样，是各个线程共享的区域，它用于存储已被虚拟机加载的类信息，常量，静态变量，即时编译(JIT)后的代码等数据。</strong><br>&emsp;&emsp;虽然Java虚拟机规范把方法区描述为堆的一个逻辑部分，但是它却有一个别名叫做Non-Heap（非堆），目的应该是与Java堆区分开来。<br>&emsp;&emsp;对于JDK1.8之前的HotSpot虚拟机而言，很多人经常将方法区称为我们上图中所描述的永久代，实际上两者并不等价，仅仅是因为HotSpot虚拟机的设计团队选择把GC分代收集扩展至方法区，或者说使用永久代来实现方法区而已。同时对于其他虚拟机比如IBM J9中是不存在永久代的概念的。<br>&emsp;&emsp;其实，移除永久代的工作从JDK1.7就开始了。JDK1.7中，存储在永久代的部分数据就已经转移到了Java Heap或者是 Native Heap。但永久代仍存在于JDK1.7中，并没完全移除，比如符号引用(Symbols)转移到了native heap；字面量(interned strings)转移到了java heap；类的静态变量(class statics)转移到了java heap，而在JDK1.8之后永久代的该概念也已经不再存在取而代之的是元空间metaspace。<br>&emsp;&emsp;Java虚拟机规范对这个区域的限制非常宽松，除了和Java堆一样不需要连续的内存和可以选择固定大小或者可扩展外，还可以选择不实现垃圾收集。相对而言，垃圾收集行为在这个区域是比较少出现的。这个区域的内存回收目标主要是针对常量池的回收和对类型的卸载，一般来说这个区域的回收“成绩”比较难以令人满意，尤其是类型的卸载，条件相当苛刻，但是这部分区域的回收确实是有必要的。根据Java虚拟机规范的规定，当方法区无法满足内存分配需求时，将抛出OutOfMemoryError异常。</font>
+
+<h3 id="运行常量池"><a href="#运行常量池" class="headerlink" title="运行常量池"></a><font color="#0099ff" size="4" face="黑体">运行常量池</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;方法区内部有一个非常重要的区域，叫做<strong>运行时常量池（Runtime Constant Pool，简称 RCP）</strong>。在字节码文件（Class文件）中，除了有类的版本、字段、方法、接口等先关信息描述外，还有常量池（Constant Pool Table）信息，用于存储编译器产生的字面量和符号引用。这部分内容在类被加载后，都会存储到方法区中的RCP。值得注意的是，运行时产生的新常量也可以被放入常量池中，比如 String 类中的 intern() 方法产生的常量。<br>&emsp;&emsp;常量池就是这个类型用到的常量的一个有序集合。<strong>包括直接常量(基本类型，String)和对其他类型、方法、字段的符号引用</strong>。例如：</font>
+
+<ul>
+<li>类和接口的全限定名</li>
+<li>字段的名称和描述符</li>
+<li>方法和名称和描述符</li>
+</ul>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;既然运行时常量池是方法区的一部分，自然会受到方法区内存的限制，当常量池无法再申请到内存时会抛出OutOfMemoryError异常。<br>&emsp;&emsp;池中的数据和数组一样通过索引访问。由于常量池包含了一个类型所有的对其他类型、方法、字段的符号引用，所以常量池在Java的动态链接中起了核心作用。</font>
+
+<h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a><font color="#0099ff" size="4" face="黑体">程序计数器</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;<strong>程序计数器（Program Counter Register）的作用可以看做是当前线程所执行的字节码的行号指示器。</strong><br>&emsp;&emsp;由于Java虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式来实现的，在任何一个确定的时刻，一个处理器（对于多核处理器来说是一个内核）只会执行一条线程中的指令。因此，为了线程切换后能恢复到正确的执行位置，每条线程都需要有一个独立的程序计数器，各条线程之间的计数器互不影响，独立存储，我们称这类内存区域为“线程私有”的内存。<br>&emsp;&emsp;如果线程正在执行的是一个Java方法，这个计数器记录的是正在执行的虚拟机字节码指令的地址；如果正在执行的是Natvie方法，这个计数器值则为空（Undefined）。此内存区域是唯一一个在Java虚拟机规范中没有规定任何OutOfMemoryError情况的区域。</font>
+
+<h3 id="Java虚拟机栈"><a href="#Java虚拟机栈" class="headerlink" title="Java虚拟机栈"></a><font color="#0099ff" size="4" face="黑体">Java虚拟机栈</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;<strong>与程序计数器一样，Java虚拟机栈（Java Virtual Machine Stacks）也是线程私有的，用通俗的话讲它（或者说是虚拟机栈中的局部变量表部分）就是我们常常听说到堆栈中的那个“栈内存”，是在线程创建时创建，它的生命期是跟随线程的生命期。</strong><br>&emsp;&emsp;局部变量表存放了编译期可知的各种基本数据类型（boolean、byte、char、short、int、float、long、double）、对象引用（reference类型，它不等同于对象本身，根据不同的虚拟机实现，它可能是一个指向对象起始地址的引用指针，也可能指向一个代表对象的句柄或者其他与此对象相关的位置）和returnAddress类型（指向了一条字节码指令的地址）。其中64位长度的long和double类型的数据会占用2个局部变量空间（Slot），其余的数据类型只占用1个。局部变量表所需的内存空间在编译期间完成分配，当进入一个方法时，这个方法需要在帧中分配多大的局部变量空间是完全确定的，在方法运行期间不会改变局部变量表的大小。<br>&emsp;&emsp;虚拟机栈描述的是Java方法执行的内存模型：每个方法在执行的同时都会创建一个栈帧(Stack Frame)用于存储局部变量表（局部变量表需要的内存在编译期间就确定了所以在方法运行期间不会改变大小），操作数栈，动态链接，方法出口等信息。每一个方法从调用至出栈的过程，就对应着栈帧在虚拟机中从入栈到出栈的过程。<br>&emsp;&emsp;在Java虚拟机规范中，对这个区域规定了两种异常状况：如果线程请求的栈深度大于虚拟机所允许的深度，将抛出StackOverflowError异常；如果虚拟机栈可以动态扩展（当前大部分的Java虚拟机都可动态扩展，只不过Java虚拟机规范中也允许固定长度的虚拟机栈），当扩展时无法申请到足够的内存时会抛出OutOfMemoryError异常。</font>
+
+<h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a><font color="#0099ff" size="4" face="黑体">本地方法栈</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;<strong>本地方法栈（NativeMethodStacks）与虚拟机栈所发挥的作用是非常相似的，其区别不过是虚拟机栈为虚拟机执行Java方法（也就是字节码）服务，而本地方法栈则是为虚拟机使用到的Native方法服务。与虚拟机栈一样，本地方法栈区域也会抛出StackOverflowError和OutOfMemoryError异常。</strong></font>
+
+<h3 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a><font color="#0099ff" size="4" face="黑体">直接内存</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;<strong>直接内存（DirectMemory）并不是虚拟机运行时数据区的一部分，但是这部分内存也被频繁地使用，而且也可能导致OutOfMemoryError异常出现。</strong><br>&emsp;&emsp;在JDK1.4中新加入了NIO（NewInput/Output）类，引入了一种基于通道（Channel）与缓冲区（Buffer）的I/O方式，它可以使用Native函数库直接分配堆外内存，然后通过一个存储在Java堆里面的DirectByteBuffer对象作为这块内存的引用进行操作。这样能在一些场景中显著提高性能，因为避免了在Java堆和Native堆中来回复制数据。<br>&emsp;&emsp;显然，本机直接内存的分配不会受到Java堆大小的限制，但是，既然是内存，则肯定还是会受到本机总内存（包括RAM及SWAP区或者分页文件）的大小及处理器寻址空间的限制。服务器管理员配置虚拟机参数时，经常会忽略掉直接内存，使得各个内存区域的总和大于物理内存限制（包括物理上的和操作系统级的限制），从而导致动态扩展时出现OutOfMemoryError异常。</font>
+
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
 <ul>
 <li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
 </ul>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年03月23日 19:02</p>
-	<p>原始链接： <a class="post-url" href="/2018/03/13/20180313-文件搜索利器Everything v1.4.1.896 正式版/" title="文件搜索利器everything">https://blog.hdqyf.club/2018/03/13/20180313-文件搜索利器Everything v1.4.1.896 正式版/</a></p>
+        <p>最后更新： 2018年08月07日 16:00</p>
+	<p>原始链接： <a class="post-url" href="/2018/08/07/20180807-Weekly Diary—JVM内存区域解析/" title="Weekly Diary—JVM内存区域解析">https://blog.hdqyf.club/2018/08/07/20180807-Weekly Diary—JVM内存区域解析/</a></p>
         <footer>
             <a href="https://blog.hdqyf.club">
                 <img src="/images/logo.png" alt="Garen">
@@ -261,7 +298,7 @@ ga('send', 'pageview');
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/03/13/20180313-文件搜索利器Everything v1.4.1.896 正式版/&title=《文件搜索利器everything》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/03/13/9fhWAP.jpg" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/08/07/20180807-Weekly Diary—JVM内存区域解析/&title=《Weekly Diary—JVM内存区域解析》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/08/07/PsiehQ.jpg" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -271,22 +308,22 @@ ga('send', 'pageview');
             </a>
           </li>
           <li>
-            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/03/13/20180313-文件搜索利器Everything v1.4.1.896 正式版/&title=《文件搜索利器everything》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/08/07/20180807-Weekly Diary—JVM内存区域解析/&title=《Weekly Diary—JVM内存区域解析》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
               <i class="fa fa-star"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/03/13/20180313-文件搜索利器Everything v1.4.1.896 正式版/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/08/07/20180807-Weekly Diary—JVM内存区域解析/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《文件搜索利器everything》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/03/13/20180313-文件搜索利器Everything v1.4.1.896 正式版/&via=https://blog.hdqyf.club" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Weekly Diary—JVM内存区域解析》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/08/07/20180807-Weekly Diary—JVM内存区域解析/&via=https://blog.hdqyf.club" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/03/13/20180313-文件搜索利器Everything v1.4.1.896 正式版/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/08/07/20180807-Weekly Diary—JVM内存区域解析/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -296,7 +333,7 @@ ga('send', 'pageview');
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/03/13/20180313-文件搜索利器Everything v1.4.1.896 正式版/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/08/07/20180807-Weekly Diary—JVM内存区域解析/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -308,9 +345,7 @@ ga('send', 'pageview');
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/效率/" class="color3">效率</a>
-      
-    <a href="/tags/资源/" class="color3">资源</a>
+    <a href="/tags/Java/" class="color5">Java</a>
       
   </li>
 
@@ -323,26 +358,16 @@ ga('send', 'pageview');
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#下载地址"><span class="post-toc-text">下载地址</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#堆内存"><span class="post-toc-text">堆内存</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#方法区"><span class="post-toc-text">方法区</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#运行常量池"><span class="post-toc-text">运行常量池</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#程序计数器"><span class="post-toc-text">程序计数器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Java虚拟机栈"><span class="post-toc-text">Java虚拟机栈</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#本地方法栈"><span class="post-toc-text">本地方法栈</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#直接内存"><span class="post-toc-text">直接内存</span></a></li></ol>
         </nav>
     </aside>
     
 
 <nav id="article-nav">
   
-    <a href="/2018/03/15/20180315-百度网盘高速下载器 PanDownload/" id="article-nav-newer" class="article-nav-link-wrap">
-
-      <span class="article-nav-title">
-        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
-        
-          百度网盘高速下载器 PanDownload
-        
-      </span>
-    </a>
   
-  
-    <a href="/2018/03/11/20180311-格式工厂 v4.3.0.0 最新去广告绿色纯净版本/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">格式工厂 v4.3.0.0 最新去广告绿色纯净版本</span>
+    <a href="/2018/08/06/20180806-Weekly Diary—浅谈Java中final、finalize、finally/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Weekly Diary—浅谈Java中final、finalize、finally</span>
       <i class="fa fa-hand-o-right" aria-hidden="true"></i>
     </a>
   
