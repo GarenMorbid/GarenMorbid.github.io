@@ -3,51 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>SpringMVC深入—SpringMVC配置详解 | HDQ | Blog</title>
+  <title>Weekly Diary—Redis面试题总结 | HDQ | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HDQ,HDQ's Blog" />
   
-  <meta name="description" content="SpringMVC web模型
-@RequestMapping参数说明
-value：定义处理方法的请求的URL地址
-method：定义处理方法的http method类型，如GET/POST方法，不指定的时候，可以处理任何http请求
-params：定义请求的URL中必须包含的参数，用于窄化请求
-headers：定义请求的request headers必须包含的参数，与params是类似的
-con">
+  <meta name="description" content="什么是Redis？&amp;emsp;&amp;emsp;Redis 是一个基于内存的高性能key-value数据库。
+
+Redis特点&amp;emsp;&amp;emsp;Redis本质上是一个Key-Value类型的内存数据库，很像memcached，整个数据库统统加载在内存当中进行操作，定期通过异步操作把数据库数据flush到硬盘上进行保存。&amp;emsp;&amp;emsp;因为是纯内存操作，Redis的性能非常出色，每秒可以处理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SpringMVC深入—SpringMVC配置详解">
-<meta property="og:url" content="https://blog.hdqyf.club/2018/05/14/20180514-SpringMVC深入—SpringMVC配置详解/index.html">
+<meta property="og:title" content="Weekly Diary—Redis面试题总结">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/08/12/20180812-Weekly Diary—Redis面试题总结/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
-<meta property="og:description" content="SpringMVC web模型
-@RequestMapping参数说明
-value：定义处理方法的请求的URL地址
-method：定义处理方法的http method类型，如GET/POST方法，不指定的时候，可以处理任何http请求
-params：定义请求的URL中必须包含的参数，用于窄化请求
-headers：定义请求的request headers必须包含的参数，与params是类似的
-con">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/CrAj9f.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/CrALNt.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/CrAqAI.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/CrAHHA.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/CrA7Bd.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/CrATnH.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/CrA5cD.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/CrAIje.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/CrA41O.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/CrAO4P.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/14/CrAv38.png">
-<meta property="og:updated_time" content="2018-05-14T02:38:26.614Z">
+<meta property="og:description" content="什么是Redis？&amp;emsp;&amp;emsp;Redis 是一个基于内存的高性能key-value数据库。
+
+Redis特点&amp;emsp;&amp;emsp;Redis本质上是一个Key-Value类型的内存数据库，很像memcached，整个数据库统统加载在内存当中进行操作，定期通过异步操作把数据库数据flush到硬盘上进行保存。&amp;emsp;&amp;emsp;因为是纯内存操作，Redis的性能非常出色，每秒可以处理">
+<meta property="og:updated_time" content="2018-08-12T01:25:42.714Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SpringMVC深入—SpringMVC配置详解">
-<meta name="twitter:description" content="SpringMVC web模型
-@RequestMapping参数说明
-value：定义处理方法的请求的URL地址
-method：定义处理方法的http method类型，如GET/POST方法，不指定的时候，可以处理任何http请求
-params：定义请求的URL中必须包含的参数，用于窄化请求
-headers：定义请求的request headers必须包含的参数，与params是类似的
-con">
-<meta name="twitter:image" content="https://s1.ax1x.com/2018/05/14/CrAj9f.png">
+<meta name="twitter:title" content="Weekly Diary—Redis面试题总结">
+<meta name="twitter:description" content="什么是Redis？&amp;emsp;&amp;emsp;Redis 是一个基于内存的高性能key-value数据库。
+
+Redis特点&amp;emsp;&amp;emsp;Redis本质上是一个Key-Value类型的内存数据库，很像memcached，整个数据库统统加载在内存当中进行操作，定期通过异步操作把数据库数据flush到硬盘上进行保存。&amp;emsp;&amp;emsp;因为是纯内存操作，Redis的性能非常出色，每秒可以处理">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -168,14 +144,14 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-20180514-SpringMVC深入—SpringMVC配置详解" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-20180812-Weekly Diary—Redis面试题总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      SpringMVC深入—SpringMVC配置详解
+      Weekly Diary—Redis面试题总结
     </h1>
     <div class="post-title-bar">
       <ul>
@@ -183,12 +159,12 @@ ga('send', 'pageview');
               <li>
                   <i class="fa fa-book"></i>
                   
-                      <a href="/categories/Spring/">Spring</a>
+                      <a href="/categories/Redis/">Redis</a>
                   
               </li>
           
         <li>
-          <i class="fa fa-calendar"></i>  2018-05-14
+          <i class="fa fa-calendar"></i>  2018-08-12
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -204,69 +180,120 @@ ga('send', 'pageview');
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <h3 id="SpringMVC-web模型"><a href="#SpringMVC-web模型" class="headerlink" title="SpringMVC web模型"></a><font color="#0099ff" size="4" face="黑体">SpringMVC web模型</font></h3><p><img src="https://s1.ax1x.com/2018/05/14/CrAj9f.png" alt=""><br></p>
-<h3 id="RequestMapping参数说明"><a href="#RequestMapping参数说明" class="headerlink" title="@RequestMapping参数说明"></a><font color="#0099ff" size="4" face="黑体">@RequestMapping参数说明</font></h3><ul>
-<li>value：定义处理方法的请求的URL地址</li>
-<li>method：定义处理方法的http method类型，如GET/POST方法，不指定的时候，可以处理任何http请求</li>
-<li>params：定义请求的URL中必须包含的参数，用于窄化请求</li>
-<li>headers：定义请求的request headers必须包含的参数，与params是类似的</li>
-<li>consums：指定处理请求的提交类型（content-type），application/json，窄化请求</li>
-<li>produces：指定返回的内容类型，仅当request请求头中的类型中包含指定类型才返回</li>
+            <h3 id="什么是Redis？"><a href="#什么是Redis？" class="headerlink" title="什么是Redis？"></a><font color="#0099ff" size="4" face="黑体">什么是Redis？</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;Redis 是一个基于内存的高性能key-value数据库。</font>
+
+<h3 id="Redis特点"><a href="#Redis特点" class="headerlink" title="Redis特点"></a><font color="#0099ff" size="4" face="黑体">Redis特点</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;Redis本质上是一个Key-Value类型的内存数据库，很像memcached，整个数据库统统加载在内存当中进行操作，定期通过异步操作把数据库数据flush到硬盘上进行保存。<br>&emsp;&emsp;因为是纯内存操作，Redis的性能非常出色，每秒可以处理超过 10万次读写操作，是已知性能最快的Key-Value DB。<br>&emsp;&emsp;Redis的出色之处不仅仅是性能，Redis最大的魅力是支持保存多种数据结构，此外单个value的最大限制是1GB，不像 memcached只能保存1MB的数据，因此Redis可以用来实现很多有用的功能，比方说用他的List来做FIFO双向链表，实现一个轻量级的高性 能消息队列服务，用他的Set可以做高性能的tag系统等等。<br>&emsp;&emsp;另外Redis也可以对存入的Key-Value设置expire时间，因此也可以被当作一 个功能加强版的memcached来用。<br>&emsp;&emsp;Redis的主要缺点是数据库容量受到物理内存的限制，不能用作海量数据的高性能读写，因此Redis适合的场景主要局限在较小数据量的高性能操作和运算上。<br><strong>Redis通过Key-Value的单值不同类型来区分, 以下是支持的类型:</strong></font>
+
+<ul>
+<li>Strings</li>
+<li>Lists</li>
+<li>Sets 求交集、并集</li>
+<li>Sorted Set</li>
+<li>hashes</li>
 </ul>
-<h4 id="Params的使用"><a href="#Params的使用" class="headerlink" title="Params的使用"></a><font color="#0099ff" size="3" face="黑体">Params的使用</font></h4><p><img src="https://s1.ax1x.com/2018/05/14/CrALNt.png" alt=""><br></p>
-<h4 id="Value配置详解"><a href="#Value配置详解" class="headerlink" title="Value配置详解"></a><font color="#0099ff" size="3" face="黑体">Value配置详解</font></h4><ul>
-<li>支持通配符<ul>
-<li>?：代表匹配文件名中的一个字符，test/t?.action——test/t3.action</li>
-<li>*：代表匹配文件名中的任意字符，test/t*.action——test/t333.action</li>
-<li>**：匹配多层路径，/**/test.action</li>
+<h3 id="为什么redis需要把所有数据放到内存中？"><a href="#为什么redis需要把所有数据放到内存中？" class="headerlink" title="为什么redis需要把所有数据放到内存中？"></a><font color="#0099ff" size="4" face="黑体">为什么redis需要把所有数据放到内存中？</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;Redis为了达到最快的读写速度将数据都读到内存中，并通过异步的方式将数据写入磁盘。所以redis具有快速和数据持久化的特征。<br>&emsp;&emsp;如果不将数据放在内存中，磁盘I/O速度为严重影响redis的性能。在内存越来越便宜的今天，redis将会越来越受欢迎。<br>&emsp;&emsp;如果设置了最大使用的内存，则数据已有记录数达到内存限值后不能继续插入新值。</font>
+
+<h3 id="Redis是单进程单线程的"><a href="#Redis是单进程单线程的" class="headerlink" title="Redis是单进程单线程的"></a><font color="#0099ff" size="4" face="黑体">Redis是单进程单线程的</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;redis利用队列技术将并发访问变为串行访问，消除了传统数据库串行控制的开销</font>
+
+<h3 id="虚拟内存"><a href="#虚拟内存" class="headerlink" title="虚拟内存"></a><font color="#0099ff" size="4" face="黑体">虚拟内存</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;当你的key很小而value很大时,使用VM的效果会比较好.因为这样节约的内存比较大。<br>&emsp;&emsp;当你的key不小时,可以考虑使用一些非常方法将很大的key变成很大的value,比如你可以考虑将key,value组合成一个新的value。<br>&emsp;&emsp;vm-max-threads这个参数,可以设置访问swap文件的线程数,设置最好不要超过机器的核数,如果设置为0,那么所有对swap文件的操作都是串行的。<br>&emsp;&emsp;可能会造成比较长时间的延迟,但是对数据完整性有很好的保证。<br>&emsp;&emsp;自己测试的时候发现用虚拟内存性能也不错。如果数据量很大，可以考虑分布式或者其他数据库。</font>
+
+<h3 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a><font color="#0099ff" size="4" face="黑体">分布式</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;redis支持主从的模式。原则：Master会将数据同步到slave，而slave不会将数据同步到master。Slave启动时会连接master来同步数据。<br>&emsp;&emsp;这是一个典型的分布式读写分离模型。我们可以利用master来插入数据，slave提供检索服务。这样可以有效减少单个机器的并发访问数量。</font>
+
+<h3 id="读写分离模型"><a href="#读写分离模型" class="headerlink" title="读写分离模型"></a><font color="#0099ff" size="4" face="黑体">读写分离模型</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;通过增加Slave DB的数量，读的性能可以线性增长。为了避免Master DB的单点故障，集群一般都会采用两台Master DB做双机热备，所以整个集群的读和写的可用性都非常高。<br>&emsp;&emsp;读写分离架构的缺陷在于，不管是Master还是Slave，每个节点都必须保存完整的数据，如果在数据量很大的情况下，集群的扩展能力还是受限于单个节点的存储能力，而且对于Write-intensive类型的应用，读写分离架构并不适合。</font>
+
+<h3 id="数据分片模型"><a href="#数据分片模型" class="headerlink" title="数据分片模型"></a><font color="#0099ff" size="4" face="黑体">数据分片模型</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;为了解决读写分离模型的缺陷，可以将数据分片模型应用进来。<br>&emsp;&emsp;可以将每个节点看成都是独立的master，然后通过业务实现数据分片。<br>&emsp;&emsp;结合上面两种模型，可以将每个master设计成由一个master和多个slave组成的模型。</font>
+
+<h3 id="Redis的回收策略"><a href="#Redis的回收策略" class="headerlink" title="Redis的回收策略"></a><font color="#0099ff" size="4" face="黑体">Redis的回收策略</font></h3><ul>
+<li>🔍 <strong>volatile-lru</strong>：从已设置过期时间的数据集（server.db[i].expires）中挑选最近最少使用的数据淘汰</li>
+<li>🔍 <strong>volatile-ttl</strong>：从已设置过期时间的数据集（server.db[i].expires）中挑选将要过期的数据淘汰</li>
+<li>🔍 <strong>volatile-random</strong>：从已设置过期时间的数据集（server.db[i].expires）中任意选择数据淘汰</li>
+<li>🔍 <strong>allkeys-lru</strong>：从数据集（server.db[i].dict）中挑选最近最少使用的数据淘汰</li>
+<li>🔍 <strong>allkeys-random</strong>：从数据集（server.db[i].dict）中任意选择数据淘汰</li>
+<li>🔍 <strong>no-enviction（驱逐）</strong>：禁止驱逐数据</li>
 </ul>
+<h3 id="Redis面试题集锦"><a href="#Redis面试题集锦" class="headerlink" title="Redis面试题集锦"></a><font color="#0099ff" size="4" face="黑体">Redis面试题集锦</font></h3><ul>
+<li>👀 <strong>使用Redis有哪些好处？</strong><ol>
+<li>速度快，因为数据存在内存中，类似于HashMap，HashMap的优势就是查找和操作的时间复杂度都是O(1)</li>
+<li>支持丰富数据类型，支持string，list，set，sorted set，hash</li>
+<li>支持事务，操作都是原子性，所谓的原子性就是对数据的更改要么全部执行，要么全部不执行</li>
+<li>丰富的特性：可用于缓存，消息，按key设置过期时间，过期后将会自动删除</li>
+</ol>
+</li>
+<li>👀 <strong>redis相比memcached有哪些优势？</strong><ol>
+<li>memcached所有的值均是简单的字符串，redis作为其替代者，支持更为丰富的数据类型</li>
+<li>redis的速度比memcached快很多</li>
+<li>redis可以持久化其数据</li>
+</ol>
+</li>
+<li>👀 <strong>redis常见性能问题和解决方案：</strong><ol>
+<li>Master最好不要做任何持久化工作，如RDB内存快照和AOF日志文件</li>
+<li>如果数据比较重要，某个Slave开启AOF备份数据，策略设置为每秒同步一次</li>
+<li>为了主从复制的速度和连接的稳定性，Master和Slave最好在同一个局域网内</li>
+<li>尽量避免在压力很大的主库上增加从库</li>
+<li>主从复制不要用图状结构，用单向链表结构更为稳定，即：Master &lt;- Slave1 &lt;- Slave2 &lt;- Slave3…</li>
+</ol>
 </li>
 </ul>
-<p><img src="https://s1.ax1x.com/2018/05/14/CrAqAI.png" alt=""><br></p>
+<p><strong>这样的结构方便解决单点故障问题，实现Slave对Master的替换。如果Master挂了，可以立刻启用Slave1做Master，其他不变。</strong></p>
 <ul>
-<li>支持或关系：一个value的配置可以支持两个URL路径的映射</li>
-</ul>
-<p><img src="https://s1.ax1x.com/2018/05/14/CrAHHA.png" alt=""><br></p>
-<ul>
-<li>支持正则表达式</li>
-</ul>
-<p><img src="https://s1.ax1x.com/2018/05/14/CrA7Bd.png" alt=""><br></p>
-<p><img src="https://s1.ax1x.com/2018/05/14/CrATnH.png" alt=""><br></p>
-<h4 id="RESTFUL支持"><a href="#RESTFUL支持" class="headerlink" title="RESTFUL支持"></a><font color="#0099ff" size="3" face="黑体">RESTFUL支持</font></h4><p>轻量级的SOA（面向服务）的实现，将一个个的请求做出的相应以资源的形式返回<br>🌱 请求资源：<br>    URL风格：将参数通过URL传递到服务器端<br>    SpringMVC支持restful风格，可以通过URL进行参数的传递</p>
-<p><img src="https://s1.ax1x.com/2018/05/14/CrA5cD.png" alt=""><br></p>
-<h3 id="基于注解的参数绑定"><a href="#基于注解的参数绑定" class="headerlink" title="基于注解的参数绑定"></a><font color="#0099ff" size="4" face="黑体">基于注解的参数绑定</font></h3><ul>
-<li>@RequestParam：设置绑定的参数名和传入的参数名的值</li>
-</ul>
-<p><img src="https://s1.ax1x.com/2018/05/14/CrAIje.png" alt=""><br></p>
-<ul>
-<li>@PathVarible</li>
-</ul>
-<h3 id="数据回显深入理解"><a href="#数据回显深入理解" class="headerlink" title="数据回显深入理解"></a><font color="#0099ff" size="4" face="黑体">数据回显深入理解</font></h3><p><strong>🌱 数据回显方式</strong>:</p>
-<ul>
-<li>原生servlet的api</li>
-<li>ModelAndView</li>
-<li>Model/ModelMap：默认在request作用域实现数据传递</li>
-</ul>
-<p><img src="https://s1.ax1x.com/2018/05/14/CrA41O.png" alt=""><br></p>
-<ul>
-<li>@ModeAttribute<ul>
-<li>用于方法返回值：用来在处理@RequestMapping之前，为请求绑定需要从后台查询到的model</li>
-<li>当前RequestMapping的每一个返回都可以携带modeAttribute中的属性和属性值，默认作用域在请求（request）作用域</li>
-</ul>
+<li>👀 <strong>MySQL里有2000w数据，redis中只存20w的数据，如何保证redis中的数据都是热点数据</strong><ol>
+<li>相关知识：redis 内存数据集大小上升到一定大小的时候，就会施行数据淘汰策略吗，redis 提供6种数据淘汰策略，上文已经列出。</li>
+</ol>
+</li>
+<li>👀 <strong>Memcache与Redis的区别都有哪些？</strong><ol>
+<li>存储方式：<ol>
+<li>Memecache把数据全部存在内存之中，断电后会挂掉，数据不能超过内存大小</li>
+<li>Redis有部份存在硬盘上，这样能保证数据的持久性</li>
+</ol>
+</li>
+<li>数据支持类型<ol>
+<li>Memcache对数据类型支持相对简单</li>
+<li>Redis有复杂的数据类型</li>
+</ol>
+</li>
+<li>使用底层模型不同<ol>
+<li>它们之间底层实现方式 以及与客户端之间通信的应用协议不一样，Redis直接自己构建了VM 机制 ，因为一般的系统调用系统函数的话，会浪费一定的时间去移动和请求</li>
+</ol>
+</li>
+<li>value大小<ol>
+<li>redis最大可以达到1GB，而memcache只有1MB</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>👀 <strong>Redis 常见的性能问题都有哪些？如何解决？</strong></p>
+<ol>
+<li>Master写内存快照，save命令调度rdbSave函数，会阻塞主线程的工作，当快照比较大时对性能影响是非常大的，会间断性暂停服务，所以Master最好不要写内存快照</li>
+<li>Master AOF持久化，如果不重写AOF文件，这个持久化方式对性能的影响是最小的，但是AOF文件会不断增大，AOF文件过大会影响Master重启的恢复速度，Master最好不要做任何持久化工作，包括内存快照和AOF日志文件，特别是不要启用内存快照做持久化,如果数据比较关键，某个Slave开启AOF备份数据，策略为每秒同步一次</li>
+<li>Master调用BGREWRITEAOF重写AOF文件，AOF在重写的时候会占大量的CPU和内存资源，导致服务load过高，出现短暂服务暂停现象</li>
+<li>Redis主从复制的性能问题，为了主从复制的速度和连接的稳定性，Slave和Master最好在同一个局域网内</li>
+</ol>
+</li>
+<li><p>👀 <strong>redis 最适合的场景</strong></p>
 </li>
 </ul>
-<p><img src="https://s1.ax1x.com/2018/05/14/CrAO4P.png" alt=""><br></p>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;Redis最适合所有数据in-momory的场景，虽然Redis也提供持久化功能，但实际更多的是一个disk-backed的功能，跟传统意义上的持久化有比较大的差别。<br>&emsp;&emsp;那么可能大家就会有疑问，似乎Redis更像一个加强版的Memcached，那么何时使用Memcached,何时使用Redis呢?<br>&emsp;&emsp;如果简单地比较Redis与Memcached的区别，大多数都会得到以下观点：</font>
+
 <ul>
-<li>@SessionAttribute：用于类和接口<ul>
-<li>将ModelAttribute中的key相同的属性值也放到session作用域中</li>
+<li>Redis不仅仅支持简单的k/v类型的数据，同时还提供list，set，zset，hash等数据结构的存储。</li>
+<li>Redis支持数据的备份，即master-slave模式的数据备份。</li>
+<li>Redis支持数据的持久化，可以将内存中的数据保持在磁盘中，重启的时候可以再次加载进行使用。</li>
 </ul>
-</li>
-</ul>
-<p><img src="https://s1.ax1x.com/2018/05/14/CrAv38.png" alt=""><br></p>
-<ul>
-<li>@CookieValue</li>
-<li>…</li>
-</ul>
+<p><strong>① 会话缓存（Session Cache）</strong></p>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;最常用的一种使用Redis的情景是会话缓存（session cache）。用Redis缓存会话比其他存储（如Memcached）的优势在于：Redis提供持久化。当维护一个不是严格要求一致性的缓存时，如果用户的购物车信息全部丢失，大部分人都会不高兴的，现在，他们还会这样吗？<br>&emsp;&emsp;幸运的是，随着 Redis 这些年的改进，很容易找到怎么恰当的使用Redis来缓存会话的文档。甚至广为人知的商业平台Magento也提供Redis的插件。</font>
+
+<p><strong>② 全页缓存（FPC）</strong></p>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;除基本的会话token之外，Redis还提供很简便的FPC平台。回到一致性问题，即使重启了Redis实例，因为有磁盘的持久化，用户也不会看到页面加载速度的下降，这是一个极大改进，类似PHP本地FPC。<br>&emsp;&emsp;再次以Magento为例，Magento提供一个插件来使用Redis作为全页缓存后端。<br>&emsp;&emsp;此外，对WordPress的用户来说，Pantheon有一个非常好的插件  wp-redis，这个插件能帮助你以最快速度加载你曾浏览过的页面。</font>
+
+<p><strong>③ 队列</strong></p>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;Reids在内存存储引擎领域的一大优点是提供 list 和 set 操作，这使得Redis能作为一个很好的消息队列平台来使用。Redis作为队列使用的操作，就类似于本地程序语言（如Python）对 list 的 push/pop 操作。<br>&emsp;&emsp;如果你快速的在Google中搜索“Redis queues”，你马上就能找到大量的开源项目，这些项目的目的就是利用Redis创建非常好的后端工具，以满足各种队列需求。例如，Celery有一个后台就是使用Redis作为broker，你可以从这里去查看。</font>
+
+<p><strong>④ 排行榜/计数器</strong></p>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;Redis在内存中对数字进行递增或递减的操作实现的非常好。集合（Set）和有序集合（Sorted Set）也使得我们在执行这些操作的时候变的非常简单，Redis只是正好提供了这两种数据结构。所以，我们要从排序集合中获取到排名最靠前的10个用户–我们称之为“user_scores”，我们只需要像下面一样执行即可：<br>&emsp;&emsp;当然，这是假定你是根据你用户的分数做递增的排序。如果你想返回用户及用户的分数，你需要这样执行：<br>&emsp;&emsp;<code>ZRANGE user_scores 0 10 WITHSCORES</code><br>&emsp;&emsp;Agora Games就是一个很好的例子，用Ruby实现的，它的排行榜就是使用Redis来存储数据的，你可以在这里看到。</font>
+
+<p><strong>⑤ 发布/订阅</strong></p>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;最后（但肯定不是最不重要的）是Redis的发布/订阅功能。发布/订阅的使用场景确实非常多。我已看见人们在社交网络连接中使用，还可作为基于发布/订阅的脚本触发器，甚至用Redis的发布/订阅功能来建立聊天系统！（不，这是真的，你可以去核实）。<br>&emsp;&emsp;Redis提供的所有特性中，我感觉这个是喜欢的人最少的一个，虽然它为用户提供如果此多功能。</font>
+
 <p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
 <ul>
 <li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
@@ -274,8 +301,8 @@ ga('send', 'pageview');
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年05月14日 10:38</p>
-	<p>原始链接： <a class="post-url" href="/2018/05/14/20180514-SpringMVC深入—SpringMVC配置详解/" title="SpringMVC深入—SpringMVC配置详解">https://blog.hdqyf.club/2018/05/14/20180514-SpringMVC深入—SpringMVC配置详解/</a></p>
+        <p>最后更新： 2018年08月12日 09:25</p>
+	<p>原始链接： <a class="post-url" href="/2018/08/12/20180812-Weekly Diary—Redis面试题总结/" title="Weekly Diary—Redis面试题总结">https://blog.hdqyf.club/2018/08/12/20180812-Weekly Diary—Redis面试题总结/</a></p>
         <footer>
             <a href="https://blog.hdqyf.club">
                 <img src="/images/logo.png" alt="Garen">
@@ -349,7 +376,7 @@ ga('send', 'pageview');
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/05/14/20180514-SpringMVC深入—SpringMVC配置详解/&title=《SpringMVC深入—SpringMVC配置详解》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/05/14/CrEJgO.jpg" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/08/12/20180812-Weekly Diary—Redis面试题总结/&title=《Weekly Diary—Redis面试题总结》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/08/12/Pc1lwT.jpg" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -359,22 +386,22 @@ ga('send', 'pageview');
             </a>
           </li>
           <li>
-            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/05/14/20180514-SpringMVC深入—SpringMVC配置详解/&title=《SpringMVC深入—SpringMVC配置详解》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/08/12/20180812-Weekly Diary—Redis面试题总结/&title=《Weekly Diary—Redis面试题总结》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
               <i class="fa fa-star"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/05/14/20180514-SpringMVC深入—SpringMVC配置详解/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/08/12/20180812-Weekly Diary—Redis面试题总结/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SpringMVC深入—SpringMVC配置详解》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/05/14/20180514-SpringMVC深入—SpringMVC配置详解/&via=https://blog.hdqyf.club" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Weekly Diary—Redis面试题总结》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/08/12/20180812-Weekly Diary—Redis面试题总结/&via=https://blog.hdqyf.club" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/05/14/20180514-SpringMVC深入—SpringMVC配置详解/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/08/12/20180812-Weekly Diary—Redis面试题总结/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -384,7 +411,7 @@ ga('send', 'pageview');
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/05/14/20180514-SpringMVC深入—SpringMVC配置详解/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/08/12/20180812-Weekly Diary—Redis面试题总结/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -396,11 +423,7 @@ ga('send', 'pageview');
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/Java/" class="color5">Java</a>
-      
-    <a href="/tags/框架/" class="color3">框架</a>
-      
-    <a href="/tags/Spring/" class="color2">Spring</a>
+    <a href="/tags/Redis/" class="color1">Redis</a>
       
   </li>
 
@@ -413,26 +436,16 @@ ga('send', 'pageview');
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SpringMVC-web模型"><span class="post-toc-text">SpringMVC web模型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#RequestMapping参数说明"><span class="post-toc-text">@RequestMapping参数说明</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Params的使用"><span class="post-toc-text">Params的使用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Value配置详解"><span class="post-toc-text">Value配置详解</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#RESTFUL支持"><span class="post-toc-text">RESTFUL支持</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基于注解的参数绑定"><span class="post-toc-text">基于注解的参数绑定</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数据回显深入理解"><span class="post-toc-text">数据回显深入理解</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#什么是Redis？"><span class="post-toc-text">什么是Redis？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Redis特点"><span class="post-toc-text">Redis特点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么redis需要把所有数据放到内存中？"><span class="post-toc-text">为什么redis需要把所有数据放到内存中？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Redis是单进程单线程的"><span class="post-toc-text">Redis是单进程单线程的</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#虚拟内存"><span class="post-toc-text">虚拟内存</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#分布式"><span class="post-toc-text">分布式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#读写分离模型"><span class="post-toc-text">读写分离模型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数据分片模型"><span class="post-toc-text">数据分片模型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Redis的回收策略"><span class="post-toc-text">Redis的回收策略</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Redis面试题集锦"><span class="post-toc-text">Redis面试题集锦</span></a></li></ol>
         </nav>
     </aside>
     
 
 <nav id="article-nav">
   
-    <a href="/2018/05/14/20180514-SpringMVC深入—文件上传/" id="article-nav-newer" class="article-nav-link-wrap">
-
-      <span class="article-nav-title">
-        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
-        
-          SpringMVC深入—文件上传
-        
-      </span>
-    </a>
   
-  
-    <a href="/2018/05/10/20180510-框架理论深入—Spring中的事务/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">框架理论深入—Spring中的事务</span>
+    <a href="/2018/08/07/20180807-Weekly Diary—JVM内存区域解析/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Weekly Diary—JVM内存区域解析</span>
       <i class="fa fa-hand-o-right" aria-hidden="true"></i>
     </a>
   
