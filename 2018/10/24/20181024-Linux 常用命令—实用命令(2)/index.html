@@ -14,7 +14,7 @@
 <meta property="og:url" content="https://blog.hdqyf.club/2018/10/24/20181024-Linux 常用命令—实用命令(2)/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
 <meta property="og:description" content="前言&amp;emsp;&amp;emsp;作为一个Java开发人员，有些常用的Linux命令必须掌握。即使平时开发过程中不使用Linux（Unix）或者mac系统，也需要熟练掌握Linux命令。因为很多服务器上都是Linux系统。所以，要和服务器机器交互，就要通过shell命令。&amp;emsp;&amp;emsp;本文是基于个人总结和上一篇文章的补充：Linux 常用命令—实用命令(1)，并不会对所有命令进行详细讲解，只给">
-<meta property="og:updated_time" content="2018-10-24T03:36:38.845Z">
+<meta property="og:updated_time" content="2018-10-24T04:56:04.885Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux 常用命令—实用命令(2)">
 <meta name="twitter:description" content="前言&amp;emsp;&amp;emsp;作为一个Java开发人员，有些常用的Linux命令必须掌握。即使平时开发过程中不使用Linux（Unix）或者mac系统，也需要熟练掌握Linux命令。因为很多服务器上都是Linux系统。所以，要和服务器机器交互，就要通过shell命令。&amp;emsp;&amp;emsp;本文是基于个人总结和上一篇文章的补充：Linux 常用命令—实用命令(1)，并不会对所有命令进行详细讲解，只给">
@@ -179,7 +179,7 @@ ga('send', 'pageview');
 <h3 id="必会Linux命令清单"><a href="#必会Linux命令清单" class="headerlink" title="必会Linux命令清单"></a><font color="#0099ff" size="4" face="黑体">必会Linux命令清单</font></h3><ul>
 <li><p><strong>查找文件</strong></p>
 <blockquote>
-<p><code>find / -name filename.txt</code> 根据名称查找/目录下的filename.txt文件。<br><br><code>find . -name &quot;*.xml&quot;</code> 递归查找所有的xml文件<br><br><code>find . -name &quot;*&quot; |xargs grep &quot;hello&quot;</code> 递归查找所有文件内容中包含hello world的xml文件<br><br><code>grep -H &#39;spring&#39; *.xml</code> 查找所以有的包含spring的xml文件<br><br><code>find ./ -size 0 | xargs rm</code> -f &amp; 删除文件大小为零的文件<br><br><code>ls -l | grep &#39;.jar&#39;</code> 查找当前目录中的所有jar文件<br><br><code>grep &#39;test&#39; d*</code> 显示所有以d开头的文件中包含test的行。<br><br><code>grep &#39;test&#39; aa bb cc</code> 显示在aa，bb，cc文件中匹配test的行。<br><br><code>grep &#39;[a-z]\{5\}&#39; aa</code> 显示所有包含每个字符串至少有5个连续小写字符的字符串的行。</p>
+<p><code>find / -name filename.txt</code> 根据名称查找/目录下的filename.txt文件。<br><br><code>find . -name &quot;*.xml&quot;</code> 递归查找所有的xml文件<br><br><code>find . -name &quot;*&quot; |xargs grep &quot;hello&quot;</code> 递归查找所有文件内容中包含hello world的xml文件<br><br><code>grep -H &#39;spring&#39; *.xml</code> 查找所以有的包含spring的xml文件<br><br><code>find ./ -size 0 | xargs rm -f &amp;</code> 删除文件大小为零的文件<br><br><code>ls -l | grep &#39;.jar&#39;</code> 查找当前目录中的所有jar文件<br><br><code>grep &#39;test&#39; d*</code> 显示所有以d开头的文件中包含test的行。<br><br><code>grep &#39;test&#39; aa bb cc</code> 显示在aa，bb，cc文件中匹配test的行。<br><br><code>grep &#39;[a-z]\{5\}&#39; aa</code> 显示所有包含每个字符串至少有5个连续小写字符的字符串的行。</p>
 </blockquote>
 </li>
 <li><p><strong>查看一个程序是否运行</strong></p>
@@ -326,7 +326,7 @@ ga('send', 'pageview');
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年10月24日 11:36</p>
+        <p>最后更新： 2018年10月24日 12:56</p>
 	<p>原始链接： <a class="post-url" href="/2018/10/24/20181024-Linux 常用命令—实用命令(2)/" title="Linux 常用命令—实用命令(2)">https://blog.hdqyf.club/2018/10/24/20181024-Linux 常用命令—实用命令(2)/</a></p>
         <footer>
             <a href="https://blog.hdqyf.club">
