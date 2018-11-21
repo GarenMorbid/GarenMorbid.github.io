@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>建造者模式详解 | HDQ | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="HDQ,HDQ's Blog" />
+  
+  <meta name="description" content="前言&amp;emsp;&amp;emsp;建造者模式：是将一个复杂的对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。&amp;emsp;&amp;emsp;工厂类模式提供的是创建单个类的模式，而建造者模式则是将各种产品集中起来进行管理，用来创建复合对象，所谓复合对象就是指某个类具有不同的属性。&amp;emsp;&amp;emsp;建造者模式通常包括下面几个角色：&amp;emsp;&amp;emsp;1、Builder：给出一个抽象接口，以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="建造者模式详解">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/11/21/20181121-建造者模式详解/index.html">
+<meta property="og:site_name" content="HDQ | Blog">
+<meta property="og:description" content="前言&amp;emsp;&amp;emsp;建造者模式：是将一个复杂的对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。&amp;emsp;&amp;emsp;工厂类模式提供的是创建单个类的模式，而建造者模式则是将各种产品集中起来进行管理，用来创建复合对象，所谓复合对象就是指某个类具有不同的属性。&amp;emsp;&amp;emsp;建造者模式通常包括下面几个角色：&amp;emsp;&amp;emsp;1、Builder：给出一个抽象接口，以">
+<meta property="og:image" content="https://s1.ax1x.com/2018/11/21/F9gmse.png">
+<meta property="og:updated_time" content="2018-11-21T02:30:12.072Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="建造者模式详解">
+<meta name="twitter:description" content="前言&amp;emsp;&amp;emsp;建造者模式：是将一个复杂的对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。&amp;emsp;&amp;emsp;工厂类模式提供的是创建单个类的模式，而建造者模式则是将各种产品集中起来进行管理，用来创建复合对象，所谓复合对象就是指某个类具有不同的属性。&amp;emsp;&amp;emsp;建造者模式通常包括下面几个角色：&amp;emsp;&amp;emsp;1、Builder：给出一个抽象接口，以">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/11/21/F9gmse.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/mylive.css">
+  <link rel="stylesheet" href="/css/mySetting.css">
+  <script src="/js/pace.min.js"></script>
+  <script src="/js/mySetting.js"></script>
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-113082369-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?a3fed5fc0a708f5e993575bc1ccaf623";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+  
+
+</head>
+<body>
+  <div id="container">
+      <div class="maplebg"></div>
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">HDQ&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        HDQ&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 互联网生活 互联网资源的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="个人网站" target="_blank" href="http://hdqyf.club/">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="GitHub" target="_blank" href="https://github.com/GarenMorbid">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="https://weibo.com/u/5470832383?refer_flag=1005055013_">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Steam" target="_blank" href="http://steamcommunity.com/id/610717159/">
+                            <i class="fa fa-steam fa-2x"></i></a>
+                    
+                        <a title="Blog&#39;s App Download" target="_blank" href="https://pan.lanzou.com/i10yfxi">
+                            <i class="fa fa-android fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-20181121-建造者模式详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      建造者模式详解
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/设计模式/">设计模式</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-11-21
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;<strong>建造者模式：是将一个复杂的对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</strong><br>&emsp;&emsp;工厂类模式提供的是创建单个类的模式，而建造者模式则是将各种产品集中起来进行管理，用来创建复合对象，所谓复合对象就是指某个类具有不同的属性。<br>&emsp;&emsp;建造者模式通常包括下面几个角色：<br>&emsp;&emsp;1、<strong>Builder</strong>：给出一个抽象接口，以规范产品对象的各个组成成分的建造。这个接口规定要实现复杂对象的哪些部分的创建，并不涉及具体的对象部件的创建。<br>&emsp;&emsp;2、<strong>ConcreteBuilder</strong>：实现Builder接口，针对不同的商业逻辑，具体化复杂对象的各部分的创建。 在建造过程完成后，提供产品的实例。<br>&emsp;&emsp;3、<strong>Director</strong>：调用具体建造者来创建复杂对象的各个部分，在指导者中不涉及具体产品的信息，只负责保证对象各部分完整创建或按某种顺序创建。<br>&emsp;&emsp;4、<strong>Product</strong>：要创建的复杂对象。<br>&emsp;&emsp;主要作用：在用户不知道对象的建造过程和细节的情况下就可以直接创建复杂的对象。</font>
+
+<blockquote>
+<ol>
+<li>用户只需要给出指定复杂对象的类型和内容</li>
+<li>建造者模式负责按顺序创建复杂对象（把内部的建造过程和细节隐藏起来)</li>
+</ol>
+</blockquote>
+<p><img src="https://s1.ax1x.com/2018/11/21/F9gmse.png" alt=""><br></p>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">模式讲解：<br>&emsp;&emsp;1. 指挥者（Director）直接和客户（Client）进行需求沟通<br>&emsp;&emsp;2. 沟通后指挥者将客户创建产品的需求划分为各个部件的建造请求（Builder）<br>&emsp;&emsp;3. 将各个部件的建造请求委派到具体的建造者（ConcreteBuilder）<br>&emsp;&emsp;4. 各个具体建造者负责进行产品部件的构建<br>&emsp;&emsp;5. 最终构建成具体产品（Product）</font>
+
+<h3 id="栗子"><a href="#栗子" class="headerlink" title="栗子"></a><font color="#0099ff" size="4" face="黑体">栗子</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;这里以游戏开发中人物的构造过程为例。在游戏中创建一个形象时，需要对每个部位进行创建。简化而言，需要创建头部，身体和四肢。</font>
+
+<h4 id="1、Product"><a href="#1、Product" class="headerlink" title="1、Product"></a><font color="#0099ff" size="3" face="黑体">1、Product</font></h4><p><strong>要创建的复杂对象</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;  </div><div class="line">    <span class="keyword">private</span> String head;  </div><div class="line">    <span class="keyword">private</span> String body;  </div><div class="line">    <span class="keyword">private</span> String foot;  </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getHead</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> head;  </div><div class="line">    &#125;  </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setHead</span><span class="params">(String head)</span> </span>&#123;  </div><div class="line">        <span class="keyword">this</span>.head = head;  </div><div class="line">    &#125;  </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getBody</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> body;  </div><div class="line">    &#125;  </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBody</span><span class="params">(String body)</span> </span>&#123;  </div><div class="line">        <span class="keyword">this</span>.body = body;  </div><div class="line">    &#125;  </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getFoot</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> foot;  </div><div class="line">    &#125;  </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setFoot</span><span class="params">(String foot)</span> </span>&#123;  </div><div class="line">        <span class="keyword">this</span>.foot = foot;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="2、Builder"><a href="#2、Builder" class="headerlink" title="2、Builder"></a><font color="#0099ff" size="3" face="黑体">2、Builder</font></h4><p><strong>给出一个抽象接口，以规范产品对象的各个组成成分的建造。这个接口规定要实现复杂对象的哪些部分的创建，并不涉及具体的对象部件的创建</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PersonBuilder</span> </span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">buildHead</span><span class="params">()</span></span>;  </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">buildBody</span><span class="params">()</span></span>;  </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">buildFoot</span><span class="params">()</span></span>;  </div><div class="line">    <span class="function">Person <span class="title">buildPerson</span><span class="params">()</span></span>;<span class="comment">//组装  </span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="3、ConcreteBuilder"><a href="#3、ConcreteBuilder" class="headerlink" title="3、ConcreteBuilder"></a><font color="#0099ff" size="3" face="黑体">3、ConcreteBuilder</font></h4><p><strong>实现Builder接口，针对不同的商业逻辑，具体化复杂对象的各部分的创建。 在建造过程完成后，提供产品的实例</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ManBuilder</span> <span class="keyword">implements</span> <span class="title">PersonBuilder</span> </span>&#123;  </div><div class="line">    Person person;  </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ManBuilder</span><span class="params">()</span> </span>&#123;  </div><div class="line">        person = <span class="keyword">new</span> Person();<span class="comment">//创建一个person实例，用于调用set方法  </span></div><div class="line">    &#125;  </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildBody</span><span class="params">()</span> </span>&#123;  </div><div class="line">        person.setBody(<span class="string">"建造身体部分"</span>);  </div><div class="line">    &#125;  </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildFoot</span><span class="params">()</span> </span>&#123;  </div><div class="line">        person.setFoot(<span class="string">"建造四肢部分"</span>);  </div><div class="line">    &#125;  </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildHead</span><span class="params">()</span> </span>&#123;  </div><div class="line">        person.setHead(<span class="string">"建造头部部分"</span>);  </div><div class="line">    &#125;  </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Person <span class="title">buildPerson</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> person;<span class="comment">//返回一个person实例  </span></div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="4、Director"><a href="#4、Director" class="headerlink" title="4、Director"></a><font color="#0099ff" size="3" face="黑体">4、Director</font></h4><p><strong>调用具体建造者来创建复杂对象的各个部分，在指导者中不涉及具体产品的信息，只负责保证对象各部分完整创建或按某种顺序创建</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonDirector</span> </span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">public</span> Person <span class="title">constructPerson</span><span class="params">(PersonBuilder pb)</span> </span>&#123;  </div><div class="line">        <span class="comment">//按照 身体---&gt;头部---&gt;四肢 的顺序创建人物  </span></div><div class="line">        pb.buildHead();  </div><div class="line">        pb.buildBody();  </div><div class="line">        pb.buildFoot();  </div><div class="line">        <span class="keyword">return</span> pb.buildPerson();  </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="5、测试"><a href="#5、测试" class="headerlink" title="5、测试"></a><font color="#0099ff" size="3" face="黑体">5、测试</font></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </div><div class="line">        PersonDirector pd = <span class="keyword">new</span> PersonDirector();  </div><div class="line">        Person person = pd.constructPerson(<span class="keyword">new</span> ManBuilder());  </div><div class="line">        System.out.println(person.getBody());  </div><div class="line">        System.out.println(person.getFoot());  </div><div class="line">        System.out.println(person.getHead());  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">建造身体部分</div><div class="line">建造四肢部分</div><div class="line">建造头部部分</div></pre></td></tr></table></figure>
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a><font color="#0099ff" size="4" face="黑体">优缺点</font></h3><ul>
+<li>优点：<ul>
+<li>易于解耦：将产品本身与产品创建过程进行解耦，可以使用相同的创建过程来得到不同的产品。也就说细节依赖抽象。</li>
+<li>易于精确控制对象的创建：将复杂产品的创建步骤分解在不同的方法中，使得创建过程更加清晰</li>
+<li>易于拓展：增加新的具体建造者无需修改原有类库的代码，易于拓展，符合“开闭原则”</li>
+</ul>
+</li>
+<li>缺点:<ul>
+<li>建造者模式所创建的产品一般具有较多的共同点，其组成部分相似；如果产品之间的差异性很大，则不适合使用建造者模式，因此其使用范围受到一定的限制</li>
+<li>如果产品的内部变化复杂，可能会导致需要定义很多具体建造者类来实现这种变化，导致系统变得很庞大</li>
+</ul>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><font color="#0099ff" size="4" face="黑体">总结</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;在《Effective Java》书中第二条，就提到“遇到多个构造器参数时要考虑用构建器”，其实这里的构建器就属于建造者模式，只是里面把四个角色都放到具体产品里面了。而建造者模式主要解决在软件系统中，有时候面临着“一个复杂对象”的创建工作，其通常由各个部分的子对象用一定的算法构成；由于需求的变化，这个复杂对象的各个部分经常面临着剧烈的变化，但是将它们组合在一起的算法却相对稳定。</font>
+
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年11月21日 10:30</p>
+	<p>原始链接： <a class="post-url" href="/2018/11/21/20181121-建造者模式详解/" title="建造者模式详解">https://blog.hdqyf.club/2018/11/21/20181121-建造者模式详解/</a></p>
+        <footer>
+            <a href="https://blog.hdqyf.club">
+                <img src="/images/logo.png" alt="Garen">
+                Garen
+            </a>
+        </footer>
+    </div>
+</div>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/11/21/20181121-建造者模式详解/&title=《建造者模式详解》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/11/21/F9gnqH.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/11/21/20181121-建造者模式详解/&title=《建造者模式详解》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+              <i class="fa fa-star"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/11/21/20181121-建造者模式详解/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《建造者模式详解》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/11/21/20181121-建造者模式详解/&via=https://blog.hdqyf.club" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/11/21/20181121-建造者模式详解/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/11/21/20181121-建造者模式详解/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Java/" class="color5">Java</a>
+      
+    <a href="/tags/设计模式/" class="color5">设计模式</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#栗子"><span class="post-toc-text">栗子</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、Product"><span class="post-toc-text">1、Product</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、Builder"><span class="post-toc-text">2、Builder</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3、ConcreteBuilder"><span class="post-toc-text">3、ConcreteBuilder</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4、Director"><span class="post-toc-text">4、Director</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5、测试"><span class="post-toc-text">5、测试</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#优缺点"><span class="post-toc-text">优缺点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2018/11/20/20181120-抽象工厂模式详解/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">抽象工厂模式详解</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <span id="runtime_span"></span>
+            <br>
+            <p>
+                Powered by <a href="#" target="_blank">HDQ</a> Theme <a href="#" target="_blank">Garen</a> &copy;
+                2018
+                    Garen<br>
+            </p>
+        </div>
+    </div>
+</footer>
+<script>
+    function show_runtime() {
+            window.setTimeout("show_runtime()", 1000);
+            X = new Date("11/25/2017 05:20:00");
+            Y = new Date(); T = (Y.getTime() - X.getTime()); M = 24 * 60 * 60 * 1000;
+            a = T / M;
+            A = Math.floor(a);
+            b = (a - A) * 24;
+            B = Math.floor(b);
+            c = (b - B) * 60;
+            C = Math.floor((b - B) * 60);
+            D = Math.floor((c - C) * 60);
+            runtime_span.innerHTML = "本站勉强运行: " + A + "天" + B + "小时" + C + "分" + D + "秒";
+        }
+
+        show_runtime();
+</script>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-user"></span>
+    <span class="fui-photo"></span>
+    <span class="fui-info-circle"></span>
+    <span class="fui-cross"></span>
+</div>
+</div>
+<script src="/js/mylive-tips.js"></script>
+<script src="/js/mylive.js"></script>
+<script type="text/javascript">initModel(window.location.protocol+'//'+window.location.hostname+'/'+'json/')</script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://blog.hdqyf.club",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/3DS-MAX/">3DS MAX</a><a class="category-link" href="/categories/CAD/">CAD</a><a class="category-link" href="/categories/CPU/">CPU</a><a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/Docker/">Docker</a><a class="category-link" href="/categories/GPU/">GPU</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/Java/">Java</a><a class="category-link" href="/categories/Linux/">Linux</a><a class="category-link" href="/categories/MVC/">MVC</a><a class="category-link" href="/categories/Mac/">Mac</a><a class="category-link" href="/categories/MongoDB/">MongoDB</a><a class="category-link" href="/categories/MySQL/">MySQL</a><a class="category-link" href="/categories/OCR识别/">OCR识别</a><a class="category-link" href="/categories/Office/">Office</a><a class="category-link" href="/categories/Oracle/">Oracle</a><a class="category-link" href="/categories/PDF/">PDF</a><a class="category-link" href="/categories/PDF工具/">PDF工具</a><a class="category-link" href="/categories/Redis/">Redis</a><a class="category-link" href="/categories/SQL/">SQL</a><a class="category-link" href="/categories/Spring/">Spring</a><a class="category-link" href="/categories/Steam/">Steam</a><a class="category-link" href="/categories/WiFi/">WiFi</a><a class="category-link" href="/categories/hibernate/">hibernate</a><a class="category-link" href="/categories/iOS/">iOS</a><a class="category-link" href="/categories/mybatis/">mybatis</a><a class="category-link" href="/categories/下载/">下载</a><a class="category-link" href="/categories/卸载/">卸载</a><a class="category-link" href="/categories/字体/">字体</a><a class="category-link" href="/categories/常识/">常识</a><a class="category-link" href="/categories/开发工具/">开发工具</a><a class="category-link" href="/categories/感悟/">感悟</a><a class="category-link" href="/categories/截屏/">截屏</a><a class="category-link" href="/categories/播放器/">播放器</a><a class="category-link" href="/categories/效率/">效率</a><a class="category-link" href="/categories/文档/">文档</a><a class="category-link" href="/categories/杂谈/">杂谈</a><a class="category-link" href="/categories/注册表/">注册表</a><a class="category-link" href="/categories/激活/">激活</a><a class="category-link" href="/categories/生活/">生活</a><a class="category-link" href="/categories/编辑器/">编辑器</a><a class="category-link" href="/categories/翻译/">翻译</a><a class="category-link" href="/categories/虚拟机/">虚拟机</a><a class="category-link" href="/categories/设计模式/">设计模式</a><a class="category-link" href="/categories/资源/">资源</a><a class="category-link" href="/categories/转换/">转换</a><a class="category-link" href="/categories/运行库/">运行库</a><a class="category-link" href="/categories/音乐/">音乐</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 10.83px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/CSS/" style="font-size: 10.83px;">CSS</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/HTML/" style="font-size: 12.5px;">HTML</a> <a href="/tags/JS/" style="font-size: 11.67px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 15.83px;">Linux</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Mac/" style="font-size: 11.67px;">Mac</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/OCR识别/" style="font-size: 10px;">OCR识别</a> <a href="/tags/Office/" style="font-size: 11.67px;">Office</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PDF/" style="font-size: 10.83px;">PDF</a> <a href="/tags/PDF工具/" style="font-size: 10px;">PDF工具</a> <a href="/tags/PPT/" style="font-size: 10.83px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/Redis/" style="font-size: 10.83px;">Redis</a> <a href="/tags/SQL/" style="font-size: 10.83px;">SQL</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/WiFi/" style="font-size: 10px;">WiFi</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/iOS/" style="font-size: 11.67px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 16.67px;">mybatis</a> <a href="/tags/下载/" style="font-size: 14.17px;">下载</a> <a href="/tags/前端/" style="font-size: 12.5px;">前端</a> <a href="/tags/办公/" style="font-size: 13.33px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 10.83px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发工具/" style="font-size: 10.83px;">开发工具</a> <a href="/tags/开发技巧/" style="font-size: 11.67px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.5px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/插件/" style="font-size: 10px;">插件</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 15px;">效率</a> <a href="/tags/数据库/" style="font-size: 13.33px;">数据库</a> <a href="/tags/文档/" style="font-size: 10px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/杂谈/" style="font-size: 10px;">杂谈</a> <a href="/tags/框架/" style="font-size: 19.17px;">框架</a> <a href="/tags/检测/" style="font-size: 10.83px;">检测</a> <a href="/tags/注册表/" style="font-size: 10.83px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 12.5px;">激活</a> <a href="/tags/生活/" style="font-size: 13.33px;">生活</a> <a href="/tags/系统必备/" style="font-size: 10px;">系统必备</a> <a href="/tags/终端/" style="font-size: 10.83px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/脚本/" style="font-size: 10.83px;">脚本</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/视频/" style="font-size: 11.67px;">视频</a> <a href="/tags/设计模式/" style="font-size: 15.83px;">设计模式</a> <a href="/tags/词典/" style="font-size: 10px;">词典</a> <a href="/tags/资源/" style="font-size: 18.33px;">资源</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/运行库/" style="font-size: 10px;">运行库</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 10.83px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/CSS/" style="font-size: 10.83px;">CSS</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/HTML/" style="font-size: 12.5px;">HTML</a> <a href="/tags/JS/" style="font-size: 11.67px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 15.83px;">Linux</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Mac/" style="font-size: 11.67px;">Mac</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/OCR识别/" style="font-size: 10px;">OCR识别</a> <a href="/tags/Office/" style="font-size: 11.67px;">Office</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PDF/" style="font-size: 10.83px;">PDF</a> <a href="/tags/PDF工具/" style="font-size: 10px;">PDF工具</a> <a href="/tags/PPT/" style="font-size: 10.83px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/Redis/" style="font-size: 10.83px;">Redis</a> <a href="/tags/SQL/" style="font-size: 10.83px;">SQL</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/WiFi/" style="font-size: 10px;">WiFi</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/iOS/" style="font-size: 11.67px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 16.67px;">mybatis</a> <a href="/tags/下载/" style="font-size: 14.17px;">下载</a> <a href="/tags/前端/" style="font-size: 12.5px;">前端</a> <a href="/tags/办公/" style="font-size: 13.33px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 10.83px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发工具/" style="font-size: 10.83px;">开发工具</a> <a href="/tags/开发技巧/" style="font-size: 11.67px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.5px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/插件/" style="font-size: 10px;">插件</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 15px;">效率</a> <a href="/tags/数据库/" style="font-size: 13.33px;">数据库</a> <a href="/tags/文档/" style="font-size: 10px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/杂谈/" style="font-size: 10px;">杂谈</a> <a href="/tags/框架/" style="font-size: 19.17px;">框架</a> <a href="/tags/检测/" style="font-size: 10.83px;">检测</a> <a href="/tags/注册表/" style="font-size: 10.83px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 12.5px;">激活</a> <a href="/tags/生活/" style="font-size: 13.33px;">生活</a> <a href="/tags/系统必备/" style="font-size: 10px;">系统必备</a> <a href="/tags/终端/" style="font-size: 10.83px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/脚本/" style="font-size: 10.83px;">脚本</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/视频/" style="font-size: 11.67px;">视频</a> <a href="/tags/设计模式/" style="font-size: 15.83px;">设计模式</a> <a href="/tags/词典/" style="font-size: 10px;">词典</a> <a href="/tags/资源/" style="font-size: 18.33px;">资源</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/运行库/" style="font-size: 10px;">运行库</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.staticfile.org/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.staticfile.org/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.staticfile.org/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+<script>
+  $(".pingfuADHolder").remove();
+</script>
+</html>
