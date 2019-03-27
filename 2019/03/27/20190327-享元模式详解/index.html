@@ -3,23 +3,25 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>ES6中的let和const | HDQ | Blog</title>
+  <title>享元模式详解 | HDQ | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HDQ,HDQ's Blog">
   
-  <meta name="description" content="let&amp;emsp;&amp;emsp;ES6新增了let命令，用来声明变量。它的用法类似于var，但是所声明的变量，只在let命令所在的代码块内有效。  1234567&amp;#123;    var a = 123;    let b = 123;&amp;#125;console.log(a); // 123console.log(b); // b is not defined &amp;emsp;&amp;emsp;上面代码在代">
-<meta name="keywords" content="JS">
+  <meta name="description" content="前言&amp;emsp;&amp;emsp;说到享元模式，第一个想到的应该就是池技术了，String常量池、数据库连接池、缓冲池等等都是享元模式的应用，所以说享元模式是池技术的重要实现方式。&amp;emsp;&amp;emsp;比如我们每次创建字符串对象时，都需要创建一个新的字符串对象的话，内存开销会很大，所以如果第一次创建了字符串对象“Garen”，下次再创建相同的字符串“Garen”时，只是把它的引用指向“Garen”，这">
+<meta name="keywords" content="Java,设计模式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ES6中的let和const">
-<meta property="og:url" content="https://blog.hdqyf.club/2019/03/19/20190319-ES6中的let和const/index.html">
+<meta property="og:title" content="享元模式详解">
+<meta property="og:url" content="https://blog.hdqyf.club/2019/03/27/20190327-享元模式详解/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
-<meta property="og:description" content="let&amp;emsp;&amp;emsp;ES6新增了let命令，用来声明变量。它的用法类似于var，但是所声明的变量，只在let命令所在的代码块内有效。  1234567&amp;#123;    var a = 123;    let b = 123;&amp;#125;console.log(a); // 123console.log(b); // b is not defined &amp;emsp;&amp;emsp;上面代码在代">
+<meta property="og:description" content="前言&amp;emsp;&amp;emsp;说到享元模式，第一个想到的应该就是池技术了，String常量池、数据库连接池、缓冲池等等都是享元模式的应用，所以说享元模式是池技术的重要实现方式。&amp;emsp;&amp;emsp;比如我们每次创建字符串对象时，都需要创建一个新的字符串对象的话，内存开销会很大，所以如果第一次创建了字符串对象“Garen”，下次再创建相同的字符串“Garen”时，只是把它的引用指向“Garen”，这">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-19T07:48:42.340Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/27/AaTVxg.png">
+<meta property="og:updated_time" content="2019-03-27T07:00:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ES6中的let和const">
-<meta name="twitter:description" content="let&amp;emsp;&amp;emsp;ES6新增了let命令，用来声明变量。它的用法类似于var，但是所声明的变量，只在let命令所在的代码块内有效。  1234567&amp;#123;    var a = 123;    let b = 123;&amp;#125;console.log(a); // 123console.log(b); // b is not defined &amp;emsp;&amp;emsp;上面代码在代">
+<meta name="twitter:title" content="享元模式详解">
+<meta name="twitter:description" content="前言&amp;emsp;&amp;emsp;说到享元模式，第一个想到的应该就是池技术了，String常量池、数据库连接池、缓冲池等等都是享元模式的应用，所以说享元模式是池技术的重要实现方式。&amp;emsp;&amp;emsp;比如我们每次创建字符串对象时，都需要创建一个新的字符串对象的话，内存开销会很大，所以如果第一次创建了字符串对象“Garen”，下次再创建相同的字符串“Garen”时，只是把它的引用指向“Garen”，这">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/03/27/AaTVxg.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -140,14 +142,14 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-20190319-ES6中的let和const" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-20190327-享元模式详解" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      ES6中的let和const
+      享元模式详解
     </h1>
     <div class="post-title-bar">
       <ul>
@@ -155,12 +157,12 @@ ga('send', 'pageview');
               <li>
                   <i class="fa fa-book"></i>
                   
-                      <a href="/categories/JS/">JS</a>
+                      <a href="/categories/设计模式/">设计模式</a>
                   
               </li>
           
         <li>
-          <i class="fa fa-calendar"></i>  2019-03-19
+          <i class="fa fa-calendar"></i>  2019-03-27
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -176,48 +178,44 @@ ga('send', 'pageview');
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <h3 id="let"><a href="#let" class="headerlink" title="let"></a><font color="#0099ff" size="4" face="黑体">let</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;ES6新增了let命令，用来声明变量。它的用法类似于var，但是所声明的变量，只在let命令所在的代码块内有效。</font>
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;说到享元模式，第一个想到的应该就是池技术了，String常量池、数据库连接池、缓冲池等等都是享元模式的应用，所以说享元模式是池技术的重要实现方式。<br>&emsp;&emsp;比如我们每次创建字符串对象时，都需要创建一个新的字符串对象的话，内存开销会很大，所以如果第一次创建了字符串对象“Garen”，下次再创建相同的字符串“Garen”时，只是把它的引用指向“Garen”，这样就实现了“Garen”字符串再内存中的共享。<br>&emsp;&emsp;举个最简单的例子，网络联机下棋的时候，一台服务器连接了多个客户端（玩家），如果我们每个棋子都要创建对象，那一盘棋可能就有上百个对象产生，玩家多点的话，因为内存空间有限，一台服务器就难以支持了，所以这里要使用享元模式，将棋子对象减少到几个实例。下面给出享元模式的定义。<br>&emsp;&emsp;<strong>享元模式（Flyweight）</strong>，运用共享技术有效地支持大量细粒度的对象。UML结构图如下：</font>
 
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">123</span>;</span><br><span class="line">    <span class="keyword">let</span> b = <span class="number">123</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 123</span></span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// b is not defined</span></span><br></pre></td></tr></table></figure>
-<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;上面代码在代码块之中，分别用let和var声明了两个变量。然后在代码块之外调用这两个变量，结果let声明的变量报错，var声明的变量返回了正确的值。这表明，let声明的变量只在它所在的代码块有效<br>&emsp;&emsp;for循环相信大家都玩过。下面这种现象扭曲了我们块级作用域的思想！如果将var改成let就可以了！</font>
+<p><img src="https://s2.ax1x.com/2019/03/27/AaTVxg.png" alt><br></p>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;其中，Flyweight是抽象享元角色。它是产品的抽象类，同时定义出对象的外部状态和内部状态（外部状态及内部状态相关内容见后方）的接口或实现；ConcreteFlyweight是具体享元角色，是具体的产品类，实现抽象角色定义的业务；UnsharedConcreteFlyweight是不可共享的享元角色，一般不会出现在享元工厂中；FlyweightFactory是享元工厂，它用于构造一个池容器，同时提供从池中获得对象的方法。</font>
 
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(i); <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
-<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;再看一个例子：</font>
+<h3 id="1-Flyweight抽象类"><a href="#1-Flyweight抽象类" class="headerlink" title="1. Flyweight抽象类"></a><font color="#0099ff" size="4" face="黑体">1. Flyweight抽象类</font></h3><p>所有具体享元类的超类或接口，通过这个接口，Flyweight可以接受并作用于外部状态。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Flyweight</span> </span>&#123;</span><br><span class="line">    <span class="comment">//内部状态</span></span><br><span class="line">    <span class="keyword">public</span> String intrinsic;</span><br><span class="line">    <span class="comment">//外部状态</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">final</span> String extrinsic;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//要求享元角色必须接受外部状态</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Flyweight</span><span class="params">(String extrinsic)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.extrinsic = extrinsic;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//定义业务操作</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">operate</span><span class="params">(<span class="keyword">int</span> extrinsic)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getIntrinsic</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> intrinsic;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIntrinsic</span><span class="params">(String intrinsic)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.intrinsic = intrinsic;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-ConcreteFlyweight类"><a href="#2-ConcreteFlyweight类" class="headerlink" title="2. ConcreteFlyweight类"></a><font color="#0099ff" size="4" face="黑体">2. ConcreteFlyweight类</font></h3><p>继承Flyweight超类或实现Flyweight接口，并为其内部状态增加存储空间。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteFlyweight</span> <span class="keyword">extends</span> <span class="title">Flyweight</span> </span>&#123;</span><br><span class="line">    <span class="comment">//接受外部状态</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ConcreteFlyweight</span><span class="params">(String extrinsic)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(extrinsic);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//根据外部状态进行逻辑处理</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operate</span><span class="params">(<span class="keyword">int</span> extrinsic)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"具体Flyweight:"</span> + extrinsic);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-UnsharedConcreteFlyweight类"><a href="#3-UnsharedConcreteFlyweight类" class="headerlink" title="3. UnsharedConcreteFlyweight类"></a><font color="#0099ff" size="4" face="黑体">3. UnsharedConcreteFlyweight类</font></h3><p>指那些不需要共享的Flyweight子类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UnsharedConcreteFlyweight</span> <span class="keyword">extends</span> <span class="title">Flyweight</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UnsharedConcreteFlyweight</span><span class="params">(String extrinsic)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(extrinsic);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operate</span><span class="params">(<span class="keyword">int</span> extrinsic)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"不共享的具体Flyweight:"</span> + extrinsic);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-FlyweightFactory类"><a href="#4-FlyweightFactory类" class="headerlink" title="4. FlyweightFactory类"></a><font color="#0099ff" size="4" face="黑体">4. FlyweightFactory类</font></h3><p>一个享元工厂，用来创建并管理Flyweight对象，主要是用来确保合理地共享Flyweight，当用户请求一个Flyweight时，FlyweightFactory对象提供一个已创建的实例或创建一个实例。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FlyweightFactory</span> </span>&#123;</span><br><span class="line">    <span class="comment">//定义一个池容器</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> HashMap&lt;String, Flyweight&gt; pool = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//享元工厂</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Flyweight <span class="title">getFlyweight</span><span class="params">(String extrinsic)</span> </span>&#123;</span><br><span class="line">        Flyweight flyweight = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(pool.containsKey(extrinsic)) &#123;    <span class="comment">//池中有该对象</span></span><br><span class="line">            flyweight = pool.get(extrinsic);</span><br><span class="line">            System.out.print(<span class="string">"已有 "</span> + extrinsic + <span class="string">" 直接从池中取----&gt;"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//根据外部状态创建享元对象</span></span><br><span class="line">            flyweight = <span class="keyword">new</span> ConcreteFlyweight(extrinsic);</span><br><span class="line">            <span class="comment">//放入池中</span></span><br><span class="line">            pool.put(extrinsic, flyweight);</span><br><span class="line">            System.out.print(<span class="string">"创建 "</span> + extrinsic + <span class="string">" 并从池中取出----&gt;"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> flyweight;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-Client客户端"><a href="#5-Client客户端" class="headerlink" title="5. Client客户端"></a><font color="#0099ff" size="4" face="黑体">5. Client客户端</font></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> extrinsic = <span class="number">22</span>;</span><br><span class="line"></span><br><span class="line">        Flyweight flyweightX = FlyweightFactory.getFlyweight(<span class="string">"X"</span>);</span><br><span class="line">        flyweightX.operate(++ extrinsic);</span><br><span class="line"></span><br><span class="line">        Flyweight flyweightY = FlyweightFactory.getFlyweight(<span class="string">"Y"</span>);</span><br><span class="line">        flyweightY.operate(++ extrinsic);</span><br><span class="line"></span><br><span class="line">        Flyweight flyweightZ = FlyweightFactory.getFlyweight(<span class="string">"Z"</span>);</span><br><span class="line">        flyweightZ.operate(++ extrinsic);</span><br><span class="line"></span><br><span class="line">        Flyweight flyweightReX = FlyweightFactory.getFlyweight(<span class="string">"X"</span>);</span><br><span class="line">        flyweightReX.operate(++ extrinsic);</span><br><span class="line"></span><br><span class="line">        Flyweight unsharedFlyweight = <span class="keyword">new</span> UnsharedConcreteFlyweight(<span class="string">"X"</span>);</span><br><span class="line">        unsharedFlyweight.operate(++ extrinsic);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">创建X 并从池中取出----&gt;具体Flyweight:23</span><br><span class="line">创建Y 并从池中取出----&gt;具体Flyweight:24</span><br><span class="line">创建Z 并从池中取出----&gt;具体Flyweight:25</span><br><span class="line">已有X 直接从池中取----&gt;具体Flyweight:26</span><br><span class="line">不共享的具体Flyweight:27</span><br></pre></td></tr></table></figure>
+<h3 id="内部状态和外部状态"><a href="#内部状态和外部状态" class="headerlink" title="内部状态和外部状态"></a><font color="#0099ff" size="4" face="黑体">内部状态和外部状态</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;上面享元模式的定义为我们提出了两个要求：细粒度和共享对象。我们知道分配太多的对象到应用程序中将有损程序的性能，同时还容易造成内存溢出，要避免这种情况，用到的就是共享技术，这里就需要提到内部状态和外部状态了。<br>&emsp;&emsp;因为要求细粒度对象，所以不可避免地会使对象数量多且性质相近，此时我们就将这些对象的信息分为两个部分：内部状态和外部状态。<br>&emsp;&emsp;<strong>内部状态</strong>指对象共享出来的信息，存储在享元对象内部并且不会随环境的改变而改变；<strong>外部状态</strong>指对象得以依赖的一个标记，是随环境改变而改变的、不可共享的状态。<br>&emsp;&emsp;我们举一个最简单的例子，棋牌类游戏大家都有玩过吧，比如说说围棋和跳棋，它们都有大量的棋子对象，围棋和五子棋只有黑白两色，跳棋颜色略多一点，但也是不太变化的，所以棋子颜色就是棋子的内部状态；而各个棋子之间的差别就是位置的不同，我们落子嘛，落子颜色是定的，但位置是变化的，所以方位坐标就是棋子的外部状态。<br>&emsp;&emsp;那么为什么这里要用享元模式呢？可以想象一下，上面提到的棋类游戏的例子，比如围棋，理论上有361个空位可以放棋子，常规情况下每盘棋都有可能有两三百个棋子对象产生，因为内存空间有限，一台服务器很难支持更多的玩家玩围棋游戏，如果用享元模式来处理棋子，那么棋子对象就可以减少到只有两个实例，这样就很好的解决了对象的开销问题。</font>
 
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">   a[i] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(i);</span><br><span class="line">   &#125;;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> a[<span class="number">6</span>]();</span><br></pre></td></tr></table></figure>
-<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;上面代码中，变量i是var命令声明的，在全局范围内都有效，所以全局只有一个变量i。每一次循环，变量i的值都会发生改变，而循环内被赋给数组a的函数内部的console.log(i)，里面的i指向的就是全局的i。也就是说，所有数组a的成员里面的i，指向的都是同一个i，导致运行时输出的是最后一轮的i的值，也就是 10<br>&emsp;&emsp;如果使用let，声明的变量仅在块级作用域内有效，最后输出的是 6。</font>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  a[i] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a[<span class="number">6</span>]();</span><br></pre></td></tr></table></figure>
-<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;上面代码中，变量i是let声明的，当前的i只在本轮循环有效，所以每一次循环的i其实都是一个新的变量，所以最后输出的是6。你可能会问，如果每一轮循环的变量i都是重新声明的，那它怎么知道上一轮循环的值，从而计算出本轮循环的值？这是因为 JavaScript 引擎内部会记住上一轮循环的值，初始化本轮的变量i时，就在上一轮循环的基础上进行计算。</font>
-
-<h4 id="不存在变量提升"><a href="#不存在变量提升" class="headerlink" title="不存在变量提升"></a><font color="#0099ff" size="3" face="黑体">不存在变量提升</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;var命令会发生“变量提升”现象，即变量可以在声明之前使用，值为undefined。这种现象多多少少是有些奇怪的，按照一般的逻辑，变量应该在声明语句之后才可以使用。<br>&emsp;&emsp;为了纠正这种现象，let命令改变了语法行为，它所声明的变量一定要在声明后使用，否则报错。</font>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// var 的情况</span></span><br><span class="line"><span class="built_in">console</span>.log(foo); <span class="comment">// 输出undefined</span></span><br><span class="line"><span class="keyword">var</span> foo = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// let 的情况</span></span><br><span class="line"><span class="built_in">console</span>.log(bar); <span class="comment">// 报错ReferenceError</span></span><br><span class="line"><span class="keyword">let</span> bar = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
-<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;上面代码中，变量foo用var命令声明，会发生变量提升，即脚本开始运行时，变量foo已经存在了，但是没有值，所以会输出undefined。变量bar用let命令声明，不会发生变量提升。这表示在声明它之前，变量bar是不存在的，这时如果用到它，就会抛出一个错误。</font>
-
-<h4 id="不允许重复声明"><a href="#不允许重复声明" class="headerlink" title="不允许重复声明"></a><font color="#0099ff" size="3" face="黑体">不允许重复声明</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;let不允许在相同作用域内，重复声明同一个变量。</font>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 报错</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="number">10</span>;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 报错</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="number">10</span>;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;因此，不能在函数内部重新声明参数。</font>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> arg; <span class="comment">// 报错</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">let</span> arg; <span class="comment">// 不报错</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="为什么需要块级作用域？"><a href="#为什么需要块级作用域？" class="headerlink" title="为什么需要块级作用域？"></a><font color="#0099ff" size="3" face="黑体">为什么需要块级作用域？</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;ES5 只有全局作用域和函数作用域，没有块级作用域，这带来很多不合理的场景。<br>&emsp;&emsp;第一种场景，内层变量可能会覆盖外层变量。</font>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> tmp = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(tmp);</span><br><span class="line">  <span class="keyword">if</span> (<span class="literal">false</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> tmp = <span class="string">'hello world'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f(); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
-<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;上面代码的原意是，if代码块的外部使用外层的tmp变量，内部使用内层的tmp变量。但是，函数f执行后，输出结果为undefined，原因在于变量提升，导致内层的tmp变量覆盖了外层的tmp变量。<br>&emsp;&emsp;第二种场景，用来计数的循环变量泄露为全局变量。</font>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">'hello'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; s.length; i++) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(s[i]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(i); <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
-<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;上面代码中，变量i只用来控制循环，但是循环结束后，它并没有消失，泄露成了全局变量。</font>
-
-<h3 id="const"><a href="#const" class="headerlink" title="const"></a><font color="#0099ff" size="4" face="黑体">const</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;基本语法：const声明一个只读的常量。一旦声明，常量的值就不能改变。</font>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> PI = <span class="number">3.1415</span>;</span><br><span class="line">PI <span class="comment">// 3.1415</span></span><br><span class="line"></span><br><span class="line">PI = <span class="number">3</span>; <span class="comment">// TypeError: Assignment to constant variable.</span></span><br></pre></td></tr></table></figure>
-<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;上面代码表明改变常量的值会报错.<br>&emsp;&emsp;const声明的变量不得改变值，这意味着，const一旦声明变量，就必须立即初始化，不能留到以后赋值。</font>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> foo;</span><br><span class="line"><span class="comment">// SyntaxError: Missing initializer in const declaration</span></span><br></pre></td></tr></table></figure>
-<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;上面代码表示，对于const来说，只声明不赋值，就会报错。<br>&emsp;&emsp;const的作用域与let命令相同：只在声明所在的块级作用域内有效。</font>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> MAX = <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MAX <span class="comment">// Uncaught ReferenceError: MAX is not defined</span></span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><font color="#0099ff" size="4" face="黑体">总结</font></h3><ul>
+<li><strong>何时使用</strong><ul>
+<li>系统中有大量对象时</li>
+<li>这些对象消耗大量内存时</li>
+<li>这些对象的状态大部分可以外部化时</li>
+</ul>
+</li>
+<li><strong>方法</strong><ul>
+<li>用唯一标识码判断，如果在内存中有，则返回这个唯一标识码所标识的对象，用HashMap/HashTable存储</li>
+</ul>
+</li>
+<li><strong>优点</strong><ul>
+<li>大大减少了对象的创建，降低了程序内存的占用，提高效率</li>
+</ul>
+</li>
+<li><strong>缺点</strong><ul>
+<li>提高了系统的复杂度。需要分离出内部状态和外部状态，而外部状态具有固化特性，不应该随着内部状态的改变而改变</li>
+</ul>
+</li>
+</ul>
 <p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
 <ul>
 <li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
@@ -225,8 +223,8 @@ ga('send', 'pageview');
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2019年03月19日 15:48</p>
-	<p>原始链接： <a class="post-url" href="/2019/03/19/20190319-ES6中的let和const/" title="ES6中的let和const">https://blog.hdqyf.club/2019/03/19/20190319-ES6中的let和const/</a></p>
+        <p>最后更新： 2019年03月27日 15:00</p>
+	<p>原始链接： <a class="post-url" href="/2019/03/27/20190327-享元模式详解/" title="享元模式详解">https://blog.hdqyf.club/2019/03/27/20190327-享元模式详解/</a></p>
         <footer>
             <a href="https://blog.hdqyf.club">
                 <img src="/images/logo.png" alt="Garen">
@@ -300,7 +298,7 @@ ga('send', 'pageview');
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2019/03/19/20190319-ES6中的let和const/&title=《ES6中的let和const》 — HDQ | Blog&pic=https://s2.ax1x.com/2019/03/19/AuphKP.jpg" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2019/03/27/20190327-享元模式详解/&title=《享元模式详解》 — HDQ | Blog&pic=https://s2.ax1x.com/2019/03/27/AaTkPf.jpg" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -310,22 +308,22 @@ ga('send', 'pageview');
             </a>
           </li>
           <li>
-            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2019/03/19/20190319-ES6中的let和const/&title=《ES6中的let和const》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2019/03/27/20190327-享元模式详解/&title=《享元模式详解》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
               <i class="fa fa-star"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2019/03/19/20190319-ES6中的let和const/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2019/03/27/20190327-享元模式详解/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《ES6中的let和const》 — HDQ | Blog&url=https://blog.hdqyf.club/2019/03/19/20190319-ES6中的let和const/&via=https://blog.hdqyf.club" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《享元模式详解》 — HDQ | Blog&url=https://blog.hdqyf.club/2019/03/27/20190327-享元模式详解/&via=https://blog.hdqyf.club" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2019/03/19/20190319-ES6中的let和const/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2019/03/27/20190327-享元模式详解/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -335,7 +333,7 @@ ga('send', 'pageview');
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2019/03/19/20190319-ES6中的let和const/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2019/03/27/20190327-享元模式详解/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -347,7 +345,9 @@ ga('send', 'pageview');
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/JS/" class="color3">JS</a>
+    <a href="/tags/Java/" class="color5">Java</a>
+      
+    <a href="/tags/设计模式/" class="color5">设计模式</a>
       
   </li>
 
@@ -360,26 +360,16 @@ ga('send', 'pageview');
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#let"><span class="post-toc-text">let</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#不存在变量提升"><span class="post-toc-text">不存在变量提升</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#不允许重复声明"><span class="post-toc-text">不允许重复声明</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#为什么需要块级作用域？"><span class="post-toc-text">为什么需要块级作用域？</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#const"><span class="post-toc-text">const</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-Flyweight抽象类"><span class="post-toc-text">1. Flyweight抽象类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-ConcreteFlyweight类"><span class="post-toc-text">2. ConcreteFlyweight类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-UnsharedConcreteFlyweight类"><span class="post-toc-text">3. UnsharedConcreteFlyweight类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-FlyweightFactory类"><span class="post-toc-text">4. FlyweightFactory类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-Client客户端"><span class="post-toc-text">5. Client客户端</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内部状态和外部状态"><span class="post-toc-text">内部状态和外部状态</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
         </nav>
     </aside>
     
 
 <nav id="article-nav">
   
-    <a href="/2019/03/27/20190327-享元模式详解/" id="article-nav-newer" class="article-nav-link-wrap">
-
-      <span class="article-nav-title">
-        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
-        
-          享元模式详解
-        
-      </span>
-    </a>
   
-  
-    <a href="/2019/02/21/20190221-export，export default 和 import 区别以及用法/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">export，export default 和 import区别以及用法</span>
+    <a href="/2019/03/19/20190319-ES6中的let和const/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">ES6中的let和const</span>
       <i class="fa fa-hand-o-right" aria-hidden="true"></i>
     </a>
   
