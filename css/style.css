@@ -2161,6 +2161,15 @@ pre .javascript .function {
   .reward-title {
     font-size: 18px;
   }
+  #mygirl {
+    display: none;
+  }
+  #message {
+    display: none;
+  }
+  .mumu {
+    display: none;
+  }
 }
 @media screen and (min-width: 768px) {
   #sidebar {
