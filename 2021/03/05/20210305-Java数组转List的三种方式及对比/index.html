@@ -4,26 +4,23 @@
   <meta charset="utf-8">
   <meta name="referrer" content="no-referrer-when-downgrade">
   
-  <title>修改文件时间利器—NewFileTime | HDQ | Blog</title>
+  <title>Java数组转List的三种方式及对比 | HDQ | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HDQ,HDQ's Blog">
   
-  <meta name="description" content="前言&amp;emsp;&amp;emsp;NewFileTime 是一款简单实用的文件属性时间修改器，通过它，用户可以自由设置文件最后一次使用的时间，创建时间等，当您浏览别人的文件夹或是在别人的文件夹进行修改操作时，文件会自动记录文件操作的时间，所以，当您不想让人发现文件被别人动过，那就需要修改一下文件的操作时间，修改文件时间属性(NewFileTime)就能帮助您轻松快捷的解决文件时间属性问题，您只需把文件拖">
-<meta name="keywords" content="效率,资源,办公">
+  <meta name="description" content="前言本文介绍Java中数组转为List三种情况的优劣对比，以及应用场景的对比，以及程序员常犯的类型转换错误原因解析。 一.最常见方式（未必最佳）通过 Arrays.asList(strArray)方式,将数组转换List后，不能对List增删，只能查改，否则抛异常。 关键代码：List list = Arrays.asList(strArray); 1234567private void test">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="修改文件时间利器—NewFileTime">
-<meta property="og:url" content="https://blog.hdqyf.club/2018/10/24/20181024-修改文件时间利器—NewFileTime/index.html">
+<meta property="og:title" content="Java数组转List的三种方式及对比">
+<meta property="og:url" content="https://blog.hdqyf.club/2021/03/05/20210305-Java数组转List的三种方式及对比/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
-<meta property="og:description" content="前言&amp;emsp;&amp;emsp;NewFileTime 是一款简单实用的文件属性时间修改器，通过它，用户可以自由设置文件最后一次使用的时间，创建时间等，当您浏览别人的文件夹或是在别人的文件夹进行修改操作时，文件会自动记录文件操作的时间，所以，当您不想让人发现文件被别人动过，那就需要修改一下文件的操作时间，修改文件时间属性(NewFileTime)就能帮助您轻松快捷的解决文件时间属性问题，您只需把文件拖">
+<meta property="og:description" content="前言本文介绍Java中数组转为List三种情况的优劣对比，以及应用场景的对比，以及程序员常犯的类型转换错误原因解析。 一.最常见方式（未必最佳）通过 Arrays.asList(strArray)方式,将数组转换List后，不能对List增删，只能查改，否则抛异常。 关键代码：List list = Arrays.asList(strArray); 1234567private void test">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://s1.ax1x.com/2018/10/24/isCwjS.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/10/24/isCdc8.png">
-<meta property="og:updated_time" content="2018-10-24T07:34:35.224Z">
+<meta property="og:updated_time" content="2021-03-05T12:58:22.329Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="修改文件时间利器—NewFileTime">
-<meta name="twitter:description" content="前言&amp;emsp;&amp;emsp;NewFileTime 是一款简单实用的文件属性时间修改器，通过它，用户可以自由设置文件最后一次使用的时间，创建时间等，当您浏览别人的文件夹或是在别人的文件夹进行修改操作时，文件会自动记录文件操作的时间，所以，当您不想让人发现文件被别人动过，那就需要修改一下文件的操作时间，修改文件时间属性(NewFileTime)就能帮助您轻松快捷的解决文件时间属性问题，您只需把文件拖">
-<meta name="twitter:image" content="https://s1.ax1x.com/2018/10/24/isCwjS.png">
+<meta name="twitter:title" content="Java数组转List的三种方式及对比">
+<meta name="twitter:description" content="前言本文介绍Java中数组转为List三种情况的优劣对比，以及应用场景的对比，以及程序员常犯的类型转换错误原因解析。 一.最常见方式（未必最佳）通过 Arrays.asList(strArray)方式,将数组转换List后，不能对List增删，只能查改，否则抛异常。 关键代码：List list = Arrays.asList(strArray); 1234567private void test">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -144,14 +141,14 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-20181024-修改文件时间利器—NewFileTime" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-20210305-Java数组转List的三种方式及对比" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      修改文件时间利器—NewFileTime
+      Java数组转List的三种方式及对比
     </h1>
     <div class="post-title-bar">
       <ul>
@@ -159,12 +156,12 @@ ga('send', 'pageview');
               <li>
                   <i class="fa fa-book"></i>
                   
-                      <a href="/categories/效率/">效率</a>
+                      <a href="/categories/Java/">Java</a>
                   
               </li>
           
         <li>
-          <i class="fa fa-calendar"></i>  2018-10-24
+          <i class="fa fa-calendar"></i>  2021-03-05
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -180,21 +177,83 @@ ga('send', 'pageview');
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;<strong>NewFileTime</strong> 是一款简单实用的文件属性时间修改器，通过它，用户可以自由设置文件最后一次使用的时间，创建时间等，当您浏览别人的文件夹或是在别人的文件夹进行修改操作时，文件会自动记录文件操作的时间，所以，当您不想让人发现文件被别人动过，那就需要修改一下文件的操作时间，修改文件时间属性(NewFileTime)就能帮助您轻松快捷的解决文件时间属性问题，您只需把文件拖入或导入软件中，然后进行时间设置就可以了，十分方便。可对单个文件进行修改，也可以修改文件夹以满足对文件的批量修改。这可以说是学生党交作业利器，emm~😂😂😂</font>
-
-<p><img src="https://s1.ax1x.com/2018/10/24/isCwjS.png" alt><br></p>
-<h3 id="软件功能"><a href="#软件功能" class="headerlink" title="软件功能"></a><font color="#0099ff" size="4" face="黑体">软件功能</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;可以派出在同一时间内，新增档案，通过简单的拖放或由进口从folder.in任何情况下，它会打开不同的方式，使其尽快这样做。您可以使档案的比例年轻或年纪较大，或有针对性的具体时间！使用NewFileTime的软件，就可以轻松修改文件夹创建时间，以及文件的创建时间、修改时间和访问时间，<a href="http://www.softwareok.com/?seite=Microsoft/NewFileTime" target="_blank" rel="noopener">详细介绍点击这里</a>。</font>
-
-<p><img src="https://s1.ax1x.com/2018/10/24/isCdc8.png" alt><br></p>
-<h3 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a><font color="#0099ff" size="4" face="黑体">下载地址</font></h3><p><a href="https://pan.baidu.com/s/1yMONEIpEtnevdR7X4je9cg" target="_blank" rel="noopener">百度下载 密码：7zmr</a><br><a href="https://www.lanzous.com/b416904/" target="_blank" rel="noopener">蓝奏云下载 密码：14z3</a></p>
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a><font color="#0099ff" size="4" face="黑体">前言</font></h3><p>本文介绍Java中数组转为List三种情况的优劣对比，以及应用场景的对比，以及程序员常犯的类型转换错误原因解析。</p>
+<h3 id="一-最常见方式（未必最佳）"><a href="#一-最常见方式（未必最佳）" class="headerlink" title="一.最常见方式（未必最佳）"></a><font color="#0099ff" size="4" face="黑体">一.最常见方式（未必最佳）</font></h3><p>通过 <code>Arrays.asList(strArray)</code>方式,将数组转换List后，不能对List增删，只能查改，否则抛异常。</p>
+<p>关键代码：<code>List list = Arrays.asList(strArray);</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">testArrayCastToListError</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  String[] strArray = <span class="keyword">new</span> String[<span class="number">2</span>];</span><br><span class="line">  List list = Arrays.asList(strArray);</span><br><span class="line">  <span class="comment">//对转换后的list插入一条数据</span></span><br><span class="line">  list.add(<span class="string">"1"</span>);</span><br><span class="line">  System.out.println(list);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; java.lang.UnsupportedOperationException</span><br><span class="line"> at java.util.AbstractList.add(AbstractList.java:148)</span><br><span class="line"> at java.util.AbstractList.add(AbstractList.java:108)</span><br><span class="line"> at com.darwin.junit.Calculator.testArrayCastToList(Calculator.java:19)</span><br><span class="line"> at com.darwin.junit.Calculator.main(Calculator.java:44)</span><br></pre></td></tr></table></figure>
+<p>程序在list.add(“1”)处，抛出异常：UnsupportedOperationException。原因解析：</p>
+<p>原因解析：<br><code>Arrays.asList(strArray)</code>返回值是<code>java.util.Arrays</code>类中一个私有静态内部类<code>java.util.Arrays.ArrayList</code>，它并非<code>java.util.ArrayList</code>类。<code>java.util.Arrays.ArrayList</code>类具有 set()，get()，contains()等方法，但是不具有添加<code>add()</code>或删除<code>remove()</code>方法,所以调用add()方法会报错。</p>
+<p>使用场景：<code>Arrays.asList(strArray)</code>方式仅能用在将数组转换为List后，不需要增删其中的值，仅作为数据源读取使用。</p>
+<h3 id="二-数组转为List后，支持增删改查的方式"><a href="#二-数组转为List后，支持增删改查的方式" class="headerlink" title="二.数组转为List后，支持增删改查的方式"></a><font color="#0099ff" size="4" face="黑体">二.数组转为List后，支持增删改查的方式</font></h3><p>通过ArrayList的构造器，将<code>Arrays.asList(strArray)</code>的返回值由<code>java.util.Arrays.ArrayList</code>转为<code>java.util.ArrayList</code>。</p>
+<p>关键代码：<code>ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;(Arrays.asList(strArray)) ;</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">testArrayCastToListRight</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  String[] strArray = <span class="keyword">new</span> String[<span class="number">2</span>];</span><br><span class="line">  ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;(Arrays.asList(strArray)) ;</span><br><span class="line">  list.add(<span class="string">"1"</span>);</span><br><span class="line">  System.out.println(list);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行结果：成功追加一个元素“1”。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[null, null, 1]</span><br></pre></td></tr></table></figure>
+<p>使用场景：需要在将数组转换为List后，对List进行增删改查操作，在List的数据量不大的情况下，可以使用。</p>
+<h3 id="三-通过集合工具类Collections-addAll-方法-最高效"><a href="#三-通过集合工具类Collections-addAll-方法-最高效" class="headerlink" title="三.通过集合工具类Collections.addAll()方法(最高效)"></a><font color="#0099ff" size="4" face="黑体">三.通过集合工具类Collections.addAll()方法(最高效)</font></h3><p>通过<code>Collections.addAll(arrayList, strArray)</code>方式转换，根据数组的长度创建一个长度相同的List，然后通过<code>Collections.addAll()</code>方法，将数组中的元素转为二进制，然后添加到List中，这是最高效的方法。</p>
+<p>关键代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt; String&gt; arrayList = <span class="keyword">new</span> ArrayList&lt;String&gt;(strArray.length);</span><br><span class="line">Collections.addAll(arrayList, strArray);</span><br></pre></td></tr></table></figure>
+<p>测试：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">testArrayCastToListEfficient</span><span class="params">()</span></span>&#123;</span><br><span class="line">  String[] strArray = <span class="keyword">new</span> String[<span class="number">2</span>];</span><br><span class="line">  ArrayList&lt; String&gt; arrayList = <span class="keyword">new</span> ArrayList&lt;String&gt;(strArray.length);</span><br><span class="line">  Collections.addAll(arrayList, strArray);</span><br><span class="line">  arrayList.add(<span class="string">"1"</span>);</span><br><span class="line">  System.out.println(arrayList);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行结果：同样成功追加一个元素“1”。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[null, null, 1]</span><br></pre></td></tr></table></figure>
+<p>使用场景：需要在将数组转换为List后，对List进行增删改查操作，在List的数据量巨大的情况下，优先使用，可以提高操作速度。</p>
+<p>注：附上<code>Collections.addAll()</code>方法源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">boolean</span> <span class="title">addAll</span><span class="params">(Collection&lt;? <span class="keyword">super</span> T&gt; c, T... elements)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">boolean</span> result = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">for</span> (T element : elements) &#123;</span><br><span class="line">        result |= c.add(element);<span class="comment">//result和c.add(element)按位或运算,然后赋值给result</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="问题解答"><a href="#问题解答" class="headerlink" title="问题解答"></a><font color="#0099ff" size="4" face="黑体">问题解答</font></h3><p>问题：数组类型如果是整型数组，转为List时，会报错？</p>
+<p><strong>答案：</strong>在<code>JDK1.8</code>环境中测试，这三种转换方式是没有问题的。放心使用。对于<code>Integer[]</code>整型数组转List的方法和测试结果如下：</p>
+<p><strong>方式一：不支持增删</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Integer[] intArray1 = <span class="keyword">new</span> Integer[<span class="number">2</span>];</span><br><span class="line">List&lt;Integer&gt; list1 = Arrays.asList(intArray1);</span><br><span class="line">System.out.println(list1);</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[null, null]</span><br></pre></td></tr></table></figure>
+<p><strong>方式二：支持增删</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Integer[] intArray2 = <span class="keyword">new</span> Integer[<span class="number">2</span>];</span><br><span class="line">List&lt;Integer&gt; list2 = <span class="keyword">new</span> ArrayList&lt;Integer&gt;(Arrays.asList(intArray2)) ;</span><br><span class="line">list2.add(<span class="number">2</span>);</span><br><span class="line">System.out.println(list2);</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[null, null, 2]</span><br></pre></td></tr></table></figure>
+<p><strong>方式三：支持增删，且数据量大最高效</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Integer[] intArray3 = <span class="keyword">new</span> Integer[<span class="number">2</span>];</span><br><span class="line">List&lt;Integer&gt; list3 = <span class="keyword">new</span> ArrayList&lt;Integer&gt;(intArray3.length);</span><br><span class="line">Collections.addAll(list3, intArray3);</span><br><span class="line">list3.add(<span class="number">3</span>);</span><br><span class="line">System.out.println(list3);</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[null, null, 3]</span><br></pre></td></tr></table></figure>
+<p>综上，整型<code>Integer[]</code>数组转<code>List&lt;Integer&gt;</code>的正确方式应该是这样的。</p>
+<p>易错点：可能出现的错误可能是这样转换的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] intArray1 = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">List&lt;Integer&gt; list1 = Arrays.asList(intArray1);<span class="comment">//此处报错！！！</span></span><br></pre></td></tr></table></figure>
+<p>报错原因：等号两边类型不一致，当然编译不通过。分析见下文。</p>
+<p>那么在声明数组时，用<code>int[]</code>还是<code>Integer[]</code>，哪种声明方式才能正确的转为<code>List</code>呢？<br><strong>答案：</strong> 只能用<code>Integer[]</code>转<code>List&lt;Integer&gt;</code>，即只能用基本数据类型的包装类型，才能直接转为List。</p>
+<p>原因分析如下：</p>
+<p>我们来看<code>List</code>在Java源码中的定义（别害怕看不懂源码，看我分析，很易懂的）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">List</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt; </span>&#123;省略…&#125;</span><br></pre></td></tr></table></figure>
+<p>再来看<code>Arrays.asList()</code>的在Java源码定义：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">asList</span><span class="params">(T... a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ArrayList&lt;&gt;(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>从上述源码中可以看出，<code>List</code>声明时，需要传递一个泛型<code>&lt;E&gt;</code>作为形参，<code>asList()</code>参数类型也是泛型中的通配类型<code>&lt;T&gt;</code>。Java中所有的泛型必须是引用类型。</p>
+</li>
+<li><p>什么是引用类型？<code>Integer</code>是引用类型，那<code>int</code>是什么类型？<code>int</code>是基本数据类型，不是引用类型。这就是为什么java中没有<code>List&lt;int&gt;</code>，而只有<code>List&lt;Integer&gt;</code>。</p>
+</li>
+<li><p>举一反三：其他8种基本数据类型<code>byte、short、int、long、float、double、char</code>也都不是引用类型，所以8种基本数据类型都不能作为List的形参。但<code>String、数组、class、interface</code>是引用类型，都可以作为List的形参，所以存在<code>List&lt;Runnable&gt;</code>接口类型的集合、<code>List&lt;int[]&gt;</code>数组类型的集合、<code>List&lt;String&gt;</code>类的集合。但不存在<code>List&lt;byte&gt;</code>、<code>List&lt;short&gt;</code>等基本类型的集合。</p>
+</li>
+</ul>
+<p>有了上述基础知识后，再来看为什么下面两行代码第二行能编译通过，第三行却编译报错？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] intArray1 = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">1</span>]; </span><br><span class="line">Arrays.asList(intArray1);<span class="comment">//编译不报错</span></span><br><span class="line">List&lt;Integer&gt; list1 = Arrays.asList( intArray1);<span class="comment">//编译报错</span></span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<ul>
+<li><p>第二行代码，<code>Arrays.asList()</code>方法的入参是个引用类型的<code>int[]</code>，那么返回值类型一定是<code>List&lt;int[]&gt;</code> ，其完整代码是：<code>List&lt;int[]&gt; intsArray = Arrays.asList(intArray1);</code>，所以编译通过，没问题。</p>
+</li>
+<li><p>第三行报错，因为等号两边的类型不一致，左边：<code>List&lt;Integer&gt;</code>，右边<code>List&lt;int[]&gt;</code>，所以编译时就报错。</p>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><font color="#0099ff" size="4" face="黑体">总结</font></h3><p>现在你应该明白，为什么<code>int[]</code>不能直接转换为<code>List&lt;Integer&gt;</code>，而<code>Integer[]</code>就可以转换为<code>List&lt;Integer&gt;</code>了吧。因为<code>List</code>中的泛型必须是引用类型，<code>int</code>是基本数据类型，不是引用类型，但<code>int</code>的包装类型<code>Integer</code>是<code>class</code>类型，属于引用类型，所以<code>Integer</code>可以作为<code>List</code>形参，<code>List&lt;Integer&gt;</code>在java中是可以存在的，但不存在<code>List&lt;int&gt;</code>类型。</p>
+<p>在编码时，我们不光要知其然，还要知其所以然，通过分析JDK源码，才能得出一手信息，不仅了解到了如何用，还能得出为何这样用。</p>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
 <ul>
 <li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
 </ul>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年10月24日 15:34</p>
-	<p>原始链接： <a class="post-url" href="/2018/10/24/20181024-修改文件时间利器—NewFileTime/" title="修改文件时间利器—NewFileTime">https://blog.hdqyf.club/2018/10/24/20181024-修改文件时间利器—NewFileTime/</a></p>
+        <p>最后更新： 2021年03月05日 20:58</p>
+	<p>原始链接： <a class="post-url" href="/2021/03/05/20210305-Java数组转List的三种方式及对比/" title="Java数组转List的三种方式及对比">https://blog.hdqyf.club/2021/03/05/20210305-Java数组转List的三种方式及对比/</a></p>
         <footer>
             <a href="https://blog.hdqyf.club">
                 <img src="/images/logo.png" alt="Garen">
@@ -268,7 +327,7 @@ ga('send', 'pageview');
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/10/24/20181024-修改文件时间利器—NewFileTime/&title=《修改文件时间利器—NewFileTime》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/10/24/isCWcT.png" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2021/03/05/20210305-Java数组转List的三种方式及对比/&title=《Java数组转List的三种方式及对比》 — HDQ | Blog&pic=https://s3.ax1x.com/2021/03/05/6mfec6.jpg" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -278,22 +337,22 @@ ga('send', 'pageview');
             </a>
           </li>
           <li>
-            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/10/24/20181024-修改文件时间利器—NewFileTime/&title=《修改文件时间利器—NewFileTime》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2021/03/05/20210305-Java数组转List的三种方式及对比/&title=《Java数组转List的三种方式及对比》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
               <i class="fa fa-star"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/10/24/20181024-修改文件时间利器—NewFileTime/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2021/03/05/20210305-Java数组转List的三种方式及对比/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《修改文件时间利器—NewFileTime》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/10/24/20181024-修改文件时间利器—NewFileTime/&via=https://blog.hdqyf.club" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java数组转List的三种方式及对比》 — HDQ | Blog&url=https://blog.hdqyf.club/2021/03/05/20210305-Java数组转List的三种方式及对比/&via=https://blog.hdqyf.club" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/10/24/20181024-修改文件时间利器—NewFileTime/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2021/03/05/20210305-Java数组转List的三种方式及对比/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -303,7 +362,7 @@ ga('send', 'pageview');
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/10/24/20181024-修改文件时间利器—NewFileTime/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2021/03/05/20210305-Java数组转List的三种方式及对比/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -315,11 +374,7 @@ ga('send', 'pageview');
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/效率/" class="color3">效率</a>
-      
-    <a href="/tags/资源/" class="color3">资源</a>
-      
-    <a href="/tags/办公/" class="color3">办公</a>
+    <a href="/tags/Java/" class="color5">Java</a>
       
   </li>
 
@@ -332,26 +387,16 @@ ga('send', 'pageview');
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#软件功能"><span class="post-toc-text">软件功能</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#下载地址"><span class="post-toc-text">下载地址</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一-最常见方式（未必最佳）"><span class="post-toc-text">一.最常见方式（未必最佳）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二-数组转为List后，支持增删改查的方式"><span class="post-toc-text">二.数组转为List后，支持增删改查的方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三-通过集合工具类Collections-addAll-方法-最高效"><span class="post-toc-text">三.通过集合工具类Collections.addAll()方法(最高效)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#问题解答"><span class="post-toc-text">问题解答</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
         </nav>
     </aside>
     
 
 <nav id="article-nav">
   
-    <a href="/2018/10/25/20181025-Linux安装并部署MongoDB/" id="article-nav-newer" class="article-nav-link-wrap">
-
-      <span class="article-nav-title">
-        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
-        
-          Linux安装并部署MongoDB
-        
-      </span>
-    </a>
   
-  
-    <a href="/2018/10/24/20181024-Linux 常用命令—实用命令(2)/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">Linux 常用命令—实用命令(2)</span>
+    <a href="/2021/02/02/20210202-2021年支付宝五福，今年又有哪些隐藏福呢？/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">2021年支付宝五福，今年又有哪些隐藏福呢？</span>
       <i class="fa fa-hand-o-right" aria-hidden="true"></i>
     </a>
   
