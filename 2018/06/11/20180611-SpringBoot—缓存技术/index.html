@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  <title>SpringBoot—缓存技术 | HDQ | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="HDQ,HDQ's Blog">
+  
+  <meta name="description" content="前言&amp;emsp;&amp;emsp;我们知道一个程序的瓶颈在于数据库，我们也知道内存的速度是大大快于硬盘的速度的。当我们需要重复的获取相同的数据的时候，我们一次又一次的请求数据库或者远程服务，导致大量的时间耗费在数据库查询或者远程方法的调用上，导致程序性能的恶化，这更是数据缓存要解决的问题。  JSR107Java Caching定义了5个核心接口，分别是 CachingProvider, CacheMa">
+<meta name="keywords" content="Java,框架,Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot—缓存技术">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/06/11/20180611-SpringBoot—缓存技术/index.html">
+<meta property="og:site_name" content="HDQ | Blog">
+<meta property="og:description" content="前言&amp;emsp;&amp;emsp;我们知道一个程序的瓶颈在于数据库，我们也知道内存的速度是大大快于硬盘的速度的。当我们需要重复的获取相同的数据的时候，我们一次又一次的请求数据库或者远程服务，导致大量的时间耗费在数据库查询或者远程方法的调用上，导致程序性能的恶化，这更是数据缓存要解决的问题。  JSR107Java Caching定义了5个核心接口，分别是 CachingProvider, CacheMa">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://s1.ax1x.com/2018/06/12/CLT5ut.png">
+<meta property="og:updated_time" content="2018-09-19T08:03:43.340Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SpringBoot—缓存技术">
+<meta name="twitter:description" content="前言&amp;emsp;&amp;emsp;我们知道一个程序的瓶颈在于数据库，我们也知道内存的速度是大大快于硬盘的速度的。当我们需要重复的获取相同的数据的时候，我们一次又一次的请求数据库或者远程服务，导致大量的时间耗费在数据库查询或者远程方法的调用上，导致程序性能的恶化，这更是数据缓存要解决的问题。  JSR107Java Caching定义了5个核心接口，分别是 CachingProvider, CacheMa">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/06/12/CLT5ut.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/mylive.css">
+  <link rel="stylesheet" href="/css/mySetting.css">
+  <script src="/js/pace.min.js"></script>
+  <script src="/js/mySetting.js"></script>
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-113082369-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?a3fed5fc0a708f5e993575bc1ccaf623";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+  
+
+</head></html>
+<body>
+  <div id="container">
+      <div class="maplebg"></div>
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">HDQ&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        HDQ&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 互联网生活 互联网资源的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="个人网站" target="_blank" href="http://hdqyf.club/">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="GitHub" target="_blank" href="https://github.com/GarenMorbid">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="https://weibo.com/u/5470832383?refer_flag=1005055013_">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Steam" target="_blank" href="https://steamcommunity.com/id/GarenMorbid/">
+                            <i class="fa fa-steam fa-2x"></i></a>
+                    
+                        <a title="Blog&#39;s App Download" target="_blank" href="https://pan.lanzou.com/i10yfxi">
+                            <i class="fa fa-android fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-20180611-SpringBoot—缓存技术" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      SpringBoot—缓存技术
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/Spring/">Spring</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-06-11
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;我们知道一个程序的瓶颈在于数据库，我们也知道内存的速度是大大快于硬盘的速度的。当我们需要重复的获取相同的数据的时候，我们一次又一次的请求数据库或者远程服务，导致大量的时间耗费在数据库查询或者远程方法的调用上，导致程序性能的恶化，这更是数据缓存要解决的问题。</font>
+
+<h3 id="JSR107"><a href="#JSR107" class="headerlink" title="JSR107"></a><font color="#0099ff" size="4" face="黑体">JSR107</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">Java Caching定义了5个核心接口，分别是 <strong>CachingProvider</strong>, <strong>CacheManager</strong>, <strong>Cache</strong>, <strong>Entry</strong> 和 <strong>Expiry</strong></font>
+
+<ul>
+<li><strong>CachingProvider</strong>定义了创建、配置、获取、管理和控制多个CacheManager。一个应用可以在运行期访问多个CachingProvider。</li>
+<li><strong>CacheManager</strong>定义了创建、配置、获取、管理和控制多个唯一命名的Cache，这些Cache存在于CacheManager的上下文中。一个CacheManager仅被一个CachingProvider所拥有。</li>
+<li><strong>Cache</strong>是一个类似Map的数据结构并临时存储以Key为索引的值。一个Cache仅被一个CacheManager所拥有。</li>
+<li><strong>Entry</strong>是一个存储在Cache中的key-value对。</li>
+<li><strong>Expiry</strong> 每一个存储在Cache中的条目有一个定义的有效期。一旦超过这个时间，条目为过期的状态。一旦过期，条目将不可访问、更新和删除。缓存有效期可以通过ExpiryPolicy设置</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/06/12/CLT5ut.png" alt><br></p>
+<h3 id="Spring的缓存支持"><a href="#Spring的缓存支持" class="headerlink" title="Spring的缓存支持"></a><font color="#0099ff" size="4" face="黑体">Spring的缓存支持</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;Spring定义了<code>org.springframework.cache.CacheManager</code>和<code>org.springframework.cache.Cache</code>接口来统一不同的缓存技术。其中，CacheManager是Spring提供的各种缓存技术抽象接口，Cache接口包含了缓存的各种操作（增加、删除获得缓存，我们一般不会直接和此接口打交道）</font>
+
+<h3 id="Spring支持的CacheManager"><a href="#Spring支持的CacheManager" class="headerlink" title="Spring支持的CacheManager"></a><font color="#0099ff" size="4" face="黑体">Spring支持的CacheManager</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">针对不同的缓存技术，需要实现不同的CacheManager，下面我们来介绍这些CacheManager</font>
+
+<ul>
+<li>💎 <strong>SimpleCacheManager</strong>：使用检点的Collection来存储缓存，主要用来测试</li>
+<li>💎 <strong>ConcurrentMapCacheManager</strong>：使用ConcurrentMap来存储缓存</li>
+<li>💎 <strong>NoOpCacheManager</strong>：仅测试用途，不会实际存储缓存</li>
+<li>💎 <strong>EhCacheManager</strong>：使用EhCache作为缓存技术</li>
+<li>💎 <strong>GuavaCacheManager</strong>：使用Google Guava的GuavaCache作为缓存技术</li>
+<li>💎 <strong>HazelcastCacheManager</strong>：使用Hazelcast作为缓存技术</li>
+<li>💎 <strong>JCacheManager</strong>：支持JCache（JSR—107）标准的实现作为缓存技术</li>
+<li>💎 <strong>RedisCacheManager</strong>：使用Redis作为缓存技术</li>
+</ul>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;实现任意一种CacheManager 的时候，需要注册实现CacheManager的bean，当然每种缓存技术都有很多额外的配置，但配置CacheManager 是必不可少的</font>
+
+<h3 id="声明式缓存注解"><a href="#声明式缓存注解" class="headerlink" title="声明式缓存注解"></a><font color="#0099ff" size="4" face="黑体">声明式缓存注解</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;Spring提供了4个注解来声明缓存规则（又是使用注解式的AOP的一个生动例子），如表</font>
+
+<table>
+<thead>
+<tr>
+<th>注解</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@Cacheable</td>
+<td>在方法执行前Spring先查看缓存中是否有数据，如果有数据，则直接返回缓存数据，若没有数据，调用方法并将方法返回值放进缓存</td>
+</tr>
+<tr>
+<td>@CachePut</td>
+<td>无论怎样，都会将方法的返回值放到缓存中。@CachePut的属性和@Cacheable保持一样</td>
+</tr>
+<tr>
+<td>@CacheEvict</td>
+<td>将一条或多条数据从缓存中删除</td>
+</tr>
+<tr>
+<td>@Caching</td>
+<td>可以通过@Caching注解组合多个注解策略在一个方法上</td>
+</tr>
+<tr>
+<td>CacheConfig</td>
+<td>@CacheConfig设置公共的属性，比如cacheNames/value的重用</td>
+</tr>
+</tbody>
+</table>
+<h3 id="开启声明式缓存"><a href="#开启声明式缓存" class="headerlink" title="开启声明式缓存"></a><font color="#0099ff" size="4" face="黑体">开启声明式缓存</font></h3><p>开启声明式缓存支持非常简单，只需要在配置类上使用<code>@EnabelCaching</code> 注解即可</p>
+<h3 id="SpringBoot的支持"><a href="#SpringBoot的支持" class="headerlink" title="SpringBoot的支持"></a><font color="#0099ff" size="4" face="黑体">SpringBoot的支持</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;在Spring中国年使用缓存技术的关键是配置CacheManager 而Springbok 为我门自动配置了多个CacheManager的实现。在spring boot 环境下，使用缓存技术只需要在项目中导入相关缓存技术的依赖包，并配置类使用@EnabelCaching开启缓存支持即可</font>
+
+<h3 id="使用案例"><a href="#使用案例" class="headerlink" title="使用案例"></a><font color="#0099ff" size="4" face="黑体">使用案例</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">案例都可以使用SpEL表达式</font>
+
+<ul>
+<li>💜 <strong>root object</strong><ul>
+<li>💙 <strong>methodName</strong>：当前被调用的方法名，示例：<code>#root.methodName</code></li>
+<li>💙 <strong>method</strong>：当前被调用的方法，示例：<code>#root.method.name</code></li>
+<li>💙 <strong>target</strong>：当前被调用的目标对象，示例：<code>#root.target</code></li>
+<li>💙 <strong>targetClass</strong>：当前被调用的目标对象类，示例：<code>#root.targetClass</code></li>
+<li>💙 <strong>args</strong>：当前被调用的方法的参数列表，示例：<code>#root.args[0]</code></li>
+<li>💙 <strong>caches</strong>：当前方法调用使用的缓存列表（如@Cacheable(value={“cache1”, “cache2”})），则有两个cache，示例：<code>#root.caches[0].name</code></li>
+</ul>
+</li>
+<li>💜 <strong>evaluation context</strong><ul>
+<li>💙 <strong>argument name</strong>：方法参数的名字. 可以直接 #参数名 ，也可以使用 #p0或#a0 的形式，0代表参数的索引，示例：<code>#iban、#a0、#p0</code></li>
+<li>💙 <strong>result</strong>：方法执行后的返回值（仅当方法执行之后的判断有效，如‘unless’，’cache put’的表达式 ’cache evict’的表达式beforeInvocation=false），示例<code>#result</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="Cacheable"><a href="#Cacheable" class="headerlink" title="@Cacheable"></a><font color="#0099ff" size="3" face="黑体">@Cacheable</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>@Cacheable</code> 将方法的运行结果进行缓存；如果以后再要相同的数据，直接从缓存中获取，不在进行调用方法<br>&emsp;&emsp;CacheManager管理多个Cache组件的，对缓存的真正CRUD操作在Cache组建中，每一个缓存组件有自己唯一一个组件名字</font>
+
+<p>属性：</p>
+<ul>
+<li><strong>cacheNames/value</strong>:指定缓存组件的名字</li>
+<li><strong>key</strong>：缓存数据使用的key，可以用他来指定。默认是使用方法参数的值 例 1-方法的返回值<ul>
+<li>编写SpEL表达式  #id;参数id的值  #a0 #p0 #root.args[0]</li>
+</ul>
+</li>
+<li><strong>keyGenerator</strong>：key的生成器：也可以自己指定key的生成器的组件id<ul>
+<li>key/keyGenerator二选一使用</li>
+</ul>
+</li>
+<li><strong>cacheManager</strong>：指定缓存管理器，或者指定缓存解析器cacheResolver</li>
+<li><strong>condition</strong>：指定复合条件的情况下才缓存</li>
+<li><strong>unless</strong>：否定缓存，当unless指定的条件为true，方法的返回值就不会被缓存，可以获取到结果进行判断</li>
+<li><strong>sync</strong>：是否使用异步缓存</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Cacheable</span>(cacheNames = <span class="string">"emp"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> Employee <span class="title">getEmp</span><span class="params">(Integer id)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"查询"</span> + id + <span class="string">"员工"</span>);</span><br><span class="line">    Employee employee = employeeMapper.getEmpByID(id);</span><br><span class="line">    <span class="keyword">return</span> employee;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="CachePut"><a href="#CachePut" class="headerlink" title="@CachePut"></a><font color="#0099ff" size="3" face="黑体">@CachePut</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>@CachePut</code>：既调用方法又更新数据。修改了数据库的某个数据，同时更新缓存，属性几乎和@Cacheable一致，但是@Cacheable不能再key中写result，而@CachePut能，因为@CachePut是方法运行后会得到结果</font>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@CachePut</span>(cacheNames = <span class="string">"emp"</span>,key = <span class="string">"#result.id"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> Employee <span class="title">updateEmp</span><span class="params">(Employee employee)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"updateEmp:"</span> + employee.getLastName());</span><br><span class="line">    employeeMapper.updateEmp(employee);</span><br><span class="line">    <span class="keyword">return</span> employee;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="CacheEvict"><a href="#CacheEvict" class="headerlink" title="@CacheEvict"></a><font color="#0099ff" size="3" face="黑体">@CacheEvict</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>@CachEvict</code>的作用 主要针对方法配置，能够根据一定的条件对缓存进行清空</font>
+
+<p>属性与@Cacheable几乎一致，多出下面几个属性：</p>
+<ul>
+<li><strong>allEntries</strong>：是否清空所有缓存内容，缺省为 false，如果指定为 true，则方法调用后将立即清空所有缓存</li>
+<li><strong>beforeInvocation</strong>：是否在方法执行前就清空，缺省为 false，如果指定为 true，则在方法还没有执行的时候就清空缓存，缺省情况下，如果方法执行抛出异常，则不会清空缓存</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@CacheEvict</span>(cacheNames = <span class="string">"emp"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteEmp</span><span class="params">(Integer id)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"进入delete方法，删除ID为"</span> + id + <span class="string">"的员工"</span>);</span><br><span class="line">    employeeMapper.deleteEmpByID(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Caching"><a href="#Caching" class="headerlink" title="@Caching"></a><font color="#0099ff" size="3" face="黑体">@Caching</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>@Caching</code> 多个规则,定义复杂的缓存规则</font>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Caching</span>(</span><br><span class="line">    cacheable = &#123;</span><br><span class="line">            <span class="meta">@Cacheable</span>(cacheNames = <span class="string">"emp"</span>,key = <span class="string">"#lastName"</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    put = &#123;</span><br><span class="line">            <span class="meta">@CachePut</span>(cacheNames = <span class="string">"emp"</span>,key = <span class="string">"#result.id"</span>),</span><br><span class="line">            <span class="meta">@CachePut</span>(cacheNames = <span class="string">"emp"</span>,key = <span class="string">"#result.email"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">public</span> Employee <span class="title">getEmpByLastName</span><span class="params">(String lastName)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> employeeMapper.getEmpByLastName(lastName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="CacheConfig"><a href="#CacheConfig" class="headerlink" title="@CacheConfig"></a><font color="#0099ff" size="3" face="黑体">@CacheConfig</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>@CacheConfig</code>设置公共的属性,这里配置了cacheNames = “emp”，下面的方法就可以不用配置这一项了</font>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@CacheConfig</span>(cacheNames = <span class="string">"emp"</span>,cacheManager = <span class="string">"employeeCacheManager"</span>)</span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EmployeeService</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年09月19日 16:03</p>
+	<p>原始链接： <a class="post-url" href="/2018/06/11/20180611-SpringBoot—缓存技术/" title="SpringBoot—缓存技术">https://blog.hdqyf.club/2018/06/11/20180611-SpringBoot—缓存技术/</a></p>
+        <footer>
+            <a href="https://blog.hdqyf.club">
+                <img src="/images/logo.png" alt="Garen">
+                Garen
+            </a>
+        </footer>
+    </div>
+</div>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/06/11/20180611-SpringBoot—缓存技术/&title=《SpringBoot—缓存技术》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/09/19/ieHoqI.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/06/11/20180611-SpringBoot—缓存技术/&title=《SpringBoot—缓存技术》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+              <i class="fa fa-star"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/06/11/20180611-SpringBoot—缓存技术/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SpringBoot—缓存技术》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/06/11/20180611-SpringBoot—缓存技术/&via=https://blog.hdqyf.club" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/06/11/20180611-SpringBoot—缓存技术/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/06/11/20180611-SpringBoot—缓存技术/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Java/" class="color5">Java</a>
+      
+    <a href="/tags/框架/" class="color3">框架</a>
+      
+    <a href="/tags/Spring/" class="color2">Spring</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#JSR107"><span class="post-toc-text">JSR107</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Spring的缓存支持"><span class="post-toc-text">Spring的缓存支持</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Spring支持的CacheManager"><span class="post-toc-text">Spring支持的CacheManager</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#声明式缓存注解"><span class="post-toc-text">声明式缓存注解</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#开启声明式缓存"><span class="post-toc-text">开启声明式缓存</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SpringBoot的支持"><span class="post-toc-text">SpringBoot的支持</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用案例"><span class="post-toc-text">使用案例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Cacheable"><span class="post-toc-text">@Cacheable</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#CachePut"><span class="post-toc-text">@CachePut</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#CacheEvict"><span class="post-toc-text">@CacheEvict</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Caching"><span class="post-toc-text">@Caching</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#CacheConfig"><span class="post-toc-text">@CacheConfig</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/2018/06/14/20180614-高效编码—使用lombok提高编码效率/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          高效编码—使用lombok提高编码效率
+        
+      </span>
+    </a>
+  
+  
+    <a href="/2018/06/11/20180611-生活三十六计—查看WiFi密码/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">生活三十六计—查看WiFi密码</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <span id="runtime_span"></span>
+            <br>
+            <p>
+                Powered by <a href="#" target="_blank">HDQ</a> Theme <a href="#" target="_blank">Garen</a> &copy;
+                2022
+                    Garen<br>
+            </p>
+        </div>
+    </div>
+</footer>
+<script>
+    function show_runtime() {
+            window.setTimeout("show_runtime()", 1000);
+            X = new Date("11/25/2017 05:20:00");
+            Y = new Date(); T = (Y.getTime() - X.getTime()); M = 24 * 60 * 60 * 1000;
+            a = T / M;
+            A = Math.floor(a);
+            b = (a - A) * 24;
+            B = Math.floor(b);
+            c = (b - B) * 60;
+            C = Math.floor((b - B) * 60);
+            D = Math.floor((c - C) * 60);
+            runtime_span.innerHTML = "本站勉强运行: " + A + "天" + B + "小时" + C + "分" + D + "秒";
+        }
+
+        show_runtime();
+</script>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-user"></span>
+    <span class="fui-photo"></span>
+    <span class="fui-info-circle"></span>
+    <span class="fui-cross"></span>
+</div>
+</div>
+<script src="/js/mylive-tips.js"></script>
+<script src="/js/mylive.js"></script>
+<script type="text/javascript">initModel(window.location.protocol+'//'+window.location.hostname+'/'+'json/')</script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://blog.hdqyf.club",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/3DS-MAX/">3DS MAX</a><a class="category-link" href="/categories/CAD/">CAD</a><a class="category-link" href="/categories/CPU/">CPU</a><a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/Docker/">Docker</a><a class="category-link" href="/categories/GPU/">GPU</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/Java/">Java</a><a class="category-link" href="/categories/Linux/">Linux</a><a class="category-link" href="/categories/MVC/">MVC</a><a class="category-link" href="/categories/Mac/">Mac</a><a class="category-link" href="/categories/MongoDB/">MongoDB</a><a class="category-link" href="/categories/MySQL/">MySQL</a><a class="category-link" href="/categories/OCR识别/">OCR识别</a><a class="category-link" href="/categories/Office/">Office</a><a class="category-link" href="/categories/Oracle/">Oracle</a><a class="category-link" href="/categories/PDF/">PDF</a><a class="category-link" href="/categories/PDF工具/">PDF工具</a><a class="category-link" href="/categories/Redis/">Redis</a><a class="category-link" href="/categories/SQL/">SQL</a><a class="category-link" href="/categories/Spring/">Spring</a><a class="category-link" href="/categories/Steam/">Steam</a><a class="category-link" href="/categories/WiFi/">WiFi</a><a class="category-link" href="/categories/hibernate/">hibernate</a><a class="category-link" href="/categories/iOS/">iOS</a><a class="category-link" href="/categories/mybatis/">mybatis</a><a class="category-link" href="/categories/node/">node</a><a class="category-link" href="/categories/下载/">下载</a><a class="category-link" href="/categories/卸载/">卸载</a><a class="category-link" href="/categories/字体/">字体</a><a class="category-link" href="/categories/常识/">常识</a><a class="category-link" href="/categories/开发工具/">开发工具</a><a class="category-link" href="/categories/感悟/">感悟</a><a class="category-link" href="/categories/截屏/">截屏</a><a class="category-link" href="/categories/播放器/">播放器</a><a class="category-link" href="/categories/效率/">效率</a><a class="category-link" href="/categories/文档/">文档</a><a class="category-link" href="/categories/杂谈/">杂谈</a><a class="category-link" href="/categories/注册表/">注册表</a><a class="category-link" href="/categories/激活/">激活</a><a class="category-link" href="/categories/生活/">生活</a><a class="category-link" href="/categories/编辑器/">编辑器</a><a class="category-link" href="/categories/翻译/">翻译</a><a class="category-link" href="/categories/虚拟机/">虚拟机</a><a class="category-link" href="/categories/设计模式/">设计模式</a><a class="category-link" href="/categories/资源/">资源</a><a class="category-link" href="/categories/转换/">转换</a><a class="category-link" href="/categories/运行库/">运行库</a><a class="category-link" href="/categories/音乐/">音乐</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 10.71px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/CSS/" style="font-size: 10.71px;">CSS</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/HTML/" style="font-size: 12.14px;">HTML</a> <a href="/tags/JS/" style="font-size: 14.29px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Mac/" style="font-size: 11.43px;">Mac</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/OCR识别/" style="font-size: 10px;">OCR识别</a> <a href="/tags/Office/" style="font-size: 11.43px;">Office</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PDF/" style="font-size: 10.71px;">PDF</a> <a href="/tags/PDF工具/" style="font-size: 10px;">PDF工具</a> <a href="/tags/PPT/" style="font-size: 10.71px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/Redis/" style="font-size: 10.71px;">Redis</a> <a href="/tags/SQL/" style="font-size: 10.71px;">SQL</a> <a href="/tags/Spring/" style="font-size: 17.86px;">Spring</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/WiFi/" style="font-size: 10px;">WiFi</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/iOS/" style="font-size: 11.43px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 16.43px;">mybatis</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/下载/" style="font-size: 13.57px;">下载</a> <a href="/tags/前端/" style="font-size: 12.14px;">前端</a> <a href="/tags/办公/" style="font-size: 13.57px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 10.71px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发工具/" style="font-size: 11.43px;">开发工具</a> <a href="/tags/开发技巧/" style="font-size: 12.14px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.14px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/插件/" style="font-size: 10.71px;">插件</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 15.71px;">效率</a> <a href="/tags/数据库/" style="font-size: 12.86px;">数据库</a> <a href="/tags/文档/" style="font-size: 10.71px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/杂谈/" style="font-size: 10.71px;">杂谈</a> <a href="/tags/框架/" style="font-size: 19.29px;">框架</a> <a href="/tags/检测/" style="font-size: 10.71px;">检测</a> <a href="/tags/注册表/" style="font-size: 10.71px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 12.14px;">激活</a> <a href="/tags/生活/" style="font-size: 14.29px;">生活</a> <a href="/tags/系统必备/" style="font-size: 10px;">系统必备</a> <a href="/tags/终端/" style="font-size: 10.71px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/脚本/" style="font-size: 10.71px;">脚本</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/视频/" style="font-size: 11.43px;">视频</a> <a href="/tags/设计模式/" style="font-size: 17.14px;">设计模式</a> <a href="/tags/词典/" style="font-size: 10px;">词典</a> <a href="/tags/资源/" style="font-size: 18.57px;">资源</a> <a href="/tags/转换/" style="font-size: 10.71px;">转换</a> <a href="/tags/运行库/" style="font-size: 10px;">运行库</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 10.71px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/CSS/" style="font-size: 10.71px;">CSS</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/HTML/" style="font-size: 12.14px;">HTML</a> <a href="/tags/JS/" style="font-size: 14.29px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Mac/" style="font-size: 11.43px;">Mac</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/OCR识别/" style="font-size: 10px;">OCR识别</a> <a href="/tags/Office/" style="font-size: 11.43px;">Office</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PDF/" style="font-size: 10.71px;">PDF</a> <a href="/tags/PDF工具/" style="font-size: 10px;">PDF工具</a> <a href="/tags/PPT/" style="font-size: 10.71px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/Redis/" style="font-size: 10.71px;">Redis</a> <a href="/tags/SQL/" style="font-size: 10.71px;">SQL</a> <a href="/tags/Spring/" style="font-size: 17.86px;">Spring</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/WiFi/" style="font-size: 10px;">WiFi</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/iOS/" style="font-size: 11.43px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 16.43px;">mybatis</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/下载/" style="font-size: 13.57px;">下载</a> <a href="/tags/前端/" style="font-size: 12.14px;">前端</a> <a href="/tags/办公/" style="font-size: 13.57px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 10.71px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发工具/" style="font-size: 11.43px;">开发工具</a> <a href="/tags/开发技巧/" style="font-size: 12.14px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.14px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/插件/" style="font-size: 10.71px;">插件</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 15.71px;">效率</a> <a href="/tags/数据库/" style="font-size: 12.86px;">数据库</a> <a href="/tags/文档/" style="font-size: 10.71px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/杂谈/" style="font-size: 10.71px;">杂谈</a> <a href="/tags/框架/" style="font-size: 19.29px;">框架</a> <a href="/tags/检测/" style="font-size: 10.71px;">检测</a> <a href="/tags/注册表/" style="font-size: 10.71px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 12.14px;">激活</a> <a href="/tags/生活/" style="font-size: 14.29px;">生活</a> <a href="/tags/系统必备/" style="font-size: 10px;">系统必备</a> <a href="/tags/终端/" style="font-size: 10.71px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/脚本/" style="font-size: 10.71px;">脚本</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/视频/" style="font-size: 11.43px;">视频</a> <a href="/tags/设计模式/" style="font-size: 17.14px;">设计模式</a> <a href="/tags/词典/" style="font-size: 10px;">词典</a> <a href="/tags/资源/" style="font-size: 18.57px;">资源</a> <a href="/tags/转换/" style="font-size: 10.71px;">转换</a> <a href="/tags/运行库/" style="font-size: 10px;">运行库</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.staticfile.org/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.staticfile.org/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.staticfile.org/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+<script>
+  $(".pingfuADHolder").remove();
+</script>
+</html>

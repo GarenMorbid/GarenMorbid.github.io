@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  <title>MySQL常用函数 | HDQ | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="HDQ,HDQ's Blog">
+  
+  <meta name="description" content="一、数学函数ABS(x)&amp;emsp;返回x的绝对值BIN(x)&amp;emsp;返回x的二进制（OCT返回八进制，HEX返回十六进制）EXP(x)&amp;emsp;返回值e（自然对数的底）的x次方GREATEST(x1,x2,…,xn)&amp;emsp;返回集合中最大的值LEAST(x1,x2,…,xn)&amp;emsp; 返回集合中最小的值LN(x)&amp;emsp;返回x的自然对数LOG(x,y)&amp;emsp;返回x的以y为">
+<meta name="keywords" content="数据库,MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL常用函数">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/03/23/20180323-MySQL常用函数/index.html">
+<meta property="og:site_name" content="HDQ | Blog">
+<meta property="og:description" content="一、数学函数ABS(x)&amp;emsp;返回x的绝对值BIN(x)&amp;emsp;返回x的二进制（OCT返回八进制，HEX返回十六进制）EXP(x)&amp;emsp;返回值e（自然对数的底）的x次方GREATEST(x1,x2,…,xn)&amp;emsp;返回集合中最大的值LEAST(x1,x2,…,xn)&amp;emsp; 返回集合中最小的值LN(x)&amp;emsp;返回x的自然对数LOG(x,y)&amp;emsp;返回x的以y为">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://s1.ax1x.com/2018/03/23/9bKzeH.png">
+<meta property="og:updated_time" content="2018-09-19T07:49:04.772Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL常用函数">
+<meta name="twitter:description" content="一、数学函数ABS(x)&amp;emsp;返回x的绝对值BIN(x)&amp;emsp;返回x的二进制（OCT返回八进制，HEX返回十六进制）EXP(x)&amp;emsp;返回值e（自然对数的底）的x次方GREATEST(x1,x2,…,xn)&amp;emsp;返回集合中最大的值LEAST(x1,x2,…,xn)&amp;emsp; 返回集合中最小的值LN(x)&amp;emsp;返回x的自然对数LOG(x,y)&amp;emsp;返回x的以y为">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/03/23/9bKzeH.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/mylive.css">
+  <link rel="stylesheet" href="/css/mySetting.css">
+  <script src="/js/pace.min.js"></script>
+  <script src="/js/mySetting.js"></script>
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-113082369-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?a3fed5fc0a708f5e993575bc1ccaf623";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+  
+
+</head></html>
+<body>
+  <div id="container">
+      <div class="maplebg"></div>
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">HDQ&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        HDQ&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 互联网生活 互联网资源的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="个人网站" target="_blank" href="http://hdqyf.club/">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="GitHub" target="_blank" href="https://github.com/GarenMorbid">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="https://weibo.com/u/5470832383?refer_flag=1005055013_">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Steam" target="_blank" href="https://steamcommunity.com/id/GarenMorbid/">
+                            <i class="fa fa-steam fa-2x"></i></a>
+                    
+                        <a title="Blog&#39;s App Download" target="_blank" href="https://pan.lanzou.com/i10yfxi">
+                            <i class="fa fa-android fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-20180323-MySQL常用函数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      MySQL常用函数
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/MySQL/">MySQL</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-03-23
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h3 id="一、数学函数"><a href="#一、数学函数" class="headerlink" title="一、数学函数"></a><font color="#0099ff" size="4" face="微软雅黑">一、数学函数</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>ABS(x)</code>&emsp;返回x的绝对值</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>BIN(x)</code>&emsp;返回x的二进制（OCT返回八进制，HEX返回十六进制）</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>EXP(x)</code>&emsp;返回值e（自然对数的底）的x次方</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>GREATEST(x1,x2,…,xn)</code>&emsp;返回集合中最大的值</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>LEAST(x1,x2,…,xn)</code>&emsp; 返回集合中最小的值</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>LN(x)</code>&emsp;返回x的自然对数</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>LOG(x,y)</code>&emsp;返回x的以y为底的对数</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>MOD(x,y)</code>&emsp;返回x/y的模（余数）</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>PI()</code>&emsp;返回pi的值（圆周率）</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>RAND()</code>&emsp;返回0到1内的随机值,可以通过提供一个参数(种子)使RAND()随机数生成器生成一个指定的值</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>FLOOR(x)</code>&emsp;返回小于x的最大整数值，（去掉小数取整）</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>CEILING(x)</code>&emsp;返回大于x的最小整数值，（进一取整）</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>ROUND(x,y)</code>&emsp;返回参数x的四舍五入的有y位小数的值，（四舍五入）</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>TRUNCATE(x,y)</code>&emsp;返回数字x截短为y位小数的结果</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>SIGN(x)</code>&emsp;返回代表数字x的符号的值（正数返回1，负数返回-1，0返回0）</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>SQRT(x)</code>&emsp;返回一个数的平方根</font>
+
+<h3 id="二、聚合函数-常用于GROUP-BY从句的SELECT查询中"><a href="#二、聚合函数-常用于GROUP-BY从句的SELECT查询中" class="headerlink" title="二、聚合函数(常用于GROUP BY从句的SELECT查询中)"></a><font color="#0099ff" size="4" face="微软雅黑">二、聚合函数(常用于GROUP BY从句的SELECT查询中)</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>AVG(col)</code>&emsp;返回指定列的平均值</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>COUNT(col)</code>&emsp;返回指定列中非NULL值/行的个数（当函数参数为星号*时不会忽略）</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>MIN(col)</code>&emsp;返回指定列的最小值</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>MAX(col)</code>&emsp;返回指定列的最大值</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>SUM(col)</code>&emsp;返回指定列的所有值之和</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>GROUP_CONCAT(col)</code>&emsp;返回由属于一组的列值连接组合而成的结果</font>
+
+<h3 id="三、字符串函数"><a href="#三、字符串函数" class="headerlink" title="三、字符串函数"></a><font color="#0099ff" size="4" face="微软雅黑">三、字符串函数</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>ASCII(char)</code>&emsp;返回字符的ASCII码值</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>BIT_LENGTH(str)</code>&emsp;返回字符串的比特长度</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>CONCAT(s1,s2…,sn)</code>&emsp;将s1,s2…,sn连接成字符串</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>CONCAT_WS(sep,s1,s2…,sn) </code>&emsp;将s1,s2…,sn连接成字符串，并用sep字符间隔</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>INSERT(str,x,y,instr)</code>&emsp;将字符串str从第x位置开始，y个字符长的子串替换为字符串instr，返回结果</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>FIND_IN_SET(str,list)</code>&emsp;分析逗号分隔的list列表，如果发现str，返回str在list中的位置</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>LCASE(str)或LOWER(str)</code>&emsp;返回将字符串str中所有字符改变为小写后的结果</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>UCASE(str)或UPPER(str)</code>&emsp; 返回将字符串str中所有字符转变为大写后的结果</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>LEFT(str,x) </code>&emsp;返回字符串str中最左边的x个字符</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>RIGHT(str,x) </code>&emsp;返回字符串str中最右边的x个字符</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>LENGTH(str)</code>&emsp;返回字符串str中的字符数</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>POSITION(substr,str)</code>&emsp;返回子串substr在字符串str中第一次出现的位置</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>QUOTE(str)</code>&emsp;用反斜杠转义str中的单引号</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>REPEAT(str,srchstr,rplcstr)</code>&emsp;返回字符串str重复x次的结果</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>REVERSE(str)</code>&emsp;返回颠倒字符串str的结果</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>LTRIM(str)</code>&emsp;去掉字符串str开头的空格</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>RTRIM(str)</code>&emsp;去掉字符串str尾部的空格</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>TRIM(str)</code>&emsp;去除字符串首部和尾部的所有空格</font>
+
+<h3 id="四、日期和时间函数"><a href="#四、日期和时间函数" class="headerlink" title="四、日期和时间函数"></a><font color="#0099ff" size="4" face="微软雅黑">四、日期和时间函数</font></h3><p><code>DATE_ADD(date,INTERVAL int keyword)</code>&emsp;返回日期date加上间隔时间int的结果(int必须按照关键字进行格式化),如：SELECTDATE_ADD(CURRENT_DATE,INTERVAL 6 MONTH);<br><code>DATE_SUB(date,INTERVAL int keyword)</code>&emsp;返回日期date加上间隔时间int的结果(int必须按照关键字进行格式化),如：SELECTDATE_SUB(CURRENT_DATE,INTERVAL 6 MONTH);</p>
+<font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>DATE_FORMAT(date,fmt)</code>&emsp;依照指定的fmt格式格式化日期date值</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>FROM_UNIXTIME(ts,fmt)</code>&emsp;根据指定的fmt格式，格式化UNIX时间戳ts</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>MONTHNAME(date)</code>&emsp;返回date的月份名(英语月份，如October)</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>DAYNAME(date)</code>&emsp;返回date的星期名(英语星期几，如Saturday)</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>NOW()</code>&emsp;返回当前的日期和时间 如：2016-10-08 18:57:39</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>CURDATE()或CURRENT_DATE()</code>&emsp;返回当前的日期</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>CURTIME()或CURRENT_TIME()</code>&emsp;返回当前的时间</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>QUARTER(date)</code>&emsp;返回date在一年中的季度(1~4)</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>WEEK(date)</code>&emsp;返回日期date为一年中第几周(0~53)</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>DAYOFYEAR(date)</code>&emsp;返回date是一年的第几天(1~366)</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>DAYOFMONTH(date)</code>&emsp;返回date是一个月的第几天(1~31)</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>DAYOFWEEK(date)</code>&emsp;返回date所代表的一星期中的第几天(1~7)</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>YEAR(date)</code>&emsp;返回日期date的年份(1000~9999)</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>MONTH(date)</code>&emsp;返回date的月份部分</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>DAY(date)</code>&emsp;返回date的天数部分</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>HOUR(time)</code>&emsp;返回time的小时值(0~23)</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>MINUTE(time)</code>&emsp;返回time的分钟值(0~59)</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>SECOND(time)</code>&emsp; 返回time的秒值（0-59）</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>DATE(datetime)</code>&emsp;返回datetime的日期值</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>TIME(datetime)</code>&emsp;返回datetime的时间值</font>
+
+<h3 id="五、加密函数"><a href="#五、加密函数" class="headerlink" title="五、加密函数"></a><font color="#0099ff" size="4" face="微软雅黑">五、加密函数</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>AES_ENCRYPT(str,key)</code>&emsp;返回用密钥key对字符串str利用高级加密标准算法加密后的结果，调用AES_ENCRYPT的结果是一个二进制字符串，以BLOB类型存储</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>AES_DECRYPT(str,key)</code>&emsp;返回用密钥key对字符串str利用高级加密标准算法解密后的结果</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>DECODE(str,key)</code>&emsp;使用key作为密钥解密加密字符串str</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>ENCRYPT(str,salt)</code>&emsp;使用UNIXcrypt()函数，用关键词salt(一个可以惟一确定口令的字符串，就像钥匙一样)加密字符串str</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>ENCODE(str,key)</code>&emsp;使用key作为密钥加密字符串str，调用ENCODE()的结果是一个二进制字符串，它以BLOB类型存储</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>MD5()</code>&emsp;计算字符串str的MD5校验和</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>PASSWORD(str)</code>&emsp;返回字符串str的加密版本，这个加密过程是不可逆转的，和UNIX密码加密过程使用不同的算法</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>SHA()</code>&emsp;计算字符串str的安全散列算法(SHA)校验和</font>
+
+<h3 id="六、格式化函数"><a href="#六、格式化函数" class="headerlink" title="六、格式化函数"></a><font color="#0099ff" size="4" face="微软雅黑">六、格式化函数</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>DATE_FORMAT(date,fmt)</code>&emsp;依照字符串fmt格式化日期date值</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>FORMAT(x,y) </code>&emsp;把x格式化为以逗号隔开的数字序列，y是结果的小数位数</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>INET_ATON(ip)</code>&emsp;返回IP地址的数字表示</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>INET_NTOA(num)</code>&emsp;返回数字所代表的IP地址</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>TIME_FORMAT(time,fmt)</code>&emsp;依照字符串fmt格式化时间time值</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">其中最简单的是FORMAT()函数，它可以把大的数值格式化为以逗号间隔的易读的序列。</font>
+
+<h3 id="七、数据类型转换函数"><a href="#七、数据类型转换函数" class="headerlink" title="七、数据类型转换函数"></a><font color="#0099ff" size="4" face="微软雅黑">七、数据类型转换函数</font></h3><p><code>CAST()</code>&emsp;将一个值转换为指定的数据类型（类型有：BINARY,CHAR,DATE,TIME,DATETIME,SIGNED,UNSIGNED）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CAST</span>(<span class="keyword">NOW</span>() <span class="keyword">AS</span> SIGNED <span class="built_in">INTEGER</span>),<span class="keyword">CURDATE</span>()+<span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s1.ax1x.com/2018/03/23/9bKzeH.png" alt></p>
+<h3 id="八、系统信息函数"><a href="#八、系统信息函数" class="headerlink" title="八、系统信息函数"></a><font color="#0099ff" size="4" face="微软雅黑">八、系统信息函数</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>DATABASE()</code>&emsp;返回当前数据库名</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>BENCHMARK(count,expr)</code>&emsp;将表达式expr重复运行count次</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>CONNECTION_ID()</code>&emsp;返回当前客户的连接ID</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>FOUND_ROWS()</code>&emsp;返回最后一个SELECT查询进行检索的总行数</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>USER()或SYSTEM_USER()</code>&emsp;返回当前登陆用户名</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>VERSION()</code>&emsp; 返回MySQL服务器的版本</font>
+
+<h3 id="九、条件判断函数"><a href="#九、条件判断函数" class="headerlink" title="九、条件判断函数"></a><font color="#0099ff" size="4" face="微软雅黑">九、条件判断函数</font></h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>IF(expr,v1,v2)</code>&emsp;如果expr是TRUE则返回v1，否则返回v2</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>IFNULL(v1,v2)</code>&emsp;如果v1不为NULL，则返回v1，否则返回v2</font><br><br><font color="#304556" size="3" face="微软雅黑" style="line-height:2;"><code>CASE expr WHEN v1 THEN r1 [WHEN v2 THEN v2] [ELSE rn] END</code>&emsp;如果expr等于某个vn，则返回对应位置THEN后面的结果，如果与所有值都不想等，则返回ELSE后面的rn</font>
+
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年09月19日 15:49</p>
+	<p>原始链接： <a class="post-url" href="/2018/03/23/20180323-MySQL常用函数/" title="MySQL常用函数">https://blog.hdqyf.club/2018/03/23/20180323-MySQL常用函数/</a></p>
+        <footer>
+            <a href="https://blog.hdqyf.club">
+                <img src="/images/logo.png" alt="Garen">
+                Garen
+            </a>
+        </footer>
+    </div>
+</div>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/03/23/20180323-MySQL常用函数/&title=《MySQL常用函数》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/09/19/ie7n1J.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/03/23/20180323-MySQL常用函数/&title=《MySQL常用函数》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+              <i class="fa fa-star"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/03/23/20180323-MySQL常用函数/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MySQL常用函数》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/03/23/20180323-MySQL常用函数/&via=https://blog.hdqyf.club" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/03/23/20180323-MySQL常用函数/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/03/23/20180323-MySQL常用函数/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/数据库/" class="color4">数据库</a>
+      
+    <a href="/tags/MySQL/" class="color1">MySQL</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、数学函数"><span class="post-toc-text">一、数学函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、聚合函数-常用于GROUP-BY从句的SELECT查询中"><span class="post-toc-text">二、聚合函数(常用于GROUP BY从句的SELECT查询中)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、字符串函数"><span class="post-toc-text">三、字符串函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、日期和时间函数"><span class="post-toc-text">四、日期和时间函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#五、加密函数"><span class="post-toc-text">五、加密函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#六、格式化函数"><span class="post-toc-text">六、格式化函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#七、数据类型转换函数"><span class="post-toc-text">七、数据类型转换函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#八、系统信息函数"><span class="post-toc-text">八、系统信息函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#九、条件判断函数"><span class="post-toc-text">九、条件判断函数</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/2018/03/25/20180325-CCleaner Pro 绿色特别版及增强版本/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          CCleaner Pro 绿色特别版及增强版本
+        
+      </span>
+    </a>
+  
+  
+    <a href="/2018/03/22/20180322-冰点文库下载器 去广告绿色版及单文件/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">冰点文库下载器 去广告绿色版及单文件</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <span id="runtime_span"></span>
+            <br>
+            <p>
+                Powered by <a href="#" target="_blank">HDQ</a> Theme <a href="#" target="_blank">Garen</a> &copy;
+                2022
+                    Garen<br>
+            </p>
+        </div>
+    </div>
+</footer>
+<script>
+    function show_runtime() {
+            window.setTimeout("show_runtime()", 1000);
+            X = new Date("11/25/2017 05:20:00");
+            Y = new Date(); T = (Y.getTime() - X.getTime()); M = 24 * 60 * 60 * 1000;
+            a = T / M;
+            A = Math.floor(a);
+            b = (a - A) * 24;
+            B = Math.floor(b);
+            c = (b - B) * 60;
+            C = Math.floor((b - B) * 60);
+            D = Math.floor((c - C) * 60);
+            runtime_span.innerHTML = "本站勉强运行: " + A + "天" + B + "小时" + C + "分" + D + "秒";
+        }
+
+        show_runtime();
+</script>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-user"></span>
+    <span class="fui-photo"></span>
+    <span class="fui-info-circle"></span>
+    <span class="fui-cross"></span>
+</div>
+</div>
+<script src="/js/mylive-tips.js"></script>
+<script src="/js/mylive.js"></script>
+<script type="text/javascript">initModel(window.location.protocol+'//'+window.location.hostname+'/'+'json/')</script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://blog.hdqyf.club",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/3DS-MAX/">3DS MAX</a><a class="category-link" href="/categories/CAD/">CAD</a><a class="category-link" href="/categories/CPU/">CPU</a><a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/Docker/">Docker</a><a class="category-link" href="/categories/GPU/">GPU</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/Java/">Java</a><a class="category-link" href="/categories/Linux/">Linux</a><a class="category-link" href="/categories/MVC/">MVC</a><a class="category-link" href="/categories/Mac/">Mac</a><a class="category-link" href="/categories/MongoDB/">MongoDB</a><a class="category-link" href="/categories/MySQL/">MySQL</a><a class="category-link" href="/categories/OCR识别/">OCR识别</a><a class="category-link" href="/categories/Office/">Office</a><a class="category-link" href="/categories/Oracle/">Oracle</a><a class="category-link" href="/categories/PDF/">PDF</a><a class="category-link" href="/categories/PDF工具/">PDF工具</a><a class="category-link" href="/categories/Redis/">Redis</a><a class="category-link" href="/categories/SQL/">SQL</a><a class="category-link" href="/categories/Spring/">Spring</a><a class="category-link" href="/categories/Steam/">Steam</a><a class="category-link" href="/categories/WiFi/">WiFi</a><a class="category-link" href="/categories/hibernate/">hibernate</a><a class="category-link" href="/categories/iOS/">iOS</a><a class="category-link" href="/categories/mybatis/">mybatis</a><a class="category-link" href="/categories/node/">node</a><a class="category-link" href="/categories/下载/">下载</a><a class="category-link" href="/categories/卸载/">卸载</a><a class="category-link" href="/categories/字体/">字体</a><a class="category-link" href="/categories/常识/">常识</a><a class="category-link" href="/categories/开发工具/">开发工具</a><a class="category-link" href="/categories/感悟/">感悟</a><a class="category-link" href="/categories/截屏/">截屏</a><a class="category-link" href="/categories/播放器/">播放器</a><a class="category-link" href="/categories/效率/">效率</a><a class="category-link" href="/categories/文档/">文档</a><a class="category-link" href="/categories/杂谈/">杂谈</a><a class="category-link" href="/categories/注册表/">注册表</a><a class="category-link" href="/categories/激活/">激活</a><a class="category-link" href="/categories/生活/">生活</a><a class="category-link" href="/categories/编辑器/">编辑器</a><a class="category-link" href="/categories/翻译/">翻译</a><a class="category-link" href="/categories/虚拟机/">虚拟机</a><a class="category-link" href="/categories/设计模式/">设计模式</a><a class="category-link" href="/categories/资源/">资源</a><a class="category-link" href="/categories/转换/">转换</a><a class="category-link" href="/categories/运行库/">运行库</a><a class="category-link" href="/categories/音乐/">音乐</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 10.71px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/CSS/" style="font-size: 10.71px;">CSS</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/HTML/" style="font-size: 12.14px;">HTML</a> <a href="/tags/JS/" style="font-size: 14.29px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Mac/" style="font-size: 11.43px;">Mac</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/OCR识别/" style="font-size: 10px;">OCR识别</a> <a href="/tags/Office/" style="font-size: 11.43px;">Office</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PDF/" style="font-size: 10.71px;">PDF</a> <a href="/tags/PDF工具/" style="font-size: 10px;">PDF工具</a> <a href="/tags/PPT/" style="font-size: 10.71px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/Redis/" style="font-size: 10.71px;">Redis</a> <a href="/tags/SQL/" style="font-size: 10.71px;">SQL</a> <a href="/tags/Spring/" style="font-size: 17.86px;">Spring</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/WiFi/" style="font-size: 10px;">WiFi</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/iOS/" style="font-size: 11.43px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 16.43px;">mybatis</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/下载/" style="font-size: 13.57px;">下载</a> <a href="/tags/前端/" style="font-size: 12.14px;">前端</a> <a href="/tags/办公/" style="font-size: 13.57px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 10.71px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发工具/" style="font-size: 11.43px;">开发工具</a> <a href="/tags/开发技巧/" style="font-size: 12.14px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.14px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/插件/" style="font-size: 10.71px;">插件</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 15.71px;">效率</a> <a href="/tags/数据库/" style="font-size: 12.86px;">数据库</a> <a href="/tags/文档/" style="font-size: 10.71px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/杂谈/" style="font-size: 10.71px;">杂谈</a> <a href="/tags/框架/" style="font-size: 19.29px;">框架</a> <a href="/tags/检测/" style="font-size: 10.71px;">检测</a> <a href="/tags/注册表/" style="font-size: 10.71px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 12.14px;">激活</a> <a href="/tags/生活/" style="font-size: 14.29px;">生活</a> <a href="/tags/系统必备/" style="font-size: 10px;">系统必备</a> <a href="/tags/终端/" style="font-size: 10.71px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/脚本/" style="font-size: 10.71px;">脚本</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/视频/" style="font-size: 11.43px;">视频</a> <a href="/tags/设计模式/" style="font-size: 17.14px;">设计模式</a> <a href="/tags/词典/" style="font-size: 10px;">词典</a> <a href="/tags/资源/" style="font-size: 18.57px;">资源</a> <a href="/tags/转换/" style="font-size: 10.71px;">转换</a> <a href="/tags/运行库/" style="font-size: 10px;">运行库</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 10.71px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/CSS/" style="font-size: 10.71px;">CSS</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/HTML/" style="font-size: 12.14px;">HTML</a> <a href="/tags/JS/" style="font-size: 14.29px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Mac/" style="font-size: 11.43px;">Mac</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/OCR识别/" style="font-size: 10px;">OCR识别</a> <a href="/tags/Office/" style="font-size: 11.43px;">Office</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PDF/" style="font-size: 10.71px;">PDF</a> <a href="/tags/PDF工具/" style="font-size: 10px;">PDF工具</a> <a href="/tags/PPT/" style="font-size: 10.71px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/Redis/" style="font-size: 10.71px;">Redis</a> <a href="/tags/SQL/" style="font-size: 10.71px;">SQL</a> <a href="/tags/Spring/" style="font-size: 17.86px;">Spring</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/WiFi/" style="font-size: 10px;">WiFi</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/iOS/" style="font-size: 11.43px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 16.43px;">mybatis</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/下载/" style="font-size: 13.57px;">下载</a> <a href="/tags/前端/" style="font-size: 12.14px;">前端</a> <a href="/tags/办公/" style="font-size: 13.57px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 10.71px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发工具/" style="font-size: 11.43px;">开发工具</a> <a href="/tags/开发技巧/" style="font-size: 12.14px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.14px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/插件/" style="font-size: 10.71px;">插件</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 15.71px;">效率</a> <a href="/tags/数据库/" style="font-size: 12.86px;">数据库</a> <a href="/tags/文档/" style="font-size: 10.71px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/杂谈/" style="font-size: 10.71px;">杂谈</a> <a href="/tags/框架/" style="font-size: 19.29px;">框架</a> <a href="/tags/检测/" style="font-size: 10.71px;">检测</a> <a href="/tags/注册表/" style="font-size: 10.71px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 12.14px;">激活</a> <a href="/tags/生活/" style="font-size: 14.29px;">生活</a> <a href="/tags/系统必备/" style="font-size: 10px;">系统必备</a> <a href="/tags/终端/" style="font-size: 10.71px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/脚本/" style="font-size: 10.71px;">脚本</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/视频/" style="font-size: 11.43px;">视频</a> <a href="/tags/设计模式/" style="font-size: 17.14px;">设计模式</a> <a href="/tags/词典/" style="font-size: 10px;">词典</a> <a href="/tags/资源/" style="font-size: 18.57px;">资源</a> <a href="/tags/转换/" style="font-size: 10.71px;">转换</a> <a href="/tags/运行库/" style="font-size: 10px;">运行库</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.staticfile.org/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.staticfile.org/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.staticfile.org/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+<script>
+  $(".pingfuADHolder").remove();
+</script>
+</html>

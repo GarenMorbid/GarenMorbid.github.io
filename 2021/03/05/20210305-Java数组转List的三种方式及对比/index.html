@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  <title>Java数组转List的三种方式及对比 | HDQ | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="HDQ,HDQ's Blog">
+  
+  <meta name="description" content="前言本文介绍Java中数组转为List三种情况的优劣对比，以及应用场景的对比，以及程序员常犯的类型转换错误原因解析。 一.最常见方式（未必最佳）通过 Arrays.asList(strArray)方式,将数组转换List后，不能对List增删，只能查改，否则抛异常。 关键代码：List list = Arrays.asList(strArray); 1234567private void test">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java数组转List的三种方式及对比">
+<meta property="og:url" content="https://blog.hdqyf.club/2021/03/05/20210305-Java数组转List的三种方式及对比/index.html">
+<meta property="og:site_name" content="HDQ | Blog">
+<meta property="og:description" content="前言本文介绍Java中数组转为List三种情况的优劣对比，以及应用场景的对比，以及程序员常犯的类型转换错误原因解析。 一.最常见方式（未必最佳）通过 Arrays.asList(strArray)方式,将数组转换List后，不能对List增删，只能查改，否则抛异常。 关键代码：List list = Arrays.asList(strArray); 1234567private void test">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2021-04-02T08:13:14.511Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java数组转List的三种方式及对比">
+<meta name="twitter:description" content="前言本文介绍Java中数组转为List三种情况的优劣对比，以及应用场景的对比，以及程序员常犯的类型转换错误原因解析。 一.最常见方式（未必最佳）通过 Arrays.asList(strArray)方式,将数组转换List后，不能对List增删，只能查改，否则抛异常。 关键代码：List list = Arrays.asList(strArray); 1234567private void test">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/mylive.css">
+  <link rel="stylesheet" href="/css/mySetting.css">
+  <script src="/js/pace.min.js"></script>
+  <script src="/js/mySetting.js"></script>
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-113082369-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?a3fed5fc0a708f5e993575bc1ccaf623";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+  
+
+</head></html>
+<body>
+  <div id="container">
+      <div class="maplebg"></div>
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">HDQ&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        HDQ&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 互联网生活 互联网资源的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="个人网站" target="_blank" href="http://hdqyf.club/">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="GitHub" target="_blank" href="https://github.com/GarenMorbid">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="https://weibo.com/u/5470832383?refer_flag=1005055013_">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Steam" target="_blank" href="https://steamcommunity.com/id/GarenMorbid/">
+                            <i class="fa fa-steam fa-2x"></i></a>
+                    
+                        <a title="Blog&#39;s App Download" target="_blank" href="https://pan.lanzou.com/i10yfxi">
+                            <i class="fa fa-android fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-20210305-Java数组转List的三种方式及对比" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      Java数组转List的三种方式及对比
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/Java/">Java</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-03-05
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a><font color="#0099ff" size="4" face="黑体">前言</font></h3><p>本文介绍Java中数组转为List三种情况的优劣对比，以及应用场景的对比，以及程序员常犯的类型转换错误原因解析。</p>
+<h3 id="一-最常见方式（未必最佳）"><a href="#一-最常见方式（未必最佳）" class="headerlink" title="一.最常见方式（未必最佳）"></a><font color="#0099ff" size="4" face="黑体">一.最常见方式（未必最佳）</font></h3><p>通过 <code>Arrays.asList(strArray)</code>方式,将数组转换List后，不能对List增删，只能查改，否则抛异常。</p>
+<p>关键代码：<code>List list = Arrays.asList(strArray);</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">testArrayCastToListError</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  String[] strArray = <span class="keyword">new</span> String[<span class="number">2</span>];</span><br><span class="line">  List list = Arrays.asList(strArray);</span><br><span class="line">  <span class="comment">//对转换后的list插入一条数据</span></span><br><span class="line">  list.add(<span class="string">"1"</span>);</span><br><span class="line">  System.out.println(list);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; java.lang.UnsupportedOperationException</span><br><span class="line"> at java.util.AbstractList.add(AbstractList.java:148)</span><br><span class="line"> at java.util.AbstractList.add(AbstractList.java:108)</span><br><span class="line"> at com.darwin.junit.Calculator.testArrayCastToList(Calculator.java:19)</span><br><span class="line"> at com.darwin.junit.Calculator.main(Calculator.java:44)</span><br></pre></td></tr></table></figure>
+<p>程序在list.add(“1”)处，抛出异常：UnsupportedOperationException。原因解析：</p>
+<p>原因解析：<br><code>Arrays.asList(strArray)</code>返回值是<code>java.util.Arrays</code>类中一个私有静态内部类<code>java.util.Arrays.ArrayList</code>，它并非<code>java.util.ArrayList</code>类。<code>java.util.Arrays.ArrayList</code>类具有 set()，get()，contains()等方法，但是不具有添加<code>add()</code>或删除<code>remove()</code>方法,所以调用add()方法会报错。</p>
+<p>使用场景：<code>Arrays.asList(strArray)</code>方式仅能用在将数组转换为List后，不需要增删其中的值，仅作为数据源读取使用。</p>
+<h3 id="二-数组转为List后，支持增删改查的方式"><a href="#二-数组转为List后，支持增删改查的方式" class="headerlink" title="二.数组转为List后，支持增删改查的方式"></a><font color="#0099ff" size="4" face="黑体">二.数组转为List后，支持增删改查的方式</font></h3><p>通过ArrayList的构造器，将<code>Arrays.asList(strArray)</code>的返回值由<code>java.util.Arrays.ArrayList</code>转为<code>java.util.ArrayList</code>。</p>
+<p>关键代码：<code>ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;(Arrays.asList(strArray)) ;</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">testArrayCastToListRight</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  String[] strArray = <span class="keyword">new</span> String[<span class="number">2</span>];</span><br><span class="line">  ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;(Arrays.asList(strArray)) ;</span><br><span class="line">  list.add(<span class="string">"1"</span>);</span><br><span class="line">  System.out.println(list);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行结果：成功追加一个元素“1”。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[null, null, 1]</span><br></pre></td></tr></table></figure>
+<p>使用场景：需要在将数组转换为List后，对List进行增删改查操作，在List的数据量不大的情况下，可以使用。</p>
+<h3 id="三-通过集合工具类Collections-addAll-方法-最高效"><a href="#三-通过集合工具类Collections-addAll-方法-最高效" class="headerlink" title="三.通过集合工具类Collections.addAll()方法(最高效)"></a><font color="#0099ff" size="4" face="黑体">三.通过集合工具类Collections.addAll()方法(最高效)</font></h3><p>通过<code>Collections.addAll(arrayList, strArray)</code>方式转换，根据数组的长度创建一个长度相同的List，然后通过<code>Collections.addAll()</code>方法，将数组中的元素转为二进制，然后添加到List中，这是最高效的方法。</p>
+<p>关键代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt; String&gt; arrayList = <span class="keyword">new</span> ArrayList&lt;String&gt;(strArray.length);</span><br><span class="line">Collections.addAll(arrayList, strArray);</span><br></pre></td></tr></table></figure>
+<p>测试：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">testArrayCastToListEfficient</span><span class="params">()</span></span>&#123;</span><br><span class="line">  String[] strArray = <span class="keyword">new</span> String[<span class="number">2</span>];</span><br><span class="line">  ArrayList&lt; String&gt; arrayList = <span class="keyword">new</span> ArrayList&lt;String&gt;(strArray.length);</span><br><span class="line">  Collections.addAll(arrayList, strArray);</span><br><span class="line">  arrayList.add(<span class="string">"1"</span>);</span><br><span class="line">  System.out.println(arrayList);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行结果：同样成功追加一个元素“1”。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[null, null, 1]</span><br></pre></td></tr></table></figure>
+<p>使用场景：需要在将数组转换为List后，对List进行增删改查操作，在List的数据量巨大的情况下，优先使用，可以提高操作速度。</p>
+<p>注：附上<code>Collections.addAll()</code>方法源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">boolean</span> <span class="title">addAll</span><span class="params">(Collection&lt;? <span class="keyword">super</span> T&gt; c, T... elements)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">boolean</span> result = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">for</span> (T element : elements) &#123;</span><br><span class="line">        result |= c.add(element);<span class="comment">//result和c.add(element)按位或运算,然后赋值给result</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="问题解答"><a href="#问题解答" class="headerlink" title="问题解答"></a><font color="#0099ff" size="4" face="黑体">问题解答</font></h3><p>问题：数组类型如果是整型数组，转为List时，会报错？</p>
+<p><strong>答案：</strong>在<code>JDK1.8</code>环境中测试，这三种转换方式是没有问题的。放心使用。对于<code>Integer[]</code>整型数组转List的方法和测试结果如下：</p>
+<p><strong>方式一：不支持增删</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Integer[] intArray1 = <span class="keyword">new</span> Integer[<span class="number">2</span>];</span><br><span class="line">List&lt;Integer&gt; list1 = Arrays.asList(intArray1);</span><br><span class="line">System.out.println(list1);</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[null, null]</span><br></pre></td></tr></table></figure>
+<p><strong>方式二：支持增删</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Integer[] intArray2 = <span class="keyword">new</span> Integer[<span class="number">2</span>];</span><br><span class="line">List&lt;Integer&gt; list2 = <span class="keyword">new</span> ArrayList&lt;Integer&gt;(Arrays.asList(intArray2)) ;</span><br><span class="line">list2.add(<span class="number">2</span>);</span><br><span class="line">System.out.println(list2);</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[null, null, 2]</span><br></pre></td></tr></table></figure>
+<p><strong>方式三：支持增删，且数据量大最高效</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Integer[] intArray3 = <span class="keyword">new</span> Integer[<span class="number">2</span>];</span><br><span class="line">List&lt;Integer&gt; list3 = <span class="keyword">new</span> ArrayList&lt;Integer&gt;(intArray3.length);</span><br><span class="line">Collections.addAll(list3, intArray3);</span><br><span class="line">list3.add(<span class="number">3</span>);</span><br><span class="line">System.out.println(list3);</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[null, null, 3]</span><br></pre></td></tr></table></figure>
+<p>综上，整型<code>Integer[]</code>数组转<code>List&lt;Integer&gt;</code>的正确方式应该是这样的。</p>
+<p>易错点：可能出现的错误可能是这样转换的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] intArray1 = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">List&lt;Integer&gt; list1 = Arrays.asList(intArray1);<span class="comment">//此处报错！！！</span></span><br></pre></td></tr></table></figure>
+<p>报错原因：等号两边类型不一致，当然编译不通过。分析见下文。</p>
+<p>那么在声明数组时，用<code>int[]</code>还是<code>Integer[]</code>，哪种声明方式才能正确的转为<code>List</code>呢？<br><strong>答案：</strong> 只能用<code>Integer[]</code>转<code>List&lt;Integer&gt;</code>，即只能用基本数据类型的包装类型，才能直接转为List。</p>
+<p>原因分析如下：</p>
+<p>我们来看<code>List</code>在Java源码中的定义（别害怕看不懂源码，看我分析，很易懂的）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">List</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt; </span>&#123;省略…&#125;</span><br></pre></td></tr></table></figure>
+<p>再来看<code>Arrays.asList()</code>的在Java源码定义：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">asList</span><span class="params">(T... a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ArrayList&lt;&gt;(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>从上述源码中可以看出，<code>List</code>声明时，需要传递一个泛型<code>&lt;E&gt;</code>作为形参，<code>asList()</code>参数类型也是泛型中的通配类型<code>&lt;T&gt;</code>。Java中所有的泛型必须是引用类型。</p>
+</li>
+<li><p>什么是引用类型？<code>Integer</code>是引用类型，那<code>int</code>是什么类型？<code>int</code>是基本数据类型，不是引用类型。这就是为什么java中没有<code>List&lt;int&gt;</code>，而只有<code>List&lt;Integer&gt;</code>。</p>
+</li>
+<li><p>举一反三：其他8种基本数据类型<code>byte、short、int、long、float、double、char</code>也都不是引用类型，所以8种基本数据类型都不能作为List的形参。但<code>String、数组、class、interface</code>是引用类型，都可以作为List的形参，所以存在<code>List&lt;Runnable&gt;</code>接口类型的集合、<code>List&lt;int[]&gt;</code>数组类型的集合、<code>List&lt;String&gt;</code>类的集合。但不存在<code>List&lt;byte&gt;</code>、<code>List&lt;short&gt;</code>等基本类型的集合。</p>
+</li>
+</ul>
+<p>有了上述基础知识后，再来看为什么下面两行代码第二行能编译通过，第三行却编译报错？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] intArray1 = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">1</span>]; </span><br><span class="line">Arrays.asList(intArray1);<span class="comment">//编译不报错</span></span><br><span class="line">List&lt;Integer&gt; list1 = Arrays.asList( intArray1);<span class="comment">//编译报错</span></span><br></pre></td></tr></table></figure>
+<p><strong>答案：</strong></p>
+<ul>
+<li><p>第二行代码，<code>Arrays.asList()</code>方法的入参是个引用类型的<code>int[]</code>，那么返回值类型一定是<code>List&lt;int[]&gt;</code> ，其完整代码是：<code>List&lt;int[]&gt; intsArray = Arrays.asList(intArray1);</code>，所以编译通过，没问题。</p>
+</li>
+<li><p>第三行报错，因为等号两边的类型不一致，左边：<code>List&lt;Integer&gt;</code>，右边<code>List&lt;int[]&gt;</code>，所以编译时就报错。</p>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><font color="#0099ff" size="4" face="黑体">总结</font></h3><p>现在你应该明白，为什么<code>int[]</code>不能直接转换为<code>List&lt;Integer&gt;</code>，而<code>Integer[]</code>就可以转换为<code>List&lt;Integer&gt;</code>了吧。因为<code>List</code>中的泛型必须是引用类型，<code>int</code>是基本数据类型，不是引用类型，但<code>int</code>的包装类型<code>Integer</code>是<code>class</code>类型，属于引用类型，所以<code>Integer</code>可以作为<code>List</code>形参，<code>List&lt;Integer&gt;</code>在java中是可以存在的，但不存在<code>List&lt;int&gt;</code>类型。</p>
+<p>在编码时，我们不光要知其然，还要知其所以然，通过分析JDK源码，才能得出一手信息，不仅了解到了如何用，还能得出为何这样用。</p>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2021年04月02日 16:13</p>
+	<p>原始链接： <a class="post-url" href="/2021/03/05/20210305-Java数组转List的三种方式及对比/" title="Java数组转List的三种方式及对比">https://blog.hdqyf.club/2021/03/05/20210305-Java数组转List的三种方式及对比/</a></p>
+        <footer>
+            <a href="https://blog.hdqyf.club">
+                <img src="/images/logo.png" alt="Garen">
+                Garen
+            </a>
+        </footer>
+    </div>
+</div>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2021/03/05/20210305-Java数组转List的三种方式及对比/&title=《Java数组转List的三种方式及对比》 — HDQ | Blog&pic=https://z3.ax1x.com/2021/03/05/6mfec6.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2021/03/05/20210305-Java数组转List的三种方式及对比/&title=《Java数组转List的三种方式及对比》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+              <i class="fa fa-star"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2021/03/05/20210305-Java数组转List的三种方式及对比/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java数组转List的三种方式及对比》 — HDQ | Blog&url=https://blog.hdqyf.club/2021/03/05/20210305-Java数组转List的三种方式及对比/&via=https://blog.hdqyf.club" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2021/03/05/20210305-Java数组转List的三种方式及对比/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2021/03/05/20210305-Java数组转List的三种方式及对比/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Java/" class="color5">Java</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一-最常见方式（未必最佳）"><span class="post-toc-text">一.最常见方式（未必最佳）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二-数组转为List后，支持增删改查的方式"><span class="post-toc-text">二.数组转为List后，支持增删改查的方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三-通过集合工具类Collections-addAll-方法-最高效"><span class="post-toc-text">三.通过集合工具类Collections.addAll()方法(最高效)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#问题解答"><span class="post-toc-text">问题解答</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/2021/12/20/20211220-前端实现网页打印详解/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          window.print() 前端实现网页打印详解
+        
+      </span>
+    </a>
+  
+  
+    <a href="/2021/02/02/20210202-2021年支付宝五福，今年又有哪些隐藏福呢？/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">2021年支付宝五福，今年又有哪些隐藏福呢？</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <span id="runtime_span"></span>
+            <br>
+            <p>
+                Powered by <a href="#" target="_blank">HDQ</a> Theme <a href="#" target="_blank">Garen</a> &copy;
+                2022
+                    Garen<br>
+            </p>
+        </div>
+    </div>
+</footer>
+<script>
+    function show_runtime() {
+            window.setTimeout("show_runtime()", 1000);
+            X = new Date("11/25/2017 05:20:00");
+            Y = new Date(); T = (Y.getTime() - X.getTime()); M = 24 * 60 * 60 * 1000;
+            a = T / M;
+            A = Math.floor(a);
+            b = (a - A) * 24;
+            B = Math.floor(b);
+            c = (b - B) * 60;
+            C = Math.floor((b - B) * 60);
+            D = Math.floor((c - C) * 60);
+            runtime_span.innerHTML = "本站勉强运行: " + A + "天" + B + "小时" + C + "分" + D + "秒";
+        }
+
+        show_runtime();
+</script>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-user"></span>
+    <span class="fui-photo"></span>
+    <span class="fui-info-circle"></span>
+    <span class="fui-cross"></span>
+</div>
+</div>
+<script src="/js/mylive-tips.js"></script>
+<script src="/js/mylive.js"></script>
+<script type="text/javascript">initModel(window.location.protocol+'//'+window.location.hostname+'/'+'json/')</script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://blog.hdqyf.club",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/3DS-MAX/">3DS MAX</a><a class="category-link" href="/categories/CAD/">CAD</a><a class="category-link" href="/categories/CPU/">CPU</a><a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/Docker/">Docker</a><a class="category-link" href="/categories/GPU/">GPU</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/Java/">Java</a><a class="category-link" href="/categories/Linux/">Linux</a><a class="category-link" href="/categories/MVC/">MVC</a><a class="category-link" href="/categories/Mac/">Mac</a><a class="category-link" href="/categories/MongoDB/">MongoDB</a><a class="category-link" href="/categories/MySQL/">MySQL</a><a class="category-link" href="/categories/OCR识别/">OCR识别</a><a class="category-link" href="/categories/Office/">Office</a><a class="category-link" href="/categories/Oracle/">Oracle</a><a class="category-link" href="/categories/PDF/">PDF</a><a class="category-link" href="/categories/PDF工具/">PDF工具</a><a class="category-link" href="/categories/Redis/">Redis</a><a class="category-link" href="/categories/SQL/">SQL</a><a class="category-link" href="/categories/Spring/">Spring</a><a class="category-link" href="/categories/Steam/">Steam</a><a class="category-link" href="/categories/WiFi/">WiFi</a><a class="category-link" href="/categories/hibernate/">hibernate</a><a class="category-link" href="/categories/iOS/">iOS</a><a class="category-link" href="/categories/mybatis/">mybatis</a><a class="category-link" href="/categories/node/">node</a><a class="category-link" href="/categories/下载/">下载</a><a class="category-link" href="/categories/卸载/">卸载</a><a class="category-link" href="/categories/字体/">字体</a><a class="category-link" href="/categories/常识/">常识</a><a class="category-link" href="/categories/开发工具/">开发工具</a><a class="category-link" href="/categories/感悟/">感悟</a><a class="category-link" href="/categories/截屏/">截屏</a><a class="category-link" href="/categories/播放器/">播放器</a><a class="category-link" href="/categories/效率/">效率</a><a class="category-link" href="/categories/文档/">文档</a><a class="category-link" href="/categories/杂谈/">杂谈</a><a class="category-link" href="/categories/注册表/">注册表</a><a class="category-link" href="/categories/激活/">激活</a><a class="category-link" href="/categories/生活/">生活</a><a class="category-link" href="/categories/编辑器/">编辑器</a><a class="category-link" href="/categories/翻译/">翻译</a><a class="category-link" href="/categories/虚拟机/">虚拟机</a><a class="category-link" href="/categories/设计模式/">设计模式</a><a class="category-link" href="/categories/资源/">资源</a><a class="category-link" href="/categories/转换/">转换</a><a class="category-link" href="/categories/运行库/">运行库</a><a class="category-link" href="/categories/音乐/">音乐</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 10.71px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/CSS/" style="font-size: 10.71px;">CSS</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/HTML/" style="font-size: 12.14px;">HTML</a> <a href="/tags/JS/" style="font-size: 14.29px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Mac/" style="font-size: 11.43px;">Mac</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/OCR识别/" style="font-size: 10px;">OCR识别</a> <a href="/tags/Office/" style="font-size: 11.43px;">Office</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PDF/" style="font-size: 10.71px;">PDF</a> <a href="/tags/PDF工具/" style="font-size: 10px;">PDF工具</a> <a href="/tags/PPT/" style="font-size: 10.71px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/Redis/" style="font-size: 10.71px;">Redis</a> <a href="/tags/SQL/" style="font-size: 10.71px;">SQL</a> <a href="/tags/Spring/" style="font-size: 17.86px;">Spring</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/WiFi/" style="font-size: 10px;">WiFi</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/iOS/" style="font-size: 11.43px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 16.43px;">mybatis</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/下载/" style="font-size: 13.57px;">下载</a> <a href="/tags/前端/" style="font-size: 12.14px;">前端</a> <a href="/tags/办公/" style="font-size: 13.57px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 10.71px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发工具/" style="font-size: 11.43px;">开发工具</a> <a href="/tags/开发技巧/" style="font-size: 12.14px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.14px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/插件/" style="font-size: 10.71px;">插件</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 15.71px;">效率</a> <a href="/tags/数据库/" style="font-size: 12.86px;">数据库</a> <a href="/tags/文档/" style="font-size: 10.71px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/杂谈/" style="font-size: 10.71px;">杂谈</a> <a href="/tags/框架/" style="font-size: 19.29px;">框架</a> <a href="/tags/检测/" style="font-size: 10.71px;">检测</a> <a href="/tags/注册表/" style="font-size: 10.71px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 12.14px;">激活</a> <a href="/tags/生活/" style="font-size: 14.29px;">生活</a> <a href="/tags/系统必备/" style="font-size: 10px;">系统必备</a> <a href="/tags/终端/" style="font-size: 10.71px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/脚本/" style="font-size: 10.71px;">脚本</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/视频/" style="font-size: 11.43px;">视频</a> <a href="/tags/设计模式/" style="font-size: 17.14px;">设计模式</a> <a href="/tags/词典/" style="font-size: 10px;">词典</a> <a href="/tags/资源/" style="font-size: 18.57px;">资源</a> <a href="/tags/转换/" style="font-size: 10.71px;">转换</a> <a href="/tags/运行库/" style="font-size: 10px;">运行库</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 10.71px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/CSS/" style="font-size: 10.71px;">CSS</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/HTML/" style="font-size: 12.14px;">HTML</a> <a href="/tags/JS/" style="font-size: 14.29px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Mac/" style="font-size: 11.43px;">Mac</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/OCR识别/" style="font-size: 10px;">OCR识别</a> <a href="/tags/Office/" style="font-size: 11.43px;">Office</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PDF/" style="font-size: 10.71px;">PDF</a> <a href="/tags/PDF工具/" style="font-size: 10px;">PDF工具</a> <a href="/tags/PPT/" style="font-size: 10.71px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/Redis/" style="font-size: 10.71px;">Redis</a> <a href="/tags/SQL/" style="font-size: 10.71px;">SQL</a> <a href="/tags/Spring/" style="font-size: 17.86px;">Spring</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/WiFi/" style="font-size: 10px;">WiFi</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/iOS/" style="font-size: 11.43px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 16.43px;">mybatis</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/下载/" style="font-size: 13.57px;">下载</a> <a href="/tags/前端/" style="font-size: 12.14px;">前端</a> <a href="/tags/办公/" style="font-size: 13.57px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 10.71px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发工具/" style="font-size: 11.43px;">开发工具</a> <a href="/tags/开发技巧/" style="font-size: 12.14px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.14px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/插件/" style="font-size: 10.71px;">插件</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 15.71px;">效率</a> <a href="/tags/数据库/" style="font-size: 12.86px;">数据库</a> <a href="/tags/文档/" style="font-size: 10.71px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/杂谈/" style="font-size: 10.71px;">杂谈</a> <a href="/tags/框架/" style="font-size: 19.29px;">框架</a> <a href="/tags/检测/" style="font-size: 10.71px;">检测</a> <a href="/tags/注册表/" style="font-size: 10.71px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 12.14px;">激活</a> <a href="/tags/生活/" style="font-size: 14.29px;">生活</a> <a href="/tags/系统必备/" style="font-size: 10px;">系统必备</a> <a href="/tags/终端/" style="font-size: 10.71px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/脚本/" style="font-size: 10.71px;">脚本</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/视频/" style="font-size: 11.43px;">视频</a> <a href="/tags/设计模式/" style="font-size: 17.14px;">设计模式</a> <a href="/tags/词典/" style="font-size: 10px;">词典</a> <a href="/tags/资源/" style="font-size: 18.57px;">资源</a> <a href="/tags/转换/" style="font-size: 10.71px;">转换</a> <a href="/tags/运行库/" style="font-size: 10px;">运行库</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.staticfile.org/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.staticfile.org/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.staticfile.org/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+<script>
+  $(".pingfuADHolder").remove();
+</script>
+</html>

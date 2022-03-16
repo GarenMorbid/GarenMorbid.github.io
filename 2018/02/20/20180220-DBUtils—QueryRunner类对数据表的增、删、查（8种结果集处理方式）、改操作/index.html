@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  <title>DBUtils—QueryRunner类对数据表的增、删、查（8种结果集处理方式）、改操作 | HDQ | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="HDQ,HDQ's Blog">
+  
+  <meta name="description" content="使用 QueryRunner 类,实现对数据表的 insert delete update 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374package com.shu">
+<meta name="keywords" content="Java,数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DBUtils—QueryRunner类对数据表的增、删、查（8种结果集处理方式）、改操作">
+<meta property="og:url" content="https://blog.hdqyf.club/2018/02/20/20180220-DBUtils—QueryRunner类对数据表的增、删、查（8种结果集处理方式）、改操作/index.html">
+<meta property="og:site_name" content="HDQ | Blog">
+<meta property="og:description" content="使用 QueryRunner 类,实现对数据表的 insert delete update 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374package com.shu">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://s1.ax1x.com/2018/02/20/9NCIxI.png">
+<meta property="og:updated_time" content="2018-09-19T07:40:10.325Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DBUtils—QueryRunner类对数据表的增、删、查（8种结果集处理方式）、改操作">
+<meta name="twitter:description" content="使用 QueryRunner 类,实现对数据表的 insert delete update 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374package com.shu">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/02/20/9NCIxI.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/mylive.css">
+  <link rel="stylesheet" href="/css/mySetting.css">
+  <script src="/js/pace.min.js"></script>
+  <script src="/js/mySetting.js"></script>
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-113082369-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?a3fed5fc0a708f5e993575bc1ccaf623";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+  
+
+</head></html>
+<body>
+  <div id="container">
+      <div class="maplebg"></div>
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">HDQ&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        HDQ&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 互联网生活 互联网资源的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="个人网站" target="_blank" href="http://hdqyf.club/">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="GitHub" target="_blank" href="https://github.com/GarenMorbid">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="https://weibo.com/u/5470832383?refer_flag=1005055013_">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Steam" target="_blank" href="https://steamcommunity.com/id/GarenMorbid/">
+                            <i class="fa fa-steam fa-2x"></i></a>
+                    
+                        <a title="Blog&#39;s App Download" target="_blank" href="https://pan.lanzou.com/i10yfxi">
+                            <i class="fa fa-android fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-20180220-DBUtils—QueryRunner类对数据表的增、删、查（8种结果集处理方式）、改操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      DBUtils—QueryRunner类对数据表的增、删、查（8种结果集处理方式）、改操作
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/Java/">Java</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-02-20
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h3 id="使用-QueryRunner-类-实现对数据表的-insert-delete-update"><a href="#使用-QueryRunner-类-实现对数据表的-insert-delete-update" class="headerlink" title="使用 QueryRunner 类,实现对数据表的 insert delete update "></a><font color="#0099ff" size="4" face="微软雅黑">使用 QueryRunner 类,实现对数据表的 insert delete update </font></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shuhuadream.queryrunner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.dbutils.DbUtils;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.dbutils.QueryRunner;</span><br><span class="line"><span class="keyword">import</span> com.shuhuadream.jdbcutil.JDBCUtilConfig;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  使用QueryRunner类,实现对数据表的</span></span><br><span class="line"><span class="comment"> *  insert delete update</span></span><br><span class="line"><span class="comment"> *  调用QueryRunner类的方法 update (Connection con,String sql,Object...param)</span></span><br><span class="line"><span class="comment"> *  Object...param 可变参数,Object类型,SQL语句会出现?占位符</span></span><br><span class="line"><span class="comment"> *  数据库连接对象,自定义的工具类传递</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QueryRunnerDemo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Connection con = JDBCUtilConfig.getConnection();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        <span class="comment">//insert();</span></span><br><span class="line">        update();</span><br><span class="line">        <span class="comment">//delete();</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     *  定义方法,使用QueryRunner类的方法delete将数据表的数据删除</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">()</span><span class="keyword">throws</span> SQLException</span>&#123;  </span><br><span class="line">        <span class="comment">//创建QueryRunner类对象  </span></span><br><span class="line">        QueryRunner qr = <span class="keyword">new</span> QueryRunner();</span><br><span class="line">        <span class="comment">//写删除的SQL语句  </span></span><br><span class="line">        String sql = <span class="string">"DELETE FROM sort WHERE sid=?"</span>;  </span><br><span class="line">        <span class="comment">//调用QueryRunner方法update  </span></span><br><span class="line">        <span class="keyword">int</span> row = qr.update(con, sql, <span class="number">8</span>);  </span><br><span class="line">        System.out.println(row);  </span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         *  判断insert,update,delete执行是否成功</span></span><br><span class="line"><span class="comment">         *  对返回值row判断</span></span><br><span class="line"><span class="comment">         *  if(row&gt;0) 执行成功</span></span><br><span class="line"><span class="comment">         */</span>  </span><br><span class="line">        DbUtils.closeQuietly(con);  </span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     *  定义方法,使用QueryRunner类的方法update将数据表的数据修改</span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">()</span><span class="keyword">throws</span> SQLException</span>&#123;  </span><br><span class="line">        <span class="comment">//创建QueryRunner类对象  </span></span><br><span class="line">        QueryRunner qr = <span class="keyword">new</span> QueryRunner();</span><br><span class="line">        <span class="comment">//写修改数据的SQL语句  </span></span><br><span class="line">        String sql = <span class="string">"UPDATE sort SET sname=?,sprice=?,sdesc=? WHERE sid=?"</span>;  </span><br><span class="line">        <span class="comment">//定义Object数组,存储?中的参数  </span></span><br><span class="line">        Object[] params = &#123;<span class="string">"花卉"</span>,<span class="number">100.88</span>,<span class="string">"情人节玫瑰花"</span>,<span class="number">4</span>&#125;;  </span><br><span class="line">        <span class="comment">//调用QueryRunner方法update  </span></span><br><span class="line">        <span class="keyword">int</span> row = qr.update(con, sql, params);  </span><br><span class="line">        System.out.println(row);  </span><br><span class="line">        DbUtils.closeQuietly(con);  </span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 定义方法,使用QueryRunner类的方法update向数据表中,添加数据</span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">()</span><span class="keyword">throws</span> SQLException</span>&#123;  </span><br><span class="line">        <span class="comment">//创建QueryRunner类对象  </span></span><br><span class="line">        QueryRunner qr = <span class="keyword">new</span> QueryRunner();  </span><br><span class="line">        String sql = <span class="string">"INSERT INTO sort (sname,sprice,sdesc)VALUES(?,?,?)"</span>;  </span><br><span class="line">        <span class="comment">//将三个?占位符的实际参数,写在数组中  </span></span><br><span class="line">        Object[] params = &#123;<span class="string">"体育用品"</span>,<span class="number">289.32</span>,<span class="string">"购买体育用品"</span>&#125;;  </span><br><span class="line">        <span class="comment">//调用QueryRunner类的方法update执行SQL语句  </span></span><br><span class="line">        <span class="keyword">int</span> row = qr.update(con, sql, params);  </span><br><span class="line">        System.out.println(row);  </span><br><span class="line">        DbUtils.closeQuietly(con);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="QueryRunner-数据查询操作，结果集八种处理方法"><a href="#QueryRunner-数据查询操作，结果集八种处理方法" class="headerlink" title="QueryRunner 数据查询操作，结果集八种处理方法"></a><font color="#0099ff" size="4" face="微软雅黑">QueryRunner 数据查询操作，结果集八种处理方法</font></h3><p><img src="https://s1.ax1x.com/2018/02/20/9NCIxI.png" alt></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shuhuadream.queryrunner;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;  </span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;  </span><br><span class="line"><span class="keyword">import</span> java.util.List;  </span><br><span class="line"><span class="keyword">import</span> java.util.Map;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.dbutils.QueryRunner;  </span><br><span class="line"><span class="keyword">import</span> org.apache.commons.dbutils.handlers.ArrayHandler;  </span><br><span class="line"><span class="keyword">import</span> org.apache.commons.dbutils.handlers.ArrayListHandler;  </span><br><span class="line"><span class="keyword">import</span> org.apache.commons.dbutils.handlers.BeanHandler;  </span><br><span class="line"><span class="keyword">import</span> org.apache.commons.dbutils.handlers.BeanListHandler;  </span><br><span class="line"><span class="keyword">import</span> org.apache.commons.dbutils.handlers.ColumnListHandler;  </span><br><span class="line"><span class="keyword">import</span> org.apache.commons.dbutils.handlers.MapHandler;  </span><br><span class="line"><span class="keyword">import</span> org.apache.commons.dbutils.handlers.MapListHandler;  </span><br><span class="line"><span class="keyword">import</span> org.apache.commons.dbutils.handlers.ScalarHandler;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.shuhuadream.domain.Sort;  </span><br><span class="line"><span class="keyword">import</span> com.shuhuadream.jdbcutil.JDBCUtilConfig;  </span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * QueryRunner数据查询操作</span></span><br><span class="line"><span class="comment"> *  调用QueryRunner类方法query(Connection con,String sql,ResultSetHandler r,Object..params)</span></span><br><span class="line"><span class="comment"> *      ResultSetHandler r 结果集的处理方式，传递ResultSetHandler接口实现类</span></span><br><span class="line"><span class="comment"> *      Object...params sql语句的?占位符</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 注意：query方法返回值，返回的是T 泛型，具体返回值类型，跟随结果集处理方式变化</span></span><br><span class="line"><span class="comment"> * */</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QueryRunnerDemo02</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Connection con = JDBCUtilConfig.getConnection();  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> SQLException </span>&#123;  </span><br><span class="line">        <span class="comment">//ArrayHandler();  </span></span><br><span class="line">        <span class="comment">//arrayListHandler();  </span></span><br><span class="line">        <span class="comment">//beanHandler();  </span></span><br><span class="line">        <span class="comment">//beanListHandler();  </span></span><br><span class="line">        <span class="comment">//columnListHandler();  </span></span><br><span class="line">        <span class="comment">//scalarHandler();  </span></span><br><span class="line">        <span class="comment">//mapHandler();  </span></span><br><span class="line">        mapListHandler();  </span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">    <span class="comment">/**  </span></span><br><span class="line"><span class="comment">     * 结果集第一种处理方法，ArrayHandler</span></span><br><span class="line"><span class="comment">     * 将结果第一行存储到对象数组中Object[]</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> SQLException  </span></span><br><span class="line"><span class="comment">     * */</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ArrayHandler</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;  </span><br><span class="line">        QueryRunner qr = <span class="keyword">new</span> QueryRunner();  </span><br><span class="line">        String sql = <span class="string">"SELECT * FROM sort"</span>;  </span><br><span class="line">        <span class="comment">//调用query执行查询，传递连接对象，SQL语句，结果集处理方式的实现类</span></span><br><span class="line">        <span class="comment">//返回对象数组  </span></span><br><span class="line">        Object[] result = qr.query(con, sql,<span class="keyword">new</span> ArrayHandler());  </span><br><span class="line">        <span class="keyword">for</span> (Object obj : result) &#123;  </span><br><span class="line">            System.out.println(obj);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 结果集的第二种处理方法，ArrayListHandler</span></span><br><span class="line"><span class="comment">     * 将结果集的每一行，封装到对象数组中，出现很多对象数组</span></span><br><span class="line"><span class="comment">     * 对象数组存储到List集合</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> SQLException  </span></span><br><span class="line"><span class="comment">     * */</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">arrayListHandler</span><span class="params">()</span> <span class="keyword">throws</span> SQLException</span>&#123;  </span><br><span class="line">        QueryRunner qr = <span class="keyword">new</span> QueryRunner();  </span><br><span class="line">        String sql  = <span class="string">"SELECT * FROM sort"</span>;  </span><br><span class="line">        <span class="comment">//调用query方法，结果集处理的参数上，传递实现类ArrayListHandler  </span></span><br><span class="line">        <span class="comment">//方法返回值 每行是一个数组  </span></span><br><span class="line">        List&lt;Object[]&gt; result = qr.query(con, sql, <span class="keyword">new</span> ArrayListHandler());  </span><br><span class="line">        <span class="comment">//集合的遍历  </span></span><br><span class="line">        <span class="keyword">for</span> (Object[] objs : result) &#123;  </span><br><span class="line">            <span class="keyword">for</span> (Object obj : objs) &#123;  </span><br><span class="line">                System.out.print(obj+<span class="string">"\t"</span>);  </span><br><span class="line">            &#125;  </span><br><span class="line">            System.out.println();  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 结果集的第三种处理方法BeanHandler</span></span><br><span class="line"><span class="comment">     * 将结果集的第一行数据，封装为JavaBean对象</span></span><br><span class="line"><span class="comment">     * 注意：被封装成数据到JavaBean对象，Sort类必须有空参构造</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> SQLException  </span></span><br><span class="line"><span class="comment">     * */</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">beanHandler</span><span class="params">()</span> <span class="keyword">throws</span> SQLException</span>&#123;  </span><br><span class="line">        QueryRunner qr = <span class="keyword">new</span> QueryRunner();  </span><br><span class="line">        String sql = <span class="string">"SELECT * FROM sort"</span>;  </span><br><span class="line">        <span class="comment">//调用方法，传递结果集实现BeanHandler  </span></span><br><span class="line">        <span class="comment">//BeanHandler(Class&lt;T&gt; type)  </span></span><br><span class="line">        Sort s = qr.query(con, sql,<span class="keyword">new</span> BeanHandler&lt;Sort&gt;(Sort.class));  </span><br><span class="line">        System.out.println(s);  </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 结果集第四种处理方法，BeanListHandler</span></span><br><span class="line"><span class="comment">     * 将数据结果集的每一行数据，封装为JavaBean对象</span></span><br><span class="line"><span class="comment">     * 多个JavaBean对象封装到List集合中</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> SQLException  </span></span><br><span class="line"><span class="comment">     * */</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">beanListHandler</span><span class="params">()</span> <span class="keyword">throws</span> SQLException</span>&#123;  </span><br><span class="line">        QueryRunner qr = <span class="keyword">new</span> QueryRunner();  </span><br><span class="line">        String sql = <span class="string">"SELECT * FROM sort"</span>;  </span><br><span class="line">        <span class="comment">//调用方法传递结果集的实现类BeanListHandler  </span></span><br><span class="line">        <span class="comment">//BeanListHandler(Class&lt;T&gt; type)  </span></span><br><span class="line">        List&lt;Sort&gt; list = qr.query(con, sql, <span class="keyword">new</span> BeanListHandler&lt;Sort&gt;(Sort.class));  </span><br><span class="line">        <span class="keyword">for</span> (Sort s : list) &#123;  </span><br><span class="line">            System.out.println(s);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 结果集第五种处理方法，ColumnListHandler</span></span><br><span class="line"><span class="comment">     * 结果集，指定列的数据，存储到List集合中</span></span><br><span class="line"><span class="comment">     * List&lt;Object&gt; 每个列数据类型不同</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> SQLException  </span></span><br><span class="line"><span class="comment">     * */</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">columnListHandler</span><span class="params">()</span> <span class="keyword">throws</span> SQLException</span>&#123;  </span><br><span class="line">        QueryRunner qr = <span class="keyword">new</span> QueryRunner();  </span><br><span class="line">        String sql = <span class="string">"SELECT * FROM sort"</span>;  </span><br><span class="line">        <span class="comment">//调用方法query，传递结果集实现类ColumnListHandler  </span></span><br><span class="line">        <span class="comment">//实现类构造方法，使用字符串的列名  </span></span><br><span class="line">        List&lt;Object&gt; list = qr.query(con, sql, <span class="keyword">new</span> ColumnListHandler&lt;Object&gt;(<span class="string">"sname"</span>));  </span><br><span class="line">        <span class="keyword">for</span> (Object obj : list) &#123;  </span><br><span class="line">            System.out.println(obj);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 结果集第六种处理方法、</span></span><br><span class="line"><span class="comment">     * 对于查询后，只有一个结果</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> SQLException  </span></span><br><span class="line"><span class="comment">     * */</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">scalarHandler</span><span class="params">()</span> <span class="keyword">throws</span> SQLException</span>&#123;  </span><br><span class="line">        QueryRunner qr = <span class="keyword">new</span> QueryRunner();  </span><br><span class="line">        String sql = <span class="string">"SELECT COUNT(*) FROM sort"</span>;  </span><br><span class="line">        <span class="comment">//调用方法query,传递结果集处理类ScalarHandler  </span></span><br><span class="line">        <span class="keyword">long</span> count = qr.query(con,sql,<span class="keyword">new</span> ScalarHandler&lt;Long&gt;());  </span><br><span class="line">        System.out.println(count);  </span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 结果集的第七种处理方式，MapHandler</span></span><br><span class="line"><span class="comment">     * 将结果集第一行数据，封装到Map集合中</span></span><br><span class="line"><span class="comment">     * Map&lt;键，值&gt; 键：列名 值：这列数据</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> SQLException  </span></span><br><span class="line"><span class="comment">     * */</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">mapHandler</span><span class="params">()</span> <span class="keyword">throws</span> SQLException</span>&#123;  </span><br><span class="line">        QueryRunner qr = <span class="keyword">new</span> QueryRunner();  </span><br><span class="line">        String sql = <span class="string">"SELECT * FROM sort"</span>;  </span><br><span class="line">        <span class="comment">//调用方法query，传递结果集实现类MapHandler  </span></span><br><span class="line">        <span class="comment">//返回值：Map集合，Map接口实现类 泛型  </span></span><br><span class="line">        Map&lt;String,Object&gt; map = qr.query(con, sql,<span class="keyword">new</span> MapHandler());  </span><br><span class="line">        <span class="keyword">for</span> (String key : map.keySet()) &#123;  </span><br><span class="line">            System.out.println(key+<span class="string">"..."</span>+map.get(key));  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 结果集第八种处理方法，MapListHandler</span></span><br><span class="line"><span class="comment">     * 将结果集每一行存储到Map集合，键：列名 值：数据</span></span><br><span class="line"><span class="comment">     * Map集合过多，存储到List集合</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> SQLException  </span></span><br><span class="line"><span class="comment">     * */</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">mapListHandler</span><span class="params">()</span> <span class="keyword">throws</span> SQLException</span>&#123;  </span><br><span class="line">        QueryRunner qr = <span class="keyword">new</span> QueryRunner();  </span><br><span class="line">        String sql = <span class="string">"SELECT * FROM sort"</span>;  </span><br><span class="line">        <span class="comment">//调用方法query，传递结果集实现类MapListHander  </span></span><br><span class="line">        <span class="comment">//返回值List集合，存储的是Map集合  </span></span><br><span class="line">        List&lt;Map&lt;String, Object&gt;&gt; list = qr.query(con, sql,<span class="keyword">new</span> MapListHandler());  </span><br><span class="line">        <span class="keyword">for</span> (Map&lt;String, Object&gt; map : list) &#123;  </span><br><span class="line">            <span class="keyword">for</span> (String key : map.keySet()) &#123;  </span><br><span class="line">                System.out.print(key+<span class="string">"..."</span>+map.get(key));  </span><br><span class="line">            &#125;  </span><br><span class="line">            System.out.println();  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年09月19日 15:40</p>
+	<p>原始链接： <a class="post-url" href="/2018/02/20/20180220-DBUtils—QueryRunner类对数据表的增、删、查（8种结果集处理方式）、改操作/" title="DBUtils—QueryRunner类对数据表的增、删、查（8种结果集处理方式）、改操作">https://blog.hdqyf.club/2018/02/20/20180220-DBUtils—QueryRunner类对数据表的增、删、查（8种结果集处理方式）、改操作/</a></p>
+        <footer>
+            <a href="https://blog.hdqyf.club">
+                <img src="/images/logo.png" alt="Garen">
+                Garen
+            </a>
+        </footer>
+    </div>
+</div>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/02/20/20180220-DBUtils—QueryRunner类对数据表的增、删、查（8种结果集处理方式）、改操作/&title=《DBUtils—QueryRunner类对数据表的增、删、查（8种结果集处理方式）、改操作》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/09/19/ie7l0x.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/02/20/20180220-DBUtils—QueryRunner类对数据表的增、删、查（8种结果集处理方式）、改操作/&title=《DBUtils—QueryRunner类对数据表的增、删、查（8种结果集处理方式）、改操作》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+              <i class="fa fa-star"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/02/20/20180220-DBUtils—QueryRunner类对数据表的增、删、查（8种结果集处理方式）、改操作/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《DBUtils—QueryRunner类对数据表的增、删、查（8种结果集处理方式）、改操作》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/02/20/20180220-DBUtils—QueryRunner类对数据表的增、删、查（8种结果集处理方式）、改操作/&via=https://blog.hdqyf.club" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/02/20/20180220-DBUtils—QueryRunner类对数据表的增、删、查（8种结果集处理方式）、改操作/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/02/20/20180220-DBUtils—QueryRunner类对数据表的增、删、查（8种结果集处理方式）、改操作/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Java/" class="color5">Java</a>
+      
+    <a href="/tags/数据库/" class="color4">数据库</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用-QueryRunner-类-实现对数据表的-insert-delete-update"><span class="post-toc-text">使用 QueryRunner 类,实现对数据表的 insert delete update </span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#QueryRunner-数据查询操作，结果集八种处理方法"><span class="post-toc-text">QueryRunner 数据查询操作，结果集八种处理方法</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/2018/02/24/20180224-HTML小技巧—好玩的特效/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          HTML小技巧—好玩的特效
+        
+      </span>
+    </a>
+  
+  
+    <a href="/2018/02/19/20180219-Linux 服务器综合测速脚本ZBench/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Linux 服务器综合测速脚本 ZBench</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <span id="runtime_span"></span>
+            <br>
+            <p>
+                Powered by <a href="#" target="_blank">HDQ</a> Theme <a href="#" target="_blank">Garen</a> &copy;
+                2022
+                    Garen<br>
+            </p>
+        </div>
+    </div>
+</footer>
+<script>
+    function show_runtime() {
+            window.setTimeout("show_runtime()", 1000);
+            X = new Date("11/25/2017 05:20:00");
+            Y = new Date(); T = (Y.getTime() - X.getTime()); M = 24 * 60 * 60 * 1000;
+            a = T / M;
+            A = Math.floor(a);
+            b = (a - A) * 24;
+            B = Math.floor(b);
+            c = (b - B) * 60;
+            C = Math.floor((b - B) * 60);
+            D = Math.floor((c - C) * 60);
+            runtime_span.innerHTML = "本站勉强运行: " + A + "天" + B + "小时" + C + "分" + D + "秒";
+        }
+
+        show_runtime();
+</script>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-user"></span>
+    <span class="fui-photo"></span>
+    <span class="fui-info-circle"></span>
+    <span class="fui-cross"></span>
+</div>
+</div>
+<script src="/js/mylive-tips.js"></script>
+<script src="/js/mylive.js"></script>
+<script type="text/javascript">initModel(window.location.protocol+'//'+window.location.hostname+'/'+'json/')</script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://blog.hdqyf.club",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/3DS-MAX/">3DS MAX</a><a class="category-link" href="/categories/CAD/">CAD</a><a class="category-link" href="/categories/CPU/">CPU</a><a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/Docker/">Docker</a><a class="category-link" href="/categories/GPU/">GPU</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/Java/">Java</a><a class="category-link" href="/categories/Linux/">Linux</a><a class="category-link" href="/categories/MVC/">MVC</a><a class="category-link" href="/categories/Mac/">Mac</a><a class="category-link" href="/categories/MongoDB/">MongoDB</a><a class="category-link" href="/categories/MySQL/">MySQL</a><a class="category-link" href="/categories/OCR识别/">OCR识别</a><a class="category-link" href="/categories/Office/">Office</a><a class="category-link" href="/categories/Oracle/">Oracle</a><a class="category-link" href="/categories/PDF/">PDF</a><a class="category-link" href="/categories/PDF工具/">PDF工具</a><a class="category-link" href="/categories/Redis/">Redis</a><a class="category-link" href="/categories/SQL/">SQL</a><a class="category-link" href="/categories/Spring/">Spring</a><a class="category-link" href="/categories/Steam/">Steam</a><a class="category-link" href="/categories/WiFi/">WiFi</a><a class="category-link" href="/categories/hibernate/">hibernate</a><a class="category-link" href="/categories/iOS/">iOS</a><a class="category-link" href="/categories/mybatis/">mybatis</a><a class="category-link" href="/categories/node/">node</a><a class="category-link" href="/categories/下载/">下载</a><a class="category-link" href="/categories/卸载/">卸载</a><a class="category-link" href="/categories/字体/">字体</a><a class="category-link" href="/categories/常识/">常识</a><a class="category-link" href="/categories/开发工具/">开发工具</a><a class="category-link" href="/categories/感悟/">感悟</a><a class="category-link" href="/categories/截屏/">截屏</a><a class="category-link" href="/categories/播放器/">播放器</a><a class="category-link" href="/categories/效率/">效率</a><a class="category-link" href="/categories/文档/">文档</a><a class="category-link" href="/categories/杂谈/">杂谈</a><a class="category-link" href="/categories/注册表/">注册表</a><a class="category-link" href="/categories/激活/">激活</a><a class="category-link" href="/categories/生活/">生活</a><a class="category-link" href="/categories/编辑器/">编辑器</a><a class="category-link" href="/categories/翻译/">翻译</a><a class="category-link" href="/categories/虚拟机/">虚拟机</a><a class="category-link" href="/categories/设计模式/">设计模式</a><a class="category-link" href="/categories/资源/">资源</a><a class="category-link" href="/categories/转换/">转换</a><a class="category-link" href="/categories/运行库/">运行库</a><a class="category-link" href="/categories/音乐/">音乐</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 10.71px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/CSS/" style="font-size: 10.71px;">CSS</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/HTML/" style="font-size: 12.14px;">HTML</a> <a href="/tags/JS/" style="font-size: 14.29px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Mac/" style="font-size: 11.43px;">Mac</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/OCR识别/" style="font-size: 10px;">OCR识别</a> <a href="/tags/Office/" style="font-size: 11.43px;">Office</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PDF/" style="font-size: 10.71px;">PDF</a> <a href="/tags/PDF工具/" style="font-size: 10px;">PDF工具</a> <a href="/tags/PPT/" style="font-size: 10.71px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/Redis/" style="font-size: 10.71px;">Redis</a> <a href="/tags/SQL/" style="font-size: 10.71px;">SQL</a> <a href="/tags/Spring/" style="font-size: 17.86px;">Spring</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/WiFi/" style="font-size: 10px;">WiFi</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/iOS/" style="font-size: 11.43px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 16.43px;">mybatis</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/下载/" style="font-size: 13.57px;">下载</a> <a href="/tags/前端/" style="font-size: 12.14px;">前端</a> <a href="/tags/办公/" style="font-size: 13.57px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 10.71px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发工具/" style="font-size: 11.43px;">开发工具</a> <a href="/tags/开发技巧/" style="font-size: 12.14px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.14px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/插件/" style="font-size: 10.71px;">插件</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 15.71px;">效率</a> <a href="/tags/数据库/" style="font-size: 12.86px;">数据库</a> <a href="/tags/文档/" style="font-size: 10.71px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/杂谈/" style="font-size: 10.71px;">杂谈</a> <a href="/tags/框架/" style="font-size: 19.29px;">框架</a> <a href="/tags/检测/" style="font-size: 10.71px;">检测</a> <a href="/tags/注册表/" style="font-size: 10.71px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 12.14px;">激活</a> <a href="/tags/生活/" style="font-size: 14.29px;">生活</a> <a href="/tags/系统必备/" style="font-size: 10px;">系统必备</a> <a href="/tags/终端/" style="font-size: 10.71px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/脚本/" style="font-size: 10.71px;">脚本</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/视频/" style="font-size: 11.43px;">视频</a> <a href="/tags/设计模式/" style="font-size: 17.14px;">设计模式</a> <a href="/tags/词典/" style="font-size: 10px;">词典</a> <a href="/tags/资源/" style="font-size: 18.57px;">资源</a> <a href="/tags/转换/" style="font-size: 10.71px;">转换</a> <a href="/tags/运行库/" style="font-size: 10px;">运行库</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 10.71px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/CSS/" style="font-size: 10.71px;">CSS</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/HTML/" style="font-size: 12.14px;">HTML</a> <a href="/tags/JS/" style="font-size: 14.29px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Mac/" style="font-size: 11.43px;">Mac</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/OCR识别/" style="font-size: 10px;">OCR识别</a> <a href="/tags/Office/" style="font-size: 11.43px;">Office</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PDF/" style="font-size: 10.71px;">PDF</a> <a href="/tags/PDF工具/" style="font-size: 10px;">PDF工具</a> <a href="/tags/PPT/" style="font-size: 10.71px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/Redis/" style="font-size: 10.71px;">Redis</a> <a href="/tags/SQL/" style="font-size: 10.71px;">SQL</a> <a href="/tags/Spring/" style="font-size: 17.86px;">Spring</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/WiFi/" style="font-size: 10px;">WiFi</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/iOS/" style="font-size: 11.43px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 16.43px;">mybatis</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/下载/" style="font-size: 13.57px;">下载</a> <a href="/tags/前端/" style="font-size: 12.14px;">前端</a> <a href="/tags/办公/" style="font-size: 13.57px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 10.71px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发工具/" style="font-size: 11.43px;">开发工具</a> <a href="/tags/开发技巧/" style="font-size: 12.14px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.14px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/插件/" style="font-size: 10.71px;">插件</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 15.71px;">效率</a> <a href="/tags/数据库/" style="font-size: 12.86px;">数据库</a> <a href="/tags/文档/" style="font-size: 10.71px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/杂谈/" style="font-size: 10.71px;">杂谈</a> <a href="/tags/框架/" style="font-size: 19.29px;">框架</a> <a href="/tags/检测/" style="font-size: 10.71px;">检测</a> <a href="/tags/注册表/" style="font-size: 10.71px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 12.14px;">激活</a> <a href="/tags/生活/" style="font-size: 14.29px;">生活</a> <a href="/tags/系统必备/" style="font-size: 10px;">系统必备</a> <a href="/tags/终端/" style="font-size: 10.71px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/脚本/" style="font-size: 10.71px;">脚本</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/视频/" style="font-size: 11.43px;">视频</a> <a href="/tags/设计模式/" style="font-size: 17.14px;">设计模式</a> <a href="/tags/词典/" style="font-size: 10px;">词典</a> <a href="/tags/资源/" style="font-size: 18.57px;">资源</a> <a href="/tags/转换/" style="font-size: 10.71px;">转换</a> <a href="/tags/运行库/" style="font-size: 10px;">运行库</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.staticfile.org/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.staticfile.org/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.staticfile.org/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+<script>
+  $(".pingfuADHolder").remove();
+</script>
+</html>
