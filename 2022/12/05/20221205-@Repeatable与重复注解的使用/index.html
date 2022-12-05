@@ -4,27 +4,25 @@
   <meta charset="utf-8">
   <meta name="referrer" content="no-referrer-when-downgrade">
   
-  <title>VMware Pro最新官方正式版及激活密钥 | HDQ | Blog</title>
+  <title>@Repeatable与重复注解的使用 | HDQ | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HDQ,HDQ's Blog">
   
-  <meta name="description" content="前言&amp;emsp;&amp;emsp;VMware是功能最强大的虚拟机软件，用户可以在虚拟机同时运行各种操作系统，进行开发、测试、演示和部署软件，虚拟机中复制服务器、台式机和平板环境，每个虚拟机可分配多个处理器核心、主内存和显存。VMware Workstation™14 Pro延续了VMware的传统，即提供专业技术人员每天在使用虚拟机时所依赖的领先功能和性能。借助对最新版本的Windows和客户机操作系">
-<meta name="keywords" content="资源,虚拟机">
+  <meta name="description" content="前言@Repeatable是JDK1.8出现的元注解，在早前的版本中声明的注解Annotation是不能够重复作用在同一个类或方法上的，而有些时候我们的开发偏偏需要这样的使用诉求和场景。 使用单一注解的使用方式如下： 1234567@Target(&amp;#123;ElementType.METHOD, ElementType.TYPE&amp;#125;)@Retention(RetentionPolicy.">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VMware Pro最新官方正式版及激活密钥">
-<meta property="og:url" content="https://blog.hdqyf.club/2018/05/22/20180522-VMware Pro最新官方正式版及激活密钥/index.html">
+<meta property="og:title" content="@Repeatable与重复注解的使用">
+<meta property="og:url" content="https://blog.hdqyf.club/2022/12/05/20221205-@Repeatable与重复注解的使用/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
-<meta property="og:description" content="前言&amp;emsp;&amp;emsp;VMware是功能最强大的虚拟机软件，用户可以在虚拟机同时运行各种操作系统，进行开发、测试、演示和部署软件，虚拟机中复制服务器、台式机和平板环境，每个虚拟机可分配多个处理器核心、主内存和显存。VMware Workstation™14 Pro延续了VMware的传统，即提供专业技术人员每天在使用虚拟机时所依赖的领先功能和性能。借助对最新版本的Windows和客户机操作系">
+<meta property="og:description" content="前言@Repeatable是JDK1.8出现的元注解，在早前的版本中声明的注解Annotation是不能够重复作用在同一个类或方法上的，而有些时候我们的开发偏偏需要这样的使用诉求和场景。 使用单一注解的使用方式如下： 1234567@Target(&amp;#123;ElementType.METHOD, ElementType.TYPE&amp;#125;)@Retention(RetentionPolicy.">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/22/CReuhF.jpg">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/22/CReMp4.jpg">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/22/CRentU.jpg">
-<meta property="og:updated_time" content="2018-09-19T08:04:52.823Z">
+<meta property="og:image" content="https://s2.loli.net/2022/12/05/F24eEOJptXUgcL5.png">
+<meta property="og:updated_time" content="2022-12-05T01:33:00.686Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="VMware Pro最新官方正式版及激活密钥">
-<meta name="twitter:description" content="前言&amp;emsp;&amp;emsp;VMware是功能最强大的虚拟机软件，用户可以在虚拟机同时运行各种操作系统，进行开发、测试、演示和部署软件，虚拟机中复制服务器、台式机和平板环境，每个虚拟机可分配多个处理器核心、主内存和显存。VMware Workstation™14 Pro延续了VMware的传统，即提供专业技术人员每天在使用虚拟机时所依赖的领先功能和性能。借助对最新版本的Windows和客户机操作系">
-<meta name="twitter:image" content="https://s1.ax1x.com/2018/05/22/CReuhF.jpg">
+<meta name="twitter:title" content="@Repeatable与重复注解的使用">
+<meta name="twitter:description" content="前言@Repeatable是JDK1.8出现的元注解，在早前的版本中声明的注解Annotation是不能够重复作用在同一个类或方法上的，而有些时候我们的开发偏偏需要这样的使用诉求和场景。 使用单一注解的使用方式如下： 1234567@Target(&amp;#123;ElementType.METHOD, ElementType.TYPE&amp;#125;)@Retention(RetentionPolicy.">
+<meta name="twitter:image" content="https://s2.loli.net/2022/12/05/F24eEOJptXUgcL5.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -145,14 +143,14 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-20180522-VMware Pro最新官方正式版及激活密钥" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-20221205-@Repeatable与重复注解的使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      VMware Pro最新官方正式版及激活密钥
+      @Repeatable与重复注解的使用
     </h1>
     <div class="post-title-bar">
       <ul>
@@ -160,12 +158,12 @@ ga('send', 'pageview');
               <li>
                   <i class="fa fa-book"></i>
                   
-                      <a href="/categories/虚拟机/">虚拟机</a>
+                      <a href="/categories/Java/">Java</a>
                   
               </li>
           
         <li>
-          <i class="fa fa-calendar"></i>  2018-05-22
+          <i class="fa fa-calendar"></i>  2022-12-05
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -181,37 +179,80 @@ ga('send', 'pageview');
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">&emsp;&emsp;<strong>VMware</strong>是功能最强大的虚拟机软件，用户可以在虚拟机同时运行各种操作系统，进行开发、测试、演示和部署软件，虚拟机中复制服务器、台式机和平板环境，每个虚拟机可分配多个处理器核心、主内存和显存。VMware Workstation™14 Pro延续了VMware的传统，即提供专业技术人员每天在使用虚拟机时所依赖的领先功能和性能。借助对最新版本的Windows和客户机操作系统版本、最新的处理器和硬件的支持以及连接到VMware vSphere和vCloud Air的能力，让它成为提高工作效率、节省时间和征服云计算的完美工具。<br>&emsp;&emsp;热门虚拟机软件<strong>VMware Workstation Pro</strong>现已更新至14.1.2，14.0主要更新了诸多客户机操作系统版本，此外全面兼容Wind10创建者更新。12.0之后属于大型更新，专门为Win10的安装和使用做了优化，支持DX10、4K高分辨率显示屏、OpenGL 3.3、7.1声道及各种新硬件和新技术。下面附上激活密钥及注册机！</font>
-
-<p><img src="https://s1.ax1x.com/2018/05/22/CReuhF.jpg" alt><br><br><img src="https://s1.ax1x.com/2018/05/22/CReMp4.jpg" alt><br><br><img src="https://s1.ax1x.com/2018/05/22/CRentU.jpg" alt><br></p>
-<h3 id="新版本变化"><a href="#新版本变化" class="headerlink" title="新版本变化"></a><font color="#0099ff" size="4" face="黑体">新版本变化</font></h3><p>VMware Workstation 14 新功能特性</p>
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>@Repeatable是JDK1.8出现的元注解，在早前的版本中声明的注解Annotation是不能够重复作用在同一个类或方法上的，而有些时候我们的开发偏偏需要这样的使用诉求和场景。</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>单一注解的使用方式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(&#123;ElementType.METHOD, ElementType.TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Token &#123;</span><br><span class="line">    <span class="function">String <span class="title">optype</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line">    String[] field() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>引入<strong>@Repeatable</strong>注解后，改造如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(&#123;ElementType.METHOD, ElementType.TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Repeatable</span>(Tokens.class) <span class="comment">// 这里作用在业务注解上</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Token &#123;</span><br><span class="line">    <span class="function">String <span class="title">optype</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line">    String[] field() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>引入了@Tokens返回@Token数组以支持@Token多次注解重复使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(&#123;ElementType.METHOD, ElementType.TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Tokens &#123;</span><br><span class="line">    Token[] value();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="AOP切面应用"><a href="#AOP切面应用" class="headerlink" title="AOP切面应用"></a>AOP切面应用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TokenAspect</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Pointcut</span>(<span class="string">"@annotation(club.hdqyf.springboot.customannotation.annotation.Token)"</span> </span><br><span class="line">              + <span class="string">" || @annotation(club.hdqyf.springboot.customannotation.annotation.Tokens)"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">annotationPointcut</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@AfterReturning</span>(pointcut = <span class="string">"annotationPointcut()"</span>, returning = <span class="string">"rvt"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doAfterReturning</span><span class="params">(JoinPoint joinPoint, Object rvt)</span> <span class="keyword">throws</span> InvocationTargetException, IllegalAccessException </span>&#123;</span><br><span class="line">        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();</span><br><span class="line">        Token[] tokens = methodSignature.getMethod().getAnnotationsByType(Token.class);</span><br><span class="line">        <span class="keyword">for</span> (Token declaredAnnotation : tokens) &#123;</span><br><span class="line">            <span class="comment">// 获取注解上的参数</span></span><br><span class="line">            String[] s = declaredAnnotation.field();</span><br><span class="line">            String optype = declaredAnnotation.optype();</span><br><span class="line">            <span class="comment">// 对应业务...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span>(<span class="string">"/"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TokenController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Token</span>(optype = <span class="string">"html"</span>, field = &#123;<span class="string">"content"</span>&#125;)</span><br><span class="line">    <span class="meta">@Token</span>(optype = <span class="string">"text"</span>, field = &#123;<span class="string">"text"</span>&#125;)</span><br><span class="line">    <span class="meta">@GetMapping</span>(value = <span class="string">"checkToken"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TokenVo <span class="title">checkToken</span><span class="params">(@RequestParam String token)</span> </span>&#123;</span><br><span class="line">        TokenVo result = <span class="keyword">new</span> TokenVo();</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="使用总结"><a href="#使用总结" class="headerlink" title="使用总结"></a>使用总结</h3><table>
+<thead>
+<tr>
+<th>拦截注解</th>
+<th>使用注解个数</th>
+<th>getAnnotation</th>
+<th>getAnnotationsByType</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@Aop</td>
+<td>单个</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>@Aop</td>
+<td>多个</td>
+<td>×</td>
+<td>×</td>
+</tr>
+<tr>
+<td>@Aops</td>
+<td>单个</td>
+<td>×</td>
+<td>×</td>
+</tr>
+<tr>
+<td>@Aops</td>
+<td>多个</td>
+<td>×</td>
+<td>√</td>
+</tr>
+<tr>
+<td>@Aop + @Aops</td>
+<td>单个</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>@Aop + @Aops</td>
+<td>多个</td>
+<td>×</td>
+<td>√</td>
+</tr>
+</tbody>
+</table>
 <ul>
-<li><p>更新的操作系统支持：我们将继续支持最新的平台和操作系统功能特性，并且添加了对 Windows 10 创意者更新、基于客户机的 VBS、UEFI 安全启动、Ubuntu 17.04 和 Fedora 26 的支持。</p>
+<li><p>使用的时候，为了支持单个和多个的可扩展性，@Around配置同时拦截@Aop和@Aops，通过getAnnotationsByType获取注解数组来获取注解对象进行逻辑操作</p>
 </li>
-<li><p>新的网络连接控制：Workstation 14 提供了许多改进的网络连接功能。现在，您可以在客户机虚拟网卡上使用软件控制模拟延迟和丢包，并重命名虚拟网络以改善组织结构。</p>
+<li><p>通过getAnnotationsByType获取到的 Annotation[] 注解数组也是按照方法的存放顺序由上到下存储的，是有顺序性的，比如按照@Aop(“a”)、@Aop(“c”)、@Aop(“b”)进行配置，则拿到a、c、b的Annotation对象</p>
 </li>
-<li><p>改进的 vSphere 支持和集成：通过改进的 OVA 支持快速测试 vSphere，该支持使您能够轻松测试 vCenter Server Appliance 以快速完成实验室部署。</p>
-</li>
-<li><p>其他功能特性 通过我们的最新发布，我们在不断提高行业标准。我们修复了错误，添加了便捷的功能特性，实现了自动清理虚拟机磁盘空间，更新到了适用于 Linux、基于 GTK+ 3 的新 UI，并添加了对远程 ESXi 主机的更多控制等等。</p>
-</li>
+<li>业务方法被多个相同注解使用，只在一个Aspect切面中使用一次，也就是说Service方法执行一次，Aspect只拦截一次，不会因为多个注解而拦截多次，这是和不同注解作用于一个方法不同</li>
 </ul>
-<ol>
-<li>完全兼容Win10创建者更新</li>
-<li>更新客户机操作系统版本支持<br> Ubuntu 17.04<br> Fedora 26<br> CentOS 7.4<br> RHEL 7.4<br> Debian 9.1<br> Oracle Linux 7.4<br> SLE 12 SP3<br> OpenSUSE 42.3</li>
-</ol>
-<p>更多详情见链接</p>
-<p> 👉 <a href="https://docs.vmware.com/en/VMware-Workstation-Pro/14/rn/workstation-1412-release-notes.html" target="_blank" rel="noopener">官方版本查看链接</a></p>
-<h3 id="激活秘钥"><a href="#激活秘钥" class="headerlink" title="激活秘钥"></a><font color="#0099ff" size="4" face="黑体">激活秘钥</font></h3><p>VMware 2017 v14.x 永久许可证激活密钥<br><strong>FF31K-AHZD1-H8ETZ-8WWEZ-WUUVA</strong><br><strong>CV7T2-6WY5Q-48EWP-ZXY7X-QGUWD</strong></p>
-<h3 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a><font color="#0099ff" size="4" face="黑体">下载地址</font></h3><p><a href="https://pan.baidu.com/s/1j7ntWilX5DkUQXJOoX12Xg" target="_blank" rel="noopener">百度云盘下载 密码：yhx9</a></p>
-<p><strong>ps:如果你还满意的话，请留下你宝贵的评论或者投喂我喔~</strong></p>
+<p><img src="https://s2.loli.net/2022/12/05/F24eEOJptXUgcL5.png" alt="img"></p>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
 <ul>
 <li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
 </ul>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年09月19日 16:04</p>
-	<p>原始链接： <a class="post-url" href="/2018/05/22/20180522-VMware Pro最新官方正式版及激活密钥/" title="VMware Pro最新官方正式版及激活密钥">https://blog.hdqyf.club/2018/05/22/20180522-VMware Pro最新官方正式版及激活密钥/</a></p>
+        <p>最后更新： 2022年12月05日 09:33</p>
+	<p>原始链接： <a class="post-url" href="/2022/12/05/20221205-@Repeatable与重复注解的使用/" title="@Repeatable与重复注解的使用">https://blog.hdqyf.club/2022/12/05/20221205-@Repeatable与重复注解的使用/</a></p>
         <footer>
             <a href="https://blog.hdqyf.club">
                 <img src="/images/logo.png" alt="Garen">
@@ -285,7 +326,7 @@ ga('send', 'pageview');
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/05/22/20180522-VMware Pro最新官方正式版及激活密钥/&title=《VMware Pro最新官方正式版及激活密钥》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/09/19/iebPoV.jpg" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2022/12/05/20221205-@Repeatable与重复注解的使用/&title=《@Repeatable与重复注解的使用》 — HDQ | Blog&pic=https://s2.loli.net/2022/07/29/1DnC4wWiHuNUpgO.jpg" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -295,22 +336,22 @@ ga('send', 'pageview');
             </a>
           </li>
           <li>
-            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/05/22/20180522-VMware Pro最新官方正式版及激活密钥/&title=《VMware Pro最新官方正式版及激活密钥》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2022/12/05/20221205-@Repeatable与重复注解的使用/&title=《@Repeatable与重复注解的使用》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
               <i class="fa fa-star"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/05/22/20180522-VMware Pro最新官方正式版及激活密钥/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2022/12/05/20221205-@Repeatable与重复注解的使用/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《VMware Pro最新官方正式版及激活密钥》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/05/22/20180522-VMware Pro最新官方正式版及激活密钥/&via=https://blog.hdqyf.club" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《@Repeatable与重复注解的使用》 — HDQ | Blog&url=https://blog.hdqyf.club/2022/12/05/20221205-@Repeatable与重复注解的使用/&via=https://blog.hdqyf.club" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/05/22/20180522-VMware Pro最新官方正式版及激活密钥/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2022/12/05/20221205-@Repeatable与重复注解的使用/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -320,7 +361,7 @@ ga('send', 'pageview');
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/05/22/20180522-VMware Pro最新官方正式版及激活密钥/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2022/12/05/20221205-@Repeatable与重复注解的使用/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -332,9 +373,7 @@ ga('send', 'pageview');
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/资源/" class="color3">资源</a>
-      
-    <a href="/tags/虚拟机/" class="color4">虚拟机</a>
+    <a href="/tags/Java/" class="color5">Java</a>
       
   </li>
 
@@ -347,26 +386,16 @@ ga('send', 'pageview');
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#新版本变化"><span class="post-toc-text">新版本变化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#激活秘钥"><span class="post-toc-text">激活秘钥</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#下载地址"><span class="post-toc-text">下载地址</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用"><span class="post-toc-text">使用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#AOP切面应用"><span class="post-toc-text">AOP切面应用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试方法"><span class="post-toc-text">测试方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用总结"><span class="post-toc-text">使用总结</span></a></li></ol>
         </nav>
     </aside>
     
 
 <nav id="article-nav">
   
-    <a href="/2018/05/23/20180523-Weekly Diary—Java中int 和 Integer 的区别/" id="article-nav-newer" class="article-nav-link-wrap">
-
-      <span class="article-nav-title">
-        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
-        
-          Weekly Diary—Java中int 和 Integer 的区别
-        
-      </span>
-    </a>
   
-  
-    <a href="/2018/05/21/20180521-Linux 常用命令—screen 命令详解/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">Linux 常用命令—screen 命令详解</span>
+    <a href="/2022/07/29/20220729-Java 8 已普及使用，今天就来聊聊Calendar替代品/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Java 8 已普及使用，今天就来聊聊Calendar替代品</span>
       <i class="fa fa-hand-o-right" aria-hidden="true"></i>
     </a>
   
