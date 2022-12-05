@@ -4,27 +4,25 @@
   <meta charset="utf-8">
   <meta name="referrer" content="no-referrer-when-downgrade">
   
-  <title>SSM集成应用—Spring入门及案例 | HDQ | Blog</title>
+  <title>Java 8 多重注解的使用 | HDQ | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HDQ,HDQ's Blog">
   
-  <meta name="description" content="前言Spring是一个开源框架，它由Rod Johnson创建。它是为了解决企业应用开发的复杂性而创建的。Spring使用基本的JavaBean来完成以前只可能由EJB完成的事情。然而，Spring的用途不仅限于服务器端的开发。从简单性、可测试性和松耦合的角度而言，任何Java应用都可以从Spring中受益。  理解什么是Spring？ Spring是一个框架 Spring是一个容器框架 用于管理">
-<meta name="keywords" content="Java,框架,Spring">
+  <meta name="description" content="前言@Repeatable是JDK1.8出现的元注解，在早前的版本中声明的注解Annotation是不能够重复作用在同一个类或方法上的，而有些时候我们的开发偏偏需要这样的使用诉求和场景。 使用单一注解的使用方式如下： 1234567@Target(&amp;#123;ElementType.METHOD, ElementType.TYPE&amp;#125;)@Retention(RetentionPolicy.">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SSM集成应用—Spring入门及案例">
-<meta property="og:url" content="https://blog.hdqyf.club/2018/04/08/20180408-SSM集成应用—Spring入门及案例/index.html">
+<meta property="og:title" content="Java 8 多重注解的使用">
+<meta property="og:url" content="https://blog.hdqyf.club/2022/12/05/20221205-Java 8 多重注解的使用/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
-<meta property="og:description" content="前言Spring是一个开源框架，它由Rod Johnson创建。它是为了解决企业应用开发的复杂性而创建的。Spring使用基本的JavaBean来完成以前只可能由EJB完成的事情。然而，Spring的用途不仅限于服务器端的开发。从简单性、可测试性和松耦合的角度而言，任何Java应用都可以从Spring中受益。  理解什么是Spring？ Spring是一个框架 Spring是一个容器框架 用于管理">
+<meta property="og:description" content="前言@Repeatable是JDK1.8出现的元注解，在早前的版本中声明的注解Annotation是不能够重复作用在同一个类或方法上的，而有些时候我们的开发偏偏需要这样的使用诉求和场景。 使用单一注解的使用方式如下： 1234567@Target(&amp;#123;ElementType.METHOD, ElementType.TYPE&amp;#125;)@Retention(RetentionPolicy.">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://s1.ax1x.com/2018/04/08/CPjIjU.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/04/08/CPjTuF.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/04/08/CPj5cT.png">
-<meta property="og:updated_time" content="2018-09-19T07:54:30.706Z">
+<meta property="og:image" content="https://s2.loli.net/2022/12/05/F24eEOJptXUgcL5.png">
+<meta property="og:updated_time" content="2022-12-05T01:41:29.709Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SSM集成应用—Spring入门及案例">
-<meta name="twitter:description" content="前言Spring是一个开源框架，它由Rod Johnson创建。它是为了解决企业应用开发的复杂性而创建的。Spring使用基本的JavaBean来完成以前只可能由EJB完成的事情。然而，Spring的用途不仅限于服务器端的开发。从简单性、可测试性和松耦合的角度而言，任何Java应用都可以从Spring中受益。  理解什么是Spring？ Spring是一个框架 Spring是一个容器框架 用于管理">
-<meta name="twitter:image" content="https://s1.ax1x.com/2018/04/08/CPjIjU.png">
+<meta name="twitter:title" content="Java 8 多重注解的使用">
+<meta name="twitter:description" content="前言@Repeatable是JDK1.8出现的元注解，在早前的版本中声明的注解Annotation是不能够重复作用在同一个类或方法上的，而有些时候我们的开发偏偏需要这样的使用诉求和场景。 使用单一注解的使用方式如下： 1234567@Target(&amp;#123;ElementType.METHOD, ElementType.TYPE&amp;#125;)@Retention(RetentionPolicy.">
+<meta name="twitter:image" content="https://s2.loli.net/2022/12/05/F24eEOJptXUgcL5.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -145,14 +143,14 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-20180408-SSM集成应用—Spring入门及案例" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-20221205-Java 8 多重注解的使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      SSM集成应用—Spring入门及案例
+      Java 8 多重注解的使用
     </h1>
     <div class="post-title-bar">
       <ul>
@@ -160,12 +158,12 @@ ga('send', 'pageview');
               <li>
                   <i class="fa fa-book"></i>
                   
-                      <a href="/categories/Spring/">Spring</a>
+                      <a href="/categories/Java/">Java</a>
                   
               </li>
           
         <li>
-          <i class="fa fa-calendar"></i>  2018-04-08
+          <i class="fa fa-calendar"></i>  2022-12-05
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -181,45 +179,71 @@ ga('send', 'pageview');
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><font size="3" face="微软雅黑" style="line-height:2;"><strong>Spring是一个开源框架，它由Rod Johnson创建。它是为了解决企业应用开发的复杂性而创建的。Spring使用基本的JavaBean来完成以前只可能由EJB完成的事情。然而，Spring的用途不仅限于服务器端的开发。从简单性、可测试性和松耦合的角度而言，任何Java应用都可以从Spring中受益。</strong></font>
-
-<h3 id="理解什么是Spring？"><a href="#理解什么是Spring？" class="headerlink" title="理解什么是Spring？"></a><font color="#0099ff" size="4" face="黑体">理解什么是Spring？</font></h3><ul>
-<li>Spring是一个框架</li>
-<li>Spring是一个容器框架</li>
-<li>用于管理bean，并维护bean之间的关系</li>
-</ul>
-<h3 id="Spring的核心机制"><a href="#Spring的核心机制" class="headerlink" title="Spring的核心机制"></a><font color="#0099ff" size="4" face="黑体">Spring的核心机制</font></h3><ul>
-<li>Bean：可以是java中任何对象，可以使Javabean/service/servlet/dao，Spring就是通过管理每一层的bean，来实现管理整个项目<ul>
-<li>管理bean的实例化，对象的诞生</li>
-<li>管理对象的关系（类中的对象属性）</li>
-</ul>
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>@Repeatable是JDK1.8出现的元注解，在早前的版本中声明的注解Annotation是不能够重复作用在同一个类或方法上的，而有些时候我们的开发偏偏需要这样的使用诉求和场景。</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>单一注解的使用方式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(&#123;ElementType.METHOD, ElementType.TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Token &#123;</span><br><span class="line">    <span class="function">String <span class="title">optype</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line">    String[] field() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>引入<strong>@Repeatable</strong>注解后，改造如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(&#123;ElementType.METHOD, ElementType.TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Repeatable</span>(Tokens.class) <span class="comment">// 这里作用在业务注解上</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Token &#123;</span><br><span class="line">    <span class="function">String <span class="title">optype</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line">    String[] field() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>引入了@Tokens返回@Token数组以支持@Token多次注解重复使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(&#123;ElementType.METHOD, ElementType.TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Tokens &#123;</span><br><span class="line">    Token[] value();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="AOP切面应用"><a href="#AOP切面应用" class="headerlink" title="AOP切面应用"></a>AOP切面应用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TokenAspect</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Pointcut</span>(<span class="string">"@annotation(club.hdqyf.springboot.customannotation.annotation.Token)"</span> </span><br><span class="line">              + <span class="string">" || @annotation(club.hdqyf.springboot.customannotation.annotation.Tokens)"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">annotationPointcut</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@AfterReturning</span>(pointcut = <span class="string">"annotationPointcut()"</span>, returning = <span class="string">"rvt"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doAfterReturning</span><span class="params">(JoinPoint joinPoint, Object rvt)</span> <span class="keyword">throws</span> InvocationTargetException, IllegalAccessException </span>&#123;</span><br><span class="line">        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();</span><br><span class="line">        Token[] tokens = methodSignature.getMethod().getAnnotationsByType(Token.class);</span><br><span class="line">        <span class="keyword">for</span> (Token declaredAnnotation : tokens) &#123;</span><br><span class="line">            <span class="comment">// 获取注解上的参数</span></span><br><span class="line">            String[] s = declaredAnnotation.field();</span><br><span class="line">            String optype = declaredAnnotation.optype();</span><br><span class="line">            <span class="comment">// 对应业务...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span>(<span class="string">"/"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TokenController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Token</span>(optype = <span class="string">"html"</span>, field = &#123;<span class="string">"content"</span>&#125;)</span><br><span class="line">    <span class="meta">@Token</span>(optype = <span class="string">"text"</span>, field = &#123;<span class="string">"text"</span>&#125;)</span><br><span class="line">    <span class="meta">@GetMapping</span>(value = <span class="string">"checkToken"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TokenVo <span class="title">checkToken</span><span class="params">(@RequestParam String token)</span> </span>&#123;</span><br><span class="line">        TokenVo result = <span class="keyword">new</span> TokenVo();</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="使用总结"><a href="#使用总结" class="headerlink" title="使用总结"></a>使用总结</h3><table>
+<thead>
+<tr>
+<th>拦截注解</th>
+<th>使用注解个数</th>
+<th>getAnnotation</th>
+<th>getAnnotationsByType</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@Aop</td>
+<td>单个</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>@Aop</td>
+<td>多个</td>
+<td>×</td>
+<td>×</td>
+</tr>
+<tr>
+<td>@Aops</td>
+<td>单个</td>
+<td>×</td>
+<td>×</td>
+</tr>
+<tr>
+<td>@Aops</td>
+<td>多个</td>
+<td>×</td>
+<td>√</td>
+</tr>
+<tr>
+<td>@Aop + @Aops</td>
+<td>单个</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>@Aop + @Aops</td>
+<td>多个</td>
+<td>×</td>
+<td>√</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>使用的时候，为了支持单个和多个的可扩展性，@Around配置同时拦截@Aop和@Aops，通过getAnnotationsByType获取注解数组来获取注解对象进行逻辑操作</p>
 </li>
-<li>IOC/DI<ul>
-<li>IOC（inverse of control）：控制反转：service的控制权移交给Spring来管理<ul>
-<li>以前所有的对象都是new出来的，现在用了Spring之后所有的对象都是有Spring来管理的</li>
-</ul>
+<li><p>通过getAnnotationsByType获取到的 Annotation[] 注解数组也是按照方法的存放顺序由上到下存储的，是有顺序性的，比如按照@Aop(“a”)、@Aop(“c”)、@Aop(“b”)进行配置，则拿到a、c、b的Annotation对象</p>
 </li>
-<li>DI（dependency injection）：依赖注入<ul>
-<li>Service依赖于对象属性dao，由Spring将dao对象注入到service中，体现了管理service和dao的关系(通过Spring的注入来实现的)</li>
+<li>业务方法被多个相同注解使用，只在一个Aspect切面中使用一次，也就是说Service方法执行一次，Aspect只拦截一次，不会因为多个注解而拦截多次，这是和不同注解作用于一个方法不同</li>
 </ul>
-</li>
-<li>AOP（aspect oriented programming）：面向切面编程（面向所有对象编程）</li>
-</ul>
-</li>
-</ul>
-<h3 id="Spring入门案例"><a href="#Spring入门案例" class="headerlink" title="Spring入门案例"></a><font color="#0099ff" size="4" face="黑体">Spring入门案例</font></h3><h4 id="第一步：引入jar包"><a href="#第一步：引入jar包" class="headerlink" title="第一步：引入jar包"></a><font color="#0099ff" size="3" face="黑体">第一步：引入jar包</font></h4><p><img src="https://s1.ax1x.com/2018/04/08/CPjIjU.png" alt></p>
-<h4 id="第二步：编写测试bean"><a href="#第二步：编写测试bean" class="headerlink" title="第二步：编写测试bean"></a><font color="#0099ff" size="3" face="黑体">第二步：编写测试bean</font></h4><font color="#304556" size="3" face="微软雅黑" style="line-height:2;">helloService</font>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//UserService与ByService就建立了对象间的关系</span></span><br><span class="line">    <span class="keyword">private</span> ByeService byeService;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ByeService <span class="title">getByeService</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> byeService;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setByeService</span><span class="params">(ByeService byeService)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.byeService = byeService;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello:"</span>+<span class="keyword">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<font color="#304556" size="3" face="微软雅黑" style="line-height:2;">ByeService</font>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ByeService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayBye</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"bye:"</span>+<span class="keyword">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="第三步：配置applicationContext-xml"><a href="#第三步：配置applicationContext-xml" class="headerlink" title="第三步：配置applicationContext.xml"></a><font color="#0099ff" size="3" face="黑体">第三步：配置applicationContext.xml</font></h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span>  </span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:p</span>=<span class="string">"http://www.springframework.org/schema/p"</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 下面这个配置就相当于UserService service = new UserService()</span></span><br><span class="line"><span class="comment">		Spring框架一加载，就会读取该配置文件，读取到bean的配置，去实例化bean</span></span><br><span class="line"><span class="comment">	 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"helloService"</span> <span class="attr">class</span>=<span class="string">"bean.UserService"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 属性注入，相当于setName方法 --&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 基本属性 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>重庆<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 对象类型属性 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"byeService"</span> <span class="attr">ref</span>=<span class="string">"byeService"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"byeService"</span> <span class="attr">class</span>=<span class="string">"bean.ByeService"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>成都<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<font color="red" size="3" face="微软雅黑" style="line-height:2;">注意：因为helloService里面有一个byeService对象，所以在使用的时候对于pojo对象属性需要用到ref=”该pojo对象的bean id”</font>
-
-<p><img src="https://s1.ax1x.com/2018/04/08/CPjTuF.png" alt></p>
-<h4 id="第四步：编写好测试类使用Spring"><a href="#第四步：编写好测试类使用Spring" class="headerlink" title="第四步：编写好测试类使用Spring"></a><font color="#0099ff" size="3" face="黑体">第四步：编写好测试类使用Spring</font></h4><p><img src="https://s1.ax1x.com/2018/04/08/CPj5cT.png" alt></p>
-<h3 id="SSM整合所需的所有jar包下载"><a href="#SSM整合所需的所有jar包下载" class="headerlink" title="SSM整合所需的所有jar包下载"></a><font color="#0099ff" size="4" face="黑体">SSM整合所需的所有jar包下载</font></h3><p> 👉 <a href="https://pan.baidu.com/s/1-wKpaJJBnuHw_hj7qVLsvA" target="_blank" rel="noopener">百度云下载 密码：6yy3</a></p>
+<p><img src="https://s2.loli.net/2022/12/05/F24eEOJptXUgcL5.png" alt="img"></p>
 <p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
 <ul>
 <li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
@@ -227,8 +251,8 @@ ga('send', 'pageview');
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年09月19日 15:54</p>
-	<p>原始链接： <a class="post-url" href="/2018/04/08/20180408-SSM集成应用—Spring入门及案例/" title="SSM集成应用—Spring入门及案例">https://blog.hdqyf.club/2018/04/08/20180408-SSM集成应用—Spring入门及案例/</a></p>
+        <p>最后更新： 2022年12月05日 09:41</p>
+	<p>原始链接： <a class="post-url" href="/2022/12/05/20221205-Java 8 多重注解的使用/" title="Java 8 多重注解的使用">https://blog.hdqyf.club/2022/12/05/20221205-Java 8 多重注解的使用/</a></p>
         <footer>
             <a href="https://blog.hdqyf.club">
                 <img src="/images/logo.png" alt="Garen">
@@ -302,7 +326,7 @@ ga('send', 'pageview');
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2018/04/08/20180408-SSM集成应用—Spring入门及案例/&title=《SSM集成应用—Spring入门及案例》 — HDQ | Blog&pic=https://s1.ax1x.com/2018/09/19/ieHp4O.jpg" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2022/12/05/20221205-Java 8 多重注解的使用/&title=《Java 8 多重注解的使用》 — HDQ | Blog&pic=https://s2.loli.net/2022/07/29/1DnC4wWiHuNUpgO.jpg" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -312,22 +336,22 @@ ga('send', 'pageview');
             </a>
           </li>
           <li>
-            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2018/04/08/20180408-SSM集成应用—Spring入门及案例/&title=《SSM集成应用—Spring入门及案例》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2022/12/05/20221205-Java 8 多重注解的使用/&title=《Java 8 多重注解的使用》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
               <i class="fa fa-star"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2018/04/08/20180408-SSM集成应用—Spring入门及案例/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2022/12/05/20221205-Java 8 多重注解的使用/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SSM集成应用—Spring入门及案例》 — HDQ | Blog&url=https://blog.hdqyf.club/2018/04/08/20180408-SSM集成应用—Spring入门及案例/&via=https://blog.hdqyf.club" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java 8 多重注解的使用》 — HDQ | Blog&url=https://blog.hdqyf.club/2022/12/05/20221205-Java 8 多重注解的使用/&via=https://blog.hdqyf.club" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2018/04/08/20180408-SSM集成应用—Spring入门及案例/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2022/12/05/20221205-Java 8 多重注解的使用/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -337,7 +361,7 @@ ga('send', 'pageview');
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2018/04/08/20180408-SSM集成应用—Spring入门及案例/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2022/12/05/20221205-Java 8 多重注解的使用/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -351,10 +375,6 @@ ga('send', 'pageview');
       
     <a href="/tags/Java/" class="color5">Java</a>
       
-    <a href="/tags/框架/" class="color3">框架</a>
-      
-    <a href="/tags/Spring/" class="color2">Spring</a>
-      
   </li>
 
         </ul>
@@ -366,26 +386,16 @@ ga('send', 'pageview');
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#理解什么是Spring？"><span class="post-toc-text">理解什么是Spring？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Spring的核心机制"><span class="post-toc-text">Spring的核心机制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Spring入门案例"><span class="post-toc-text">Spring入门案例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第一步：引入jar包"><span class="post-toc-text">第一步：引入jar包</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第二步：编写测试bean"><span class="post-toc-text">第二步：编写测试bean</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第三步：配置applicationContext-xml"><span class="post-toc-text">第三步：配置applicationContext.xml</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第四步：编写好测试类使用Spring"><span class="post-toc-text">第四步：编写好测试类使用Spring</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SSM整合所需的所有jar包下载"><span class="post-toc-text">SSM整合所需的所有jar包下载</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用"><span class="post-toc-text">使用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#AOP切面应用"><span class="post-toc-text">AOP切面应用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试方法"><span class="post-toc-text">测试方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用总结"><span class="post-toc-text">使用总结</span></a></li></ol>
         </nav>
     </aside>
     
 
 <nav id="article-nav">
   
-    <a href="/2018/04/09/20180408-SSM集成应用—Spring注解的理解及使用/" id="article-nav-newer" class="article-nav-link-wrap">
-
-      <span class="article-nav-title">
-        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
-        
-          SSM集成应用—Spring注解的理解及使用
-        
-      </span>
-    </a>
   
-  
-    <a href="/2018/04/07/20180407-mybatis学习日记—逆向工程/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">mybatis学习日记—逆向工程</span>
+    <a href="/2022/07/29/20220729-Java 8 已普及使用，今天就来聊聊Calendar替代品/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Java 8 已普及使用，今天就来聊聊Calendar替代品</span>
       <i class="fa fa-hand-o-right" aria-hidden="true"></i>
     </a>
   
