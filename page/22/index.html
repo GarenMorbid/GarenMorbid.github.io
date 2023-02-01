@@ -4,25 +4,21 @@
   <meta charset="utf-8">
   <meta name="referrer" content="no-referrer-when-downgrade">
   
-  <title>@Repeatable与重复注解的使用 | HDQ | Blog</title>
+  <title>HDQ | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HDQ,HDQ's Blog">
   
-  <meta name="description" content="前言@Repeatable是JDK1.8出现的元注解，在早前的版本中声明的注解Annotation是不能够重复作用在同一个类或方法上的，而有些时候我们的开发偏偏需要这样的使用诉求和场景。 使用单一注解的使用方式如下： 1234567@Target(&amp;#123;ElementType.METHOD, ElementType.TYPE&amp;#125;)@Retention(RetentionPolicy.">
-<meta name="keywords" content="Java">
-<meta property="og:type" content="article">
-<meta property="og:title" content="@Repeatable与重复注解的使用">
-<meta property="og:url" content="https://blog.hdqyf.club/2022/12/05/20221205-@Repeatable与重复注解的使用/index.html">
+  <meta name="description" content="Welcome to my blog.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="HDQ | Blog">
+<meta property="og:url" content="https://blog.hdqyf.club/page/22/index.html">
 <meta property="og:site_name" content="HDQ | Blog">
-<meta property="og:description" content="前言@Repeatable是JDK1.8出现的元注解，在早前的版本中声明的注解Annotation是不能够重复作用在同一个类或方法上的，而有些时候我们的开发偏偏需要这样的使用诉求和场景。 使用单一注解的使用方式如下： 1234567@Target(&amp;#123;ElementType.METHOD, ElementType.TYPE&amp;#125;)@Retention(RetentionPolicy.">
+<meta property="og:description" content="Welcome to my blog.">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://s2.loli.net/2022/12/05/F24eEOJptXUgcL5.png">
-<meta property="og:updated_time" content="2022-12-05T01:33:00.686Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="@Repeatable与重复注解的使用">
-<meta name="twitter:description" content="前言@Repeatable是JDK1.8出现的元注解，在早前的版本中声明的注解Annotation是不能够重复作用在同一个类或方法上的，而有些时候我们的开发偏偏需要这样的使用诉求和场景。 使用单一注解的使用方式如下： 1234567@Target(&amp;#123;ElementType.METHOD, ElementType.TYPE&amp;#125;)@Retention(RetentionPolicy.">
-<meta name="twitter:image" content="https://s2.loli.net/2022/12/05/F24eEOJptXUgcL5.png">
+<meta name="twitter:title" content="HDQ | Blog">
+<meta name="twitter:description" content="Welcome to my blog.">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -143,267 +139,83 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-20221205-@Repeatable与重复注解的使用" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap">
+  
+    <article id="post-20161026-JSON-转模型-For-YYModel" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 class="post-title" itemprop="name">
-      @Repeatable与重复注解的使用
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/26/20161026-JSON-转模型-For-YYModel/" target="_blank">JSON转模型 For YYModel</a>
     </h1>
-    <div class="post-title-bar">
-      <ul>
-          
-              <li>
-                  <i class="fa fa-book"></i>
-                  
-                      <a href="/categories/Java/">Java</a>
-                  
-              </li>
-          
-        <li>
-          <i class="fa fa-calendar"></i>  2022-12-05
-        </li>
-        <li>
-          <i class="fa fa-eye"></i>
-          <span id="busuanzi_value_page_pv"></span>
-        </li>
-      </ul>
-    </div>
   
 
           
+              <span class="header-cate">
+                <i class="fa fa-map-marker"></i>
+                  
+                  <a href="/categories/iOS/">iOS</a>
+                  
+              </span>
+          
       </header>
     
-    <div class="article-entry post-content" itemprop="articleBody">
+    <div class="article-entry " itemprop="articleBody">
       
-            
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>@Repeatable是JDK1.8出现的元注解，在早前的版本中声明的注解Annotation是不能够重复作用在同一个类或方法上的，而有些时候我们的开发偏偏需要这样的使用诉求和场景。</p>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>单一注解的使用方式如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(&#123;ElementType.METHOD, ElementType.TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Token &#123;</span><br><span class="line">    <span class="function">String <span class="title">optype</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line">    String[] field() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>引入<strong>@Repeatable</strong>注解后，改造如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(&#123;ElementType.METHOD, ElementType.TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Repeatable</span>(Tokens.class) <span class="comment">// 这里作用在业务注解上</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Token &#123;</span><br><span class="line">    <span class="function">String <span class="title">optype</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line">    String[] field() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>引入了@Tokens返回@Token数组以支持@Token多次注解重复使用</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(&#123;ElementType.METHOD, ElementType.TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Tokens &#123;</span><br><span class="line">    Token[] value();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="AOP切面应用"><a href="#AOP切面应用" class="headerlink" title="AOP切面应用"></a>AOP切面应用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TokenAspect</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Pointcut</span>(<span class="string">"@annotation(club.hdqyf.springboot.customannotation.annotation.Token)"</span> </span><br><span class="line">              + <span class="string">" || @annotation(club.hdqyf.springboot.customannotation.annotation.Tokens)"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">annotationPointcut</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@AfterReturning</span>(pointcut = <span class="string">"annotationPointcut()"</span>, returning = <span class="string">"rvt"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doAfterReturning</span><span class="params">(JoinPoint joinPoint, Object rvt)</span> <span class="keyword">throws</span> InvocationTargetException, IllegalAccessException </span>&#123;</span><br><span class="line">        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();</span><br><span class="line">        Token[] tokens = methodSignature.getMethod().getAnnotationsByType(Token.class);</span><br><span class="line">        <span class="keyword">for</span> (Token declaredAnnotation : tokens) &#123;</span><br><span class="line">            <span class="comment">// 获取注解上的参数</span></span><br><span class="line">            String[] s = declaredAnnotation.field();</span><br><span class="line">            String optype = declaredAnnotation.optype();</span><br><span class="line">            <span class="comment">// 对应业务...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span>(<span class="string">"/"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TokenController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Token</span>(optype = <span class="string">"html"</span>, field = &#123;<span class="string">"content"</span>&#125;)</span><br><span class="line">    <span class="meta">@Token</span>(optype = <span class="string">"text"</span>, field = &#123;<span class="string">"text"</span>&#125;)</span><br><span class="line">    <span class="meta">@GetMapping</span>(value = <span class="string">"checkToken"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TokenVo <span class="title">checkToken</span><span class="params">(@RequestParam String token)</span> </span>&#123;</span><br><span class="line">        TokenVo result = <span class="keyword">new</span> TokenVo();</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="使用总结"><a href="#使用总结" class="headerlink" title="使用总结"></a>使用总结</h3><table>
-<thead>
-<tr>
-<th>拦截注解</th>
-<th>使用注解个数</th>
-<th>getAnnotation</th>
-<th>getAnnotationsByType</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>@Aop</td>
-<td>单个</td>
-<td>√</td>
-<td>√</td>
-</tr>
-<tr>
-<td>@Aop</td>
-<td>多个</td>
-<td>×</td>
-<td>×</td>
-</tr>
-<tr>
-<td>@Aops</td>
-<td>单个</td>
-<td>×</td>
-<td>×</td>
-</tr>
-<tr>
-<td>@Aops</td>
-<td>多个</td>
-<td>×</td>
-<td>√</td>
-</tr>
-<tr>
-<td>@Aop + @Aops</td>
-<td>单个</td>
-<td>√</td>
-<td>√</td>
-</tr>
-<tr>
-<td>@Aop + @Aops</td>
-<td>多个</td>
-<td>×</td>
-<td>√</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><p>使用的时候，为了支持单个和多个的可扩展性，@Around配置同时拦截@Aop和@Aops，通过getAnnotationsByType获取注解数组来获取注解对象进行逻辑操作</p>
-</li>
-<li><p>通过getAnnotationsByType获取到的 Annotation[] 注解数组也是按照方法的存放顺序由上到下存储的，是有顺序性的，比如按照@Aop(“a”)、@Aop(“c”)、@Aop(“b”)进行配置，则拿到a、c、b的Annotation对象</p>
-</li>
-<li>业务方法被多个相同注解使用，只在一个Aspect切面中使用一次，也就是说Service方法执行一次，Aspect只拦截一次，不会因为多个注解而拦截多次，这是和不同注解作用于一个方法不同</li>
-</ul>
-<p><img src="https://s2.loli.net/2022/12/05/F24eEOJptXUgcL5.png" alt="img"></p>
-<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
-<ul>
-<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
-</ul>
-
-            <div class="post-copyright">
-    <div class="content">
-        <p>最后更新： 2022年12月05日 09:33</p>
-	<p>原始链接： <a class="post-url" href="/2022/12/05/20221205-@Repeatable与重复注解的使用/" title="@Repeatable与重复注解的使用">https://blog.hdqyf.club/2022/12/05/20221205-@Repeatable与重复注解的使用/</a></p>
-        <footer>
-            <a href="https://blog.hdqyf.club">
-                <img src="/images/logo.png" alt="Garen">
-                Garen
+        <div class="article-img">
+            <a href="/2016/10/26/20161026-JSON-转模型-For-YYModel/" target="_blank">
+                
+                <img src="https://s1.ax1x.com/2018/09/19/ieoFvn.jpg" alt="JSON转模型 For YYModel" title="JSON转模型 For YYModel">
+                
             </a>
-        </footer>
-    </div>
-</div>
-<!-- 来必力City版安装代码 -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
-<script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
+        </div>
+        <div class="article-feed">
+            <p>
+                
+JSON转模型是我们做iOS开发的基础技能，本文将通过YYModel这个框架安全快速的完成JSON到模型的转换，其中还会介绍到一款好用的插件ESJsonFormat。
 
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-</script>
-<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
-</div>
-<!-- City版安装代码已完成 -->
+1、首先创建模型类创建模型类我们可以通过ESJsonFormat这款插件快速完成。
+使用方法：
+将光标移动到代码行中 如下图的13行
+然后点击Window-&gt;ESJsonFormat-&gt;In...
+            </p>
+        </div>
       
-        
-            
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;">赏</a>
-</div>
-
-<div id="reward" class="post-modal reward-lay">
-    <a class="close" href="javascript:;" id="reward-close">×</a>
-    <span class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        请我吃糖~
-        <i class="icon icon-quote-right"></i>
-    </span>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
-        </div>
-        <div class="reward-select">
-            
-            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
-                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
-            </label>
-            
-            
-            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
-                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
-            </label>
-            
-        </div>
-    </div>
-</div>
-
-
         
     </div>
     <footer class="article-footer">
         
-        
-<div class="post-share">
-    <a href="javascript:;" id="share-sub" class="post-share-fab">
-        <i class="fa fa-share-alt"></i>
-    </a>
-    <div class="post-share-list" id="share-list">
-        <ul class="share-icons">
-          <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2022/12/05/20221205-@Repeatable与重复注解的使用/&title=《@Repeatable与重复注解的使用》 — HDQ | Blog&pic=https://s2.loli.net/2022/07/29/1DnC4wWiHuNUpgO.jpg" data-title="微博">
-              <i class="fa fa-weibo"></i>
-            </a>
-          </li>
-          <li>
-            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
-              <i class="fa fa-weixin"></i>
-            </a>
-          </li>
-          <li>
-            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2022/12/05/20221205-@Repeatable与重复注解的使用/&title=《@Repeatable与重复注解的使用》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
-              <i class="fa fa-star"></i>
-            </a>
-          </li>
-          <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2022/12/05/20221205-@Repeatable与重复注解的使用/" data-title="Facebook">
-              <i class="fa fa-facebook"></i>
-            </a>
-          </li>
-          <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《@Repeatable与重复注解的使用》 — HDQ | Blog&url=https://blog.hdqyf.club/2022/12/05/20221205-@Repeatable与重复注解的使用/&via=https://blog.hdqyf.club" data-title="Twitter">
-              <i class="fa fa-twitter"></i>
-            </a>
-          </li>
-          <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2022/12/05/20221205-@Repeatable与重复注解的使用/" data-title="Google+">
-              <i class="fa fa-google-plus"></i>
-            </a>
-          </li>
-        </ul>
-     </div>
-</div>
-<div class="post-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;" id="wxShare-close">×</a>
-    <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2022/12/05/20221205-@Repeatable与重复注解的使用/" alt="微信分享二维码">
-</div>
-
-<div class="mask"></div>
-
-        
         <ul class="article-footer-menu">
+            
+                <li><i class="fa fa-calendar"></i>2016-10-26</li>
             
             
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/Java/" class="color5">Java</a>
+    <a href="/tags/iOS/" class="color4">iOS</a>
+      
+    <a href="/tags/开发技巧/" class="color5">开发技巧</a>
       
   </li>
 
         </ul>
+        
+            <a href="/2016/10/26/20161026-JSON-转模型-For-YYModel/#more" class="article-more-link" target="_blank">more&gt;&gt;</a>
         
     </footer>
   </div>
 </article>
 
 
-    <aside class="post-toc-pos post-toc-top" id="post-toc">
-        <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用"><span class="post-toc-text">使用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#AOP切面应用"><span class="post-toc-text">AOP切面应用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试方法"><span class="post-toc-text">测试方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用总结"><span class="post-toc-text">使用总结</span></a></li></ol>
-        </nav>
-    </aside>
-    
-
-<nav id="article-nav">
   
-  
-    <a href="/2022/07/29/20220729-Java 8 已普及使用，今天就来聊聊Calendar替代品/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">Java 8 已普及使用，今天就来聊聊Calendar替代品</span>
-      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
-    </a>
-  
-</nav>
 
 
-
-    
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/21/"><< Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span>
+  </nav>
 </section>
         
       </div>
@@ -425,7 +237,7 @@ ga('send', 'pageview');
             <br>
             <p>
                 Powered by <a href="#" target="_blank">HDQ</a> Theme <a href="#" target="_blank">Garen</a> &copy;
-                2022
+                2023
                     Garen<br>
             </p>
         </div>
@@ -470,7 +282,7 @@ ga('send', 'pageview');
   var mihoConfig = {
       root: "https://blog.hdqyf.club",
       animate: true,
-      isHome: false,
+      isHome: true,
       share: true,
       reward: 1
   }
@@ -572,11 +384,6 @@ ga('send', 'pageview');
   <script src="//cdn.staticfile.org/scrollReveal.js/3.0.5/scrollreveal.js"></script>
   <script src="/js/animate.js"></script>
 
-
-  <script src="/js/pop-img.js"></script>
-  <script>
-     $(".article-entry p img").popImg();
-  </script>
 
   </div>
 </body>
