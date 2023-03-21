@@ -2291,6 +2291,8 @@ pre .javascript .function {
 .sidebar-menu-box .sidebar-menu-box-container {
   max-width: 920px;
   margin: 0 auto;
+  height: inherit;
+  overflow: hidden auto;
 }
 .sidebar-menu-box .sidebar-menu-box-close {
   position: absolute;
