@@ -572,7 +572,7 @@ body {
   width: 600px;
   margin: 20px auto;
   padding: 10px 0;
-  color: #696969;
+  color: #322a2a;
   letter-spacing: 5px;
 }
 .header-nav {
@@ -583,7 +583,7 @@ body {
   text-align: center;
 }
 .header-nav .social a {
-  color: #696969;
+  color: #322a2a;
   margin-right: 15px;
   -webkit-transition: 0.2s ease;
   transition: 0.2s ease;
@@ -2059,6 +2059,8 @@ pre .javascript .function {
     -webkit-transition: transform 0.45s ease visibility 0.45s;
     transition: transform 0.45s ease visibility 0.45s;
     position: fixed;
+    overflow-y: auto;
+    padding: 0 5px;
     top: 0;
     right: 0;
     height: 100%;
