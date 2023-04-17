@@ -2820,6 +2820,22 @@ pre .javascript .function {
   -ms-transform: scale(1);
   transform: scale(1);
 }
+.post-share-list .share-icons {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-direction: reverse;
+  -moz-box-direction: reverse;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+  margin-right: 10px;
+}
 .post-share-list .share-icons li {
   display: inline-block;
   margin-left: 10px;
