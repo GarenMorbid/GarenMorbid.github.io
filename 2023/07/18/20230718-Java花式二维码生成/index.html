@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  <title>Java花式二维码生成 | HDQ | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="HDQ,HDQ's Blog">
+  
+  <meta name="description" content="前言生成二维码的方式有很多种，你可以把资源消耗放在客户端使用一些前端的二维码生成组件，如果想要存储一些生成二维码的操作日志就可以使用到服务端的二维码工具。最近业务需要并且领导也想要一点花样的二维码对其研究了一些，和大家分享一下。 前端Jquery的qrcodeJquery提供了简单二维码的生成，满足无特殊需求的开发者制作简单的二维码，使用也是相当简单。  引入js，如果你没下载到本地，也可以使用云">
+<meta name="keywords" content="Java,二维码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java花式二维码生成">
+<meta property="og:url" content="https://blog.hdqyf.club/2023/07/18/20230718-Java花式二维码生成/index.html">
+<meta property="og:site_name" content="HDQ | Blog">
+<meta property="og:description" content="前言生成二维码的方式有很多种，你可以把资源消耗放在客户端使用一些前端的二维码生成组件，如果想要存储一些生成二维码的操作日志就可以使用到服务端的二维码工具。最近业务需要并且领导也想要一点花样的二维码对其研究了一些，和大家分享一下。 前端Jquery的qrcodeJquery提供了简单二维码的生成，满足无特殊需求的开发者制作简单的二维码，使用也是相当简单。  引入js，如果你没下载到本地，也可以使用云">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-07-18T08:05:16.673Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java花式二维码生成">
+<meta name="twitter:description" content="前言生成二维码的方式有很多种，你可以把资源消耗放在客户端使用一些前端的二维码生成组件，如果想要存储一些生成二维码的操作日志就可以使用到服务端的二维码工具。最近业务需要并且领导也想要一点花样的二维码对其研究了一些，和大家分享一下。 前端Jquery的qrcodeJquery提供了简单二维码的生成，满足无特殊需求的开发者制作简单的二维码，使用也是相当简单。  引入js，如果你没下载到本地，也可以使用云">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/mylive.css">
+  <link rel="stylesheet" href="/css/mySetting.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <script src="/js/pace.min.js"></script>
+  <script src="/js/mySetting.js"></script>
+  
+<!-- Google Analytics -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M32RYCRT4X"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-M32RYCRT4X');
+</script>
+<!-- End Google Analytics -->
+
+
+  
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?a3fed5fc0a708f5e993575bc1ccaf623";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+  
+
+</head></html>
+<body>
+  <div id="container">
+      <div class="maplebg"></div>
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">HDQ&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        HDQ&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 互联网生活 互联网资源的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="个人网站" target="_blank" href="http://hdqyf.club/">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="GitHub" target="_blank" href="https://github.com/GarenMorbid">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="QQ" target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=vG_te0JtZ-ZWhvNRf8vYmV0yvyIccSV1">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Steam" target="_blank" href="https://steamcommunity.com/id/GarenMorbid/">
+                            <i class="fa fa-steam-square fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-20230718-Java花式二维码生成" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      Java花式二维码生成
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/Java/">Java</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2023-07-18
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>生成二维码的方式有很多种，你可以把资源消耗放在客户端使用一些前端的二维码生成组件，如果想要存储一些生成二维码的操作日志就可以使用到服务端的二维码工具。最近业务需要并且领导也想要一点花样的二维码对其研究了一些，和大家分享一下。</p>
+<h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h3><h4 id="Jquery的qrcode"><a href="#Jquery的qrcode" class="headerlink" title="Jquery的qrcode"></a>Jquery的qrcode</h4><p>Jquery提供了简单二维码的生成，满足无特殊需求的开发者制作简单的二维码，使用也是相当简单。</p>
+<ol>
+<li>引入js，如果你没下载到本地，也可以使用云端的js，链接：<a href="https://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js" target="_blank" rel="noopener">https://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js</a></li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"jquery.qrcode.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>创建Dom元素</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"qrcode"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>js编写代码生成二维码</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">jQuery(function()&#123;</span></span><br><span class="line"><span class="undefined">    jQuery('#qrcode').qrcode("https://www.baidu.com/");</span></span><br><span class="line"><span class="undefined">&#125;);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>除此之外还有许多其他进阶的用法，如一些大小样式调整等。</p>
+<h4 id="qrbtf"><a href="#qrbtf" class="headerlink" title="qrbtf"></a>qrbtf</h4><p>一款开源的艺术二维码生成器，支持vue，【<a href="https://classic.qrbtf.com/" target="_blank" rel="noopener">官方网站</a>】、【<a href="https://github.com/ciaochaos/qrbtf" target="_blank" rel="noopener">Github</a>】，如果你只想使用Javascript版本的可以试试第三方<a href="https://github.com/gexin1/beautify-qrcode" target="_blank" rel="noopener">魔改的qrbtf</a>，使用也是方便，不过如果要修改其相关样式还是比较困难的（特别是三个信息点个人感觉有点大）。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">// 通过script 引入</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./dist/beautifyQrcode.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    // 选择性引入对应方法</span></span><br><span class="line"><span class="undefined">    const &#123;</span></span><br><span class="line"><span class="undefined">        encodeData,</span></span><br><span class="line"><span class="undefined">        renderer25D,</span></span><br><span class="line"><span class="undefined">        rendererRect,</span></span><br><span class="line"><span class="undefined">        rendererRound,</span></span><br><span class="line"><span class="undefined">        rendererRandRound,</span></span><br><span class="line"><span class="undefined">        rendererDSJ,</span></span><br><span class="line"><span class="undefined">        rendererRandRect,</span></span><br><span class="line"><span class="undefined">        rendererImage,</span></span><br><span class="line"><span class="undefined">        rendererResImage,</span></span><br><span class="line"><span class="undefined">    &#125; = window.beautifyQrcode;</span></span><br><span class="line"><span class="undefined">    </span></span><br><span class="line"><span class="undefined">    // 根据文档传递参数调用对应的方法生成二维码即可，比如</span></span><br><span class="line"><span class="undefined">    /**</span></span><br><span class="line"><span class="undefined">     * 生成二维码数据</span></span><br><span class="line"><span class="undefined">     * @param &#123;Object&#125; options</span></span><br><span class="line"><span class="undefined">     * @param &#123;String&#125; options.text 二维码内容</span></span><br><span class="line"><span class="undefined">     * @param &#123;Number&#125; [options.width]  生成svg的宽度 默认100%</span></span><br><span class="line"><span class="undefined">     * @param &#123;Number&#125; [options.height] 生成svg的高度 默认100%</span></span><br><span class="line"><span class="undefined">     * @param &#123;Number&#125; [options.correctLevel] 容错率 1=&gt;7% 0 =&gt;15% 3=&gt;25% 2=&gt;30%</span></span><br><span class="line"><span class="undefined">     * @param &#123;Boolean&#125; [options.isSpace] 生成内容是否预留空隙 默认true</span></span><br><span class="line"><span class="undefined">     */</span></span><br><span class="line"><span class="undefined">    const qrcode = encodeData(&#123;</span></span><br><span class="line"><span class="undefined">        text: "test",</span></span><br><span class="line"><span class="undefined">        correctLevel: 0,</span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="undefined">    /**</span></span><br><span class="line"><span class="undefined">     * A1</span></span><br><span class="line"><span class="undefined">     * @param &#123;Object&#125; qrcode</span></span><br><span class="line"><span class="undefined">     * @param &#123;Object&#125; options</span></span><br><span class="line"><span class="undefined">     * @param &#123;Number&#125; [options.type]  信息点样式 0=&gt;矩形 1=&gt;圆形,2=&gt;随机</span></span><br><span class="line"><span class="undefined">     * @param &#123;Number&#125; [options.size] 信息点缩放</span></span><br><span class="line"><span class="undefined">     * @param &#123;String&#125; [options.opacity]  信息点不透明度</span></span><br><span class="line"><span class="undefined">     * @param &#123;String&#125; [options.posType] 定位点样式 0=&gt;矩形 1=&gt;圆形 2=&gt;行星</span></span><br><span class="line"><span class="undefined">     * @param &#123;String&#125; [options.otherColor] 信息点颜色</span></span><br><span class="line"><span class="undefined">     * @param &#123;String&#125; [options.posColor] 定位点点颜色</span></span><br><span class="line"><span class="undefined">     * @return &#123;String&#125; svg图片</span></span><br><span class="line"><span class="undefined">     */</span></span><br><span class="line"><span class="undefined">    const A1 = rendererRect(qrcode);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h3><h4 id="ZXing"><a href="#ZXing" class="headerlink" title="ZXing"></a>ZXing</h4><p><a href="https://github.com/zxing/zxing" target="_blank" rel="noopener">ZXing</a>，一个支持在图像中解码和生成条形码(如二维码、PDF 417、EAN、UPC、Aztec、Data Matrix、Codabar)的库。ZXing(“zebra crossing”)是一个开源的、多格式的、用Java实现的一维/二维条码图像处理库，具有到其他语言的端口。</p>
+<ol>
+<li>使用引入Maven</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- ZXing --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.google.zxing<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.3.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.google.zxing<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javase<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.3.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>使用</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            QREncode();</span><br><span class="line">            QRReader(<span class="keyword">new</span> File(<span class="string">"D:\\zxing1.gif"</span>));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (WriterException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 生成二维码</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">QREncode</span><span class="params">()</span> <span class="keyword">throws</span> WriterException, IOException </span>&#123;</span><br><span class="line">        String content = <span class="string">"test"</span>;<span class="comment">//二维码内容</span></span><br><span class="line">        <span class="keyword">int</span> width = <span class="number">200</span>; <span class="comment">// 图像宽度</span></span><br><span class="line">        <span class="keyword">int</span> height = <span class="number">200</span>; <span class="comment">// 图像高度</span></span><br><span class="line">        String format = <span class="string">"gif"</span>;<span class="comment">// 图像类型</span></span><br><span class="line">        Map&lt;EncodeHintType, Object&gt; hints = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="comment">//内容编码格式</span></span><br><span class="line">        hints.put(EncodeHintType.CHARACTER_SET, <span class="string">"UTF-8"</span>);</span><br><span class="line">        <span class="comment">// 指定纠错等级</span></span><br><span class="line">        hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);</span><br><span class="line">        <span class="comment">//设置二维码边的空度，非负数</span></span><br><span class="line">        hints.put(EncodeHintType.MARGIN, <span class="number">1</span>);</span><br><span class="line">        BitMatrix bitMatrix = <span class="keyword">new</span> MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, width, height, hints);</span><br><span class="line">        MatrixToImageWriter.writeToPath(bitMatrix, format, <span class="keyword">new</span> File(<span class="string">"D:\\zxing.gif"</span>).toPath());<span class="comment">// 输出原图片</span></span><br><span class="line">        MatrixToImageConfig matrixToImageConfig = <span class="keyword">new</span> MatrixToImageConfig(<span class="number">0xFF000001</span>, <span class="number">0xFFFFFFFF</span>);</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">            问题：生成二维码正常,生成带logo的二维码logo变成黑白</span></span><br><span class="line"><span class="comment">            原因：MatrixToImageConfig默认黑白，需要设置BLACK、WHITE</span></span><br><span class="line"><span class="comment">            解决：https://ququjioulai.iteye.com/blog/2254382</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        BufferedImage bufferedImage = LogoMatrix(MatrixToImageWriter.toBufferedImage(bitMatrix,matrixToImageConfig), <span class="keyword">new</span> File(<span class="string">"D:\\logo.png"</span>));</span><br><span class="line">        ImageIO.write(bufferedImage, <span class="string">"gif"</span>, <span class="keyword">new</span> File(<span class="string">"D:\\zxing1.gif"</span>));<span class="comment">//输出带logo图片</span></span><br><span class="line">        System.out.println(<span class="string">"输出成功."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 识别二维码</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">QRReader</span><span class="params">(File file)</span> <span class="keyword">throws</span> IOException, NotFoundException </span>&#123;</span><br><span class="line">        MultiFormatReader formatReader = <span class="keyword">new</span> MultiFormatReader();</span><br><span class="line">        <span class="comment">//读取指定的二维码文件</span></span><br><span class="line">        BufferedImage bufferedImage =ImageIO.read(file);</span><br><span class="line">        BinaryBitmap binaryBitmap= <span class="keyword">new</span> BinaryBitmap(<span class="keyword">new</span> HybridBinarizer(<span class="keyword">new</span> BufferedImageLuminanceSource(bufferedImage)));</span><br><span class="line">        <span class="comment">//定义二维码参数</span></span><br><span class="line">        Map  hints= <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        hints.put(EncodeHintType.CHARACTER_SET, <span class="string">"utf-8"</span>);</span><br><span class="line">        com.google.zxing.Result result = formatReader.decode(binaryBitmap, hints);</span><br><span class="line">        <span class="comment">//输出相关的二维码信息</span></span><br><span class="line">        System.out.println(<span class="string">"解析结果："</span>+result.toString());</span><br><span class="line">        System.out.println(<span class="string">"二维码格式类型："</span>+result.getBarcodeFormat());</span><br><span class="line">        System.out.println(<span class="string">"二维码文本内容："</span>+result.getText());</span><br><span class="line">        bufferedImage.flush();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 二维码添加logo</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> matrixImage 源二维码图片</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> logoFile logo图片</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 返回带有logo的二维码图片</span></span><br><span class="line"><span class="comment">     * 参考：https://blog.csdn.net/weixin_39494923/article/details/79058799</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> BufferedImage <span class="title">LogoMatrix</span><span class="params">(BufferedImage matrixImage, File logoFile)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 读取二维码图片，并构建绘图对象</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        Graphics2D g2 = matrixImage.createGraphics();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> matrixWidth = matrixImage.getWidth();</span><br><span class="line">        <span class="keyword">int</span> matrixHeigh = matrixImage.getHeight();</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 读取Logo图片</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        BufferedImage logo = ImageIO.read(logoFile);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//开始绘制图片</span></span><br><span class="line">        g2.drawImage(logo,matrixWidth/<span class="number">5</span>*<span class="number">2</span>,matrixHeigh/<span class="number">5</span>*<span class="number">2</span>, matrixWidth/<span class="number">5</span>, matrixHeigh/<span class="number">5</span>, <span class="keyword">null</span>);<span class="comment">//绘制</span></span><br><span class="line">        BasicStroke stroke = <span class="keyword">new</span> BasicStroke(<span class="number">5</span>,BasicStroke.CAP_ROUND,BasicStroke.JOIN_ROUND);</span><br><span class="line">        g2.setStroke(stroke);<span class="comment">// 设置笔画对象</span></span><br><span class="line">        <span class="comment">//指定弧度的圆角矩形</span></span><br><span class="line">        RoundRectangle2D.Float round = <span class="keyword">new</span> RoundRectangle2D.Float(matrixWidth/<span class="number">5</span>*<span class="number">2</span>, matrixHeigh/<span class="number">5</span>*<span class="number">2</span>, matrixWidth/<span class="number">5</span>, matrixHeigh/<span class="number">5</span>,<span class="number">20</span>,<span class="number">20</span>);</span><br><span class="line">        g2.setColor(Color.white);</span><br><span class="line">        g2.draw(round);<span class="comment">// 绘制圆弧矩形</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//设置logo 有一道灰色边框</span></span><br><span class="line">        BasicStroke stroke2 = <span class="keyword">new</span> BasicStroke(<span class="number">1</span>,BasicStroke.CAP_ROUND,BasicStroke.JOIN_ROUND);</span><br><span class="line">        g2.setStroke(stroke2);<span class="comment">// 设置笔画对象</span></span><br><span class="line">        RoundRectangle2D.Float round2 = <span class="keyword">new</span> RoundRectangle2D.Float(matrixWidth/<span class="number">5</span>*<span class="number">2</span>+<span class="number">2</span>, matrixHeigh/<span class="number">5</span>*<span class="number">2</span>+<span class="number">2</span>, matrixWidth/<span class="number">5</span>-<span class="number">4</span>, matrixHeigh/<span class="number">5</span>-<span class="number">4</span>,<span class="number">20</span>,<span class="number">20</span>);</span><br><span class="line">        g2.setColor(<span class="keyword">new</span> Color(<span class="number">128</span>,<span class="number">128</span>,<span class="number">128</span>));</span><br><span class="line">        g2.draw(round2);<span class="comment">// 绘制圆弧矩形</span></span><br><span class="line"></span><br><span class="line">        g2.dispose();</span><br><span class="line">        matrixImage.flush() ;</span><br><span class="line">        <span class="keyword">return</span> matrixImage ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="QuickMedia"><a href="#QuickMedia" class="headerlink" title="QuickMedia"></a>QuickMedia</h4><p><a href="https://github.com/liuyueyi/quick-media" target="_blank" rel="noopener">QuickMedia</a>项目，主要基于一些开源的项目实现复杂的图片、音频、视频、二维码等多媒体文件处理的二次封装类库，主要借助Builder模式简化各种复杂的调用方式，供使用者最低成本的实现开箱即用。</p>
+<p>相比于ZXing，QuickMedia对其进行了封装，让使用者调用生成二维码接口更加简单，代码更加简洁。</p>
+<ol>
+<li>使用</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.liuyueyi.media<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>qrcode-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.5.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>然后就是调用</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 基本二维码 */</span></span><br><span class="line">String msg = <span class="string">"http://weixin.qq.com/r/FS9waAPEg178rUcL93oH"</span>;</span><br><span class="line"><span class="comment">// 生成二维码，并输出为qr.png图片</span></span><br><span class="line"><span class="keyword">boolean</span> ans = QrCodeGenWrapper.of(msg).asFile(<span class="string">"qr.png"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 带logo二维码生成 */</span></span><br><span class="line">String msgLogo = <span class="string">"http://weixin.qq.com/r/FS9waAPEg178rUcL93oH"</span>;</span><br><span class="line"><span class="comment">// 这里的图片地址，支持网络图片，本地相对路劲图片，本地绝对路径图片</span></span><br><span class="line">String logo = <span class="string">"https://static.oschina.net/uploads/user/283/566591_100.jpeg"</span>;</span><br><span class="line"><span class="keyword">boolean</span> ansLogo = QrCodeGenWrapper.of(msgLogo)</span><br><span class="line">        .setLogo(logo)</span><br><span class="line">        .setLogoStyle(QrCodeOptions.LogoStyle.ROUND)</span><br><span class="line">        .setLogoBgColor(<span class="number">0xfffefefe</span>)</span><br><span class="line">        .setLogoBorderBgColor(<span class="number">0xffc7c7c7</span>)</span><br><span class="line">        .setLogoBorder(<span class="keyword">true</span>)</span><br><span class="line">        .asFile(<span class="string">"/tmp/lqr3.png"</span>);</span><br></pre></td></tr></table></figure>
+<p>不仅如此，还可以指定背景，调整信息点、探测点样式等，这位大佬不仅仅是二维码，像音频那些也有组件，想要了解的朋友可以区看看，觉得不错的话可以给大佬一个<strong>Star</strong>。</p>
+<p><strong>ps:因作者能力有限，有错误的地方请见谅</strong></p>
+<ul>
+<li>喜欢这篇文章的话可以用快捷键 <code>Ctrl + D</code> 来收藏本页</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2023年07月18日 16:05</p>
+	<p>原始链接： <a class="post-url" href="/2023/07/18/20230718-Java花式二维码生成/" title="Java花式二维码生成">https://blog.hdqyf.club/2023/07/18/20230718-Java花式二维码生成/</a></p>
+        <footer>
+            <a href="https://blog.hdqyf.club">
+                <img src="/images/logo.png" alt="Garen">
+                Garen
+            </a>
+        </footer>
+    </div>
+</div>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzU4Mi8xMDEzNw==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.hdqyf.club/2023/07/18/20230718-Java花式二维码生成/&title=《Java花式二维码生成》 — HDQ | Blog&pic=https://s2.loli.net/2023/07/18/UVSAsWh7pdTf3Z8.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qzone share-sns" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.hdqyf.club/2023/07/18/20230718-Java花式二维码生成/&title=《Java花式二维码生成》 — HDQ | Blog&source=Welcome to my blog." data-title="QQ空间">
+              <i class="fa fa-star"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.hdqyf.club/2023/07/18/20230718-Java花式二维码生成/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <!-- <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java花式二维码生成》 — HDQ | Blog&url=https://blog.hdqyf.club/2023/07/18/20230718-Java花式二维码生成/&via=https://blog.hdqyf.club" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+           <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.hdqyf.club/2023/07/18/20230718-Java花式二维码生成/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li> -->
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://blog.hdqyf.club/2023/07/18/20230718-Java花式二维码生成/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Java/" class="color5">Java</a>
+      
+    <a href="/tags/二维码/" class="color4">二维码</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前端"><span class="post-toc-text">前端</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Jquery的qrcode"><span class="post-toc-text">Jquery的qrcode</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#qrbtf"><span class="post-toc-text">qrbtf</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#后端"><span class="post-toc-text">后端</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ZXing"><span class="post-toc-text">ZXing</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#QuickMedia"><span class="post-toc-text">QuickMedia</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2023/04/17/20230417-踩坑系列：上传文件报临时目录不存在/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">踩坑系列：上传文件报临时目录不存在</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <span id="runtime_span"></span>
+            <br>
+            <p>
+                Powered by <a href="#" target="_blank">HDQ</a> Theme <a href="#" target="_blank">Garen</a> &copy;
+                2023
+                    Garen<br>
+            </p>
+        </div>
+    </div>
+</footer>
+<script>
+    function show_runtime() {
+            window.setTimeout("show_runtime()", 1000);
+            X = new Date("11/25/2017 05:20:00");
+            Y = new Date(); T = (Y.getTime() - X.getTime()); M = 24 * 60 * 60 * 1000;
+            a = T / M;
+            A = Math.floor(a);
+            b = (a - A) * 24;
+            B = Math.floor(b);
+            c = (b - B) * 60;
+            C = Math.floor((b - B) * 60);
+            D = Math.floor((c - C) * 60);
+            runtime_span.innerHTML = "本站勉强运行: " + A + "天" + B + "小时" + C + "分" + D + "秒";
+        }
+
+        show_runtime();
+</script>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-user"></span>
+    <span class="fui-photo"></span>
+    <span class="fui-info-circle"></span>
+    <span class="fui-cross"></span>
+</div>
+</div>
+<script src="/js/mylive-tips.js"></script>
+<script src="/js/mylive.js"></script>
+<script type="text/javascript">initModel(window.location.protocol+'//'+window.location.hostname+'/'+'json/')</script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://blog.hdqyf.club",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/3DS-MAX/">3DS MAX</a><a class="category-link" href="/categories/CAD/">CAD</a><a class="category-link" href="/categories/CPU/">CPU</a><a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/Docker/">Docker</a><a class="category-link" href="/categories/GPU/">GPU</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/Java/">Java</a><a class="category-link" href="/categories/Linux/">Linux</a><a class="category-link" href="/categories/MVC/">MVC</a><a class="category-link" href="/categories/Mac/">Mac</a><a class="category-link" href="/categories/MongoDB/">MongoDB</a><a class="category-link" href="/categories/MySQL/">MySQL</a><a class="category-link" href="/categories/OCR识别/">OCR识别</a><a class="category-link" href="/categories/Office/">Office</a><a class="category-link" href="/categories/Oracle/">Oracle</a><a class="category-link" href="/categories/PDF/">PDF</a><a class="category-link" href="/categories/PDF工具/">PDF工具</a><a class="category-link" href="/categories/Redis/">Redis</a><a class="category-link" href="/categories/SQL/">SQL</a><a class="category-link" href="/categories/Spring/">Spring</a><a class="category-link" href="/categories/Steam/">Steam</a><a class="category-link" href="/categories/Vue/">Vue</a><a class="category-link" href="/categories/WiFi/">WiFi</a><a class="category-link" href="/categories/hibernate/">hibernate</a><a class="category-link" href="/categories/iOS/">iOS</a><a class="category-link" href="/categories/mybatis/">mybatis</a><a class="category-link" href="/categories/node/">node</a><a class="category-link" href="/categories/下载/">下载</a><a class="category-link" href="/categories/卸载/">卸载</a><a class="category-link" href="/categories/字体/">字体</a><a class="category-link" href="/categories/常识/">常识</a><a class="category-link" href="/categories/开发工具/">开发工具</a><a class="category-link" href="/categories/感悟/">感悟</a><a class="category-link" href="/categories/截屏/">截屏</a><a class="category-link" href="/categories/播放器/">播放器</a><a class="category-link" href="/categories/效率/">效率</a><a class="category-link" href="/categories/文档/">文档</a><a class="category-link" href="/categories/杂谈/">杂谈</a><a class="category-link" href="/categories/注册表/">注册表</a><a class="category-link" href="/categories/激活/">激活</a><a class="category-link" href="/categories/生活/">生活</a><a class="category-link" href="/categories/编辑器/">编辑器</a><a class="category-link" href="/categories/翻译/">翻译</a><a class="category-link" href="/categories/虚拟机/">虚拟机</a><a class="category-link" href="/categories/设计模式/">设计模式</a><a class="category-link" href="/categories/资源/">资源</a><a class="category-link" href="/categories/转换/">转换</a><a class="category-link" href="/categories/运行库/">运行库</a><a class="category-link" href="/categories/音乐/">音乐</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 10.71px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/CSS/" style="font-size: 10.71px;">CSS</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/HTML/" style="font-size: 12.86px;">HTML</a> <a href="/tags/JS/" style="font-size: 15px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Mac/" style="font-size: 11.43px;">Mac</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/OCR识别/" style="font-size: 10px;">OCR识别</a> <a href="/tags/Office/" style="font-size: 11.43px;">Office</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PDF/" style="font-size: 10.71px;">PDF</a> <a href="/tags/PDF工具/" style="font-size: 10px;">PDF工具</a> <a href="/tags/PPT/" style="font-size: 10.71px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/Redis/" style="font-size: 10.71px;">Redis</a> <a href="/tags/SQL/" style="font-size: 10.71px;">SQL</a> <a href="/tags/Spring/" style="font-size: 17.86px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/WiFi/" style="font-size: 10px;">WiFi</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/iOS/" style="font-size: 11.43px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 16.43px;">mybatis</a> <a href="/tags/node/" style="font-size: 10.71px;">node</a> <a href="/tags/下载/" style="font-size: 13.57px;">下载</a> <a href="/tags/二维码/" style="font-size: 10px;">二维码</a> <a href="/tags/前端/" style="font-size: 12.14px;">前端</a> <a href="/tags/办公/" style="font-size: 13.57px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 10.71px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发工具/" style="font-size: 11.43px;">开发工具</a> <a href="/tags/开发技巧/" style="font-size: 12.14px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.14px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/插件/" style="font-size: 10.71px;">插件</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 15.71px;">效率</a> <a href="/tags/数据库/" style="font-size: 12.86px;">数据库</a> <a href="/tags/文档/" style="font-size: 10.71px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/杂谈/" style="font-size: 10.71px;">杂谈</a> <a href="/tags/框架/" style="font-size: 19.29px;">框架</a> <a href="/tags/检测/" style="font-size: 10.71px;">检测</a> <a href="/tags/注册表/" style="font-size: 10.71px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 12.14px;">激活</a> <a href="/tags/生活/" style="font-size: 14.29px;">生活</a> <a href="/tags/系统必备/" style="font-size: 10px;">系统必备</a> <a href="/tags/终端/" style="font-size: 10.71px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/脚本/" style="font-size: 10.71px;">脚本</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/视频/" style="font-size: 11.43px;">视频</a> <a href="/tags/设计模式/" style="font-size: 17.14px;">设计模式</a> <a href="/tags/词典/" style="font-size: 10px;">词典</a> <a href="/tags/资源/" style="font-size: 18.57px;">资源</a> <a href="/tags/踩坑系列/" style="font-size: 10px;">踩坑系列</a> <a href="/tags/转换/" style="font-size: 10.71px;">转换</a> <a href="/tags/运行库/" style="font-size: 10px;">运行库</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/3DS-MAX/" style="font-size: 10px;">3DS MAX</a> <a href="/tags/Android/" style="font-size: 10.71px;">Android</a> <a href="/tags/CAD/" style="font-size: 10px;">CAD</a> <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/CSS/" style="font-size: 10.71px;">CSS</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/HTML/" style="font-size: 12.86px;">HTML</a> <a href="/tags/JS/" style="font-size: 15px;">JS</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/Mac/" style="font-size: 11.43px;">Mac</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/OCR识别/" style="font-size: 10px;">OCR识别</a> <a href="/tags/Office/" style="font-size: 11.43px;">Office</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/PDF/" style="font-size: 10.71px;">PDF</a> <a href="/tags/PDF工具/" style="font-size: 10px;">PDF工具</a> <a href="/tags/PPT/" style="font-size: 10.71px;">PPT</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/Redis/" style="font-size: 10.71px;">Redis</a> <a href="/tags/SQL/" style="font-size: 10.71px;">SQL</a> <a href="/tags/Spring/" style="font-size: 17.86px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/Steam/" style="font-size: 10px;">Steam</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/WiFi/" style="font-size: 10px;">WiFi</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/iOS/" style="font-size: 11.43px;">iOS</a> <a href="/tags/mybatis/" style="font-size: 16.43px;">mybatis</a> <a href="/tags/node/" style="font-size: 10.71px;">node</a> <a href="/tags/下载/" style="font-size: 13.57px;">下载</a> <a href="/tags/二维码/" style="font-size: 10px;">二维码</a> <a href="/tags/前端/" style="font-size: 12.14px;">前端</a> <a href="/tags/办公/" style="font-size: 13.57px;">办公</a> <a href="/tags/卸载/" style="font-size: 10px;">卸载</a> <a href="/tags/图像处理/" style="font-size: 10.71px;">图像处理</a> <a href="/tags/大学/" style="font-size: 10px;">大学</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/定时器/" style="font-size: 10px;">定时器</a> <a href="/tags/开发工具/" style="font-size: 11.43px;">开发工具</a> <a href="/tags/开发技巧/" style="font-size: 12.14px;">开发技巧</a> <a href="/tags/感悟/" style="font-size: 12.14px;">感悟</a> <a href="/tags/截屏/" style="font-size: 10px;">截屏</a> <a href="/tags/插件/" style="font-size: 10.71px;">插件</a> <a href="/tags/播放器/" style="font-size: 10px;">播放器</a> <a href="/tags/效率/" style="font-size: 15.71px;">效率</a> <a href="/tags/数据库/" style="font-size: 12.86px;">数据库</a> <a href="/tags/文档/" style="font-size: 10.71px;">文档</a> <a href="/tags/智慧树/" style="font-size: 10px;">智慧树</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/杂谈/" style="font-size: 10.71px;">杂谈</a> <a href="/tags/框架/" style="font-size: 19.29px;">框架</a> <a href="/tags/检测/" style="font-size: 10.71px;">检测</a> <a href="/tags/注册表/" style="font-size: 10.71px;">注册表</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/清理/" style="font-size: 10px;">清理</a> <a href="/tags/激活/" style="font-size: 12.14px;">激活</a> <a href="/tags/生活/" style="font-size: 14.29px;">生活</a> <a href="/tags/系统必备/" style="font-size: 10px;">系统必备</a> <a href="/tags/终端/" style="font-size: 10.71px;">终端</a> <a href="/tags/编辑器/" style="font-size: 10px;">编辑器</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/脚本/" style="font-size: 10.71px;">脚本</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/视频/" style="font-size: 11.43px;">视频</a> <a href="/tags/设计模式/" style="font-size: 17.14px;">设计模式</a> <a href="/tags/词典/" style="font-size: 10px;">词典</a> <a href="/tags/资源/" style="font-size: 18.57px;">资源</a> <a href="/tags/踩坑系列/" style="font-size: 10px;">踩坑系列</a> <a href="/tags/转换/" style="font-size: 10.71px;">转换</a> <a href="/tags/运行库/" style="font-size: 10px;">运行库</a> <a href="/tags/连接池/" style="font-size: 10px;">连接池</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.staticfile.org/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.staticfile.org/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.staticfile.org/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+<script>
+  $(".pingfuADHolder").remove();
+</script>
+</html>
